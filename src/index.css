@@ -378,3 +378,37 @@
 .font-montserrat {
   font-family: 'Montserrat', sans-serif;
 }
+
+/* YouTube Background Video Styles */
+.youtube-background-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  min-width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.youtube-background-wrapper iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max(100vw, 177.77vh); /* Garante que cubra toda a largura ou altura */
+  height: max(100vh, 56.25vw); /* Garante que cubra toda a altura ou largura */
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+/* Scrollbar Hide */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
