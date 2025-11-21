@@ -6,10 +6,11 @@ export default function VideosSection() {
   const videos = [
     {
       id: 1,
-      title: 'Noites de Verão - Luna Silva',
-      artist: 'Luna Silva',
+      title: 'Clipe Oficial',
+      artist: 'Céu Music',
       views: '2.5M',
-      thumbnail: 'https://readdy.ai/api/search-image?query=professional%20music%20video%20scene%20with%20female%20pop%20singer%20performing%20on%20stage%2C%20dramatic%20teal%20and%20orange%20stage%20lighting%2C%20cinematic%20composition%2C%20high%20production%20value%2C%20concert%20atmosphere%20with%20glowing%20effects&width=800&height=450&seq=video-001&orientation=landscape',
+      videoId: 'bdLeReQbtgY', // ID do YouTube
+      thumbnail: `https://img.youtube.com/vi/bdLeReQbtgY/maxresdefault.jpg`,
       duration: '3:45'
     },
     {
@@ -17,6 +18,7 @@ export default function VideosSection() {
       title: 'Ruas da Cidade - Rafael Mendes',
       artist: 'Rafael Mendes',
       views: '1.8M',
+      videoId: '', // Adicione o ID do YouTube aqui
       thumbnail: 'https://readdy.ai/api/search-image?query=urban%20hip%20hop%20music%20video%20scene%20with%20male%20rapper%20in%20city%20streets%20at%20night%2C%20teal%20and%20bronze%20neon%20lights%2C%20cinematic%20urban%20photography%2C%20high%20production%20quality%2C%20atmospheric%20street%20setting&width=800&height=450&seq=video-002&orientation=landscape',
       duration: '4:12'
     },
@@ -25,6 +27,7 @@ export default function VideosSection() {
       title: 'Alma Brasileira - Bianca Costa',
       artist: 'Bianca Costa',
       views: '980K',
+      videoId: '', // Adicione o ID do YouTube aqui
       thumbnail: 'https://readdy.ai/api/search-image?query=elegant%20soul%20music%20video%20with%20female%20singer%20in%20artistic%20setting%2C%20warm%20bronze%20and%20teal%20lighting%2C%20sophisticated%20cinematography%2C%20high-end%20production%2C%20emotional%20performance%20scene&width=800&height=450&seq=video-003&orientation=landscape',
       duration: '5:20'
     },
@@ -33,6 +36,7 @@ export default function VideosSection() {
       title: 'Horizonte - Thiago Alves',
       artist: 'Thiago Alves',
       views: '1.2M',
+      videoId: '', // Adicione o ID do YouTube aqui
       thumbnail: 'https://readdy.ai/api/search-image?query=indie%20rock%20music%20video%20with%20male%20guitarist%20performing%2C%20atmospheric%20teal%20and%20orange%20lighting%2C%20alternative%20music%20aesthetic%2C%20cinematic%20quality%2C%20moody%20concert%20setting&width=800&height=450&seq=video-004&orientation=landscape',
       duration: '3:58'
     }
@@ -128,7 +132,7 @@ export default function VideosSection() {
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl p-6"
             onClick={() => setSelectedVideo(null)}
           >
-            <div className="relative w-full max-w-5xl">
+            <div className="relative w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
               <button
                 onClick={() => setSelectedVideo(null)}
                 className="absolute -top-12 right-0 w-10 h-10 flex items-center justify-center text-white hover:text-[#C45C2F] transition-colors cursor-pointer"
@@ -136,9 +140,26 @@ export default function VideosSection() {
                 <i className="ri-close-line text-3xl"></i>
               </button>
               <div className="aspect-video bg-black rounded-2xl border-2 border-[#C45C2F]/50 shadow-2xl shadow-[#C45C2F]/30 overflow-hidden">
-                <div className="w-full h-full flex items-center justify-center">
-                  <i className="ri-play-circle-fill text-8xl text-[#C45C2F]"></i>
-                </div>
+                {videos.find(v => v.id === selectedVideo)?.videoId ? (
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={`https://www.youtube.com/embed/${videos.find(v => v.id === selectedVideo)?.videoId}?autoplay=1`}
+                    title="Video Player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <div className="text-center">
+                      <i className="ri-play-circle-fill text-8xl text-[#C45C2F] mb-4"></i>
+                      <p className="text-white/70 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        Vídeo em breve
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
