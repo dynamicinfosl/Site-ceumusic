@@ -6,38 +6,38 @@ export default function VideosSection() {
   const videos = [
     {
       id: 1,
-      title: 'Clipe Oficial',
-      artist: 'Céu Music',
-      views: '2.5M',
+      title: 'Salva-vidas - Alexsander Lúcio',
+      artist: 'Alex Lúcio',
+      views: '271K',
       videoId: 'bdLeReQbtgY', // ID do YouTube
       thumbnail: `https://img.youtube.com/vi/bdLeReQbtgY/maxresdefault.jpg`,
       duration: '3:45'
     },
     {
       id: 2,
-      title: 'Ruas da Cidade - Rafael Mendes',
-      artist: 'Rafael Mendes',
+      title: 'Final Feliz - No Santuário feat Geziel Lima',
+      artist: 'No Santuário',
       views: '1.8M',
-      videoId: '', // Adicione o ID do YouTube aqui
-      thumbnail: 'https://readdy.ai/api/search-image?query=urban%20hip%20hop%20music%20video%20scene%20with%20male%20rapper%20in%20city%20streets%20at%20night%2C%20teal%20and%20bronze%20neon%20lights%2C%20cinematic%20urban%20photography%2C%20high%20production%20quality%2C%20atmospheric%20street%20setting&width=800&height=450&seq=video-002&orientation=landscape',
+      videoId: 'XWBgmBsxkk4', // ID do YouTube
+      thumbnail: `https://img.youtube.com/vi/XWBgmBsxkk4/maxresdefault.jpg`,
       duration: '4:12'
     },
     {
       id: 3,
-      title: 'Alma Brasileira - Bianca Costa',
-      artist: 'Bianca Costa',
-      views: '980K',
-      videoId: '', // Adicione o ID do YouTube aqui
-      thumbnail: 'https://readdy.ai/api/search-image?query=elegant%20soul%20music%20video%20with%20female%20singer%20in%20artistic%20setting%2C%20warm%20bronze%20and%20teal%20lighting%2C%20sophisticated%20cinematography%2C%20high-end%20production%2C%20emotional%20performance%20scene&width=800&height=450&seq=video-003&orientation=landscape',
+      title: 'Louva na Graça - Na Graça',
+      artist: 'Na Graça',
+      views: '45K',
+      videoId: '5bvgSlZamBo', // ID do YouTube
+      thumbnail: `https://img.youtube.com/vi/5bvgSlZamBo/maxresdefault.jpg`,
       duration: '5:20'
     },
     {
       id: 4,
-      title: 'Horizonte - Thiago Alves',
-      artist: 'Thiago Alves',
-      views: '1.2M',
-      videoId: '', // Adicione o ID do YouTube aqui
-      thumbnail: 'https://readdy.ai/api/search-image?query=indie%20rock%20music%20video%20with%20male%20guitarist%20performing%2C%20atmospheric%20teal%20and%20orange%20lighting%2C%20alternative%20music%20aesthetic%2C%20cinematic%20quality%2C%20moody%20concert%20setting&width=800&height=450&seq=video-004&orientation=landscape',
+      title: 'Milagres de Deus - Debora Lopes',
+      artist: 'Debora Lopes',
+      views: '233K',
+      videoId: 'V1hYFBtdxm8', // ID do YouTube
+      thumbnail: `https://img.youtube.com/vi/V1hYFBtdxm8/maxresdefault.jpg`,
       duration: '3:58'
     }
   ];
