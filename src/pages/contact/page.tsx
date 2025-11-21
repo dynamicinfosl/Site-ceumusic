@@ -53,13 +53,6 @@ export default function ContactPage() {
       color: '#C45C2F'
     },
     {
-      icon: 'ri-whatsapp-fill',
-      title: 'WhatsApp',
-      value: '+55 (11) 98765-4321',
-      link: 'https://wa.me/5511987654321',
-      color: '#25D366'
-    },
-    {
       icon: 'ri-map-pin-fill',
       title: 'Endereço',
       value: 'Rio de Janeiro, RJ',
@@ -112,7 +105,7 @@ export default function ContactPage() {
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#0EA8A0]/10 rounded-full blur-[120px]" />
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+          <div className="grid md:grid-cols-3 gap-6 mb-20">
             {contactInfo.map((info, index) => (
               <a
                 key={index}
@@ -296,7 +289,7 @@ export default function ContactPage() {
               </h2>
               <div className="relative overflow-hidden rounded-2xl border border-white/10 aspect-square lg:aspect-auto lg:h-full min-h-[400px]">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.0977!2d-46.6563182!3d-23.5613991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%2C%201000%20-%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235527.4935281952!2d-43.41814155!3d-22.9110137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9bde559108a05b%3A0x50dc426c672fd24e!2sRio%20de%20Janeiro%2C%20RJ!5e0!3m2!1spt-BR!2sbr!4v1234567890"
                   width="100%"
                   height="100%"
                   style={{ border: 0, filter: 'grayscale(100%) invert(90%) contrast(90%)' }}
