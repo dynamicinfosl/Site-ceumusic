@@ -52,8 +52,8 @@ export default function Navbar() {
               <span className="absolute inset-0 bg-[#0EA8A0]/20 blur-xl opacity-0 group-hover/link:opacity-100 transition-opacity duration-300"></span>
             </Link>
             <a 
-              href="https://open.spotify.com" 
-              target="_blank" 
+              href="https://www.youtube.com/@ceumusicbrasil" 
+              target="_blank"
               rel="noopener noreferrer"
               className="bg-[#0EA8A0] text-black px-4 py-2 rounded-full font-semibold hover:bg-[#0EA8A0]/90 transition-all duration-300 whitespace-nowrap cursor-pointer text-sm font-montserrat relative overflow-hidden group/btn"
             >
@@ -130,8 +130,8 @@ export default function Navbar() {
                 <span className="absolute inset-0 bg-[#0EA8A0]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Link>
               <a 
-                href="https://open.spotify.com" 
-                target="_blank" 
+                href="https://www.youtube.com/@ceumusicbrasil" 
+                target="_blank"
                 rel="noopener noreferrer"
                 className="bg-[#0EA8A0] text-black px-4 py-2 rounded-full font-semibold hover:bg-[#0EA8A0]/90 transition-all duration-300 text-center cursor-pointer font-montserrat relative overflow-hidden group"
               >
