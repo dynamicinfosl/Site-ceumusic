@@ -21,28 +21,28 @@ export default function Navbar() {
               <span className="absolute inset-0 bg-[#0EA8A0]/20 blur-xl opacity-0 group-hover/link:opacity-100 transition-opacity duration-300"></span>
             </Link>
             <Link 
-              to="/artists" 
+              to="/artistas" 
               className="text-gray-300 hover:text-white transition-all duration-300 cursor-pointer text-sm whitespace-nowrap font-montserrat relative group/link"
             >
               <span className="relative z-10">Artistas</span>
               <span className="absolute inset-0 bg-[#0EA8A0]/20 blur-xl opacity-0 group-hover/link:opacity-100 transition-opacity duration-300"></span>
             </Link>
             <Link 
-              to="/releases" 
+              to="/lancamentos" 
               className="text-gray-300 hover:text-white transition-all duration-300 cursor-pointer text-sm whitespace-nowrap font-montserrat relative group/link"
             >
               <span className="relative z-10">Lançamentos</span>
               <span className="absolute inset-0 bg-[#0EA8A0]/20 blur-xl opacity-0 group-hover/link:opacity-100 transition-opacity duration-300"></span>
             </Link>
             <Link 
-              to="/news" 
+              to="/noticias" 
               className="text-gray-300 hover:text-white transition-all duration-300 cursor-pointer text-sm whitespace-nowrap font-montserrat relative group/link"
             >
               <span className="relative z-10">Notícias</span>
               <span className="absolute inset-0 bg-[#0EA8A0]/20 blur-xl opacity-0 group-hover/link:opacity-100 transition-opacity duration-300"></span>
             </Link>
             <Link 
-              to="/contact" 
+              to="/contato" 
               className="text-gray-300 hover:text-white transition-all duration-300 cursor-pointer text-sm flex items-center whitespace-nowrap font-montserrat relative group/link"
             >
               <span className="relative z-10 flex items-center">
@@ -94,7 +94,7 @@ export default function Navbar() {
                 <span className="absolute inset-0 bg-[#0EA8A0]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Link>
               <Link 
-                to="/artists" 
+                to="/artistas" 
                 onClick={() => setIsMenuOpen(false)}
                 className="text-gray-300 hover:text-white transition-all duration-300 cursor-pointer font-montserrat relative group py-2"
               >
@@ -103,7 +103,7 @@ export default function Navbar() {
                 <span className="absolute inset-0 bg-[#0EA8A0]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Link>
               <Link 
-                to="/releases" 
+                to="/lancamentos" 
                 onClick={() => setIsMenuOpen(false)}
                 className="text-gray-300 hover:text-white transition-all duration-300 cursor-pointer font-montserrat relative group py-2"
               >
@@ -112,7 +112,7 @@ export default function Navbar() {
                 <span className="absolute inset-0 bg-[#0EA8A0]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Link>
               <Link 
-                to="/news" 
+                to="/noticias" 
                 onClick={() => setIsMenuOpen(false)}
                 className="text-gray-300 hover:text-white transition-all duration-300 cursor-pointer font-montserrat relative group py-2"
               >
@@ -121,7 +121,7 @@ export default function Navbar() {
                 <span className="absolute inset-0 bg-[#0EA8A0]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Link>
               <Link 
-                to="/contact" 
+                to="/contato" 
                 onClick={() => setIsMenuOpen(false)}
                 className="text-gray-300 hover:text-white transition-all duration-300 cursor-pointer font-montserrat relative group py-2"
               >
