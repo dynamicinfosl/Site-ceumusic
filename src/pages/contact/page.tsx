@@ -41,15 +41,15 @@ export default function ContactPage() {
     {
       icon: 'ri-mail-fill',
       title: 'Email',
-      value: 'contato@ceumusic.com.br',
-      link: 'mailto:contato@ceumusic.com.br',
+      value: 'contato@ceumusicbr.com',
+      link: 'mailto:contato@ceumusicbr.com',
       color: '#0EA8A0'
     },
     {
       icon: 'ri-phone-fill',
       title: 'Telefone',
-      value: '+55 (11) 98765-4321',
-      link: 'tel:+5511987654321',
+      value: '(21) 98244-7141',
+      link: 'tel:+5521982447141',
       color: '#C45C2F'
     },
     {
@@ -62,15 +62,15 @@ export default function ContactPage() {
     {
       icon: 'ri-map-pin-fill',
       title: 'Endereço',
-      value: 'Av. Paulista, 1000 - São Paulo, SP',
+      value: 'Rio de Janeiro, RJ',
       link: 'https://maps.google.com',
       color: '#A34528'
     }
   ];
 
   const socialLinks = [
-    { icon: 'ri-instagram-fill', url: 'https://instagram.com', color: '#E4405F', name: 'Instagram' },
-    { icon: 'ri-youtube-fill', url: 'https://youtube.com', color: '#FF0000', name: 'YouTube' },
+    { icon: 'ri-instagram-fill', url: 'https://www.instagram.com/ceumusicbr/', color: '#E4405F', name: 'Instagram' },
+    { icon: 'ri-youtube-fill', url: 'https://www.youtube.com/@ceumusicbrasil', color: '#FF0000', name: 'YouTube' },
     { icon: 'ri-spotify-fill', url: 'https://spotify.com', color: '#1DB954', name: 'Spotify' },
     { icon: 'ri-tiktok-fill', url: 'https://tiktok.com', color: '#000000', name: 'TikTok' },
     { icon: 'ri-facebook-fill', url: 'https://facebook.com', color: '#1877F2', name: 'Facebook' },
@@ -207,7 +207,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-[#0EA8A0]/50 focus:bg-white/10 transition-all duration-300 text-sm"
                       style={{ fontFamily: 'Inter, sans-serif' }}
-                      placeholder="(11) 98765-4321"
+                      placeholder="(21) 98244-7141"
                     />
                   </div>
                 </div>

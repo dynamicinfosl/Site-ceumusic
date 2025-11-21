@@ -3,16 +3,16 @@ export default function ContactSection() {
     { 
       name: 'Instagram', 
       icon: 'ri-instagram-fill', 
-      url: 'https://instagram.com',
+      url: 'https://www.instagram.com/ceumusicbr/',
       color: '#E4405F',
-      followers: '125K'
+      followers: '21,5 mil'
     },
     { 
       name: 'YouTube', 
       icon: 'ri-youtube-fill', 
-      url: 'https://youtube.com',
+      url: 'https://www.youtube.com/@ceumusicbrasil',
       color: '#FF0000',
-      followers: '89K'
+      followers: '140 mil'
     },
     { 
       name: 'Spotify', 
@@ -111,7 +111,7 @@ export default function ContactSection() {
                 Email
               </h4>
               <p className="text-white/60 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
-                contato@ceumusic.com.br
+                contato@ceumusicbr.com
               </p>
             </div>
 
@@ -123,7 +123,7 @@ export default function ContactSection() {
                 Telefone
               </h4>
               <p className="text-white/60 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
-                +55 (11) 98765-4321
+                (21) 98244-7141
               </p>
             </div>
 
@@ -135,7 +135,7 @@ export default function ContactSection() {
                 Endereço
               </h4>
               <p className="text-white/60 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
-                São Paulo, SP - Brasil
+                Rio de Janeiro, RJ - Brasil
               </p>
             </div>
           </div>

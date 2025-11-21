@@ -12,8 +12,8 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { icon: 'ri-instagram-fill', url: 'https://instagram.com', color: '#E4405F' },
-    { icon: 'ri-youtube-fill', url: 'https://youtube.com', color: '#FF0000' },
+    { icon: 'ri-instagram-fill', url: 'https://www.instagram.com/ceumusicbr/', color: '#E4405F' },
+    { icon: 'ri-youtube-fill', url: 'https://www.youtube.com/@ceumusicbrasil', color: '#FF0000' },
     { icon: 'ri-spotify-fill', url: 'https://spotify.com', color: '#1DB954' },
     { icon: 'ri-tiktok-fill', url: 'https://tiktok.com', color: '#000000' },
   ];
