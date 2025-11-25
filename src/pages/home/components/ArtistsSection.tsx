@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 
 // TODO: Substituir os dados de exemplo pelos dados reais dos artistas
@@ -124,6 +124,7 @@ const artists = [
 export default function ArtistsSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
@@ -181,9 +182,9 @@ export default function ArtistsSection() {
         >
           {/* Duplicar os artistas para scroll infinito */}
           {[...artists, ...artists].map((artist, index) => (
-            <Link
+            <div
               key={`${artist.id}-${index}`}
-              to={`/artist/${artist.id}`}
+              onClick={() => navigate(`/artist/${artist.id}`)}
               className="glass-card animate-liquid-glass rounded-2xl overflow-hidden hover:border-[#0EA8A0]/50 transition-all duration-500 cursor-pointer group flex-shrink-0 w-[320px] sm:w-[380px]"
             >
               <div className="relative">
@@ -310,7 +311,7 @@ export default function ArtistsSection() {
                   )}
                 </div>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const artists = [
   {
@@ -163,9 +163,9 @@ export default function ArtistsPage() {
         {/* Artists Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-product-shop>
           {filteredArtists.map((artist, index) => (
-            <Link
+            <div
               key={artist.id}
-              to={`/artist/${artist.id}`}
+              onClick={() => navigate(`/artist/${artist.id}`)}
               className="glass-card animate-liquid-glass rounded-2xl p-8 hover:border-[#0EA8A0]/50 transition-all duration-500 cursor-pointer group scroll-reveal"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
@@ -212,7 +212,7 @@ export default function ArtistsPage() {
                   </a>
                 </div>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

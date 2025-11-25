@@ -79,9 +79,11 @@ src/
 | --- | --- | --- |
 | `BASE_PATH` | `/ceumusic` | Define `base` do Vite e `basename` do `BrowserRouter`, útil para deploy em subpastas (ex.: GitHub Pages). |
 | `IS_PREVIEW` | `true` | Injeta `__IS_PREVIEW__` nos builds; pode ser utilizado para condicionar banners/avisos em ambientes temporários. |
+| `VITE_YOUTUBE_API_KEY` | `AIzaSy...` | Chave da API do YouTube Data API v3. Necessária para buscar vídeos do canal na seção de lançamentos e hero. |
 
 > Crie um arquivo `.env` ou defina as variáveis diretamente no ambiente (CLI/CI).  
-> Para GitHub Pages, defina `BASE_PATH=/Site-ceumusic` (ou similar) antes do `npm run build`.
+> Para GitHub Pages, defina `BASE_PATH=/Site-ceumusic` (ou similar) antes do `npm run build`.  
+> Para obter uma API Key do YouTube: acesse [Google Cloud Console](https://console.cloud.google.com/), crie um projeto, habilite a YouTube Data API v3 e gere uma chave de API.
 
 ## Conteúdo e próximos passos
 

@@ -58,13 +58,6 @@ export default function HeroSection() {
                      import.meta.env?.VITE_YOUTUBE_API_KEY ||
                      (window as any).__VITE_YOUTUBE_API_KEY__;
       
-      console.log('=== DEBUG API KEY ===');
-      console.log('import.meta.env:', import.meta.env);
-      console.log('VITE_YOUTUBE_API_KEY:', import.meta.env.VITE_YOUTUBE_API_KEY);
-      console.log('API Key presente:', !!apiKey);
-      console.log('API Key length:', apiKey?.length || 0);
-      console.log('====================');
-      
       setHasApiKey(!!apiKey);
 
       // Se não houver API key, mostra erro
@@ -80,11 +73,9 @@ export default function HeroSection() {
       // Se houver API key, tenta buscar os vídeos do canal
       setLoading(true);
       setError(null);
-      console.log('Buscando vídeos do canal:', channelHandle);
       
       try {
         const channelVideos = await fetchChannelVideos(channelHandle, 50);
-        console.log('Vídeos retornados:', channelVideos.length);
         
         if (channelVideos.length > 0) {
           // Garante que todos os vídeos tenham thumbnail
@@ -92,20 +83,21 @@ export default function HeroSection() {
             ...video,
             thumbnail: video.thumbnail || getYouTubeThumbnail(video.id)
           }));
-          console.log('Vídeos carregados com sucesso:', videosWithThumbnails.length);
           setVideos(videosWithThumbnails);
           setSelectedVideoId(videosWithThumbnails[0].id);
         } else {
           // Se não conseguir buscar, mostra erro
-          console.warn('Nenhum vídeo encontrado no canal:', channelHandle);
           setVideos([]);
           setSelectedVideoId('');
           setError('Nenhum vídeo encontrado no canal @ceumusicbrasil. Verifique se o canal existe e tem vídeos públicos.');
         }
       } catch (err) {
-        console.error('Erro ao carregar vídeos:', err);
+        // Loga apenas erros não relacionados a conexão para evitar spam no console
+        if (err instanceof Error && !err.message.includes('conexão') && !err.message.includes('internet')) {
+          console.error('Erro ao carregar vídeos:', err);
+        }
         const errorMessage = err instanceof Error ? err.message : 'Erro desconhecido';
-        setError(`Erro ao carregar vídeos do canal: ${errorMessage}. Verifique o console para mais detalhes.`);
+        setError(`Erro ao carregar vídeos do canal: ${errorMessage}`);
         setVideos([]);
         setSelectedVideoId('');
       } finally {
