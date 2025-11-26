@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 export default function VideosSection() {
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
+  const [activeVideoId, setActiveVideoId] = useState<number | null>(null);
+  const [hoveredVideoId, setHoveredVideoId] = useState<number | null>(null);
+  const carouselRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const videos = [
     {
@@ -42,6 +46,64 @@ export default function VideosSection() {
     }
   ];
 
+  // Define inicialmente o primeiro card como ativo
+  useEffect(() => {
+    if (videos.length > 0 && activeVideoId === null) {
+      setActiveVideoId(videos[0].id);
+    }
+  }, [activeVideoId, videos]);
+
+  const scrollCarousel = (direction: 'left' | 'right') => {
+    if (!carouselRef.current) return;
+
+    const container = carouselRef.current;
+    const cardWidth = container.clientWidth * 0.7; // rola aproximadamente 70% da área visível
+    const scrollAmount = direction === 'left' ? -cardWidth : cardWidth;
+
+    container.scrollBy({
+      left: scrollAmount,
+      behavior: 'smooth',
+    });
+  };
+
+  // Atualiza o card "ativo" (no centro) conforme o scroll do carrossel
+  useEffect(() => {
+    const container = carouselRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const containerCenter = container.scrollLeft + container.clientWidth / 2;
+
+      let closestId: number | null = null;
+      let closestDistance = Infinity;
+
+      cardRefs.current.forEach((card, index) => {
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+
+        const cardCenter = rect.left - containerRect.left + rect.width / 2 + container.scrollLeft;
+        const distance = Math.abs(cardCenter - containerCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestId = videos[index]?.id ?? null;
+        }
+      });
+
+      if (closestId !== null && closestId !== activeVideoId) {
+        setActiveVideoId(closestId);
+      }
+    };
+
+    handleScroll(); // garante estado correto na primeira renderização
+
+    container.addEventListener('scroll', handleScroll);
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+    };
+  }, [activeVideoId, videos]);
+
   return (
     <section className="relative py-32 bg-gradient-to-b from-black via-[#1A1A1A] to-black">
       {/* Decorative Elements */}
@@ -62,68 +124,122 @@ export default function VideosSection() {
           </p>
         </div>
 
-        {/* Videos Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {videos.map((video, index) => (
-            <div
-              key={video.id}
-              className="group cursor-pointer"
-              onClick={() => setSelectedVideo(video.id)}
-              style={{
-                animationDelay: `${index * 100}ms`
-              }}
-            >
-              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-black border border-white/10 hover:border-[#C45C2F]/50 transition-all duration-500 hover:scale-105">
-                {/* Thumbnail */}
-                <div className="relative aspect-video overflow-hidden">
-                  <img
-                    src={video.thumbnail}
-                    alt={video.title}
-                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
-                  />
-                  
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
-                  
-                  {/* Glow Border Effect */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute inset-0 border-2 border-[#C45C2F]/50 rounded-2xl shadow-2xl shadow-[#C45C2F]/30" />
-                  </div>
+        {/* Videos Carousel */}
+        <div className="relative">
+          {/* Controles do carrossel (desktop) */}
+          <button
+            type="button"
+            onClick={() => scrollCarousel('left')}
+            className="hidden md:flex absolute -left-6 top-1/2 z-20 -translate-y-1/2 w-10 h-10 items-center justify-center rounded-full bg-black/70 border border-white/10 text-white hover:bg-black hover:border-[#C45C2F]/60 transition-all cursor-pointer"
+          >
+            <i className="ri-arrow-left-s-line text-xl" />
+          </button>
 
-                  {/* Play Button */}
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center bg-[#C45C2F]/90 backdrop-blur-sm rounded-full opacity-90 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100 shadow-2xl shadow-[#C45C2F]/50">
-                    <i className="ri-play-fill text-4xl text-white ml-1"></i>
-                  </div>
+          <button
+            type="button"
+            onClick={() => scrollCarousel('right')}
+            className="hidden md:flex absolute -right-6 top-1/2 z-20 -translate-y-1/2 w-10 h-10 items-center justify-center rounded-full bg-black/70 border border-white/10 text-white hover:bg-black hover:border-[#C45C2F]/60 transition-all cursor-pointer"
+          >
+            <i className="ri-arrow-right-s-line text-xl" />
+          </button>
 
-                  {/* Duration Badge */}
-                  <div className="absolute bottom-4 right-4 px-3 py-1 bg-black/80 backdrop-blur-sm rounded-lg">
-                    <span className="text-white text-xs font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                      {video.duration}
-                    </span>
-                  </div>
+          <div
+            ref={carouselRef}
+            className="flex gap-8 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth scrollbar-hide"
+          >
+            {videos.map((video, index) => {
+              const isActive = activeVideoId === video.id;
+              const isHovered = hoveredVideoId === video.id;
 
-                  {/* Views Badge */}
-                  <div className="absolute top-4 left-4 px-3 py-1 bg-black/80 backdrop-blur-sm rounded-lg flex items-center space-x-2">
-                    <i className="ri-eye-fill text-[#0EA8A0] text-sm"></i>
-                    <span className="text-white text-xs font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                      {video.views}
-                    </span>
+              return (
+                <div
+                  key={video.id}
+                  ref={(el) => {
+                    cardRefs.current[index] = el;
+                  }}
+                  className={`group cursor-pointer flex-shrink-0 snap-center w-[85vw] sm:w-[60vw] lg:w-[40vw] max-w-xl transition-all duration-500 ${
+                    isActive ? 'opacity-100 scale-100' : 'opacity-20 scale-90'
+                  }`}
+                  onClick={() => setSelectedVideo(video.id)}
+                  style={{
+                    animationDelay: `${index * 100}ms`
+                  }}
+                >
+                  <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-black border border-white/10 hover:border-[#C45C2F]/50 transition-all duration-500 hover:scale-105">
+                    {/* Thumbnail / Preview */}
+                    <div
+                      className="relative aspect-video overflow-hidden"
+                      onMouseEnter={() => setHoveredVideoId(video.id)}
+                      onMouseLeave={() => setHoveredVideoId(null)}
+                    >
+                      {isHovered ? (
+                        <div className="w-full h-full pointer-events-none">
+                          <iframe
+                            className="w-full h-full"
+                            src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${video.videoId}`}
+                            title={video.title}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          ></iframe>
+                        </div>
+                      ) : (
+                        <img
+                          src={video.thumbnail}
+                          alt={video.title}
+                          className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                        />
+                      )}
+
+                      {/* Gradient Overlay */}
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+
+                      {/* Glow Border Effect */}
+                      <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div className="absolute inset-0 border-2 border-[#C45C2F]/50 rounded-2xl shadow-2xl shadow-[#C45C2F]/30" />
+                      </div>
+
+                      {/* Play Button (esconde durante o hover/preview) */}
+                      {!isHovered && (
+                        <div className="pointer-events-none absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center bg-[#C45C2F]/90 backdrop-blur-sm rounded-full opacity-90 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100 shadow-2xl shadow-[#C45C2F]/50">
+                          <i className="ri-play-fill text-4xl text-white ml-1"></i>
+                        </div>
+                      )}
+
+                      {/* Duration Badge */}
+                      <div className="pointer-events-none absolute bottom-4 right-4 px-3 py-1 bg-black/80 backdrop-blur-sm rounded-lg">
+                        <span className="text-white text-xs font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                          {video.duration}
+                        </span>
+                      </div>
+
+                      {/* Views Badge */}
+                      <div className="pointer-events-none absolute top-4 left-4 px-3 py-1 bg-black/80 backdrop-blur-sm rounded-lg flex items-center space-x-2">
+                        <i className="ri-eye-fill text-[#0EA8A0] text-sm"></i>
+                        <span className="text-white text-xs font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                          {video.views}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Video Info */}
+                    <div className="p-6">
+                      <h3
+                        className={`text-xl font-bold mb-2 transition-colors duration-300 ${
+                          isActive ? 'text-white group-hover:text-[#C45C2F]' : 'text-white/80 group-hover:text-[#C45C2F]'
+                        }`}
+                        style={{ fontFamily: 'Montserrat, sans-serif' }}
+                      >
+                        {video.title}
+                      </h3>
+                      <p className="text-white/60 text-sm flex items-center space-x-2" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        <i className="ri-user-voice-fill text-[#0EA8A0]"></i>
+                        <span>{video.artist}</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
-
-                {/* Video Info */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#C45C2F] transition-colors duration-300" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                    {video.title}
-                  </h3>
-                  <p className="text-white/60 text-sm flex items-center space-x-2" style={{ fontFamily: 'Inter, sans-serif' }}>
-                    <i className="ri-user-voice-fill text-[#0EA8A0]"></i>
-                    <span>{video.artist}</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
+              );
+            })}
+          </div>
         </div>
 
         {/* Video Modal */}
