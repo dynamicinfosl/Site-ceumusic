@@ -6,49 +6,243 @@ export default function ArtistDetailPage() {
   const { id } = useParams();
 
   // Mock data - em produção viria de uma API
-  const artist = {
-    id: 1,
-    name: 'Luna Silva',
-    genre: 'Pop/R&B',
-    image: 'https://readdy.ai/api/search-image?query=professional%20portrait%20of%20a%20young%20female%20pop%20singer%20with%20confident%20expression%2C%20studio%20lighting%20with%20teal%20and%20bronze%20glow%20effects%2C%20modern%20urban%20style%2C%20high%20fashion%20aesthetic%2C%20cinematic%20photography%2C%20premium%20quality%2C%20artistic%20mood%20lighting&width=800&height=800&seq=artist-detail-001&orientation=squarish',
-    banner: 'https://readdy.ai/api/search-image?query=professional%20music%20artist%20banner%20photo%2C%20female%20pop%20singer%20performing%20on%20stage%20with%20dramatic%20teal%20and%20bronze%20lighting%2C%20wide%20cinematic%20shot%2C%20concert%20atmosphere%20with%20glowing%20effects%2C%20premium%20quality%20photography%2C%20artistic%20composition&width=1920&height=600&seq=artist-banner-001&orientation=landscape',
-    bio: 'Luna Silva é uma cantora e compositora brasileira de 24 anos que conquistou o país com sua voz única e letras envolventes. Nascida em São Paulo, Luna começou sua carreira musical aos 16 anos, participando de competições locais e ganhando reconhecimento por suas performances emocionantes.\n\nCom influências que vão do R&B ao pop contemporâneo, Luna desenvolveu um estilo próprio que mistura melodias cativantes com letras profundas sobre amor, superação e empoderamento. Seu single de estreia "Noites de Verão" alcançou mais de 10 milhões de streams no Spotify em apenas três meses.\n\nAlém de sua carreira solo, Luna é conhecida por suas colaborações com outros artistas da Céu Music e por seu engajamento em causas sociais, especialmente relacionadas à educação musical para jovens de comunidades carentes.',
-    instagram: '@lunasilva',
-    spotify: 'Luna Silva',
-    youtube: 'Luna Silva Official',
-    followers: {
-      instagram: '450K',
-      spotify: '2.5M',
-      youtube: '1.2M'
-    },
-    songs: [
-      { id: 1, title: 'Noites de Verão', album: 'Single', duration: '3:45', plays: '10.2M' },
-      { id: 2, title: 'Coração Livre', album: 'Debut EP', duration: '4:12', plays: '8.5M' },
-      { id: 3, title: 'Sem Medo', album: 'Debut EP', duration: '3:28', plays: '6.8M' },
-      { id: 4, title: 'Brilhar', album: 'Debut EP', duration: '3:55', plays: '5.2M' },
-      { id: 5, title: 'Renascer', album: 'Single', duration: '4:20', plays: '4.9M' }
-    ],
-    videos: [
-      {
-        id: 1,
-        title: 'Noites de Verão (Official Video)',
-        thumbnail: 'https://readdy.ai/api/search-image?query=professional%20music%20video%20scene%20with%20female%20pop%20singer%20performing%20on%20stage%2C%20dramatic%20teal%20and%20orange%20stage%20lighting%2C%20cinematic%20composition%2C%20high%20production%20value%2C%20concert%20atmosphere%20with%20glowing%20effects&width=600&height=340&seq=artist-video-001&orientation=landscape',
-        views: '2.5M'
+  const artists = [
+    {
+      id: 1,
+      name: 'Alexsander Lucio',
+      genre: 'Gospel/CCM',
+      image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=800&fit=crop&q=80',
+      banner:
+        'https://readdy.ai/api/search-image?query=professional%20gospel%20singer%20performing%20on%20stage%20with%20dramatic%20teal%20and%20bronze%20lighting%2C%20wide%20cinematic%20shot%2C%20concert%20atmosphere%20with%20glowing%20effects%2C%20premium%20quality%20photography%2C%20artistic%20composition&width=1920&height=600&seq=artist-banner-001&orientation=landscape',
+      bio: 'Alex Lúcio nasceu e foi criado em um lar cristão, tendo suas raízes firmadas desde cedo na igreja. Vindo de uma infância simples e humilde, ele é o terceiro de cinco irmãos. Desde pequeno, Alex se destacou nos estudos, sempre dedicado e esforçado, alcançando notas máximas em todas as matérias. Aos 11 anos, seu talento acadêmico lhe rendeu o terceiro lugar em uma oficina de matemática, um momento que marcou sua trajetória escolar.\n\nCom a mãe precisando trabalhar fora para sustentar a família, Alex aprendeu desde cedo o valor do esforço e da fé. Na adolescência, ele descobriu sua vocação para a música, começando então a compor e cantar com o coração voltado sempre para Deus. Seu amor pela música se transformou em uma missão maior: hoje, ele realiza um importante trabalho de evangelização no Calçadão de Campo Grande, levando esperança e a Palavra de Deus a muitas vidas, onde já ganhou centenas de almas pra Jesus.\n\nAlex é membro ativo da Igreja Assembleia de Deus em Campo Grande, onde encontra inspiração espiritual e apoio para continuar sua caminhada. Sua trajetória é marcada por dedicação, talento e fé, e seu objetivo é sempre ser um instrumento nas mãos de Deus para tocar corações e transformar vidas através da música.',
+      instagram: 'https://www.instagram.com/alexlucio.ofc/',
+      spotify: 'https://open.spotify.com/artist/2xX3xodC7zA5u2xygCWzuP',
+      youtube: null,
+      followers: {
+        instagram: null,
+        spotify: '2.6M',
+        youtube: null,
       },
-      {
-        id: 2,
-        title: 'Coração Livre (Lyric Video)',
-        thumbnail: 'https://readdy.ai/api/search-image?query=artistic%20lyric%20video%20scene%20with%20female%20pop%20singer%2C%20vibrant%20teal%20and%20bronze%20visual%20effects%2C%20modern%20typography%2C%20cinematic%20quality%2C%20creative%20composition%20with%20glowing%20elements&width=600&height=340&seq=artist-video-002&orientation=landscape',
-        views: '1.8M'
-      }
-    ],
-    shows: [
-      { id: 1, date: '15 Mar 2024', city: 'São Paulo', venue: 'Espaço das Américas', status: 'Confirmado' },
-      { id: 2, date: '22 Mar 2024', city: 'Rio de Janeiro', venue: 'Vivo Rio', status: 'Confirmado' },
-      { id: 3, date: '05 Abr 2024', city: 'Belo Horizonte', venue: 'Music Hall', status: 'Em breve' },
-      { id: 4, date: '12 Abr 2024', city: 'Curitiba', venue: 'Live Curitiba', status: 'Em breve' }
-    ]
-  };
+      songs: [
+        { id: 1, title: 'O Fogo Arderá - Ao Vivo', album: 'Album', duration: null, plays: '58.6M' },
+        { id: 2, title: 'Buscar-Me-Eis e Me Achareis - Ao Vivo', album: 'Album', duration: null, plays: '14.5M' },
+        { id: 3, title: 'O Fogo Arderá', album: 'Album', duration: null, plays: '9.1M' },
+        { id: 4, title: 'Salva-Vidas', album: 'Album', duration: null, plays: '4.3M' },
+        { id: 5, title: 'Sempre Estive Aqui', album: 'Single', duration: null, plays: '1.0M' },
+      ],
+      videos: [
+        {
+          id: 1,
+          title: 'Noites de Verão (Official Video)',
+          thumbnail:
+            'https://readdy.ai/api/search-image?query=professional%20music%20video%20scene%20with%20female%20pop%20singer%20performing%20on%20stage%2C%20dramatic%20teal%20and%20orange%20stage%20lighting%2C%20cinematic%20composition%2C%20high%20production%20value%2C%20concert%20atmosphere%20with%20glowing%20effects&width=600&height=340&seq=artist-video-001&orientation=landscape',
+          views: '2.5M',
+        },
+        {
+          id: 2,
+          title: 'Coração Livre (Lyric Video)',
+          thumbnail:
+            'https://readdy.ai/api/search-image?query=artistic%20lyric%20video%20scene%20with%20female%20pop%20singer%2C%20vibrant%20teal%20and%20bronze%20visual%20effects%2C%20modern%20typography%2C%20cinematic%20quality%2C%20creative%20composition%20with%20glowing%20elements&width=600&height=340&seq=artist-video-002&orientation=landscape',
+          views: '1.8M',
+        },
+      ],
+      shows: [
+        { id: 1, date: '15 Mar 2024', city: 'São Paulo', venue: 'Espaço das Américas', status: 'Confirmado' },
+        { id: 2, date: '22 Mar 2024', city: 'Rio de Janeiro', venue: 'Vivo Rio', status: 'Confirmado' },
+        { id: 3, date: '05 Abr 2024', city: 'Belo Horizonte', venue: 'Music Hall', status: 'Em breve' },
+        { id: 4, date: '12 Abr 2024', city: 'Curitiba', venue: 'Live Curitiba', status: 'Em breve' },
+      ],
+    },
+    {
+      id: 10,
+      name: 'Na Graça',
+      genre: 'Gospel/CCM',
+      image:
+        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20band%20on%20stage%20leading%20congregation%20in%20worship%2C%20dramatic%20teal%20and%20bronze%20lighting%2C%20modern%20church%20concert%2C%20high%20quality%20photography&width=800&height=800&seq=artist-na-graca-detail&orientation=squarish',
+      banner:
+        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20band%20live%20concert%20with%20hands%20raised%2C%20teal%20and%20bronze%20stage%20lights%2C%20wide%20cinematic%20shot%2C%20modern%20church%20worship%20environment&width=1920&height=600&seq=artist-na-graca-banner&orientation=landscape',
+      bio: 'Na Graça é um ministério de louvor que nasceu com o propósito de conduzir a igreja a uma experiência profunda com Deus através da adoração. Com canções congregacionais e mensagens centradas na fé, o grupo tem se destacado por suas ministrações ao vivo, marcadas por simplicidade, unidade e forte presença de Deus.\n\nEntre suas faixas mais conhecidas estão “A Fé (Ao Vivo)”, “Ele Te Chamou (Ao Vivo)” e “Louva Na Graça (Ao Vivo)”, que têm alcançado milhares de ouvintes nas plataformas digitais. O grupo segue avançando com novos projetos e gravações ao vivo, sempre com o foco em espalhar a graça e o amor de Cristo por meio da música.',
+      instagram: 'https://www.instagram.com/nagracaoficial/',
+      spotify: 'https://open.spotify.com/intl-pt/artist/7pmvHrURMH0OqDcXXQiuYX',
+      youtube: null,
+      followers: {
+        instagram: null,
+        spotify: '55,5K',
+        youtube: null,
+      },
+      songs: [
+        { id: 1, title: 'A Fé - Ao Vivo', album: 'A Fé (Ao Vivo)', duration: null, plays: '679.8K' },
+        { id: 2, title: 'Ele Te Chamou - Ao Vivo', album: 'Ele Te Chamou (Ao Vivo)', duration: null, plays: '67.1K' },
+        { id: 3, title: 'Louva Na Graça - Ao Vivo', album: 'Louva Na Graça (Ao Vivo)', duration: null, plays: '16.7K' },
+      ],
+      videos: [],
+      shows: [],
+    },
+    {
+      id: 11,
+      name: 'No Santuário',
+      genre: 'Gospel/CCM',
+      image:
+        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20duo%20worship%20leaders%20on%20stage%20with%20congregation%20hands%20raised%2C%20teal%20and%20bronze%20lighting%2C%20modern%20church%20concert%2C%20high%20quality%20photography&width=800&height=800&seq=artist-no-santuario-detail&orientation=squarish',
+      banner:
+        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20band%20No%20Santuario%20live%20DVD%20recording%2C%20worship%20environment%2C%20cinematic%20wide%20shot%2C%20teal%20and%20gold%20lights%2C%20congregation%20worshipping&width=1920&height=600&seq=artist-no-santuario-banner&orientation=landscape',
+      bio: 'Com 13 anos de carreira ministerial, álbuns, EPs e ministrações por todo o Brasil, EUA e Europa, o ministério No Santuário (Pr. Israel Leonardo e Raphaela Carvalho) dedica-se a proclamar o evangelho através da adoração e da pregação da Palavra de Deus. Recentemente lançaram seu primeiro DVD com canções inéditas e uma nova versão de “Final Feliz”, além de projetos como “Ele Fará”, “Teus Átrios” e “Haja o que Houver (Ao Vivo)”.\n\nCom letras bíblicas e forte ênfase na presença de Deus, No Santuário se tornou referência na adoração congregacional, convidando a igreja a viver uma jornada de fé, esperança e restauração em cada canção.',
+      instagram: 'https://www.instagram.com/nosantuario/',
+      spotify: 'https://open.spotify.com/intl-pt/artist/3qkhpijMzbtVFexHZTNoai',
+      youtube: null,
+      followers: {
+        instagram: null,
+        spotify: '31,3K',
+        youtube: null,
+      },
+      songs: [
+        { id: 1, title: 'Ele Fará', album: 'Ele Fará', duration: null, plays: '99.7K' },
+        { id: 2, title: 'Teus Átrios', album: 'Teus Átrios', duration: null, plays: '44.1K' },
+        { id: 3, title: 'Haja o que Houver - Ao Vivo', album: 'Haja o que Houver (Ao Vivo)', duration: null, plays: '33.8K' },
+        { id: 4, title: 'Tu És o Cristo (I Call You Jesus)', album: 'Single', duration: null, plays: '39.0K' },
+      ],
+      videos: [],
+      shows: [],
+    },
+    {
+      id: 12,
+      name: 'Debora Lopes',
+      genre: 'Gospel/CCM',
+      image:
+        'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20singer%20worshipping%20with%20hands%20raised%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20stage%20portrait&width=800&height=800&seq=artist-debora-lopes-detail&orientation=squarish',
+      banner:
+        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20female%20lead%20singer%20Debora%20Lopes%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-debora-lopes-banner&orientation=landscape',
+      bio: 'Debora Lopes é uma cantora gospel brasileira que tem sido usada para ministrar sobre fé, cura e milagres através de suas canções. Com o lançamento de “Milagres de Deus (Ao Vivo)” e sua versão em playback, seu ministério vem alcançando um público cada vez maior, fortalecendo a fé de quem ouve e declarando o agir sobrenatural de Deus.\n\nCom uma voz marcante e letras centradas na Palavra, Debora tem se consolidado como um dos novos nomes da adoração contemporânea, convidando a igreja a confiar nos milagres de Deus em cada estação da vida.',
+      instagram: 'https://www.instagram.com/deboralopesoficiall/',
+      spotify: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
+      youtube: null,
+      followers: {
+        instagram: null,
+        spotify: '2,8K',
+        youtube: null,
+      },
+      songs: [
+        { id: 1, title: 'Milagres de Deus - Ao Vivo', album: 'Milagres de Deus (Ao Vivo)', duration: null, plays: '45.1K' },
+        { id: 2, title: 'Milagres de Deus - Playback', album: 'Milagres de Deus (Playback)', duration: null, plays: '1.1K' },
+      ],
+      videos: [],
+      shows: [],
+    },
+    {
+      id: 13,
+      name: 'Caio Torres',
+      genre: 'Gospel/CCM',
+      image:
+        'https://readdy.ai/api/search-image?query=Brazilian%20male%20gospel%20worship%20singer%20Caio%20Torres%20style%2C%20eyes%20closed%20in%20worship%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20stage%20portrait&width=800&height=800&seq=artist-caio-torres-detail&orientation=squarish',
+      banner:
+        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20male%20lead%20singer%20Caio%20Torres%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-caio-torres-banner&orientation=landscape',
+      bio: 'Caio Torres é um cantor gospel brasileiro que tem se dedicado a conduzir pessoas a um lugar de rendição e intimidade com Deus por meio da adoração. Com letras sinceras e melódicas, suas ministrações carregam uma mensagem de arrependimento, esperança e confiança na graça de Cristo.\n\nSeu ministério tem crescido em igrejas e eventos pelo Brasil, sempre com o propósito de apontar para Jesus e criar ambientes onde o Espírito Santo tenha liberdade para agir.',
+      instagram: 'https://www.instagram.com/caiotorees/',
+      spotify: 'https://open.spotify.com/intl-pt/artist/3TOPRsT6nYECZi9K9yZZXw',
+      youtube: null,
+      followers: {
+        instagram: null,
+        spotify: null,
+        youtube: null,
+      },
+      songs: [],
+      videos: [],
+      shows: [],
+    },
+    {
+      id: 14,
+      name: 'Nicole Lavinia',
+      genre: 'Gospel/CCM',
+      image:
+        'https://readdy.ai/api/search-image?query=Brazilian%20young%20female%20gospel%20worship%20singer%20Nicole%20Lavinia%20style%2C%20eyes%20closed%20in%20worship%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20portrait&width=800&height=800&seq=artist-nicole-lavinia-detail&orientation=squarish',
+      banner:
+        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20youth%20worship%20concert%20with%20female%20lead%20singer%20Nicole%20Lavinia%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-nicole-lavinia-banner&orientation=landscape',
+      bio: 'Nicole Lavinia é uma jovem cantora gospel brasileira que tem se destacado com canções que falam sobre rendição, santidade e intimidade com Deus. Com uma voz doce e marcante, suas ministrações carregam mensagens de esperança e encorajamento para uma geração que deseja viver os propósitos de Cristo.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, Nicole tem alcançado novos públicos, sempre com o desejo de conduzir pessoas a um encontro real com Jesus e a uma vida de adoração genuína.',
+      instagram: 'https://www.instagram.com/nicolelaviniaoficial_/',
+      spotify: 'https://open.spotify.com/intl-pt/track/0AayU24085eVhLhbk27sTE',
+      youtube: null,
+      followers: {
+        instagram: null,
+        spotify: null,
+        youtube: null,
+      },
+      songs: [],
+      videos: [],
+      shows: [],
+    },
+    {
+      id: 15,
+      name: 'Maria Pita',
+      genre: 'Gospel/CCM',
+      image:
+        'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20worship%20singer%20Maria%20Pita%20style%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20stage%20portrait&width=800&height=800&seq=artist-maria-pita-detail&orientation=squarish',
+      banner:
+        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20female%20lead%20singer%20Maria%20Pita%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-maria-pita-banner&orientation=landscape',
+      bio: 'Maria Pita é uma cantora gospel brasileira que carrega em suas canções mensagens de esperança, cura e rendição aos pés de Jesus. Com uma voz doce e firme, suas ministrações convidam a igreja a confiar na fidelidade de Deus em meio às lutas e processos.\n\nSeu ministério tem alcançado diferentes gerações, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e sincera.',
+      instagram: 'https://www.instagram.com/mariapitacantora_/',
+      spotify: 'https://open.spotify.com/intl-pt/artist/7fw7DfkvI0fMyEKfOw0k6n',
+      youtube: null,
+      followers: {
+        instagram: null,
+        spotify: null,
+        youtube: null,
+      },
+      songs: [],
+      videos: [],
+      shows: [],
+    },
+    {
+      id: 16,
+      name: 'William Soares',
+      genre: 'Gospel/CCM',
+      image:
+        'https://readdy.ai/api/search-image?query=Brazilian%20male%20gospel%20worship%20singer%20William%20Soares%20style%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20stage%20portrait&width=800&height=800&seq=artist-william-soares-detail&orientation=squarish',
+      banner:
+        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20male%20lead%20singer%20William%20Soares%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-william-soares-banner&orientation=landscape',
+      bio: 'William Soares é um cantor gospel brasileiro que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, William tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',
+      instagram: 'https://www.instagram.com/williaamsoarees/',
+      spotify: null,
+      youtube: null,
+      followers: {
+        instagram: null,
+        spotify: null,
+        youtube: null,
+      },
+      songs: [],
+      videos: [],
+      shows: [],
+    },
+    {
+      id: 17,
+      name: 'Martinha',
+      genre: 'Gospel/CCM',
+      image:
+        'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20worship%20singer%20Martinha%20style%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20stage%20portrait&width=800&height=800&seq=artist-martinha-detail&orientation=squarish',
+      banner:
+        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20female%20lead%20singer%20Martinha%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-martinha-banner&orientation=landscape',
+      bio: 'Martinha é uma cantora gospel brasileira que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, Martinha tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',
+      instagram: 'https://www.instagram.com/martinhacantoraoficial/',
+      spotify: 'https://open.spotify.com/intl-pt/artist/6etONEQiR3dUCs4IV0kIlE',
+      youtube: null,
+      followers: {
+        instagram: null,
+        spotify: '3.2K',
+        youtube: null,
+      },
+      songs: [
+        { id: 1, title: 'Quem Vai Fazer', album: 'Quem Vai Fazer', duration: null, plays: '228.8K' },
+        { id: 2, title: 'Simplesmente Invencível', album: 'Album', duration: null, plays: '31.8K' },
+        { id: 3, title: 'Eu Faço - Ao Vivo', album: 'Eu Faço (Ao Vivo)', duration: null, plays: '15.8K' },
+        { id: 4, title: 'O Escolhido', album: 'Album', duration: null, plays: '8.6K' },
+        { id: 5, title: 'Para o Mar Se Abrir', album: 'Album', duration: null, plays: '4.1K' },
+      ],
+      videos: [],
+      shows: [],
+    },
+  ];
+
+  const artistId = Number(id);
+  const artist = artists.find((a) => a.id === artistId) ?? artists[0];
 
   return (
     <div className="bg-black min-h-screen">
@@ -259,7 +453,7 @@ export default function ArtistDetailPage() {
           </h2>
           <div className="flex items-center justify-center gap-6">
             <a
-              href={`https://instagram.com/${artist.instagram}`}
+              href="https://www.instagram.com/alexlucio.ofc/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-16 h-16 flex items-center justify-center bg-[#E4405F]/20 hover:bg-[#E4405F]/30 rounded-full border border-[#E4405F]/30 hover:border-[#E4405F]/50 transition-all duration-300 hover:scale-110 cursor-pointer"
@@ -267,21 +461,23 @@ export default function ArtistDetailPage() {
               <i className="ri-instagram-fill text-3xl text-[#E4405F]"></i>
             </a>
             <a
-              href={`https://open.spotify.com/artist/${artist.spotify}`}
+              href="https://open.spotify.com/artist/2xX3xodC7zA5u2xygCWzuP"
               target="_blank"
               rel="noopener noreferrer"
               className="w-16 h-16 flex items-center justify-center bg-[#1DB954]/20 hover:bg-[#1DB954]/30 rounded-full border border-[#1DB954]/30 hover:border-[#1DB954]/50 transition-all duration-300 hover:scale-110 cursor-pointer"
             >
               <i className="ri-spotify-fill text-3xl text-[#1DB954]"></i>
             </a>
-            <a
-              href={`https://youtube.com/${artist.youtube}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-16 h-16 flex items-center justify-center bg-[#FF0000]/20 hover:bg-[#FF0000]/30 rounded-full border border-[#FF0000]/30 hover:border-[#FF0000]/50 transition-all duration-300 hover:scale-110 cursor-pointer"
-            >
-              <i className="ri-youtube-fill text-3xl text-[#FF0000]"></i>
-            </a>
+            {artist.youtube && (
+              <a
+                href={`https://youtube.com/${artist.youtube}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-16 h-16 flex items-center justify-center bg-[#FF0000]/20 hover:bg-[#FF0000]/30 rounded-full border border-[#FF0000]/30 hover:border-[#FF0000]/50 transition-all duration-300 hover:scale-110 cursor-pointer"
+              >
+                <i className="ri-youtube-fill text-3xl text-[#FF0000]"></i>
+              </a>
+            )}
           </div>
         </div>
       </section>

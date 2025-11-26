@@ -92,12 +92,24 @@ export default function HeroSection() {
           setError('Nenhum vídeo encontrado no canal @ceumusicbrasil. Verifique se o canal existe e tem vídeos públicos.');
         }
       } catch (err) {
-        // Loga apenas erros não relacionados a conexão para evitar spam no console
-        if (err instanceof Error && !err.message.includes('conexão') && !err.message.includes('internet')) {
+        // Loga apenas erros não relacionados a conexão ou cota para evitar spam no console
+        if (err instanceof Error && 
+            !err.message.includes('conexão') && 
+            !err.message.includes('internet') &&
+            !err.message.includes('cota') &&
+            !err.message.includes('quota')) {
           console.error('Erro ao carregar vídeos:', err);
         }
+        
         const errorMessage = err instanceof Error ? err.message : 'Erro desconhecido';
-        setError(`Erro ao carregar vídeos do canal: ${errorMessage}`);
+        
+        // Mensagem amigável para limite de cota
+        if (errorMessage.includes('cota') || errorMessage.includes('quota')) {
+          setError('Limite de visualizações da API do YouTube atingido hoje. Os vídeos estarão disponíveis novamente amanhã.');
+        } else {
+          setError(`Erro ao carregar vídeos do canal: ${errorMessage}`);
+        }
+        
         setVideos([]);
         setSelectedVideoId('');
       } finally {

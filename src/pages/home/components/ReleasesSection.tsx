@@ -130,15 +130,24 @@ export default function ReleasesSection() {
       } catch (err) {
         if (!isMounted) return; // Evita atualização se componente foi desmontado
         
-        // Loga apenas erros não relacionados a conexão para debug
-        if (err instanceof Error && !err.message.includes('conexão') && !err.message.includes('internet')) {
+        // Loga apenas erros não relacionados a conexão ou cota para debug
+        if (err instanceof Error && 
+            !err.message.includes('conexão') && 
+            !err.message.includes('internet') &&
+            !err.message.includes('cota') &&
+            !err.message.includes('quota')) {
           console.error('Erro ao carregar lançamentos:', err);
         }
         
         const errorMessage = err instanceof Error ? err.message : 'Erro desconhecido ao carregar lançamentos';
         
         if (isMounted) {
-          setError(errorMessage);
+          // Mensagem amigável para limite de cota
+          if (errorMessage.includes('cota') || errorMessage.includes('quota')) {
+            setError('Limite de visualizações da API do YouTube atingido hoje. Os lançamentos estarão disponíveis novamente amanhã.');
+          } else {
+            setError(errorMessage);
+          }
           setReleases([]);
           setLoading(false);
         }

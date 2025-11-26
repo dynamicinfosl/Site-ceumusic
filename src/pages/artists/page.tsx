@@ -4,63 +4,91 @@ import { useNavigate } from 'react-router-dom';
 const artists = [
   {
     id: 1,
-    name: 'Luna Silva',
-    genre: 'Pop',
-    bio: 'Voz marcante e presença de palco única',
-    image: 'https://readdy.ai/api/search-image?query=Professional%20female%20pop%20singer%20portrait%2C%20young%20woman%20with%20long%20dark%20hair%2C%20confident%20expression%2C%20studio%20lighting%2C%20music%20artist%20photography%2C%20dark%20elegant%20background&width=400&height=400&seq=artist-1&orientation=squarish',
-    instagram: 'https://instagram.com',
-    spotify: 'https://spotify.com',
-    youtube: 'https://youtube.com',
+    name: 'Alexsander Lucio',
+    genre: 'Gospel/CCM',
+    bio: 'Alex Lúcio nasceu e foi criado em um lar cristão, tendo suas raízes firmadas desde cedo na igreja. Vindo de uma infância simples e humilde, ele é o terceiro de cinco irmãos. Desde pequeno, Alex se destacou nos estudos, sempre dedicado e esforçado. Na adolescência, ele descobriu sua vocação para a música, começando então a compor e cantar com o coração voltado sempre para Deus. Seu amor pela música se transformou em uma missão maior: hoje, ele realiza um importante trabalho de evangelização no Calçadão de Campo Grande, levando esperança e a Palavra de Deus a muitas vidas.',
+    // Foto do perfil do artista - substitua pela URL real da foto
+    // Para obter a foto: baixe a foto do perfil do Instagram e hospede em um serviço de imagens (ex: Imgur, Cloudinary) ou use a URL direta se disponível
+    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop&q=80', // Placeholder temporário - substitua pela foto real do artista
+    instagram: 'https://www.instagram.com/alexlucio.ofc/',
+    spotify: 'https://open.spotify.com/artist/2xX3xodC7zA5u2xygCWzuP',
+    youtube: null, // Adicione o link do YouTube se disponível
   },
   {
-    id: 2,
-    name: 'Rafael Costa',
-    genre: 'Hip Hop',
-    bio: 'Letras que contam histórias reais das ruas',
-    image: 'https://readdy.ai/api/search-image?query=Professional%20male%20hip%20hop%20artist%20portrait%2C%20young%20man%20with%20urban%20style%2C%20confident%20pose%2C%20studio%20lighting%2C%20rapper%20photography%2C%20dark%20modern%20background&width=400&height=400&seq=artist-2&orientation=squarish',
-    instagram: 'https://instagram.com',
-    spotify: 'https://spotify.com',
-    youtube: 'https://youtube.com',
+    id: 10,
+    name: 'Na Graça',
+    genre: 'Gospel/CCM',
+    bio: 'Grupo de adoração que leva mensagens de fé e esperança através de ministrações ao vivo e canções marcadas pela presença de Deus.',
+    image: 'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20band%20on%20stage%20leading%20congregation%20in%20worship%2C%20dramatic%20teal%20and%20bronze%20lighting%2C%20modern%20church%20concert%2C%20high%20quality%20photography&width=400&height=400&seq=artist-na-graca&orientation=squarish',
+    instagram: 'https://www.instagram.com/nagracaoficial/',
+    spotify: 'https://open.spotify.com/intl-pt/artist/7pmvHrURMH0OqDcXXQiuYX',
+    youtube: null,
   },
   {
-    id: 3,
-    name: 'Marina Luz',
-    genre: 'MPB',
-    bio: 'Tradição e modernidade em perfeita harmonia',
-    image: 'https://readdy.ai/api/search-image?query=Professional%20female%20MPB%20singer%20portrait%2C%20elegant%20woman%20with%20artistic%20style%2C%20warm%20expression%2C%20studio%20lighting%2C%20Brazilian%20music%20artist%2C%20sophisticated%20dark%20background&width=400&height=400&seq=artist-3&orientation=squarish',
-    instagram: 'https://instagram.com',
-    spotify: 'https://spotify.com',
-    youtube: 'https://youtube.com',
+    id: 15,
+    name: 'Maria Pita',
+    genre: 'Gospel/CCM',
+    bio: 'Cantora gospel que traz mensagens de esperança, fé e restauração, com um estilo de adoração sensível e intenso.',
+    image:
+      'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20worship%20singer%20Maria%20Pita%20style%2C%20soft%20stage%20lighting%2C%20high%20quality%20portrait&width=400&height=400&seq=artist-maria-pita&orientation=squarish',
+    instagram: 'https://www.instagram.com/mariapitacantora_/',
+    spotify: 'https://open.spotify.com/intl-pt/artist/7fw7DfkvI0fMyEKfOw0k6n',
+    youtube: null,
   },
   {
-    id: 4,
-    name: 'Pedro Alves',
-    genre: 'Rock',
-    bio: 'Energia pura e guitarras poderosas',
-    image: 'https://readdy.ai/api/search-image?query=Professional%20male%20rock%20musician%20portrait%2C%20young%20man%20with%20edgy%20style%2C%20intense%20expression%2C%20dramatic%20lighting%2C%20rock%20artist%20photography%2C%20dark%20atmospheric%20background&width=400&height=400&seq=artist-4&orientation=squarish',
-    instagram: 'https://instagram.com',
-    spotify: 'https://spotify.com',
-    youtube: 'https://youtube.com',
+    id: 13,
+    name: 'Caio Torres',
+    genre: 'Gospel/CCM',
+    bio: 'Cantor gospel com mensagens de fé e rendição, focado em levar a igreja a uma experiência profunda de adoração e entrega através de suas canções.',
+    image:
+      'https://readdy.ai/api/search-image?query=Brazilian%20male%20gospel%20worship%20singer%20Caio%20Torres%20style%2C%20microphone%20in%20hand%2C%20teal%20and%20bronze%20lighting%2C%20high%20quality%20portrait&width=400&height=400&seq=artist-caio-torres&orientation=squarish',
+    instagram: 'https://www.instagram.com/caiotorees/',
+    spotify: 'https://open.spotify.com/intl-pt/artist/3TOPRsT6nYECZi9K9yZZXw',
+    youtube: null,
   },
   {
-    id: 5,
-    name: 'Beatriz Santos',
-    genre: 'Eletrônica',
-    bio: 'Batidas futuristas e sons inovadores',
-    image: 'https://readdy.ai/api/search-image?query=Professional%20female%20electronic%20music%20artist%20portrait%2C%20modern%20woman%20with%20futuristic%20style%2C%20creative%20expression%2C%20neon%20lighting%2C%20DJ%20producer%20photography%2C%20dark%20tech%20background&width=400&height=400&seq=artist-5&orientation=squarish',
-    instagram: 'https://instagram.com',
-    spotify: 'https://spotify.com',
-    youtube: 'https://youtube.com',
+    id: 14,
+    name: 'Nicole Lavinia',
+    genre: 'Gospel/CCM',
+    bio: 'Cantora gospel que tem se destacado entre a nova geração de adoradores, com canções que falam de intimidade com Deus e entrega total.',
+    image:
+      'https://readdy.ai/api/search-image?query=Brazilian%20young%20female%20gospel%20worship%20singer%20Nicole%20Lavinia%20style%2C%20soft%20teal%20and%20gold%20lighting%2C%20high%20quality%20portrait&width=400&height=400&seq=artist-nicole-lavinia&orientation=squarish',
+    instagram: 'https://www.instagram.com/nicolelaviniaoficial_/',
+    spotify: 'https://open.spotify.com/intl-pt/track/0AayU24085eVhLhbk27sTE',
+    youtube: null,
   },
   {
-    id: 6,
-    name: 'Lucas Ferreira',
-    genre: 'Sertanejo',
-    bio: 'Autenticidade e emoção em cada nota',
-    image: 'https://readdy.ai/api/search-image?query=Professional%20male%20sertanejo%20singer%20portrait%2C%20handsome%20man%20with%20country%20style%2C%20charismatic%20smile%2C%20warm%20lighting%2C%20Brazilian%20country%20music%20artist%2C%20elegant%20dark%20background&width=400&height=400&seq=artist-6&orientation=squarish',
-    instagram: 'https://instagram.com',
-    spotify: 'https://spotify.com',
-    youtube: 'https://youtube.com',
+    id: 12,
+    name: 'Debora Lopes',
+    genre: 'Gospel/CCM',
+    bio: 'Cantora gospel que tem se destacado com canções de fé e esperança, como “Milagres de Deus (Ao Vivo)”, alcançando milhares de ouvintes nas plataformas digitais.',
+    image:
+      'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20worship%20singer%20on%20stage%2C%20eyes%20closed%20in%20worship%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20concert%20photography&width=400&height=400&seq=artist-debora-lopes&orientation=squarish',
+    instagram: 'https://www.instagram.com/deboralopesoficiall/',
+    spotify: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
+    youtube: null,
+  },
+  {
+    id: 16,
+    name: 'William Soares',
+    genre: 'Gospel/CCM',
+    bio: 'Cantor gospel que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções.',
+    image:
+      'https://readdy.ai/api/search-image?query=Brazilian%20male%20gospel%20worship%20singer%20William%20Soares%20style%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20portrait&width=400&height=400&seq=artist-william-soares&orientation=squarish',
+    instagram: 'https://www.instagram.com/williaamsoarees/',
+    spotify: null,
+    youtube: null,
+  },
+  {
+    id: 17,
+    name: 'Martinha',
+    genre: 'Gospel/CCM',
+    bio: 'Cantora gospel que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções.',
+    image:
+      'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20worship%20singer%20Martinha%20style%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20portrait&width=400&height=400&seq=artist-martinha&orientation=squarish',
+    instagram: 'https://www.instagram.com/martinhacantoraoficial/',
+    spotify: 'https://open.spotify.com/intl-pt/artist/6etONEQiR3dUCs4IV0kIlE',
+    youtube: null,
   },
   {
     id: 7,
@@ -94,7 +122,7 @@ const artists = [
   },
 ];
 
-const genres = ['Todos', 'Pop', 'Hip Hop', 'MPB', 'Rock', 'Eletrônica', 'Sertanejo'];
+const genres = ['Todos', 'Pop', 'Hip Hop', 'MPB', 'Rock', 'Eletrônica', 'Sertanejo', 'Gospel/CCM'];
 
 export default function ArtistsPage() {
   const [selectedGenre, setSelectedGenre] = useState('Todos');
@@ -165,7 +193,7 @@ export default function ArtistsPage() {
           {filteredArtists.map((artist, index) => (
             <div
               key={artist.id}
-              onClick={() => navigate(`/artist/${artist.id}`)}
+              onClick={() => navigate(`/artista/${artist.id}`)}
               className="glass-card animate-liquid-glass rounded-2xl p-8 hover:border-[#0EA8A0]/50 transition-all duration-500 cursor-pointer group scroll-reveal"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
@@ -183,33 +211,43 @@ export default function ArtistsPage() {
                 <p className="text-[#0EA8A0] mb-2 font-montserrat text-sm">{artist.genre}</p>
                 <p className="text-gray-400 mb-4 font-montserrat text-sm">{artist.bio}</p>
                 <div className="flex items-center space-x-4">
-                  <a
-                    href={artist.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer"
-                  >
-                    <i className="ri-instagram-line"></i>
-                  </a>
-                  <a
-                    href={artist.spotify}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer"
-                  >
-                    <i className="ri-spotify-fill"></i>
-                  </a>
-                  <a
-                    href={artist.youtube}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer"
-                  >
-                    <i className="ri-youtube-fill"></i>
-                  </a>
+                  {artist.instagram && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open(artist.instagram, '_blank', 'noopener,noreferrer');
+                      }}
+                      className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer"
+                      title="Instagram"
+                      type="button"
+                    >
+                      <i className="ri-instagram-line"></i>
+                    </button>
+                  )}
+                  {artist.spotify && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open(artist.spotify, '_blank', 'noopener,noreferrer');
+                      }}
+                      className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer"
+                      title="Spotify"
+                      type="button"
+                    >
+                      <i className="ri-spotify-fill"></i>
+                    </button>
+                  )}
+                  {artist.youtube && (
+                    <a
+                      href={artist.youtube}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer"
+                    >
+                      <i className="ri-youtube-fill"></i>
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

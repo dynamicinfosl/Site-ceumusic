@@ -1,122 +1,188 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 
-// TODO: Substituir os dados de exemplo pelos dados reais dos artistas
-// Estrutura de dados dos artistas - substitua os valores de exemplo pelos dados reais
+// Artistas da Céu Music
 const artists = [
   {
     id: 1,
-    // Nome artístico do artista
-    name: 'Luna Silva', // EXEMPLO: Substituir pelo nome artístico real
-    // Gênero musical
-    genre: 'Pop', // EXEMPLO: Substituir pelo gênero real
-    // Foto oficial do artista (URL da imagem)
-    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=400&fit=crop&q=80', // EXEMPLO: Substituir pela foto oficial real
-    // Links de redes sociais (deixe null se não tiver)
+    name: 'Alexsander Lucio',
+    genre: 'Gospel/CCM',
+    // Foto do perfil do artista - substitua pela URL real da foto
+    // Para obter a foto: baixe a foto do perfil do Instagram e hospede em um serviço de imagens (ex: Imgur, Cloudinary) ou use a URL direta se disponível
+    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop&q=80', // Placeholder temporário - substitua pela foto real do artista
     socialLinks: {
-      instagram: 'https://instagram.com', // EXEMPLO: Substituir pelo link real do Instagram
-      spotify: 'https://spotify.com', // EXEMPLO: Substituir pelo link real do Spotify
-      youtube: 'https://youtube.com', // EXEMPLO: Substituir pelo link real do YouTube
-      tiktok: null, // EXEMPLO: Substituir pelo link real do TikTok ou deixe null
-      twitter: null, // EXEMPLO: Substituir pelo link real do Twitter/X ou deixe null
-      facebook: null, // EXEMPLO: Substituir pelo link real do Facebook ou deixe null
+      instagram: 'https://www.instagram.com/alexlucio.ofc/',
+      spotify: 'https://open.spotify.com/artist/2xX3xodC7zA5u2xygCWzuP',
+      youtube: null, // Adicione o link do YouTube se disponível
+      tiktok: null,
+      twitter: null,
+      facebook: null,
     },
-    // Links de músicas disponíveis (deixe array vazio se não tiver)
     musicLinks: [
-      { platform: 'Spotify', url: 'https://spotify.com' }, // EXEMPLO: Substituir pelos links reais
-      { platform: 'Apple Music', url: 'https://music.apple.com' }, // EXEMPLO: Substituir pelos links reais
-      { platform: 'Deezer', url: 'https://deezer.com' }, // EXEMPLO: Substituir pelos links reais
+      { platform: 'Spotify', url: 'https://open.spotify.com/artist/2xX3xodC7zA5u2xygCWzuP' },
+      // Adicione outros links de streaming quando disponíveis
     ],
   },
   {
-    id: 2,
-    name: 'Rafael Costa', // EXEMPLO: Substituir pelo nome artístico real
-    genre: 'Hip Hop', // EXEMPLO: Substituir pelo gênero real
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop&q=80', // EXEMPLO: Substituir pela foto oficial real
+    id: 10,
+    name: 'Na Graça',
+    genre: 'Gospel/CCM',
+    image: 'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20band%20performing%20on%20stage%20with%20teal%20and%20bronze%20lights%2C%20congregation%20worship%2C%20modern%20christian%20music%20group%2C%20high%20quality%20concert%20photography&width=600&height=600&seq=artist-na-graca&orientation=squarish',
     socialLinks: {
-      instagram: 'https://instagram.com', // EXEMPLO: Substituir pelo link real do Instagram
-      spotify: 'https://spotify.com', // EXEMPLO: Substituir pelo link real do Spotify
-      youtube: 'https://youtube.com', // EXEMPLO: Substituir pelo link real do YouTube
-      tiktok: null, // EXEMPLO: Substituir pelo link real do TikTok ou deixe null
-      twitter: null, // EXEMPLO: Substituir pelo link real do Twitter/X ou deixe null
-      facebook: null, // EXEMPLO: Substituir pelo link real do Facebook ou deixe null
+      instagram: 'https://www.instagram.com/nagracaoficial/',
+      spotify: 'https://open.spotify.com/intl-pt/artist/7pmvHrURMH0OqDcXXQiuYX',
+      youtube: null,
+      tiktok: null,
+      twitter: null,
+      facebook: null,
     },
     musicLinks: [
-      { platform: 'Spotify', url: 'https://spotify.com' }, // EXEMPLO: Substituir pelos links reais
-      { platform: 'Apple Music', url: 'https://music.apple.com' }, // EXEMPLO: Substituir pelos links reais
+      {
+        platform: 'Spotify',
+        url: 'https://open.spotify.com/intl-pt/artist/7pmvHrURMH0OqDcXXQiuYX',
+      },
     ],
   },
   {
-    id: 3,
-    name: 'Marina Luz', // EXEMPLO: Substituir pelo nome artístico real
-    genre: 'MPB', // EXEMPLO: Substituir pelo gênero real
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&h=400&fit=crop&q=80', // EXEMPLO: Substituir pela foto oficial real
+    id: 15,
+    name: 'Maria Pita',
+    genre: 'Gospel/CCM',
+    image:
+      'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20singer%20Maria%20Pita%20style%2C%20worshipping%20on%20stage%20with%20teal%20and%20bronze%20lights%2C%20high%20quality%20portrait&width=600&height=600&seq=artist-maria-pita&orientation=squarish',
     socialLinks: {
-      instagram: 'https://instagram.com', // EXEMPLO: Substituir pelo link real do Instagram
-      spotify: 'https://spotify.com', // EXEMPLO: Substituir pelo link real do Spotify
-      youtube: 'https://youtube.com', // EXEMPLO: Substituir pelo link real do YouTube
-      tiktok: null, // EXEMPLO: Substituir pelo link real do TikTok ou deixe null
-      twitter: null, // EXEMPLO: Substituir pelo link real do Twitter/X ou deixe null
-      facebook: null, // EXEMPLO: Substituir pelo link real do Facebook ou deixe null
+      instagram: 'https://www.instagram.com/mariapitacantora_/',
+      spotify: 'https://open.spotify.com/intl-pt/artist/7fw7DfkvI0fMyEKfOw0k6n',
+      youtube: null,
+      tiktok: null,
+      twitter: null,
+      facebook: null,
     },
     musicLinks: [
-      { platform: 'Spotify', url: 'https://spotify.com' }, // EXEMPLO: Substituir pelos links reais
-      { platform: 'Deezer', url: 'https://deezer.com' }, // EXEMPLO: Substituir pelos links reais
+      {
+        platform: 'Spotify',
+        url: 'https://open.spotify.com/intl-pt/artist/7fw7DfkvI0fMyEKfOw0k6n',
+      },
     ],
   },
   {
-    id: 4,
-    name: 'Pedro Alves', // EXEMPLO: Substituir pelo nome artístico real
-    genre: 'Rock', // EXEMPLO: Substituir pelo gênero real
-    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=400&fit=crop&q=80', // EXEMPLO: Substituir pela foto oficial real
+    id: 13,
+    name: 'Caio Torres',
+    genre: 'Gospel/CCM',
+    image:
+      'https://readdy.ai/api/search-image?query=Brazilian%20male%20gospel%20singer%20Caio%20Torres%20style%2C%20worshipping%20on%20stage%20with%20teal%20and%20bronze%20lights%2C%20high%20quality%20portrait&width=600&height=600&seq=artist-caio-torres&orientation=squarish',
     socialLinks: {
-      instagram: 'https://instagram.com', // EXEMPLO: Substituir pelo link real do Instagram
-      spotify: 'https://spotify.com', // EXEMPLO: Substituir pelo link real do Spotify
-      youtube: 'https://youtube.com', // EXEMPLO: Substituir pelo link real do YouTube
-      tiktok: null, // EXEMPLO: Substituir pelo link real do TikTok ou deixe null
-      twitter: null, // EXEMPLO: Substituir pelo link real do Twitter/X ou deixe null
-      facebook: null, // EXEMPLO: Substituir pelo link real do Facebook ou deixe null
+      instagram: 'https://www.instagram.com/caiotorees/',
+      spotify: 'https://open.spotify.com/intl-pt/artist/3TOPRsT6nYECZi9K9yZZXw',
+      youtube: null,
+      tiktok: null,
+      twitter: null,
+      facebook: null,
     },
     musicLinks: [
-      { platform: 'Spotify', url: 'https://spotify.com' }, // EXEMPLO: Substituir pelos links reais
-      { platform: 'Apple Music', url: 'https://music.apple.com' }, // EXEMPLO: Substituir pelos links reais
-      { platform: 'Deezer', url: 'https://deezer.com' }, // EXEMPLO: Substituir pelos links reais
+      {
+        platform: 'Spotify',
+        url: 'https://open.spotify.com/intl-pt/artist/3TOPRsT6nYECZi9K9yZZXw',
+      },
     ],
   },
   {
-    id: 5,
-    name: 'Beatriz Santos', // EXEMPLO: Substituir pelo nome artístico real
-    genre: 'Eletrônica', // EXEMPLO: Substituir pelo gênero real
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=400&fit=crop&q=80', // EXEMPLO: Substituir pela foto oficial real
+    id: 11,
+    name: 'No Santuário',
+    genre: 'Gospel/CCM',
+    image:
+      'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20duo%20worship%20leaders%20on%20stage%20with%20congregation%20worshipping%2C%20teal%20and%20bronze%20lighting%2C%20modern%20church%20concert%2C%20high%20quality%20photography&width=600&height=600&seq=artist-no-santuario&orientation=squarish',
     socialLinks: {
-      instagram: 'https://instagram.com', // EXEMPLO: Substituir pelo link real do Instagram
-      spotify: 'https://spotify.com', // EXEMPLO: Substituir pelo link real do Spotify
-      youtube: 'https://youtube.com', // EXEMPLO: Substituir pelo link real do YouTube
-      tiktok: null, // EXEMPLO: Substituir pelo link real do TikTok ou deixe null
-      twitter: null, // EXEMPLO: Substituir pelo link real do Twitter/X ou deixe null
-      facebook: null, // EXEMPLO: Substituir pelo link real do Facebook ou deixe null
+      instagram: 'https://www.instagram.com/nosantuario/',
+      spotify: 'https://open.spotify.com/intl-pt/artist/3qkhpijMzbtVFexHZTNoai',
+      youtube: null,
+      tiktok: null,
+      twitter: null,
+      facebook: null,
     },
     musicLinks: [
-      { platform: 'Spotify', url: 'https://spotify.com' }, // EXEMPLO: Substituir pelos links reais
-      { platform: 'Apple Music', url: 'https://music.apple.com' }, // EXEMPLO: Substituir pelos links reais
+      {
+        platform: 'Spotify',
+        url: 'https://open.spotify.com/intl-pt/artist/3qkhpijMzbtVFexHZTNoai',
+      },
     ],
   },
   {
-    id: 6,
-    name: 'Lucas Ferreira', // EXEMPLO: Substituir pelo nome artístico real
-    genre: 'Sertanejo', // EXEMPLO: Substituir pelo gênero real
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=400&fit=crop&q=80', // EXEMPLO: Substituir pela foto oficial real
+    id: 14,
+    name: 'Nicole Lavinia',
+    genre: 'Gospel/CCM',
+    image:
+      'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20singer%20Nicole%20Lavinia%20style%2C%20worshipping%20on%20stage%20with%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20portrait&width=600&height=600&seq=artist-nicole-lavinia&orientation=squarish',
     socialLinks: {
-      instagram: 'https://instagram.com', // EXEMPLO: Substituir pelo link real do Instagram
-      spotify: 'https://spotify.com', // EXEMPLO: Substituir pelo link real do Spotify
-      youtube: 'https://youtube.com', // EXEMPLO: Substituir pelo link real do YouTube
-      tiktok: null, // EXEMPLO: Substituir pelo link real do TikTok ou deixe null
-      twitter: null, // EXEMPLO: Substituir pelo link real do Twitter/X ou deixe null
-      facebook: null, // EXEMPLO: Substituir pelo link real do Facebook ou deixe null
+      instagram: 'https://www.instagram.com/nicolelaviniaoficial_/',
+      spotify: 'https://open.spotify.com/intl-pt/track/0AayU24085eVhLhbk27sTE',
+      youtube: null,
+      tiktok: null,
+      twitter: null,
+      facebook: null,
     },
     musicLinks: [
-      { platform: 'Spotify', url: 'https://spotify.com' }, // EXEMPLO: Substituir pelos links reais
-      { platform: 'Deezer', url: 'https://deezer.com' }, // EXEMPLO: Substituir pelos links reais
+      {
+        platform: 'Spotify',
+        url: 'https://open.spotify.com/intl-pt/track/0AayU24085eVhLhbk27sTE',
+      },
+    ],
+  },
+  {
+    id: 16,
+    name: 'William Soares',
+    genre: 'Gospel/CCM',
+    image:
+      'https://readdy.ai/api/search-image?query=Brazilian%20male%20gospel%20worship%20singer%20William%20Soares%20style%2C%20worshipping%20on%20stage%20with%20teal%20and%20bronze%20lights%2C%20high%20quality%20portrait&width=600&height=600&seq=artist-william-soares&orientation=squarish',
+    socialLinks: {
+      instagram: 'https://www.instagram.com/williaamsoarees/',
+      spotify: null,
+      youtube: null,
+      tiktok: null,
+      twitter: null,
+      facebook: null,
+    },
+    musicLinks: [],
+  },
+  {
+    id: 17,
+    name: 'Martinha',
+    genre: 'Gospel/CCM',
+    image:
+      'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20worship%20singer%20Martinha%20style%2C%20worshipping%20on%20stage%20with%20teal%20and%20bronze%20lights%2C%20high%20quality%20portrait&width=600&height=600&seq=artist-martinha&orientation=squarish',
+    socialLinks: {
+      instagram: 'https://www.instagram.com/martinhacantoraoficial/',
+      spotify: 'https://open.spotify.com/intl-pt/artist/6etONEQiR3dUCs4IV0kIlE',
+      youtube: null,
+      tiktok: null,
+      twitter: null,
+      facebook: null,
+    },
+    musicLinks: [
+      {
+        platform: 'Spotify',
+        url: 'https://open.spotify.com/intl-pt/artist/6etONEQiR3dUCs4IV0kIlE',
+      },
+    ],
+  },
+  {
+    id: 12,
+    name: 'Debora Lopes',
+    genre: 'Gospel/CCM',
+    image:
+      'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20singer%20worshipping%20on%20stage%2C%20soft%20teal%20and%20bronze%20lighting%2C%20close%20up%20portrait%2C%20high%20quality%20photography&width=600&height=600&seq=artist-debora-lopes&orientation=squarish',
+    socialLinks: {
+      instagram: 'https://www.instagram.com/deboralopesoficiall/',
+      spotify: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
+      youtube: null,
+      tiktok: null,
+      twitter: null,
+      facebook: null,
+    },
+    musicLinks: [
+      {
+        platform: 'Spotify',
+        url: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
+      },
     ],
   },
 ];
@@ -172,7 +238,7 @@ export default function ArtistsSection() {
           </h2>
         </div>
 
-        {/* Galeria com Scroll Lateral */}
+          {/* Galeria com Scroll Lateral */}
         <div 
           ref={scrollRef}
           className="flex gap-6 overflow-x-auto scrollbar-hide px-6 lg:px-12 pb-8"
@@ -184,7 +250,7 @@ export default function ArtistsSection() {
           {[...artists, ...artists].map((artist, index) => (
             <div
               key={`${artist.id}-${index}`}
-              onClick={() => navigate(`/artist/${artist.id}`)}
+            onClick={() => navigate(`/artista/${artist.id}`)}
               className="glass-card animate-liquid-glass rounded-2xl overflow-hidden hover:border-[#0EA8A0]/50 transition-all duration-500 cursor-pointer group flex-shrink-0 w-[320px] sm:w-[380px]"
             >
               <div className="relative">
@@ -212,28 +278,30 @@ export default function ArtistsSection() {
                     <p className="text-gray-500 text-xs mb-3 font-montserrat uppercase tracking-wide">Redes Sociais</p>
                     <div className="flex items-center flex-wrap gap-3">
                       {artist.socialLinks.instagram && (
-                        <a
-                          href={artist.socialLinks.instagram}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.open(artist.socialLinks.instagram, '_blank', 'noopener,noreferrer');
+                          }}
                           className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer text-lg"
                           title="Instagram"
+                          type="button"
                         >
                           <i className="ri-instagram-line"></i>
-                        </a>
+                        </button>
                       )}
                       {artist.socialLinks.spotify && (
-                        <a
-                          href={artist.socialLinks.spotify}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.open(artist.socialLinks.spotify, '_blank', 'noopener,noreferrer');
+                          }}
                           className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer text-lg"
                           title="Spotify"
+                          type="button"
                         >
                           <i className="ri-spotify-fill"></i>
-                        </a>
+                        </button>
                       )}
                       {artist.socialLinks.youtube && (
                         <a
