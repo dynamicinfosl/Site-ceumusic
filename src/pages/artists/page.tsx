@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const artists = [
   {
@@ -193,7 +192,7 @@ export default function ArtistsPage() {
           {filteredArtists.map((artist, index) => (
             <div
               key={artist.id}
-              onClick={() => navigate(`/artista/${artist.id}`)}
+              onClick={() => window.location.href = `/artista/${artist.id}`}
               className="glass-card animate-liquid-glass rounded-2xl p-8 hover:border-[#0EA8A0]/50 transition-all duration-500 cursor-pointer group scroll-reveal"
               style={{ transitionDelay: `${index * 100}ms` }}
             >

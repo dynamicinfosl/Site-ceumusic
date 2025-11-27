@@ -17,12 +17,7 @@ export default function AboutSection() {
           >
             Sobre Nós
           </span>
-          <h2
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
-            style={{ fontFamily: 'Montserrat, sans-serif' }}
-          >
-            Céu Music
-          </h2>
+          
           <p
             className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-8"
             style={{ fontFamily: 'Inter, sans-serif' }}
