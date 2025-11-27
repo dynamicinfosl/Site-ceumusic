@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const artists = [
   {
@@ -121,14 +122,13 @@ const artists = [
   },
 ];
 
-const genres = ['Todos', 'Pop', 'Hip Hop', 'MPB', 'Rock', 'Eletrônica', 'Sertanejo', 'Gospel/CCM'];
-
 export default function ArtistsPage() {
-  const [selectedGenre, setSelectedGenre] = useState('Todos');
+  const location = useLocation();
 
-  const filteredArtists = selectedGenre === 'Todos' 
-    ? artists 
-    : artists.filter(artist => artist.genre === selectedGenre);
+  // Scroll para o topo quando a página carregar ou quando a rota mudar
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [location.pathname]);
 
   useEffect(() => {
     const observerOptions = {
@@ -148,7 +148,7 @@ export default function ArtistsPage() {
     cards.forEach(card => observer.observe(card));
 
     return () => observer.disconnect();
-  }, [filteredArtists]);
+  }, [artists]);
 
   return (
     <div className="min-h-screen pt-32 pb-20 px-6 lg:px-12">
@@ -170,26 +170,9 @@ export default function ArtistsPage() {
 
         <div className="section-divider-glow"></div>
 
-        {/* Genre Filter */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {genres.map((genre) => (
-            <button
-              key={genre}
-              onClick={() => setSelectedGenre(genre)}
-              className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 whitespace-nowrap cursor-pointer text-sm font-montserrat ${
-                selectedGenre === genre
-                  ? 'bg-[#0EA8A0] text-black shadow-[0_0_20px_rgba(14,168,160,0.4)]'
-                  : 'bg-transparent border border-gray-600 text-white hover:border-[#0EA8A0] hover:shadow-[0_0_15px_rgba(14,168,160,0.2)]'
-              }`}
-            >
-              {genre}
-            </button>
-          ))}
-        </div>
-
         {/* Artists Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-product-shop>
-          {filteredArtists.map((artist, index) => (
+          {artists.map((artist, index) => (
             <div
               key={artist.id}
               onClick={() => window.location.href = `/artista/${artist.id}`}
@@ -211,30 +194,28 @@ export default function ArtistsPage() {
                 <p className="text-gray-400 mb-4 font-montserrat text-sm">{artist.bio}</p>
                 <div className="flex items-center space-x-4">
                   {artist.instagram && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        window.open(artist.instagram, '_blank', 'noopener,noreferrer');
-                      }}
+                    <a
+                      href={artist.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
                       className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer"
                       title="Instagram"
-                      type="button"
                     >
                       <i className="ri-instagram-line"></i>
-                    </button>
+                    </a>
                   )}
                   {artist.spotify && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        window.open(artist.spotify, '_blank', 'noopener,noreferrer');
-                      }}
+                    <a
+                      href={artist.spotify}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
                       className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer"
                       title="Spotify"
-                      type="button"
                     >
                       <i className="ri-spotify-fill"></i>
-                    </button>
+                    </a>
                   )}
                   {artist.youtube && (
                     <a
@@ -243,6 +224,7 @@ export default function ArtistsPage() {
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
                       className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer"
+                      title="YouTube"
                     >
                       <i className="ri-youtube-fill"></i>
                     </a>

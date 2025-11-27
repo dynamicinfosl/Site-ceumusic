@@ -385,7 +385,7 @@ export default function ArtistsSection() {
 
         <div className="text-center mt-12 px-6 lg:px-12">
           <Link
-            to="/artists"
+            to="/artistas"
             className="inline-block bg-transparent border border-gray-600 text-white px-8 py-3 rounded-full font-semibold hover:border-[#0EA8A0] hover:shadow-[0_0_20px_rgba(14,168,160,0.3)] transition-all duration-300 whitespace-nowrap cursor-pointer font-montserrat"
           >
             Ver Todos os Artistas

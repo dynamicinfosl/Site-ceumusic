@@ -75,7 +75,22 @@ export default function ArtistDetailPage() {
         { id: 2, title: 'Ele Te Chamou - Ao Vivo', album: 'Ele Te Chamou (Ao Vivo)', duration: null, plays: '67.1K' },
         { id: 3, title: 'Louva Na Graça - Ao Vivo', album: 'Louva Na Graça (Ao Vivo)', duration: null, plays: '16.7K' },
       ],
-      videos: [],
+      videos: [
+        {
+          id: 1,
+          title: 'Na Graça - Videoclipe Oficial',
+          thumbnail: 'https://img.youtube.com/vi/g89eBxkG-Aw/hqdefault.jpg',
+          views: 'YouTube',
+          url: 'https://www.youtube.com/watch?v=g89eBxkG-Aw&list=RDg89eBxkG-Aw&start_radio=1',
+        },
+        {
+          id: 2,
+          title: 'Na Graça - Live Session',
+          thumbnail: 'https://img.youtube.com/vi/5bvgSlZamBo/hqdefault.jpg',
+          views: 'YouTube',
+          url: 'https://www.youtube.com/watch?v=5bvgSlZamBo&list=RD5bvgSlZamBo&start_radio=1',
+        },
+      ],
       shows: [],
     },
     {
@@ -364,83 +379,58 @@ export default function ArtistDetailPage() {
             Videoclipes
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
-            {artist.videos.map((video) => (
-              <div
-                key={video.id}
-                className="group cursor-pointer"
-              >
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-black border border-white/10 hover:border-[#C45C2F]/50 transition-all duration-500 hover:scale-105">
-                  <div className="relative aspect-video overflow-hidden">
-                    <img
-                      src={video.thumbnail}
-                      alt={video.title}
-                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
-                    
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center bg-[#C45C2F]/90 backdrop-blur-sm rounded-full opacity-90 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100 shadow-2xl shadow-[#C45C2F]/50">
-                      <i className="ri-play-fill text-4xl text-white ml-1"></i>
-                    </div>
+            {artist.videos.map((video) => {
+              const content = (
+                <div className="group cursor-pointer">
+                  <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-black border border-white/10 hover:border-[#C45C2F]/50 transition-all duration-500 hover:scale-105">
+                    <div className="relative aspect-video overflow-hidden">
+                      <img
+                        src={video.thumbnail}
+                        alt={video.title}
+                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                      
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center bg-[#C45C2F]/90 backdrop-blur-sm rounded-full opacity-90 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100 shadow-2xl shadow-[#C45C2F]/50">
+                        <i className="ri-play-fill text-4xl text-white ml-1"></i>
+                      </div>
 
-                    <div className="absolute top-4 left-4 px-3 py-1 bg-black/80 backdrop-blur-sm rounded-lg flex items-center space-x-2">
-                      <i className="ri-eye-fill text-[#0EA8A0] text-sm"></i>
-                      <span className="text-white text-xs font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                        {video.views}
-                      </span>
+                      <div className="absolute top-4 left-4 px-3 py-1 bg-black/80 backdrop-blur-sm rounded-lg flex items-center space-x-2">
+                        <i className="ri-eye-fill text-[#0EA8A0] text-sm"></i>
+                        <span className="text-white text-xs font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                          {video.views}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-white group-hover:text-[#C45C2F] transition-colors duration-300" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                      {video.title}
-                    </h3>
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-white group-hover:text-[#C45C2F] transition-colors duration-300" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                        {video.title}
+                      </h3>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              );
 
-      {/* Shows */}
-      <section className="relative py-20 bg-black">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-white mb-12" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            Próximos Shows
-          </h2>
-          <div className="space-y-4">
-            {artist.shows.map((show) => (
-              <div
-                key={show.id}
-                className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-6 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-[#0EA8A0]/30 transition-all duration-300"
-              >
-                <div className="flex-1">
-                  <div className="flex items-center space-x-4 mb-2">
-                    <span className="text-[#0EA8A0] font-bold text-lg" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                      {show.date}
-                    </span>
-                    <span 
-                      className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                        show.status === 'Confirmado' 
-                          ? 'bg-[#0EA8A0]/20 text-[#0EA8A0] border border-[#0EA8A0]/30' 
-                          : 'bg-[#C45C2F]/20 text-[#C45C2F] border border-[#C45C2F]/30'
-                      }`}
-                      style={{ fontFamily: 'Montserrat, sans-serif' }}
-                    >
-                      {show.status}
-                    </span>
-                  </div>
-                  <h3 className="text-white font-semibold text-xl mb-1" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                    {show.city}
-                  </h3>
-                  <p className="text-white/60 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
-                    {show.venue}
-                  </p>
+              if (video.url) {
+                return (
+                  <a
+                    key={video.id}
+                    href={video.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    {content}
+                  </a>
+                );
+              }
+
+              return (
+                <div key={video.id}>
+                  {content}
                 </div>
-                <button className="px-6 py-3 bg-gradient-to-r from-[#0EA8A0] to-[#0C3F48] text-white font-semibold rounded-full shadow-lg shadow-[#0EA8A0]/30 hover:shadow-[#0EA8A0]/50 hover:scale-105 transition-all duration-300 whitespace-nowrap cursor-pointer">
-                  Comprar Ingresso
-                </button>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
