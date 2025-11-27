@@ -451,33 +451,64 @@ export default function ArtistDetailPage() {
           <h2 className="text-4xl font-bold text-white mb-8" style={{ fontFamily: 'Montserrat, sans-serif' }}>
             Siga {artist.name}
           </h2>
-          <div className="flex items-center justify-center gap-6">
-            <a
-              href="https://www.instagram.com/alexlucio.ofc/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-16 h-16 flex items-center justify-center bg-[#E4405F]/20 hover:bg-[#E4405F]/30 rounded-full border border-[#E4405F]/30 hover:border-[#E4405F]/50 transition-all duration-300 hover:scale-110 cursor-pointer"
-            >
-              <i className="ri-instagram-fill text-3xl text-[#E4405F]"></i>
-            </a>
-            <a
-              href="https://open.spotify.com/artist/2xX3xodC7zA5u2xygCWzuP"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-16 h-16 flex items-center justify-center bg-[#1DB954]/20 hover:bg-[#1DB954]/30 rounded-full border border-[#1DB954]/30 hover:border-[#1DB954]/50 transition-all duration-300 hover:scale-110 cursor-pointer"
-            >
-              <i className="ri-spotify-fill text-3xl text-[#1DB954]"></i>
-            </a>
-            {artist.youtube && (
-              <a
-                href={`https://youtube.com/${artist.youtube}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-16 h-16 flex items-center justify-center bg-[#FF0000]/20 hover:bg-[#FF0000]/30 rounded-full border border-[#FF0000]/30 hover:border-[#FF0000]/50 transition-all duration-300 hover:scale-110 cursor-pointer"
-              >
-                <i className="ri-youtube-fill text-3xl text-[#FF0000]"></i>
-              </a>
-            )}
+          <div className="flex items-center justify-center gap-6 flex-wrap">
+            {[
+              {
+                key: 'instagram',
+                url: artist.instagram,
+                icon: 'ri-instagram-fill',
+                containerClass:
+                  'bg-[#E4405F]/20 hover:bg-[#E4405F]/30 border-[#E4405F]/30 hover:border-[#E4405F]/50',
+                iconClass: 'text-[#E4405F]',
+              },
+              {
+                key: 'spotify',
+                url: artist.spotify,
+                icon: 'ri-spotify-fill',
+                containerClass:
+                  'bg-[#1DB954]/20 hover:bg-[#1DB954]/30 border-[#1DB954]/30 hover:border-[#1DB954]/50',
+                iconClass: 'text-[#1DB954]',
+              },
+              {
+                key: 'youtube',
+                url: artist.youtube,
+                icon: 'ri-youtube-fill',
+                containerClass:
+                  'bg-[#FF0000]/20 hover:bg-[#FF0000]/30 border-[#FF0000]/30 hover:border-[#FF0000]/50',
+                iconClass: 'text-[#FF0000]',
+              },
+            ].map((social) => {
+              const baseClasses =
+                'w-16 h-16 flex items-center justify-center rounded-full border transition-all duration-300';
+              const disabledClasses = 'bg-white/5 border-white/10 text-white/30 cursor-not-allowed';
+
+              if (!social.url) {
+                return (
+                  <button
+                    key={social.key}
+                    type="button"
+                    disabled
+                    className={`${baseClasses} ${disabledClasses}`}
+                    aria-disabled="true"
+                    title="Em breve"
+                  >
+                    <i className={`${social.icon} text-3xl`}></i>
+                  </button>
+                );
+              }
+
+              return (
+                <a
+                  key={social.key}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${baseClasses} ${social.containerClass} hover:scale-110 cursor-pointer`}
+                >
+                  <i className={`${social.icon} text-3xl ${social.iconClass}`}></i>
+                </a>
+              );
+            })}
           </div>
         </div>
       </section>
