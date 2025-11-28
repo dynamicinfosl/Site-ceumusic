@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { fetchChannelVideos } from '../../../utils/youtube';
+import { useState } from 'react';
 
 interface Release {
   id: string;
@@ -67,100 +66,10 @@ function getYouTubeThumbnail(videoId: string): string {
 }
 
 export default function ReleasesSection() {
-  const [releases, setReleases] = useState<Release[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // Handle do canal do YouTube da gravadora
-  const channelHandle = '@ceumusicbrasil';
-
-  useEffect(() => {
-    let isMounted = true; // Flag para evitar atualizações após desmontagem
-
-    async function loadReleases() {
-      const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
-      
-      if (!apiKey) {
-        if (isMounted) {
-          setError('API Key do YouTube não configurada. Configure VITE_YOUTUBE_API_KEY no arquivo .env');
-          setLoading(false);
-        }
-        return;
-      }
-
-      if (isMounted) {
-        setLoading(true);
-        setError(null);
-      }
-
-      try {
-        // Busca os últimos 6 vídeos do canal
-        const videos = await fetchChannelVideos(channelHandle, 6);
-        
-        if (!isMounted) return; // Evita atualização se componente foi desmontado
-        
-        if (videos.length === 0) {
-          setError('Nenhum lançamento encontrado no canal');
-          setReleases([]);
-          setLoading(false);
-          return;
-        }
-
-        // Converte os vídeos do YouTube para o formato de releases
-        const formattedReleases: Release[] = videos.map((video) => {
-          const { song, artist } = parseVideoTitle(video.title);
-          const thumbnail = video.thumbnail || getYouTubeThumbnail(video.id);
-          
-          return {
-            id: video.id,
-            title: song,
-            artist: artist,
-            cover: thumbnail,
-            type: getReleaseType(video.title),
-            date: formatDate(video.publishedAt),
-            streamingLink: `https://www.youtube.com/watch?v=${video.id}`
-          };
-        });
-
-        if (isMounted) {
-          setReleases(formattedReleases);
-          setLoading(false);
-          setError(null);
-        }
-      } catch (err) {
-        if (!isMounted) return; // Evita atualização se componente foi desmontado
-        
-        // Loga apenas erros não relacionados a conexão ou cota para debug
-        if (err instanceof Error && 
-            !err.message.includes('conexão') && 
-            !err.message.includes('internet') &&
-            !err.message.includes('cota') &&
-            !err.message.includes('quota')) {
-          console.error('Erro ao carregar lançamentos:', err);
-        }
-        
-        const errorMessage = err instanceof Error ? err.message : 'Erro desconhecido ao carregar lançamentos';
-        
-        if (isMounted) {
-          // Mensagem amigável para limite de cota
-          if (errorMessage.includes('cota') || errorMessage.includes('quota')) {
-            setError('Limite de visualizações da API do YouTube atingido hoje. Os lançamentos estarão disponíveis novamente amanhã.');
-          } else {
-            setError(errorMessage);
-          }
-          setReleases([]);
-          setLoading(false);
-        }
-      }
-    }
-
-    loadReleases();
-
-    // Cleanup function
-    return () => {
-      isMounted = false;
-    };
-  }, [channelHandle]);
+  // Lançamentos estáticos - podem ser atualizados manualmente ou via Supabase no futuro
+  const releases: Release[] = [];
+  const loading = false;
+  const error = null;
   return (
     <section className="px-6 py-20 lg:px-12 relative">
       <div className="max-w-6xl mx-auto">
@@ -180,9 +89,6 @@ export default function ReleasesSection() {
         {error && !loading && (
           <div className="text-center py-20">
             <p className="text-red-400 font-montserrat mb-2">{error}</p>
-            <p className="text-gray-400 text-sm font-montserrat">
-              Verifique se a API Key do YouTube está configurada no arquivo .env
-            </p>
           </div>
         )}
 
