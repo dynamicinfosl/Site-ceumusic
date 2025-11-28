@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 const artists = [
   {
     id: 1,
-    name: 'Alexsander Lucio',
+    name: 'Alex Lucio',
     genre: 'Gospel/CCM',
     // Foto do perfil do artista - substitua pela URL real da foto
     // Para obter a foto: baixe a foto do perfil do Instagram e hospede em um serviço de imagens (ex: Imgur, Cloudinary) ou use a URL direta se disponível
@@ -182,6 +182,27 @@ const artists = [
       {
         platform: 'Spotify',
         url: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
+      },
+    ],
+  },
+  {
+    id: 18,
+    name: 'Kaka Tavares',
+    genre: 'Gospel/CCM',
+    image:
+      'https://readdy.ai/api/search-image?query=Brazilian%20male%20gospel%20worship%20singer%20Kaka%20Tavares%20style%2C%20worshipping%20on%20stage%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20portrait&width=600&height=600&seq=artist-kaka-tavares&orientation=squarish',
+    socialLinks: {
+      instagram: null,
+      spotify: 'https://open.spotify.com/intl-pt/artist/5v86apLzejN5yQl8H2CcLh',
+      youtube: null,
+      tiktok: null,
+      twitter: null,
+      facebook: null,
+    },
+    musicLinks: [
+      {
+        platform: 'Spotify',
+        url: 'https://open.spotify.com/intl-pt/artist/5v86apLzejN5yQl8H2CcLh',
       },
     ],
   },

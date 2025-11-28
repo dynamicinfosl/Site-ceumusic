@@ -10,6 +10,7 @@ export default function ArtistDetailPage() {
     {
       id: 1,
       name: 'Alexsander Lucio',
+      followName: 'Alex Lucio',
       genre: 'Gospel/CCM',
       image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=800&fit=crop&q=80',
       banner:
@@ -17,7 +18,7 @@ export default function ArtistDetailPage() {
       bio: 'Alex Lúcio nasceu e foi criado em um lar cristão, tendo suas raízes firmadas desde cedo na igreja. Vindo de uma infância simples e humilde, ele é o terceiro de cinco irmãos. Desde pequeno, Alex se destacou nos estudos, sempre dedicado e esforçado, alcançando notas máximas em todas as matérias. Aos 11 anos, seu talento acadêmico lhe rendeu o terceiro lugar em uma oficina de matemática, um momento que marcou sua trajetória escolar.\n\nCom a mãe precisando trabalhar fora para sustentar a família, Alex aprendeu desde cedo o valor do esforço e da fé. Na adolescência, ele descobriu sua vocação para a música, começando então a compor e cantar com o coração voltado sempre para Deus. Seu amor pela música se transformou em uma missão maior: hoje, ele realiza um importante trabalho de evangelização no Calçadão de Campo Grande, levando esperança e a Palavra de Deus a muitas vidas, onde já ganhou centenas de almas pra Jesus.\n\nAlex é membro ativo da Igreja Assembleia de Deus em Campo Grande, onde encontra inspiração espiritual e apoio para continuar sua caminhada. Sua trajetória é marcada por dedicação, talento e fé, e seu objetivo é sempre ser um instrumento nas mãos de Deus para tocar corações e transformar vidas através da música.',
       instagram: 'https://www.instagram.com/alexlucio.ofc/',
       spotify: 'https://open.spotify.com/artist/2xX3xodC7zA5u2xygCWzuP',
-      youtube: null,
+      youtube: 'https://www.youtube.com/watch?v=Bqc6B5LzTN0&list=RDBqc6B5LzTN0&start_radio=1',
       followers: {
         instagram: null,
         spotify: '2.6M',
@@ -33,17 +34,17 @@ export default function ArtistDetailPage() {
       videos: [
         {
           id: 1,
-          title: 'Noites de Verão (Official Video)',
-          thumbnail:
-            'https://readdy.ai/api/search-image?query=professional%20music%20video%20scene%20with%20female%20pop%20singer%20performing%20on%20stage%2C%20dramatic%20teal%20and%20orange%20stage%20lighting%2C%20cinematic%20composition%2C%20high%20production%20value%2C%20concert%20atmosphere%20with%20glowing%20effects&width=600&height=340&seq=artist-video-001&orientation=landscape',
-          views: '2.5M',
+          title: 'O Fogo Arderá - Ao Vivo',
+          thumbnail: 'https://img.youtube.com/vi/Bqc6B5LzTN0/hqdefault.jpg',
+          views: 'YouTube',
+          url: 'https://www.youtube.com/watch?v=Bqc6B5LzTN0&list=RDBqc6B5LzTN0&start_radio=1',
         },
         {
           id: 2,
-          title: 'Coração Livre (Lyric Video)',
-          thumbnail:
-            'https://readdy.ai/api/search-image?query=artistic%20lyric%20video%20scene%20with%20female%20pop%20singer%2C%20vibrant%20teal%20and%20bronze%20visual%20effects%2C%20modern%20typography%2C%20cinematic%20quality%2C%20creative%20composition%20with%20glowing%20elements&width=600&height=340&seq=artist-video-002&orientation=landscape',
-          views: '1.8M',
+          title: 'Salva-Vidas - Ao Vivo',
+          thumbnail: 'https://img.youtube.com/vi/bdLeReQbtgY/hqdefault.jpg',
+          views: 'YouTube',
+          url: 'https://www.youtube.com/watch?v=bdLeReQbtgY&list=PLDrdTf3Y6voff928gg2qErmcgMV_surVw',
         },
       ],
       shows: [
@@ -64,7 +65,7 @@ export default function ArtistDetailPage() {
       bio: 'Na Graça é um ministério de louvor que nasceu com o propósito de conduzir a igreja a uma experiência profunda com Deus através da adoração. Com canções congregacionais e mensagens centradas na fé, o grupo tem se destacado por suas ministrações ao vivo, marcadas por simplicidade, unidade e forte presença de Deus.\n\nEntre suas faixas mais conhecidas estão “A Fé (Ao Vivo)”, “Ele Te Chamou (Ao Vivo)” e “Louva Na Graça (Ao Vivo)”, que têm alcançado milhares de ouvintes nas plataformas digitais. O grupo segue avançando com novos projetos e gravações ao vivo, sempre com o foco em espalhar a graça e o amor de Cristo por meio da música.',
       instagram: 'https://www.instagram.com/nagracaoficial/',
       spotify: 'https://open.spotify.com/intl-pt/artist/7pmvHrURMH0OqDcXXQiuYX',
-      youtube: null,
+      youtube: 'https://www.youtube.com/watch?v=g89eBxkG-Aw&list=RDg89eBxkG-Aw&start_radio=1',
       followers: {
         instagram: null,
         spotify: '55,5K',
@@ -78,14 +79,14 @@ export default function ArtistDetailPage() {
       videos: [
         {
           id: 1,
-          title: 'Na Graça - Videoclipe Oficial',
+          title: 'A FÉ - AO VIVO',
           thumbnail: 'https://img.youtube.com/vi/g89eBxkG-Aw/hqdefault.jpg',
           views: 'YouTube',
           url: 'https://www.youtube.com/watch?v=g89eBxkG-Aw&list=RDg89eBxkG-Aw&start_radio=1',
         },
         {
           id: 2,
-          title: 'Na Graça - Live Session',
+          title: 'LOUVA NA GRAÇA',
           thumbnail: 'https://img.youtube.com/vi/5bvgSlZamBo/hqdefault.jpg',
           views: 'YouTube',
           url: 'https://www.youtube.com/watch?v=5bvgSlZamBo&list=RD5bvgSlZamBo&start_radio=1',
@@ -104,7 +105,7 @@ export default function ArtistDetailPage() {
       bio: 'Com 13 anos de carreira ministerial, álbuns, EPs e ministrações por todo o Brasil, EUA e Europa, o ministério No Santuário (Pr. Israel Leonardo e Raphaela Carvalho) dedica-se a proclamar o evangelho através da adoração e da pregação da Palavra de Deus. Recentemente lançaram seu primeiro DVD com canções inéditas e uma nova versão de “Final Feliz”, além de projetos como “Ele Fará”, “Teus Átrios” e “Haja o que Houver (Ao Vivo)”.\n\nCom letras bíblicas e forte ênfase na presença de Deus, No Santuário se tornou referência na adoração congregacional, convidando a igreja a viver uma jornada de fé, esperança e restauração em cada canção.',
       instagram: 'https://www.instagram.com/nosantuario/',
       spotify: 'https://open.spotify.com/intl-pt/artist/3qkhpijMzbtVFexHZTNoai',
-      youtube: null,
+      youtube: 'https://www.youtube.com/watch?v=XWBgmBsxkk4&list=RDXWBgmBsxkk4&start_radio=1',
       followers: {
         instagram: null,
         spotify: '31,3K',
@@ -116,7 +117,22 @@ export default function ArtistDetailPage() {
         { id: 3, title: 'Haja o que Houver - Ao Vivo', album: 'Haja o que Houver (Ao Vivo)', duration: null, plays: '33.8K' },
         { id: 4, title: 'Tu És o Cristo (I Call You Jesus)', album: 'Single', duration: null, plays: '39.0K' },
       ],
-      videos: [],
+      videos: [
+        {
+          id: 1,
+          title: 'FINAL FELIZ - AO VIVO',
+          thumbnail: 'https://img.youtube.com/vi/XWBgmBsxkk4/hqdefault.jpg',
+          views: 'YouTube',
+          url: 'https://www.youtube.com/watch?v=XWBgmBsxkk4&list=RDXWBgmBsxkk4&start_radio=1',
+        },
+        {
+          id: 2,
+          title: 'HAJA O QUE HOUVER AO VIVO',
+          thumbnail: 'https://img.youtube.com/vi/qv7MCnmsoN0/hqdefault.jpg',
+          views: 'YouTube',
+          url: 'https://www.youtube.com/watch?v=qv7MCnmsoN0',
+        },
+      ],
       shows: [],
     },
     {
@@ -127,10 +143,10 @@ export default function ArtistDetailPage() {
         'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20singer%20worshipping%20with%20hands%20raised%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20stage%20portrait&width=800&height=800&seq=artist-debora-lopes-detail&orientation=squarish',
       banner:
         'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20female%20lead%20singer%20Debora%20Lopes%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-debora-lopes-banner&orientation=landscape',
-      bio: 'Debora Lopes é uma cantora gospel brasileira que tem sido usada para ministrar sobre fé, cura e milagres através de suas canções. Com o lançamento de “Milagres de Deus (Ao Vivo)” e sua versão em playback, seu ministério vem alcançando um público cada vez maior, fortalecendo a fé de quem ouve e declarando o agir sobrenatural de Deus.\n\nCom uma voz marcante e letras centradas na Palavra, Debora tem se consolidado como um dos novos nomes da adoração contemporânea, convidando a igreja a confiar nos milagres de Deus em cada estação da vida.',
+      bio: 'Debora Lopes é uma cantora gospel brasileira que tem sido usada para ministrar sobre fé, cura e milagres através de suas canções. Com o lançamento de "Milagres de Deus (Ao Vivo)" e sua versão em playback, seu ministério vem alcançando um público cada vez maior, fortalecendo a fé de quem ouve e declarando o agir sobrenatural de Deus.\n\nCom uma voz marcante e letras centradas na Palavra, Debora tem se consolidado como um dos novos nomes da adoração contemporânea, convidando a igreja a confiar nos milagres de Deus em cada estação da vida.',
       instagram: 'https://www.instagram.com/deboralopesoficiall/',
       spotify: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
-      youtube: null,
+      youtube: 'https://www.youtube.com/watch?v=V1hYFBtdxm8&list=RDV1hYFBtdxm8&start_radio=1',
       followers: {
         instagram: null,
         spotify: '2,8K',
@@ -140,6 +156,35 @@ export default function ArtistDetailPage() {
         { id: 1, title: 'Milagres de Deus - Ao Vivo', album: 'Milagres de Deus (Ao Vivo)', duration: null, plays: '45.1K' },
         { id: 2, title: 'Milagres de Deus - Playback', album: 'Milagres de Deus (Playback)', duration: null, plays: '1.1K' },
       ],
+      videos: [
+        {
+          id: 1,
+          title: 'MILAGRES DE DEUS AO VIVO',
+          thumbnail: 'https://img.youtube.com/vi/V1hYFBtdxm8/hqdefault.jpg',
+          views: 'YouTube',
+          url: 'https://www.youtube.com/watch?v=V1hYFBtdxm8&list=RDV1hYFBtdxm8&start_radio=1',
+        },
+      ],
+      shows: [],
+    },
+    {
+      id: 18,
+      name: 'Kaka Tavares',
+      genre: 'Gospel/CCM',
+      image:
+        'https://readdy.ai/api/search-image?query=Brazilian%20male%20gospel%20worship%20singer%20Kaka%20Tavares%20style%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20stage%20portrait&width=800&height=800&seq=artist-kaka-tavares-detail&orientation=squarish',
+      banner:
+        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20male%20lead%20singer%20Kaka%20Tavares%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-kaka-tavares-banner&orientation=landscape',
+      bio: 'Kaka Tavares é uma cantora gospel brasileira que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, Kaka tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',
+      instagram: null,
+      spotify: 'https://open.spotify.com/intl-pt/artist/5v86apLzejN5yQl8H2CcLh',
+      youtube: null,
+      followers: {
+        instagram: null,
+        spotify: null,
+        youtube: null,
+      },
+      songs: [],
       videos: [],
       shows: [],
     },
@@ -175,14 +220,22 @@ export default function ArtistDetailPage() {
       bio: 'Nicole Lavinia é uma jovem cantora gospel brasileira que tem se destacado com canções que falam sobre rendição, santidade e intimidade com Deus. Com uma voz doce e marcante, suas ministrações carregam mensagens de esperança e encorajamento para uma geração que deseja viver os propósitos de Cristo.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, Nicole tem alcançado novos públicos, sempre com o desejo de conduzir pessoas a um encontro real com Jesus e a uma vida de adoração genuína.',
       instagram: 'https://www.instagram.com/nicolelaviniaoficial_/',
       spotify: 'https://open.spotify.com/intl-pt/track/0AayU24085eVhLhbk27sTE',
-      youtube: null,
+      youtube: 'https://www.youtube.com/watch?v=vpi33yUn1Zc&list=RDvpi33yUn1Zc&start_radio=1',
       followers: {
         instagram: null,
         spotify: null,
         youtube: null,
       },
       songs: [],
-      videos: [],
+      videos: [
+        {
+          id: 1,
+          title: 'SERVO DO CENTURIÃO - AO VIVO',
+          thumbnail: 'https://img.youtube.com/vi/vpi33yUn1Zc/hqdefault.jpg',
+          views: 'YouTube',
+          url: 'https://www.youtube.com/watch?v=vpi33yUn1Zc&list=RDvpi33yUn1Zc&start_radio=1',
+        },
+      ],
       shows: [],
     },
     {
@@ -196,14 +249,29 @@ export default function ArtistDetailPage() {
       bio: 'Maria Pita é uma cantora gospel brasileira que carrega em suas canções mensagens de esperança, cura e rendição aos pés de Jesus. Com uma voz doce e firme, suas ministrações convidam a igreja a confiar na fidelidade de Deus em meio às lutas e processos.\n\nSeu ministério tem alcançado diferentes gerações, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e sincera.',
       instagram: 'https://www.instagram.com/mariapitacantora_/',
       spotify: 'https://open.spotify.com/intl-pt/artist/7fw7DfkvI0fMyEKfOw0k6n',
-      youtube: null,
+      youtube: 'https://www.youtube.com/watch?v=mb7rskqf1A4&list=RDEMzFMowVXry3q4Od_yFQGfxw&index=3',
       followers: {
         instagram: null,
         spotify: null,
         youtube: null,
       },
       songs: [],
-      videos: [],
+      videos: [
+        {
+          id: 1,
+          title: 'SE LEVANTE',
+          thumbnail: 'https://img.youtube.com/vi/mb7rskqf1A4/hqdefault.jpg',
+          views: 'YouTube',
+          url: 'https://www.youtube.com/watch?v=mb7rskqf1A4&list=RDEMzFMowVXry3q4Od_yFQGfxw&index=3',
+        },
+        {
+          id: 2,
+          title: 'Maria Pita e Samuel Messias - SOU TEU PAI',
+          thumbnail: 'https://img.youtube.com/vi/aioMdIBKvt8/hqdefault.jpg',
+          views: 'YouTube',
+          url: 'https://www.youtube.com/watch?v=aioMdIBKvt8&list=RDEMzFMowVXry3q4Od_yFQGfxw&index=2',
+        },
+      ],
       shows: [],
     },
     {
@@ -217,14 +285,22 @@ export default function ArtistDetailPage() {
       bio: 'William Soares é um cantor gospel brasileiro que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, William tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',
       instagram: 'https://www.instagram.com/williaamsoarees/',
       spotify: null,
-      youtube: null,
+      youtube: 'https://www.youtube.com/watch?v=MyhL5CT8-Eo&list=RDMyhL5CT8-Eo&start_radio=1',
       followers: {
         instagram: null,
         spotify: null,
         youtube: null,
       },
       songs: [],
-      videos: [],
+      videos: [
+        {
+          id: 1,
+          title: 'Ao Cheiro das Águas (Ao Vivo)',
+          thumbnail: 'https://img.youtube.com/vi/MyhL5CT8-Eo/hqdefault.jpg',
+          views: 'YouTube',
+          url: 'https://www.youtube.com/watch?v=MyhL5CT8-Eo&list=RDMyhL5CT8-Eo&start_radio=1',
+        },
+      ],
       shows: [],
     },
     {
@@ -238,7 +314,7 @@ export default function ArtistDetailPage() {
       bio: 'Martinha é uma cantora gospel brasileira que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, Martinha tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',
       instagram: 'https://www.instagram.com/martinhacantoraoficial/',
       spotify: 'https://open.spotify.com/intl-pt/artist/6etONEQiR3dUCs4IV0kIlE',
-      youtube: null,
+      youtube: 'https://www.youtube.com/watch?v=eMv-TwacSck&list=RDeMv-TwacSck&start_radio=1',
       followers: {
         instagram: null,
         spotify: '3.2K',
@@ -251,7 +327,15 @@ export default function ArtistDetailPage() {
         { id: 4, title: 'O Escolhido', album: 'Album', duration: null, plays: '8.6K' },
         { id: 5, title: 'Para o Mar Se Abrir', album: 'Album', duration: null, plays: '4.1K' },
       ],
-      videos: [],
+      videos: [
+        {
+          id: 1,
+          title: 'EU FAÇO AO VIVO',
+          thumbnail: 'https://img.youtube.com/vi/eMv-TwacSck/hqdefault.jpg',
+          views: 'YouTube',
+          url: 'https://www.youtube.com/watch?v=eMv-TwacSck&list=RDeMv-TwacSck&start_radio=1',
+        },
+      ],
       shows: [],
     },
   ];
@@ -439,7 +523,7 @@ export default function ArtistDetailPage() {
       <section className="relative py-20 bg-gradient-to-b from-black to-[#1A1A1A]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold text-white mb-8" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            Siga {artist.name}
+            Siga {artist.followName ?? artist.name}
           </h2>
           <div className="flex items-center justify-center gap-6 flex-wrap">
             {[

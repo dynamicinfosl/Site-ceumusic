@@ -4,9 +4,9 @@ import { useLocation } from 'react-router-dom';
 const artists = [
   {
     id: 1,
-    name: 'Alexsander Lucio',
+    name: 'Alex Lucio',
     genre: 'Gospel/CCM',
-    bio: 'Alex Lúcio nasceu e foi criado em um lar cristão, tendo suas raízes firmadas desde cedo na igreja. Vindo de uma infância simples e humilde, ele é o terceiro de cinco irmãos. Desde pequeno, Alex se destacou nos estudos, sempre dedicado e esforçado. Na adolescência, ele descobriu sua vocação para a música, começando então a compor e cantar com o coração voltado sempre para Deus. Seu amor pela música se transformou em uma missão maior: hoje, ele realiza um importante trabalho de evangelização no Calçadão de Campo Grande, levando esperança e a Palavra de Deus a muitas vidas.',
+    bio: 'Alex é membro ativo da Igreja Assembleia de Deus em Campo Grande, onde encontra inspiração espiritual e apoio para continuar sua caminhada. Sua trajetória é marcada por dedicação, talento e fé, e seu objetivo é sempre ser um instrumento nas mãos de Deus para tocar corações e transformar vidas através da música.',
     // Foto do perfil do artista - substitua pela URL real da foto
     // Para obter a foto: baixe a foto do perfil do Instagram e hospede em um serviço de imagens (ex: Imgur, Cloudinary) ou use a URL direta se disponível
     image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop&q=80', // Placeholder temporário - substitua pela foto real do artista
@@ -61,11 +61,22 @@ const artists = [
     id: 12,
     name: 'Debora Lopes',
     genre: 'Gospel/CCM',
-    bio: 'Cantora gospel que tem se destacado com canções de fé e esperança, como “Milagres de Deus (Ao Vivo)”, alcançando milhares de ouvintes nas plataformas digitais.',
+    bio: 'Cantora gospel que tem se destacado com canções de fé e esperança, como "Milagres de Deus (Ao Vivo)", alcançando milhares de ouvintes nas plataformas digitais.',
     image:
       'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20worship%20singer%20on%20stage%2C%20eyes%20closed%20in%20worship%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20concert%20photography&width=400&height=400&seq=artist-debora-lopes&orientation=squarish',
     instagram: 'https://www.instagram.com/deboralopesoficiall/',
     spotify: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
+    youtube: null,
+  },
+  {
+    id: 18,
+    name: 'Kaka Tavares',
+    genre: 'Gospel/CCM',
+    bio: 'Cantora gospel que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções.',
+    image:
+      'https://readdy.ai/api/search-image?query=Brazilian%20male%20gospel%20worship%20singer%20Kaka%20Tavares%20style%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20stage%20portrait&width=400&height=400&seq=artist-kaka-tavares&orientation=squarish',
+    instagram: null,
+    spotify: 'https://open.spotify.com/intl-pt/artist/5v86apLzejN5yQl8H2CcLh',
     youtube: null,
   },
   {
@@ -89,36 +100,6 @@ const artists = [
     instagram: 'https://www.instagram.com/martinhacantoraoficial/',
     spotify: 'https://open.spotify.com/intl-pt/artist/6etONEQiR3dUCs4IV0kIlE',
     youtube: null,
-  },
-  {
-    id: 7,
-    name: 'Camila Rocha',
-    genre: 'Pop',
-    bio: 'Melodias cativantes e performances inesquecíveis',
-    image: 'https://readdy.ai/api/search-image?query=Professional%20female%20pop%20artist%20portrait%2C%20young%20woman%20with%20vibrant%20style%2C%20joyful%20expression%2C%20colorful%20lighting%2C%20pop%20star%20photography%2C%20dark%20modern%20background&width=400&height=400&seq=artist-7&orientation=squarish',
-    instagram: 'https://instagram.com',
-    spotify: 'https://spotify.com',
-    youtube: 'https://youtube.com',
-  },
-  {
-    id: 8,
-    name: 'Diego Martins',
-    genre: 'Hip Hop',
-    bio: 'Flow único e rimas afiadas',
-    image: 'https://readdy.ai/api/search-image?query=Professional%20male%20rapper%20portrait%2C%20young%20man%20with%20street%20style%2C%20intense%20look%2C%20urban%20lighting%2C%20hip%20hop%20artist%20photography%2C%20dark%20gritty%20background&width=400&height=400&seq=artist-8&orientation=squarish',
-    instagram: 'https://instagram.com',
-    spotify: 'https://spotify.com',
-    youtube: 'https://youtube.com',
-  },
-  {
-    id: 9,
-    name: 'Sofia Mendes',
-    genre: 'MPB',
-    bio: 'Poesia musicada com alma brasileira',
-    image: 'https://readdy.ai/api/search-image?query=Professional%20female%20MPB%20artist%20portrait%2C%20elegant%20woman%20with%20natural%20beauty%2C%20serene%20expression%2C%20soft%20lighting%2C%20Brazilian%20music%20photography%2C%20dark%20artistic%20background&width=400&height=400&seq=artist-9&orientation=squarish',
-    instagram: 'https://instagram.com',
-    spotify: 'https://spotify.com',
-    youtube: 'https://youtube.com',
   },
 ];
 

@@ -15,112 +15,134 @@ export default function ReleasesPage() {
   const releases = [
     {
       id: 1,
-      title: 'Noites de Verão',
-      artist: 'Luna Silva',
+      title: 'Salva-vidas',
+      artist: 'Alexsander Lúcio',
       type: 'singles',
       typeLabel: 'Single',
       date: '2024',
-      cover: 'https://readdy.ai/api/search-image?query=modern%20album%20cover%20art%20for%20summer%20pop%20song%2C%20vibrant%20teal%20and%20orange%20gradient%20background%2C%20minimalist%20design%20with%20geometric%20shapes%2C%20professional%20music%20artwork%2C%20premium%20quality%2C%20artistic%20composition&width=500&height=500&seq=release-page-001&orientation=squarish',
-      genre: 'Pop/R&B',
-      streams: '10.2M',
-      featured: true
+      cover: 'https://img.youtube.com/vi/bdLeReQbtgY/maxresdefault.jpg',
+      genre: 'Gospel/CCM',
+      streams: '271K',
+      featured: true,
+      videoUrl: 'https://www.youtube.com/watch?v=bdLeReQbtgY'
     },
     {
       id: 2,
-      title: 'Ruas da Cidade',
-      artist: 'Rafael Mendes',
-      type: 'eps',
-      typeLabel: 'EP',
+      title: 'Final Feliz',
+      artist: 'No Santuário feat Geziel Lima',
+      type: 'singles',
+      typeLabel: 'Single',
       date: '2024',
-      cover: 'https://readdy.ai/api/search-image?query=urban%20hip%20hop%20album%20cover%20art%2C%20dark%20city%20streets%20with%20teal%20and%20bronze%20lighting%2C%20modern%20street%20photography%20style%2C%20professional%20music%20artwork%2C%20premium%20quality%2C%20gritty%20aesthetic&width=500&height=500&seq=release-page-002&orientation=squarish',
-      genre: 'Hip Hop/Trap',
-      streams: '8.5M',
-      featured: true
+      cover: 'https://img.youtube.com/vi/XWBgmBsxkk4/maxresdefault.jpg',
+      genre: 'Gospel/CCM',
+      streams: '1.8M',
+      featured: true,
+      videoUrl: 'https://www.youtube.com/watch?v=XWBgmBsxkk4'
     },
     {
       id: 3,
-      title: 'Alma Brasileira',
-      artist: 'Bianca Costa',
-      type: 'albums',
-      typeLabel: 'Álbum',
+      title: 'Louva na Graça',
+      artist: 'Na Graça',
+      type: 'singles',
+      typeLabel: 'Single',
       date: '2024',
-      cover: 'https://readdy.ai/api/search-image?query=elegant%20soul%20music%20album%20cover%2C%20warm%20bronze%20and%20teal%20tones%2C%20artistic%20portrait%20photography%2C%20sophisticated%20design%2C%20professional%20music%20artwork%2C%20premium%20quality%2C%20emotional%20atmosphere&width=500&height=500&seq=release-page-003&orientation=squarish',
-      genre: 'MPB/Soul',
-      streams: '6.8M',
-      featured: true
+      cover: 'https://img.youtube.com/vi/5bvgSlZamBo/maxresdefault.jpg',
+      genre: 'Gospel/CCM',
+      streams: '45K',
+      featured: true,
+      videoUrl: 'https://www.youtube.com/watch?v=5bvgSlZamBo'
     },
     {
       id: 4,
-      title: 'Horizonte',
-      artist: 'Thiago Alves',
+      title: 'Milagres de Deus',
+      artist: 'Debora Lopes',
       type: 'singles',
       typeLabel: 'Single',
       date: '2024',
-      cover: 'https://readdy.ai/api/search-image?query=indie%20rock%20album%20cover%20art%2C%20atmospheric%20landscape%20with%20teal%20and%20orange%20sky%2C%20alternative%20music%20aesthetic%2C%20professional%20artwork%2C%20premium%20quality%2C%20moody%20composition&width=500&height=500&seq=release-page-004&orientation=squarish',
-      genre: 'Rock/Indie',
-      streams: '5.2M',
-      featured: false
+      cover: 'https://img.youtube.com/vi/V1hYFBtdxm8/maxresdefault.jpg',
+      genre: 'Gospel/CCM',
+      streams: '233K',
+      featured: false,
+      videoUrl: 'https://www.youtube.com/watch?v=V1hYFBtdxm8'
     },
     {
       id: 5,
-      title: 'Pulse',
-      artist: 'Marina Oliveira',
+      title: 'O Fogo Arderá - Ao Vivo',
+      artist: 'Alexsander Lúcio',
       type: 'singles',
       typeLabel: 'Single',
       date: '2024',
-      cover: 'https://readdy.ai/api/search-image?query=electronic%20music%20album%20cover%2C%20neon%20teal%20and%20orange%20abstract%20waves%2C%20futuristic%20digital%20art%2C%20professional%20EDM%20artwork%2C%20premium%20quality%2C%20vibrant%20energy&width=500&height=500&seq=release-page-005&orientation=squarish',
-      genre: 'Eletrônica/House',
-      streams: '4.9M',
-      featured: false
+      cover: 'https://img.youtube.com/vi/Bqc6B5LzTN0/maxresdefault.jpg',
+      genre: 'Gospel/CCM',
+      streams: '58.6M',
+      featured: false,
+      videoUrl: 'https://www.youtube.com/watch?v=Bqc6B5LzTN0&list=RDBqc6B5LzTN0&start_radio=1'
     },
     {
       id: 6,
-      title: 'Raízes',
-      artist: 'Pedro Santos',
-      type: 'albums',
-      typeLabel: 'Álbum',
+      title: 'A FÉ - AO VIVO',
+      artist: 'Na Graça',
+      type: 'singles',
+      typeLabel: 'Single',
       date: '2024',
-      cover: 'https://readdy.ai/api/search-image?query=country%20music%20album%20cover%2C%20warm%20sunset%20tones%20with%20bronze%20and%20teal%20accents%2C%20rustic%20modern%20design%2C%20professional%20music%20artwork%2C%20premium%20quality%2C%20authentic%20feel&width=500&height=500&seq=release-page-006&orientation=squarish',
-      genre: 'Sertanejo/Country',
-      streams: '7.3M',
-      featured: false
+      cover: 'https://img.youtube.com/vi/g89eBxkG-Aw/maxresdefault.jpg',
+      genre: 'Gospel/CCM',
+      streams: '679.8K',
+      featured: false,
+      videoUrl: 'https://www.youtube.com/watch?v=g89eBxkG-Aw&list=RDg89eBxkG-Aw&start_radio=1'
     },
     {
       id: 7,
-      title: 'Coração Livre',
-      artist: 'Luna Silva',
-      type: 'eps',
-      typeLabel: 'EP',
-      date: '2023',
-      cover: 'https://readdy.ai/api/search-image?query=pop%20music%20EP%20cover%20art%2C%20vibrant%20teal%20and%20bronze%20gradient%2C%20modern%20minimalist%20design%20with%20abstract%20shapes%2C%20professional%20music%20artwork%2C%20premium%20quality%2C%20fresh%20aesthetic&width=500&height=500&seq=release-page-007&orientation=squarish',
-      genre: 'Pop/R&B',
-      streams: '9.1M',
-      featured: false
+      title: 'SERVO DO CENTURIÃO - AO VIVO',
+      artist: 'Nicole Lavinia',
+      type: 'singles',
+      typeLabel: 'Single',
+      date: '2024',
+      cover: 'https://img.youtube.com/vi/vpi33yUn1Zc/maxresdefault.jpg',
+      genre: 'Gospel/CCM',
+      streams: '45K',
+      featured: false,
+      videoUrl: 'https://www.youtube.com/watch?v=vpi33yUn1Zc&list=RDvpi33yUn1Zc&start_radio=1'
     },
     {
       id: 8,
-      title: 'Batidas Urbanas',
-      artist: 'Rafael Mendes',
+      title: 'SE LEVANTE',
+      artist: 'Maria Pita',
       type: 'singles',
       typeLabel: 'Single',
-      date: '2023',
-      cover: 'https://readdy.ai/api/search-image?query=urban%20trap%20single%20cover%20art%2C%20dark%20street%20scene%20with%20neon%20teal%20and%20orange%20lights%2C%20modern%20hip%20hop%20aesthetic%2C%20professional%20music%20artwork%2C%20premium%20quality%2C%20edgy%20composition&width=500&height=500&seq=release-page-008&orientation=squarish',
-      genre: 'Hip Hop/Trap',
-      streams: '6.2M',
-      featured: false
+      date: '2024',
+      cover: 'https://img.youtube.com/vi/mb7rskqf1A4/maxresdefault.jpg',
+      genre: 'Gospel/CCM',
+      streams: '35K',
+      featured: false,
+      videoUrl: 'https://www.youtube.com/watch?v=mb7rskqf1A4&list=RDEMzFMowVXry3q4Od_yFQGfxw&index=3'
     },
     {
       id: 9,
-      title: 'Melodias do Coração',
-      artist: 'Bianca Costa',
+      title: 'Ao Cheiro das Águas (Ao Vivo)',
+      artist: 'William Soares',
       type: 'singles',
       typeLabel: 'Single',
-      date: '2023',
-      cover: 'https://readdy.ai/api/search-image?query=soul%20music%20single%20cover%2C%20warm%20bronze%20tones%20with%20teal%20accents%2C%20elegant%20artistic%20design%2C%20professional%20music%20artwork%2C%20premium%20quality%2C%20intimate%20atmosphere&width=500&height=500&seq=release-page-009&orientation=squarish',
-      genre: 'MPB/Soul',
-      streams: '5.5M',
-      featured: false
-    }
+      date: '2024',
+      cover: 'https://img.youtube.com/vi/MyhL5CT8-Eo/maxresdefault.jpg',
+      genre: 'Gospel/CCM',
+      streams: '28K',
+      featured: false,
+      videoUrl: 'https://www.youtube.com/watch?v=MyhL5CT8-Eo&list=RDMyhL5CT8-Eo&start_radio=1'
+    },
+    {
+      id: 10,
+      title: 'EU FAÇO AO VIVO',
+      artist: 'Martinha',
+      type: 'singles',
+      typeLabel: 'Single',
+      date: '2024',
+      cover: 'https://img.youtube.com/vi/eMv-TwacSck/maxresdefault.jpg',
+      genre: 'Gospel/CCM',
+      streams: '15.8K',
+      featured: false,
+      videoUrl: 'https://www.youtube.com/watch?v=eMv-TwacSck&list=RDeMv-TwacSck&start_radio=1'
+    },
   ];
 
   const filteredReleases = selectedFilter === 'all' 
@@ -172,6 +194,11 @@ export default function ReleasesPage() {
               <div
                 key={release.id}
                 className="group cursor-pointer"
+                onClick={() => {
+                  if (release.videoUrl) {
+                    window.open(release.videoUrl, '_blank', 'noopener,noreferrer');
+                  }
+                }}
                 style={{
                   animationDelay: `${index * 100}ms`
                 }}
@@ -192,9 +219,21 @@ export default function ReleasesPage() {
                     </div>
 
                     {/* Play Button */}
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center bg-[#C45C2F]/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 shadow-2xl shadow-[#C45C2F]/50">
-                      <i className="ri-play-fill text-4xl text-white ml-1"></i>
-                    </div>
+                    {release.videoUrl ? (
+                      <a
+                        href={release.videoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center bg-[#C45C2F]/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 shadow-2xl shadow-[#C45C2F]/50 cursor-pointer"
+                      >
+                        <i className="ri-play-fill text-4xl text-white ml-1"></i>
+                      </a>
+                    ) : (
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center bg-[#C45C2F]/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 shadow-2xl shadow-[#C45C2F]/50">
+                        <i className="ri-play-fill text-4xl text-white ml-1"></i>
+                      </div>
+                    )}
 
                     {/* Featured Badge */}
                     <div className="absolute top-4 right-4 px-3 py-1 bg-gradient-to-r from-[#C45C2F] to-[#A34528] backdrop-blur-sm rounded-full border border-white/20 shadow-lg">
@@ -231,9 +270,20 @@ export default function ReleasesPage() {
                           {release.streams}
                         </span>
                       </div>
-                      <button className="px-4 py-2 bg-[#C45C2F]/10 hover:bg-[#C45C2F]/20 text-[#C45C2F] text-xs font-semibold rounded-lg transition-all duration-300 border border-[#C45C2F]/30 hover:border-[#C45C2F]/50 whitespace-nowrap cursor-pointer">
-                        Ouvir agora
-                      </button>
+                      {release.videoUrl ? (
+                        <a
+                          href={release.videoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-4 py-2 bg-[#C45C2F]/10 hover:bg-[#C45C2F]/20 text-[#C45C2F] text-xs font-semibold rounded-lg transition-all duration-300 border border-[#C45C2F]/30 hover:border-[#C45C2F]/50 whitespace-nowrap cursor-pointer inline-block"
+                        >
+                          Assista ao clipe
+                        </a>
+                      ) : (
+                        <button className="px-4 py-2 bg-[#C45C2F]/10 hover:bg-[#C45C2F]/20 text-[#C45C2F] text-xs font-semibold rounded-lg transition-all duration-300 border border-[#C45C2F]/30 hover:border-[#C45C2F]/50 whitespace-nowrap cursor-pointer">
+                          Ouvir agora
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -280,6 +330,11 @@ export default function ReleasesPage() {
               <div
                 key={release.id}
                 className="group flex flex-col md:flex-row items-start md:items-center gap-4 p-4 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-[#0EA8A0]/30 transition-all duration-300 cursor-pointer"
+                onClick={() => {
+                  if (release.videoUrl) {
+                    window.open(release.videoUrl, '_blank', 'noopener,noreferrer');
+                  }
+                }}
                 style={{
                   animationDelay: `${index * 50}ms`
                 }}
@@ -326,9 +381,21 @@ export default function ReleasesPage() {
 
                 {/* Actions */}
                 <div className="flex items-center space-x-2">
-                  <button className="w-10 h-10 flex items-center justify-center bg-[#0EA8A0]/20 hover:bg-[#0EA8A0]/30 rounded-lg transition-all duration-300 cursor-pointer">
-                    <i className="ri-play-fill text-[#0EA8A0] text-xl"></i>
-                  </button>
+                  {release.videoUrl ? (
+                    <a
+                      href={release.videoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 flex items-center justify-center bg-[#0EA8A0]/20 hover:bg-[#0EA8A0]/30 rounded-lg transition-all duration-300 cursor-pointer"
+                      title="Assistir clipe"
+                    >
+                      <i className="ri-play-fill text-[#0EA8A0] text-xl"></i>
+                    </a>
+                  ) : (
+                    <button className="w-10 h-10 flex items-center justify-center bg-[#0EA8A0]/20 hover:bg-[#0EA8A0]/30 rounded-lg transition-all duration-300 cursor-pointer">
+                      <i className="ri-play-fill text-[#0EA8A0] text-xl"></i>
+                    </button>
+                  )}
                   <button className="w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-white/10 rounded-lg transition-all duration-300 cursor-pointer">
                     <i className="ri-more-fill text-white/60 text-xl"></i>
                   </button>
