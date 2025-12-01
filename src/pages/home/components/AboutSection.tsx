@@ -12,19 +12,13 @@ export default function AboutSection() {
         {/* Section Content */}
         <div className="text-center">
           <span
-            className="inline-block px-4 py-2 bg-[#0EA8A0]/10 border border-[#0EA8A0]/30 rounded-full text-[#0EA8A0] text-sm font-semibold mb-6"
+            className="inline-block px-4 py-2 bg-[#0EA8A0]/10 border border-[#0EA8A0]/30 rounded-full text-[#0EA8A0] text-sm font-semibold mb-8"
             style={{ fontFamily: 'Montserrat, sans-serif' }}
           >
             Sobre Nós
           </span>
           
-          <p
-            className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-8"
-            style={{ fontFamily: 'Inter, sans-serif' }}
-          >
-            Somos uma gravadora cristã independente que acredita no poder transformador da música para tocar corações e transformar vidas. Nossa missão é descobrir e desenvolver talentos que levam mensagens de fé, esperança e amor através de produções musicais de excelência. Com tecnologia de ponta, equipe profissional e paixão pelo que fazemos, transformamos sonhos em realidade e levamos a música dos nossos artistas para o mundo inteiro.
-          </p>
-
+          {/* Logo em cima */}
           <div className="mb-10 flex justify-center">
             <img
               src={aboutImage}
@@ -32,6 +26,14 @@ export default function AboutSection() {
               className="max-w-xs md:max-w-sm w-full object-contain drop-shadow-[0_0_25px_rgba(0,0,0,0.7)] rounded-2xl"
             />
           </div>
+
+          {/* Texto em baixo */}
+          <p
+            className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-8"
+            style={{ fontFamily: 'Inter, sans-serif' }}
+          >
+            Somos uma gravadora cristã independente que acredita no poder transformador da música para tocar corações e transformar vidas. Nossa missão é descobrir e desenvolver talentos que levam mensagens de fé, esperança e amor através de produções musicais de excelência. Com tecnologia de ponta, equipe profissional e paixão pelo que fazemos, transformamos sonhos em realidade e levamos a música dos nossos artistas para o mundo inteiro.
+          </p>
 
           <Link
             to="/contact"

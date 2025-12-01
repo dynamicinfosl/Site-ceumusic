@@ -65,9 +65,67 @@ function getYouTubeThumbnail(videoId: string): string {
   return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 }
 
+// Dados mockados de lançamentos
+const MOCK_RELEASES: Release[] = [
+  {
+    id: '1',
+    title: 'Final Feliz',
+    artist: 'No Santuário feat Geziel Lima',
+    cover: 'https://img.youtube.com/vi/XWBgmBsxkk4/maxresdefault.jpg',
+    type: 'Single',
+    date: '2024',
+    streamingLink: 'https://www.youtube.com/watch?v=XWBgmBsxkk4'
+  },
+  {
+    id: '2',
+    title: 'Salva-vidas',
+    artist: 'Alexsander Lúcio',
+    cover: 'https://img.youtube.com/vi/bdLeReQbtgY/maxresdefault.jpg',
+    type: 'Single',
+    date: '2024',
+    streamingLink: 'https://www.youtube.com/watch?v=bdLeReQbtgY'
+  },
+  {
+    id: '3',
+    title: 'Louva na Graça',
+    artist: 'Na Graça',
+    cover: 'https://img.youtube.com/vi/5bvgSlZamBo/maxresdefault.jpg',
+    type: 'Single',
+    date: '2024',
+    streamingLink: 'https://www.youtube.com/watch?v=5bvgSlZamBo'
+  },
+  {
+    id: '4',
+    title: 'O Fogo Arderá - Ao Vivo',
+    artist: 'Alexsander Lúcio',
+    cover: 'https://img.youtube.com/vi/Bqc6B5LzTN0/maxresdefault.jpg',
+    type: 'Single',
+    date: '2024',
+    streamingLink: 'https://www.youtube.com/watch?v=Bqc6B5LzTN0'
+  },
+  {
+    id: '5',
+    title: 'A FÉ - AO VIVO',
+    artist: 'Na Graça',
+    cover: 'https://img.youtube.com/vi/g89eBxkG-Aw/maxresdefault.jpg',
+    type: 'Single',
+    date: '2024',
+    streamingLink: 'https://www.youtube.com/watch?v=g89eBxkG-Aw'
+  },
+  {
+    id: '6',
+    title: 'Milagres de Deus',
+    artist: 'Debora Lopes',
+    cover: 'https://img.youtube.com/vi/V1hYFBtdxm8/maxresdefault.jpg',
+    type: 'Single',
+    date: '2024',
+    streamingLink: 'https://www.youtube.com/watch?v=V1hYFBtdxm8'
+  }
+];
+
 export default function ReleasesSection() {
   // Lançamentos estáticos - podem ser atualizados manualmente ou via Supabase no futuro
-  const releases: Release[] = [];
+  const releases: Release[] = MOCK_RELEASES;
   const loading = false;
   const error = null;
   return (
