@@ -137,3 +137,4 @@ Após seguir todos os passos:
 3. Verifique se a tabela existe no Supabase (Table Editor)
 4. Verifique se as políticas RLS estão corretas
 
+

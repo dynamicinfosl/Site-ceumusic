@@ -29,7 +29,7 @@ export default function Navbar() {
   return (
     <>
       {/* Desktop Navbar - Centered */}
-      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 hidden lg:block">
+      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 hidden lg:block" style={{ position: 'fixed !important', top: '24px !important', left: '50% !important', transform: 'translateX(-50%) !important', width: 'auto', pointerEvents: 'auto' }}>
         {/* Logo acima do menu */}
         <div className="flex justify-center mb-4 relative">
           <CeuMusicLogo size="sm" />

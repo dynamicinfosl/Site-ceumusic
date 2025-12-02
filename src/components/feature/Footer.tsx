@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import logoImage from '../../../assets/Ativo 2[1].png';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -24,13 +25,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Logo e Descrição */}
           <div className="space-y-6">
-            <Link to="/" className="flex items-center space-x-3 group">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#0EA8A0] via-[#0C3F48] to-[#A34528] flex items-center justify-center shadow-lg shadow-[#0EA8A0]/20 group-hover:shadow-[#0EA8A0]/40 transition-all duration-300">
-                <span className="text-white font-bold text-xl" style={{ fontFamily: 'Pacifico, serif' }}>C</span>
-              </div>
-              <span className="text-white font-bold text-2xl tracking-tight" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                Céu Music
-              </span>
+            <Link to="/" className="flex items-center group cursor-pointer">
+              <img
+                src={logoImage}
+                alt="Céu Music"
+                className="h-12 w-auto transition-transform duration-300 group-hover:scale-105"
+              />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
               Gravadora musical independente dedicada a descobrir e promover talentos únicos. Transformando sonhos em realidade através da música.

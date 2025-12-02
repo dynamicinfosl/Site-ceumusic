@@ -109,3 +109,4 @@ VITE_SUPABASE_ANON_KEY=sua-chave-anon-aqui
 3. Adicionar mais campos à tabela conforme necessário
 4. Implementar cache se necessário
 
+

@@ -64,6 +64,13 @@
     border: none !important;
     outline: none !important;
   }
+  
+  /* Garante que o navbar fique fixo e não se mova ao rolar */
+  nav[class*="fixed"],
+  div[class*="fixed"][class*="z-50"] {
+    position: fixed !important;
+    will-change: auto !important;
+  }
 }
 
 @layer utilities {

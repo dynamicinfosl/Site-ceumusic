@@ -117,3 +117,4 @@ Se retornar 404, há problema com a tabela ou políticas.
 3. Verifique os logs que começam com 🔧, 🔍, ✅ ou ❌
 4. Compartilhe os logs de erro para diagnóstico mais preciso
 
+
