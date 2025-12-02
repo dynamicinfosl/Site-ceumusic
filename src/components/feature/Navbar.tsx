@@ -1,5 +1,27 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import logoImage from '../../../assets/Ativo 2[1].png';
+
+// Componente do Logo Céu Music
+function CeuMusicLogo({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
+  const sizeClasses = {
+    sm: 'h-10 w-auto',
+    md: 'h-14 w-auto',
+    lg: 'h-20 w-auto'
+  };
+
+  return (
+    <Link to="/" className="flex items-center justify-center group cursor-pointer relative">
+      <img 
+        src={logoImage} 
+        alt="Céu Music" 
+        className={`${sizeClasses[size]} transition-all duration-300 group-hover:opacity-90 group-hover:scale-105 object-contain`}
+      />
+      {/* Efeito de glow no hover */}
+      <span className="absolute inset-0 bg-[#0EA8A0]/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg -z-10 pointer-events-none"></span>
+    </Link>
+  );
+}
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -8,6 +30,11 @@ export default function Navbar() {
     <>
       {/* Desktop Navbar - Centered */}
       <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 hidden lg:block">
+        {/* Logo acima do menu */}
+        <div className="flex justify-center mb-4 relative">
+          <CeuMusicLogo size="sm" />
+        </div>
+        
         <nav className="bg-transparent backdrop-blur-md border border-gray-800/50 rounded-full px-6 py-3 relative overflow-hidden group">
           {/* Animated glow effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#0EA8A0]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer"></div>
@@ -66,18 +93,22 @@ export default function Navbar() {
 
       {/* Mobile Navbar */}
       <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-gray-800">
-        <div className="flex items-center justify-between px-6 py-4">
-          <Link to="/" className="text-2xl font-bold relative group" style={{ fontFamily: 'Pacifico, serif' }}>
-            <span className="relative z-10">Céu Music</span>
-            <span className="absolute inset-0 bg-[#0EA8A0]/30 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-          </Link>
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-white w-10 h-10 flex items-center justify-center cursor-pointer relative group"
-          >
-            <i className={`${isMenuOpen ? 'ri-close-line' : 'ri-menu-line'} text-2xl relative z-10`}></i>
-            <span className="absolute inset-0 bg-[#0EA8A0]/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></span>
-          </button>
+        <div className="flex flex-col">
+          {/* Logo acima do menu mobile */}
+          <div className="flex justify-center pt-3 pb-2">
+            <CeuMusicLogo size="sm" />
+          </div>
+          
+          {/* Botão de menu centralizado */}
+          <div className="flex justify-center pb-3">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-white w-10 h-10 flex items-center justify-center cursor-pointer relative group"
+            >
+              <i className={`${isMenuOpen ? 'ri-close-line' : 'ri-menu-line'} text-2xl relative z-10`}></i>
+              <span className="absolute inset-0 bg-[#0EA8A0]/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></span>
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}

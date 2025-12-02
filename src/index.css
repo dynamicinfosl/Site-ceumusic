@@ -5,9 +5,64 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body, #root {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow-x: hidden;
+    border: none !important;
+    outline: none !important;
+    position: relative;
+  }
+  
+  html {
+    height: 100%;
+    overflow: hidden;
+  }
+  
   body {
     @apply bg-black text-white;
     font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  #root {
+    min-height: 100vh;
+    height: 100%;
+  }
+  
+  /* Remove bordas padrão de iframes e vídeos */
+  iframe, video {
+    border: none !important;
+    outline: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Remove bordas de elementos que podem aparecer */
+  header, div {
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+  }
+  
+  /* Garante que o hero section não tenha espaçamentos */
+  header[class*="relative"] {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    outline: none !important;
   }
 }
 

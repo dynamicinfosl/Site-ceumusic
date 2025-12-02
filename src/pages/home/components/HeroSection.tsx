@@ -148,45 +148,96 @@ export default function HeroSection() {
   const youtubeVideoId = selectedVideo ? getYouTubeVideoId(selectedVideo.youtube_url) : null;
 
   return (
-    <header className="relative min-h-screen w-full overflow-hidden">
+    <header className="relative w-full" style={{ margin: 0, padding: 0, border: 'none', outline: 'none', height: '100vh', width: '100vw', position: 'relative', top: 0, left: 0, right: 0, bottom: 0, overflow: 'visible' }}>
       {/* Video Background */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
+      <div className="absolute w-full h-full overflow-hidden z-0" style={{ margin: 0, padding: 0, border: 'none', outline: 'none', top: 0, left: 0, right: 0, bottom: 0, width: '100vw', height: '100vh', position: 'absolute', overflow: 'hidden' }}>
         <div 
-          className="absolute inset-0 opacity-40 transition-opacity duration-500"
+          className="absolute top-0 left-0 w-full h-full opacity-30 transition-opacity duration-500"
           style={{ 
             pointerEvents: 'none',
+            width: '100vw',
+            height: '100vh',
+            margin: 0,
+            padding: 0,
+            border: 'none',
+            outline: 'none',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            overflow: 'hidden',
+            position: 'absolute',
           }}
         >
           {selectedVideo && (
             <>
               {/* Thumbnail como background (fallback) */}
               <div 
-                className="absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-500"
+                className="absolute top-0 left-0 w-full h-full bg-cover bg-center transition-opacity duration-500"
                 style={{
                   backgroundImage: selectedVideo.thumbnail_url 
                     ? `url(${selectedVideo.thumbnail_url})` 
                     : 'none',
                   filter: 'blur(20px) brightness(0.3)',
-                  transform: 'scale(1.1)',
+                  width: '100vw',
+                  height: '100vh',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
                   opacity: youtubeVideoId ? 0 : 1,
+                  margin: 0,
+                  padding: 0,
+                  border: 'none',
+                  outline: 'none',
+                  top: 0,
+                  left: 0,
                 }}
               />
               
               {/* YouTube iframe como background (se disponível) */}
               {youtubeVideoId && (
-                <iframe
-                  key={selectedVideo.id}
-                  className="absolute inset-0 w-full h-full object-cover"
+                <div
                   style={{
-                    filter: 'brightness(0.4)',
-                    pointerEvents: 'none',
-                    transform: 'scale(1.1)',
+                    position: 'absolute',
+                    top: '-1px',
+                    left: '-1px',
+                    right: '-1px',
+                    bottom: '-1px',
+                    width: 'calc(100vw + 2px)',
+                    height: 'calc(100vh + 2px)',
+                    overflow: 'hidden',
+                    margin: 0,
+                    padding: 0,
+                    zIndex: 0,
                   }}
-                  src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1`}
-                  allow="autoplay; encrypted-media"
-                  allowFullScreen
-                  title={selectedVideo.title}
-                />
+                >
+                  <iframe
+                    key={selectedVideo.id}
+                    style={{
+                      filter: 'brightness(0.7)',
+                      pointerEvents: 'none',
+                      border: 'none',
+                      outline: 'none',
+                      margin: 0,
+                      padding: 0,
+                      width: '100vw',
+                      height: '56.25vw',
+                      minHeight: '100vh',
+                      minWidth: '177.77vh',
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      display: 'block',
+                      zIndex: 0,
+                    }}
+                    src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&start=0`}
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                    title={selectedVideo.title}
+                    frameBorder="0"
+                    scrolling="no"
+                  />
+                </div>
               )}
               
               {/* Vídeo de fundo local (se disponível e não houver YouTube) */}
@@ -197,9 +248,23 @@ export default function HeroSection() {
                   loop
                   muted
                   playsInline
-                  className="absolute inset-0 w-full h-full object-cover"
                   style={{
-                    filter: 'brightness(0.4)',
+                    filter: 'brightness(0.7)',
+                    width: '100vw',
+                    height: '100vh',
+                    objectFit: 'cover',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    border: 'none',
+                    outline: 'none',
+                    margin: 0,
+                    padding: 0,
+                    minWidth: '100%',
+                    minHeight: '100%',
+                    display: 'block',
                   }}
                 >
                   <source src={selectedVideo.video_url} type="video/mp4" />
@@ -210,14 +275,14 @@ export default function HeroSection() {
           )}
         </div>
         {/* Holographic Canvas Overlay - Efeito Liquid Glass */}
-        <div className="absolute inset-0 holographic-bg opacity-30"></div>
+        <div className="absolute top-0 left-0 w-full h-full holographic-bg opacity-20" style={{ margin: 0, padding: 0, border: 'none', outline: 'none' }}></div>
         
         {/* Gradiente overlay para melhorar contraste */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/40 via-black/20 to-black/40" style={{ margin: 0, padding: 0, border: 'none', outline: 'none' }}></div>
       </div>
 
       {/* Floating Orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#0EA8A0]/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#C45C2F]/5 rounded-full blur-3xl"></div>
         <div className="absolute top-1/2 right-1/3 w-32 h-32 bg-[#A34528]/20 rounded-full blur-2xl"></div>
@@ -247,14 +312,14 @@ export default function HeroSection() {
       )}
 
       {/* Video Cards - Bottom Section */}
-      <div className="absolute bottom-0 left-0 right-0 z-50 px-6 pb-6">
+      <div className="absolute bottom-0 left-0 right-0 z-50 px-6 pb-6" style={{ paddingTop: '100px', overflow: 'visible', clipPath: 'none' }}>
         {loading ? (
           <div className="flex items-center justify-center py-8">
             <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#0EA8A0]"></div>
             <span className="ml-3 text-gray-400">Carregando vídeos...</span>
           </div>
         ) : videos.length > 0 ? (
-          <div className="flex gap-6 overflow-x-auto pb-2 scrollbar-hide items-end">
+          <div className="flex gap-6 overflow-x-auto pb-2 scrollbar-hide items-center justify-center" style={{ overflowY: 'visible', overflowX: 'auto', clipPath: 'none', minHeight: '120px' }}>
             {videos.map((video) => (
               <button
                 key={video.id}
@@ -262,16 +327,36 @@ export default function HeroSection() {
                   // Ao clicar, seleciona o vídeo para exibir como background
                   setSelectedVideoId(video.id);
                 }}
-                onMouseEnter={() => {
+                className={`group relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0 cursor-pointer ${
+                  selectedVideoId === video.id
+                    ? 'ring-3 ring-[#0EA8A0] ring-offset-2 ring-offset-black/50'
+                    : ''
+                }`}
+                style={{ 
+                  fontFamily: 'Montserrat, sans-serif',
+                  transform: selectedVideoId === video.id 
+                    ? 'scale(1.2) translateY(-8px)' 
+                    : 'scale(1) translateY(0)',
+                  transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  opacity: selectedVideoId === video.id ? 1 : 0.85,
+                  filter: selectedVideoId === video.id 
+                    ? 'brightness(1.1) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4))' 
+                    : 'brightness(1) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))',
+                }}
+                onMouseEnter={(e) => {
                   // Ao passar o mouse, seleciona o vídeo para preview
                   setSelectedVideoId(video.id);
+                  if (selectedVideoId !== video.id) {
+                    e.currentTarget.style.transform = 'scale(1.15) translateY(-4px)';
+                    e.currentTarget.style.filter = 'brightness(1.05) drop-shadow(0 12px 24px rgba(0, 0, 0, 0.3))';
+                  }
                 }}
-                className={`group relative w-16 h-16 rounded-full overflow-hidden transition-all duration-300 flex-shrink-0 cursor-pointer ${
-                  selectedVideoId === video.id
-                    ? 'ring-3 ring-[#0EA8A0] ring-offset-2 ring-offset-black/50 scale-110'
-                    : 'hover:scale-110 opacity-80 hover:opacity-100'
-                }`}
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
+                onMouseLeave={(e) => {
+                  if (selectedVideoId !== video.id) {
+                    e.currentTarget.style.transform = 'scale(1) translateY(0)';
+                    e.currentTarget.style.filter = 'brightness(1) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))';
+                  }
+                }}
                 title={`Assistir: ${video.title}`}
               >
                 {/* Thumbnail */}
