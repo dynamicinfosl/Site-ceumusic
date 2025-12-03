@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../../utils/supabase';
+import Navbar from '../../../components/feature/Navbar';
 
 interface HeroVideo {
   id: string;
@@ -149,6 +150,11 @@ export default function HeroSection() {
 
   return (
     <header className="relative w-full" style={{ margin: 0, padding: 0, border: 'none', outline: 'none', height: '100vh', width: '100vw', position: 'relative', top: 0, left: 0, right: 0, bottom: 0, overflow: 'visible' }}>
+      {/* Navbar dentro do Hero */}
+      <div className="absolute top-0 left-0 right-0 z-50" style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 50 }}>
+        <Navbar />
+      </div>
+      
       {/* Video Background */}
       <div className="absolute w-full h-full overflow-hidden z-0" style={{ margin: 0, padding: 0, border: 'none', outline: 'none', top: 0, left: 0, right: 0, bottom: 0, width: '100vw', height: '100vh', position: 'absolute', overflow: 'hidden' }}>
         <div 

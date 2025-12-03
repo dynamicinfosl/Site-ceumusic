@@ -6,7 +6,6 @@ import ReleasesSection from './components/ReleasesSection';
 import VideosSection from './components/VideosSection';
 import NewsSection from './components/NewsSection';
 import ContactSection from './components/ContactSection';
-import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
 
 export default function HomePage() {
@@ -32,7 +31,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen" style={{ margin: 0, padding: 0, width: '100%' }}>
-      <Navbar />
       <HeroSection />
       
       <div className="section-divider"></div>

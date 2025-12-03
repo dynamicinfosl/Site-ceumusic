@@ -29,13 +29,26 @@ export default function Navbar() {
   return (
     <>
       {/* Desktop Navbar - Centered */}
-      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 hidden lg:block" style={{ position: 'fixed !important', top: '24px !important', left: '50% !important', transform: 'translateX(-50%) !important', width: 'auto', pointerEvents: 'auto' }}>
+      <div 
+        className="navbar-hero-desktop absolute top-6 left-1/2 -translate-x-1/2 z-50 hidden lg:block" 
+        style={{ 
+          position: 'absolute', 
+          top: '24px', 
+          left: '50%', 
+          transform: 'translateX(-50%)', 
+          width: 'auto', 
+          pointerEvents: 'auto'
+        }}
+      >
         {/* Logo acima do menu */}
-        <div className="flex justify-center mb-4 relative">
+        <div className="flex justify-center mb-4 relative" style={{ position: 'relative', transform: 'none' }}>
           <CeuMusicLogo size="sm" />
         </div>
         
-        <nav className="bg-transparent backdrop-blur-md border border-gray-800/50 rounded-full px-6 py-3 relative overflow-hidden group">
+        <nav 
+          className="bg-transparent backdrop-blur-md border border-gray-800/50 rounded-full px-6 py-3 relative overflow-hidden group"
+          style={{ position: 'relative', transform: 'none' }}
+        >
           {/* Animated glow effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#0EA8A0]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer"></div>
           
@@ -92,7 +105,15 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Navbar */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-gray-800">
+      <div 
+        className="navbar-hero-mobile lg:hidden absolute top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-gray-800"
+        style={{ 
+          position: 'absolute', 
+          top: '0', 
+          left: '0', 
+          right: '0'
+        }}
+      >
         <div className="flex flex-col">
           {/* Logo acima do menu mobile */}
           <div className="flex justify-center pt-3 pb-2">

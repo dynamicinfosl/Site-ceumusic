@@ -65,11 +65,34 @@
     outline: none !important;
   }
   
-  /* Garante que o navbar fique fixo e não se mova ao rolar */
-  nav[class*="fixed"],
-  div[class*="fixed"][class*="z-50"] {
-    position: fixed !important;
-    will-change: auto !important;
+  /* Navbar dentro do hero section - absoluto para acompanhar o scroll */
+  .navbar-hero-desktop {
+    position: absolute !important;
+    top: 24px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 50 !important;
+  }
+  
+  .navbar-hero-mobile {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 50 !important;
+  }
+  
+  /* Garante que elementos filhos dentro do navbar não causem movimento indesejado */
+  .navbar-hero-desktop > *,
+  .navbar-hero-mobile > * {
+    position: relative !important;
+    transform: none !important;
+  }
+  
+  .navbar-hero-desktop nav,
+  .navbar-hero-mobile nav {
+    position: relative !important;
+    transform: none !important;
   }
 }
 
