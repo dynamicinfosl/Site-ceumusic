@@ -1,8 +1,47 @@
-import { useState } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Footer from '../../components/feature/Footer';
 
 export default function NewsPage() {
+  const location = useLocation();
   const [selectedCategory, setSelectedCategory] = useState('all');
+
+  // Scroll para o topo ANTES da renderização visual
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    if (document.scrollingElement) {
+      document.scrollingElement.scrollTop = 0;
+    }
+  }, [location.pathname]);
+
+  // Scroll para o topo após a renderização também
+  useEffect(() => {
+    const scrollToTop = () => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      if (document.scrollingElement) {
+        document.scrollingElement.scrollTop = 0;
+      }
+    };
+    
+    scrollToTop();
+    
+    // Múltiplas tentativas para garantir
+    const timers = [
+      setTimeout(scrollToTop, 0),
+      setTimeout(scrollToTop, 10),
+      setTimeout(scrollToTop, 50),
+      setTimeout(scrollToTop, 100),
+      setTimeout(scrollToTop, 200),
+    ];
+    
+    return () => {
+      timers.forEach(timer => clearTimeout(timer));
+    };
+  }, [location.pathname]);
 
   const categories = [
     { id: 'all', name: 'Todas' },

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const artists = [
@@ -106,9 +106,41 @@ const artists = [
 export default function ArtistsPage() {
   const location = useLocation();
 
-  // Scroll para o topo quando a página carregar ou quando a rota mudar
+  // Scroll para o topo ANTES da renderização visual
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    if (document.scrollingElement) {
+      document.scrollingElement.scrollTop = 0;
+    }
+  }, [location.pathname]);
+
+  // Scroll para o topo após a renderização também
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    const scrollToTop = () => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      if (document.scrollingElement) {
+        document.scrollingElement.scrollTop = 0;
+      }
+    };
+    
+    scrollToTop();
+    
+    // Múltiplas tentativas para garantir
+    const timers = [
+      setTimeout(scrollToTop, 0),
+      setTimeout(scrollToTop, 10),
+      setTimeout(scrollToTop, 50),
+      setTimeout(scrollToTop, 100),
+      setTimeout(scrollToTop, 200),
+    ];
+    
+    return () => {
+      timers.forEach(timer => clearTimeout(timer));
+    };
   }, [location.pathname]);
 
   useEffect(() => {

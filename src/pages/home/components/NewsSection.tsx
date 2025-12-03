@@ -208,6 +208,12 @@ export default function NewsSection() {
         <div className="text-center">
           <Link
             to="/noticias"
+            onClick={(e) => {
+              // Scroll para o topo antes de navegar
+              window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+              document.documentElement.scrollTop = 0;
+              document.body.scrollTop = 0;
+            }}
             className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-[#A34528] to-[#C45C2F] text-white font-semibold rounded-full shadow-lg shadow-[#A34528]/30 hover:shadow-[#A34528]/50 hover:scale-105 transition-all duration-300 whitespace-nowrap cursor-pointer"
             style={{ fontFamily: 'Montserrat, sans-serif' }}
           >
