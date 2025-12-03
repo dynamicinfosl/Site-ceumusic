@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
 
 export default function ContactPage() {
@@ -72,8 +71,6 @@ export default function ContactPage() {
 
   return (
     <div className="bg-black min-h-screen">
-      <Navbar />
-
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div 
