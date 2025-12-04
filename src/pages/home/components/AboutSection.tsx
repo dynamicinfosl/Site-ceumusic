@@ -36,7 +36,23 @@ export default function AboutSection() {
           </p>
 
           <Link
-            to="/contact"
+            to="/sobre"
+            onClick={(e) => {
+              // Scroll para o topo antes de navegar - múltiplas formas
+              window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+              window.scrollTo(0, 0);
+              document.documentElement.scrollTop = 0;
+              document.body.scrollTop = 0;
+              if (document.scrollingElement) {
+                document.scrollingElement.scrollTop = 0;
+              }
+              // Garantir scroll após um pequeno delay também
+              requestAnimationFrame(() => {
+                window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+              });
+            }}
             className="inline-flex items-center gap-2 bg-transparent border border-gray-600 text-white px-8 py-3 rounded-full font-semibold hover:border-[#0EA8A0] hover:shadow-[0_0_20px_rgba(14,168,160,0.3)] hover:text-[#0EA8A0] transition-all duration-300 whitespace-nowrap cursor-pointer font-montserrat"
           >
             Saiba Mais

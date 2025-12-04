@@ -6,6 +6,7 @@ const Artists = lazy(() => import('../pages/artists/page'));
 const ArtistDetail = lazy(() => import('../pages/artist-detail/page'));
 const Releases = lazy(() => import('../pages/releases/page'));
 const News = lazy(() => import('../pages/news/page'));
+const About = lazy(() => import('../pages/about/page'));
 const Contact = lazy(() => import('../pages/contact/page'));
 const NotFound = lazy(() => import('../pages/NotFound'));
 
@@ -29,6 +30,10 @@ const routes: RouteObject[] = [
   {
     path: '/noticias',
     element: <News />,
+  },
+  {
+    path: '/sobre',
+    element: <About />,
   },
   {
     path: '/contato',
