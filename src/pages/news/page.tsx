@@ -8,34 +8,60 @@ export default function NewsPage() {
 
   // Scroll para o topo ANTES da renderização visual
   useLayoutEffect(() => {
-    window.scrollTo(0, 0);
+    // Forçar scroll imediato antes de qualquer renderização
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
     if (document.scrollingElement) {
       document.scrollingElement.scrollTop = 0;
     }
+    // Também tentar com scrollTo direto
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   // Scroll para o topo após a renderização também
   useEffect(() => {
     const scrollToTop = () => {
+      // Tentar scroll para o elemento de referência primeiro
+      const topElement = document.getElementById('news-page-top');
+      if (topElement) {
+        topElement.scrollIntoView({ behavior: 'instant', block: 'start' });
+      }
+      
+      // Múltiplas formas de garantir o scroll
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       window.scrollTo(0, 0);
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
       if (document.scrollingElement) {
         document.scrollingElement.scrollTop = 0;
       }
+      // Tentar também com scrollIntoView no body
+      if (document.body) {
+        document.body.scrollIntoView({ behavior: 'instant', block: 'start' });
+      }
     };
     
+    // Scroll imediato
     scrollToTop();
     
-    // Múltiplas tentativas para garantir
+    // Usar requestAnimationFrame para garantir que aconteça após renderização
+    requestAnimationFrame(() => {
+      scrollToTop();
+      requestAnimationFrame(() => {
+        scrollToTop();
+      });
+    });
+    
+    // Múltiplas tentativas com timeouts para garantir
     const timers = [
       setTimeout(scrollToTop, 0),
       setTimeout(scrollToTop, 10),
       setTimeout(scrollToTop, 50),
       setTimeout(scrollToTop, 100),
       setTimeout(scrollToTop, 200),
+      setTimeout(scrollToTop, 300),
+      setTimeout(scrollToTop, 500),
     ];
     
     return () => {
@@ -159,6 +185,9 @@ export default function NewsPage() {
 
   return (
     <div className="bg-black min-h-screen">
+      {/* Elemento de referência para scroll - invisível no topo */}
+      <div id="news-page-top" className="absolute top-0 left-0 w-1 h-1 opacity-0 pointer-events-none" aria-hidden="true"></div>
+      
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div 
