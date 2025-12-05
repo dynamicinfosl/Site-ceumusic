@@ -105,11 +105,44 @@ export default function ContactPage() {
     }
   };
 
+  // Função para formatar telefone brasileiro
+  const formatPhone = (value: string): string => {
+    // Remove tudo que não é número
+    const numbers = value.replace(/\D/g, '');
+    
+    // Limita a 11 dígitos (celular) ou 10 dígitos (fixo)
+    const limitedNumbers = numbers.slice(0, 11);
+    
+    // Aplica a máscara
+    if (limitedNumbers.length <= 10) {
+      // Telefone fixo: (XX) XXXX-XXXX
+      return limitedNumbers
+        .replace(/(\d{2})(\d)/, '($1) $2')
+        .replace(/(\d{4})(\d)/, '$1-$2');
+    } else {
+      // Celular: (XX) XXXXX-XXXX
+      return limitedNumbers
+        .replace(/(\d{2})(\d)/, '($1) $2')
+        .replace(/(\d{5})(\d)/, '$1-$2');
+    }
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    
+    // Aplica formatação apenas para o campo de telefone
+    if (name === 'phone') {
+      const formattedPhone = formatPhone(value);
+      setFormData({
+        ...formData,
+        [name]: formattedPhone
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
   const contactInfo = [
@@ -271,6 +304,7 @@ export default function ContactPage() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
+                      maxLength={15}
                       className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-[#0EA8A0]/50 focus:bg-white/10 transition-all duration-300 text-sm"
                       style={{ fontFamily: 'Inter, sans-serif' }}
                       placeholder="(21) 98244-7141"
