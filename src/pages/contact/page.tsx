@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import Footer from '../../components/feature/Footer';
 
 export default function ContactPage() {
@@ -12,21 +13,96 @@ export default function ContactPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  // Configurações do EmailJS - Substitua pelos seus valores
+  // Para obter essas credenciais, acesse: https://www.emailjs.com/
+  const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
+  const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
+  const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
+
+  // Verificar se as credenciais estão configuradas (apenas em desenvolvimento)
+  if (import.meta.env.DEV) {
+    if (EMAILJS_SERVICE_ID === 'YOUR_SERVICE_ID' || 
+        EMAILJS_TEMPLATE_ID === 'YOUR_TEMPLATE_ID' || 
+        EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
+      console.warn('⚠️ EmailJS não configurado! Verifique o arquivo .env');
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
     
-    // Simular envio
-    setTimeout(() => {
+    try {
+      // Inicializar EmailJS
+      emailjs.init(EMAILJS_PUBLIC_KEY);
+
+      // Mapear o assunto para texto legível
+      const subjectMap: { [key: string]: string } = {
+        'parceria': 'Parceria Comercial',
+        'artista': 'Quero ser artista',
+        'imprensa': 'Assessoria de Imprensa',
+        'evento': 'Contratação para Evento',
+        'outro': 'Outro'
+      };
+
+      // Preparar os dados do template
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone || 'Não informado',
+        subject: subjectMap[formData.subject] || formData.subject,
+        message: formData.message,
+        to_email: 'contato@ceumusicbr.com', // Email de destino
+      };
+
+      // Enviar email
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      // Sucesso
       setIsSubmitting(false);
       setSubmitStatus('success');
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
       
+      // Resetar status após 5 segundos
       setTimeout(() => {
         setSubmitStatus('idle');
-      }, 3000);
-    }, 1500);
+      }, 5000);
+    } catch (error: any) {
+      // Erro
+      console.error('Erro ao enviar email:', error);
+      setIsSubmitting(false);
+      setSubmitStatus('error');
+      
+      // Mensagem de erro mais detalhada
+      let errorMsg = 'Erro ao enviar mensagem. ';
+      
+      if (error?.text) {
+        errorMsg += `Detalhes: ${error.text}`;
+      } else if (error?.message) {
+        errorMsg += `Detalhes: ${error.message}`;
+      } else {
+        errorMsg += 'Por favor, verifique se as credenciais do EmailJS estão corretas no arquivo .env';
+      }
+      
+      errorMsg += ' Ou entre em contato diretamente pelo email contato@ceumusicbr.com';
+      
+      setErrorMessage(errorMsg);
+      
+      // Resetar status de erro após 8 segundos
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setErrorMessage('');
+      }, 8000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -213,15 +289,22 @@ export default function ContactPage() {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 pr-8 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-[#0EA8A0]/50 focus:bg-white/10 transition-all duration-300 text-sm cursor-pointer"
-                    style={{ fontFamily: 'Inter, sans-serif' }}
+                    className="w-full px-4 py-3 pr-8 bg-[#0A0A0A] border border-white/20 rounded-xl text-white focus:outline-none focus:border-[#0EA8A0]/50 focus:bg-[#0A0A0A] transition-all duration-300 text-sm cursor-pointer appearance-none"
+                    style={{ 
+                      fontFamily: 'Inter, sans-serif',
+                      backgroundColor: '#0A0A0A',
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'right 1rem center',
+                      backgroundSize: '12px'
+                    }}
                   >
-                    <option value="">Selecione um assunto</option>
-                    <option value="parceria">Parceria Comercial</option>
-                    <option value="artista">Quero ser artista</option>
-                    <option value="imprensa">Assessoria de Imprensa</option>
-                    <option value="evento">Contratação para Evento</option>
-                    <option value="outro">Outro</option>
+                    <option value="" style={{ backgroundColor: '#0A0A0A', color: '#ffffff' }}>Selecione um assunto</option>
+                    <option value="parceria" style={{ backgroundColor: '#0A0A0A', color: '#ffffff' }}>Parceria Comercial</option>
+                    <option value="artista" style={{ backgroundColor: '#0A0A0A', color: '#ffffff' }}>Quero ser artista</option>
+                    <option value="imprensa" style={{ backgroundColor: '#0A0A0A', color: '#ffffff' }}>Assessoria de Imprensa</option>
+                    <option value="evento" style={{ backgroundColor: '#0A0A0A', color: '#ffffff' }}>Contratação para Evento</option>
+                    <option value="outro" style={{ backgroundColor: '#0A0A0A', color: '#ffffff' }}>Outro</option>
                   </select>
                 </div>
 
@@ -274,6 +357,21 @@ export default function ContactPage() {
                     <p className="text-white text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
                       Mensagem enviada com sucesso! Entraremos em contato em breve.
                     </p>
+                  </div>
+                )}
+
+                {/* Error Message */}
+                {submitStatus === 'error' && (
+                  <div className="p-4 bg-red-500/20 border border-red-500/30 rounded-xl flex items-start space-x-3">
+                    <i className="ri-error-warning-fill text-2xl text-red-500 flex-shrink-0 mt-0.5"></i>
+                    <div>
+                      <p className="text-white text-sm font-semibold mb-1" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                        Erro ao enviar mensagem
+                      </p>
+                      <p className="text-white/80 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        {errorMessage || 'Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente ou entre em contato diretamente pelo email contato@ceumusicbr.com'}
+                      </p>
+                    </div>
                   </div>
                 )}
               </form>
