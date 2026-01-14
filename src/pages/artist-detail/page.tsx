@@ -300,8 +300,7 @@ export default function ArtistDetailPage() {
       id: 17,
       name: 'Martinha',
       genre: 'Gospel/CCM',
-      image:
-        'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20worship%20singer%20Martinha%20style%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20stage%20portrait&width=800&height=800&seq=artist-martinha-detail&orientation=squarish',
+      image: '/artistas/martinha/Gemini_Generated_Image_o5dhzho5dhzho5dh (1).png',
       banner:
         'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20female%20lead%20singer%20Martinha%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-martinha-banner&orientation=landscape',
       bio: 'Martinha é uma cantora gospel brasileira que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, Martinha tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',

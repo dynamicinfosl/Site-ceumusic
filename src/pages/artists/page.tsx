@@ -98,8 +98,7 @@ const artists = [
     name: 'Martinha',
     genre: 'Gospel/CCM',
     bio: 'Cantora gospel que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções.',
-    image:
-      'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20worship%20singer%20Martinha%20style%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20portrait&width=400&height=400&seq=artist-martinha&orientation=squarish',
+    image: '/artistas/martinha/Gemini_Generated_Image_o5dhzho5dhzho5dh (1).png',
     instagram: 'https://www.instagram.com/martinhacantoraoficial/',
     spotify: 'https://open.spotify.com/intl-pt/artist/6etONEQiR3dUCs4IV0kIlE',
     youtube: null,

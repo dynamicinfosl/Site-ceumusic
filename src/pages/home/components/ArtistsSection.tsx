@@ -141,8 +141,7 @@ const artists = [
     id: 17,
     name: 'Martinha',
     genre: 'Gospel/CCM',
-    image:
-      'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20worship%20singer%20Martinha%20style%2C%20worshipping%20on%20stage%20with%20teal%20and%20bronze%20lights%2C%20high%20quality%20portrait&width=600&height=600&seq=artist-martinha&orientation=squarish',
+    image: '/artistas/martinha/Gemini_Generated_Image_o5dhzho5dhzho5dh (1).png',
     socialLinks: {
       instagram: 'https://www.instagram.com/martinhacantoraoficial/',
       spotify: 'https://open.spotify.com/intl-pt/artist/6etONEQiR3dUCs4IV0kIlE',
