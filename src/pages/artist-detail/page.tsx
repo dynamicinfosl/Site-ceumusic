@@ -58,8 +58,7 @@ export default function ArtistDetailPage() {
       id: 10,
       name: 'Na Graça',
       genre: 'Gospel/CCM',
-      image:
-        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20band%20on%20stage%20leading%20congregation%20in%20worship%2C%20dramatic%20teal%20and%20bronze%20lighting%2C%20modern%20church%20concert%2C%20high%20quality%20photography&width=800&height=800&seq=artist-na-graca-detail&orientation=squarish',
+      image: '/artistas/na graca/na graca.png',
       banner:
         'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20band%20live%20concert%20with%20hands%20raised%2C%20teal%20and%20bronze%20stage%20lights%2C%20wide%20cinematic%20shot%2C%20modern%20church%20worship%20environment&width=1920&height=600&seq=artist-na-graca-banner&orientation=landscape',
       bio: 'Na Graça é um ministério de louvor que nasceu com o propósito de conduzir a igreja a uma experiência profunda com Deus através da adoração. Com canções congregacionais e mensagens centradas na fé, o grupo tem se destacado por suas ministrações ao vivo, marcadas por simplicidade, unidade e forte presença de Deus.\n\nEntre suas faixas mais conhecidas estão “A Fé (Ao Vivo)”, “Ele Te Chamou (Ao Vivo)” e “Louva Na Graça (Ao Vivo)”, que têm alcançado milhares de ouvintes nas plataformas digitais. O grupo segue avançando com novos projetos e gravações ao vivo, sempre com o foco em espalhar a graça e o amor de Cristo por meio da música.',
@@ -138,7 +137,7 @@ export default function ArtistDetailPage() {
       id: 12,
       name: 'Debora Lopes',
       genre: 'Gospel/CCM',
-      image: '/artistas/debora-lopes/IMG_8699.jpg',
+      image: '/artistas/debora-lopes/debora-lopes.png',
       banner:
         'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20female%20lead%20singer%20Debora%20Lopes%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-debora-lopes-banner&orientation=landscape',
       bio: 'Debora Lopes é uma cantora gospel brasileira que tem sido usada para ministrar sobre fé, cura e milagres através de suas canções. Com o lançamento de "Milagres de Deus (Ao Vivo)" e sua versão em playback, seu ministério vem alcançando um público cada vez maior, fortalecendo a fé de quem ouve e declarando o agir sobrenatural de Deus.\n\nCom uma voz marcante e letras centradas na Palavra, Debora tem se consolidado como um dos novos nomes da adoração contemporânea, convidando a igreja a confiar nos milagres de Deus em cada estação da vida.',
@@ -332,6 +331,66 @@ export default function ArtistDetailPage() {
       ],
       shows: [],
     },
+    {
+      id: 19,
+      name: 'Rachel Malafaia',
+      genre: 'Gospel/CCM',
+      image: '/artistas/rachel-malafaia/IMG_5693.jpg',
+      banner:
+        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20female%20lead%20singer%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-rachel-malafaia-banner&orientation=landscape',
+      bio: 'Rachel Malafaia é uma cantora gospel brasileira que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, Rachel tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',
+      instagram: 'https://www.instagram.com/rachelmalafaia/',
+      spotify: 'https://open.spotify.com/intl-pt/artist/1xyrtLIDTu5kRTCvnHgIcJ',
+      youtube: null,
+      followers: {
+        instagram: null,
+        spotify: null,
+        youtube: null,
+      },
+      songs: [],
+      videos: [],
+      shows: [],
+    },
+    {
+      id: 20,
+      name: 'George Lean',
+      genre: 'Gospel/CCM',
+      image: '/artistas/george-lean/IMG_1982.jpg',
+      banner:
+        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20male%20lead%20singer%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-george-lean-banner&orientation=landscape',
+      bio: 'George Lean é um cantor gospel brasileiro que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, George tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',
+      instagram: 'https://www.instagram.com/georgelean/',
+      spotify: null,
+      youtube: null,
+      followers: {
+        instagram: null,
+        spotify: null,
+        youtube: null,
+      },
+      songs: [],
+      videos: [],
+      shows: [],
+    },
+    {
+      id: 21,
+      name: 'Gabriel Magalhães',
+      genre: 'Gospel/CCM',
+      image: '/artistas/gabriel-magalhaes/IMG_4165.jpg',
+      banner:
+        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20male%20lead%20singer%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-gabriel-magalhaes-banner&orientation=landscape',
+      bio: 'Gabriel Magalhães é um cantor gospel brasileiro que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, Gabriel tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',
+      instagram: 'https://www.instagram.com/gabrielmagalhaes.oficial1/',
+      spotify: null,
+      youtube: null,
+      followers: {
+        instagram: null,
+        spotify: null,
+        youtube: null,
+      },
+      songs: [],
+      videos: [],
+      shows: [],
+    },
   ];
 
   const artistId = Number(id);
@@ -364,7 +423,10 @@ export default function ArtistDetailPage() {
                   alt={artist.name}
                   className="w-full h-full object-cover"
                   style={{
-                    objectPosition: artist.id === 18 ? 'center 20%' : artist.id === 14 ? 'center 30%' : artist.id === 11 ? 'center 28%' : [13, 16].includes(artist.id) ? 'center 35%' : 'center top'
+                    objectPosition: artist.id === 18 ? 'center 20%' : artist.id === 14 ? 'center 30%' : artist.id === 11 ? 'center 28%' : artist.id === 19 ? 'center 30%' : artist.id === 20 ? 'center 30%' : [13, 16].includes(artist.id) ? 'center 35%' : 'center top',
+                    imageRendering: [10, 12, 18, 19].includes(artist.id) ? 'auto' : 'crisp-edges',
+                    WebkitImageRendering: [10, 12, 18, 19].includes(artist.id) ? 'auto' : 'crisp-edges',
+                    filter: [10, 12, 18, 19].includes(artist.id) ? 'none' : 'contrast(1.1) saturate(1.05)'
                   }}
                 />
               </div>

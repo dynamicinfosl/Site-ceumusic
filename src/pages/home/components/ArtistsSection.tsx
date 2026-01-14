@@ -25,7 +25,7 @@ const artists = [
     id: 10,
     name: 'Na Graça',
     genre: 'Gospel/CCM',
-    image: 'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20band%20performing%20on%20stage%20with%20teal%20and%20bronze%20lights%2C%20congregation%20worship%2C%20modern%20christian%20music%20group%2C%20high%20quality%20concert%20photography&width=600&height=600&seq=artist-na-graca&orientation=squarish',
+    image: '/artistas/na graca/na graca.png',
     socialLinks: {
       instagram: 'https://www.instagram.com/nagracaoficial/',
       spotify: 'https://open.spotify.com/intl-pt/artist/7pmvHrURMH0OqDcXXQiuYX',
@@ -162,7 +162,7 @@ const artists = [
     id: 12,
     name: 'Debora Lopes',
     genre: 'Gospel/CCM',
-    image: '/artistas/debora-lopes/IMG_8699.jpg',
+    image: '/artistas/debora-lopes/debora-lopes.png',
     socialLinks: {
       instagram: 'https://www.instagram.com/deboralopesoficiall/',
       spotify: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
@@ -197,6 +197,56 @@ const artists = [
         url: 'https://open.spotify.com/intl-pt/artist/5v86apLzejN5yQl8H2CcLh',
       },
     ],
+  },
+  {
+    id: 19,
+    name: 'Rachel Malafaia',
+    genre: 'Gospel/CCM',
+    image: '/artistas/rachel-malafaia/IMG_5693.jpg',
+    socialLinks: {
+      instagram: 'https://www.instagram.com/rachelmalafaia/',
+      spotify: 'https://open.spotify.com/intl-pt/artist/1xyrtLIDTu5kRTCvnHgIcJ',
+      youtube: null,
+      tiktok: null,
+      twitter: null,
+      facebook: null,
+    },
+    musicLinks: [
+      {
+        platform: 'Spotify',
+        url: 'https://open.spotify.com/intl-pt/artist/1xyrtLIDTu5kRTCvnHgIcJ',
+      },
+    ],
+  },
+  {
+    id: 20,
+    name: 'George Lean',
+    genre: 'Gospel/CCM',
+    image: '/artistas/george-lean/IMG_1982.jpg',
+    socialLinks: {
+      instagram: 'https://www.instagram.com/georgelean/',
+      spotify: null,
+      youtube: null,
+      tiktok: null,
+      twitter: null,
+      facebook: null,
+    },
+    musicLinks: [],
+  },
+  {
+    id: 21,
+    name: 'Gabriel Magalhães',
+    genre: 'Gospel/CCM',
+    image: '/artistas/gabriel-magalhaes/IMG_4165.jpg',
+    socialLinks: {
+      instagram: 'https://www.instagram.com/gabrielmagalhaes.oficial1/',
+      spotify: null,
+      youtube: null,
+      tiktok: null,
+      twitter: null,
+      facebook: null,
+    },
+    musicLinks: [],
   },
 ];
 
@@ -275,7 +325,10 @@ export default function ArtistsSection() {
                       alt={artist.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       style={{
-                        objectPosition: artist.id === 18 ? 'center 20%' : artist.id === 14 ? 'center 30%' : artist.id === 11 ? 'center 28%' : [13, 16].includes(artist.id) ? 'center 35%' : 'center'
+                        objectPosition: artist.id === 10 ? '75% center' : artist.id === 18 ? 'center 20%' : artist.id === 14 ? 'center 30%' : artist.id === 11 ? 'center 28%' : artist.id === 19 ? 'center 30%' : artist.id === 20 ? 'center 40%' : [13, 16].includes(artist.id) ? 'center 35%' : 'center',
+                        imageRendering: [10, 12, 18, 19].includes(artist.id) ? 'auto' : 'crisp-edges',
+                        WebkitImageRendering: [10, 12, 18, 19].includes(artist.id) ? 'auto' : 'crisp-edges',
+                        filter: [10, 12, 18, 19].includes(artist.id) ? 'none' : 'contrast(1.1) saturate(1.05)'
                       }}
                     />
                   </div>

@@ -17,7 +17,7 @@ const artists = [
     name: 'Na Graça',
     genre: 'Gospel/CCM',
     bio: 'Grupo de adoração que leva mensagens de fé e esperança através de ministrações ao vivo e canções marcadas pela presença de Deus.',
-    image: 'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20band%20on%20stage%20leading%20congregation%20in%20worship%2C%20dramatic%20teal%20and%20bronze%20lighting%2C%20modern%20church%20concert%2C%20high%20quality%20photography&width=400&height=400&seq=artist-na-graca&orientation=squarish',
+    image: '/artistas/na graca/na graca.png',
     instagram: 'https://www.instagram.com/nagracaoficial/',
     spotify: 'https://open.spotify.com/intl-pt/artist/7pmvHrURMH0OqDcXXQiuYX',
     youtube: null,
@@ -68,7 +68,7 @@ const artists = [
     name: 'Debora Lopes',
     genre: 'Gospel/CCM',
     bio: 'Cantora gospel que tem se destacado com canções de fé e esperança, como "Milagres de Deus (Ao Vivo)", alcançando milhares de ouvintes nas plataformas digitais.',
-    image: '/artistas/debora-lopes/IMG_8699.jpg',
+    image: '/artistas/debora-lopes/debora-lopes.png',
     instagram: 'https://www.instagram.com/deboralopesoficiall/',
     spotify: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
     youtube: null,
@@ -102,6 +102,36 @@ const artists = [
       'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20worship%20singer%20Martinha%20style%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20portrait&width=400&height=400&seq=artist-martinha&orientation=squarish',
     instagram: 'https://www.instagram.com/martinhacantoraoficial/',
     spotify: 'https://open.spotify.com/intl-pt/artist/6etONEQiR3dUCs4IV0kIlE',
+    youtube: null,
+  },
+  {
+    id: 19,
+    name: 'Rachel Malafaia',
+    genre: 'Gospel/CCM',
+    bio: 'Cantora gospel que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções.',
+    image: '/artistas/rachel-malafaia/IMG_5693.jpg',
+    instagram: 'https://www.instagram.com/rachelmalafaia/',
+    spotify: 'https://open.spotify.com/intl-pt/artist/1xyrtLIDTu5kRTCvnHgIcJ',
+    youtube: null,
+  },
+  {
+    id: 20,
+    name: 'George Lean',
+    genre: 'Gospel/CCM',
+    bio: 'Cantor gospel que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções.',
+    image: '/artistas/george-lean/IMG_1982.jpg',
+    instagram: 'https://www.instagram.com/georgelean/',
+    spotify: null,
+    youtube: null,
+  },
+  {
+    id: 21,
+    name: 'Gabriel Magalhães',
+    genre: 'Gospel/CCM',
+    bio: 'Cantor gospel que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções.',
+    image: '/artistas/gabriel-magalhaes/IMG_4165.jpg',
+    instagram: 'https://www.instagram.com/gabrielmagalhaes.oficial1/',
+    spotify: null,
     youtube: null,
   },
 ];
@@ -232,7 +262,10 @@ export default function ArtistsPage() {
                       alt={artist.name}
                       className="w-full h-full object-cover"
                       style={{
-                        objectPosition: artist.id === 18 ? 'center 20%' : artist.id === 14 ? 'center 30%' : artist.id === 11 ? 'center 28%' : [13, 16].includes(artist.id) ? 'center 35%' : 'center'
+                        objectPosition: artist.id === 10 ? '75% center' : artist.id === 18 ? 'center 20%' : artist.id === 14 ? 'center 30%' : artist.id === 11 ? 'center 28%' : artist.id === 19 ? 'center 30%' : artist.id === 20 ? 'center 40%' : [13, 16].includes(artist.id) ? 'center 35%' : 'center',
+                        imageRendering: [10, 12, 18, 19].includes(artist.id) ? 'auto' : 'crisp-edges',
+                        WebkitImageRendering: [10, 12, 18, 19].includes(artist.id) ? 'auto' : 'crisp-edges',
+                        filter: [10, 12, 18, 19].includes(artist.id) ? 'none' : 'contrast(1.1) saturate(1.05)'
                       }}
                     />
                   </div>
