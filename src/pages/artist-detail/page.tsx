@@ -12,7 +12,7 @@ export default function ArtistDetailPage() {
       name: 'Alexsander Lucio',
       followName: 'Alex Lucio',
       genre: 'Gospel/CCM',
-      image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=800&fit=crop&q=80',
+      image: '/artistas/alex-lucio/IMG_3735.jpg',
       banner:
         'https://readdy.ai/api/search-image?query=professional%20gospel%20singer%20performing%20on%20stage%20with%20dramatic%20teal%20and%20bronze%20lighting%2C%20wide%20cinematic%20shot%2C%20concert%20atmosphere%20with%20glowing%20effects%2C%20premium%20quality%20photography%2C%20artistic%20composition&width=1920&height=600&seq=artist-banner-001&orientation=landscape',
       bio: 'Alex Lúcio nasceu e foi criado em um lar cristão, tendo suas raízes firmadas desde cedo na igreja. Vindo de uma infância simples e humilde, ele é o terceiro de cinco irmãos. Desde pequeno, Alex se destacou nos estudos, sempre dedicado e esforçado, alcançando notas máximas em todas as matérias. Aos 11 anos, seu talento acadêmico lhe rendeu o terceiro lugar em uma oficina de matemática, um momento que marcou sua trajetória escolar.\n\nCom a mãe precisando trabalhar fora para sustentar a família, Alex aprendeu desde cedo o valor do esforço e da fé. Na adolescência, ele descobriu sua vocação para a música, começando então a compor e cantar com o coração voltado sempre para Deus. Seu amor pela música se transformou em uma missão maior: hoje, ele realiza um importante trabalho de evangelização no Calçadão de Campo Grande, levando esperança e a Palavra de Deus a muitas vidas, onde já ganhou centenas de almas pra Jesus.\n\nAlex é membro ativo da Igreja Assembleia de Deus em Campo Grande, onde encontra inspiração espiritual e apoio para continuar sua caminhada. Sua trajetória é marcada por dedicação, talento e fé, e seu objetivo é sempre ser um instrumento nas mãos de Deus para tocar corações e transformar vidas através da música.',
@@ -98,8 +98,7 @@ export default function ArtistDetailPage() {
       id: 11,
       name: 'No Santuário',
       genre: 'Gospel/CCM',
-      image:
-        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20duo%20worship%20leaders%20on%20stage%20with%20congregation%20hands%20raised%2C%20teal%20and%20bronze%20lighting%2C%20modern%20church%20concert%2C%20high%20quality%20photography&width=800&height=800&seq=artist-no-santuario-detail&orientation=squarish',
+      image: '/artistas/no%20santuario/IMG_0090.jpg',
       banner:
         'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20band%20No%20Santuario%20live%20DVD%20recording%2C%20worship%20environment%2C%20cinematic%20wide%20shot%2C%20teal%20and%20gold%20lights%2C%20congregation%20worshipping&width=1920&height=600&seq=artist-no-santuario-banner&orientation=landscape',
       bio: 'Com 13 anos de carreira ministerial, álbuns, EPs e ministrações por todo o Brasil, EUA e Europa, o ministério No Santuário (Pr. Israel Leonardo e Raphaela Carvalho) dedica-se a proclamar o evangelho através da adoração e da pregação da Palavra de Deus. Recentemente lançaram seu primeiro DVD com canções inéditas e uma nova versão de “Final Feliz”, além de projetos como “Ele Fará”, “Teus Átrios” e “Haja o que Houver (Ao Vivo)”.\n\nCom letras bíblicas e forte ênfase na presença de Deus, No Santuário se tornou referência na adoração congregacional, convidando a igreja a viver uma jornada de fé, esperança e restauração em cada canção.',
@@ -139,8 +138,7 @@ export default function ArtistDetailPage() {
       id: 12,
       name: 'Debora Lopes',
       genre: 'Gospel/CCM',
-      image:
-        'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20singer%20worshipping%20with%20hands%20raised%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20stage%20portrait&width=800&height=800&seq=artist-debora-lopes-detail&orientation=squarish',
+      image: '/artistas/debora-lopes/IMG_8699.jpg',
       banner:
         'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20female%20lead%20singer%20Debora%20Lopes%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-debora-lopes-banner&orientation=landscape',
       bio: 'Debora Lopes é uma cantora gospel brasileira que tem sido usada para ministrar sobre fé, cura e milagres através de suas canções. Com o lançamento de "Milagres de Deus (Ao Vivo)" e sua versão em playback, seu ministério vem alcançando um público cada vez maior, fortalecendo a fé de quem ouve e declarando o agir sobrenatural de Deus.\n\nCom uma voz marcante e letras centradas na Palavra, Debora tem se consolidado como um dos novos nomes da adoração contemporânea, convidando a igreja a confiar nos milagres de Deus em cada estação da vida.',
@@ -171,8 +169,7 @@ export default function ArtistDetailPage() {
       id: 18,
       name: 'Kaka Tavares',
       genre: 'Gospel/CCM',
-      image:
-        'https://readdy.ai/api/search-image?query=Brazilian%20male%20gospel%20worship%20singer%20Kaka%20Tavares%20style%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20stage%20portrait&width=800&height=800&seq=artist-kaka-tavares-detail&orientation=squarish',
+      image: '/artistas/kaka-tavares/IMG_3648.jpg',
       banner:
         'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20male%20lead%20singer%20Kaka%20Tavares%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-kaka-tavares-banner&orientation=landscape',
       bio: 'Kaka Tavares é uma cantora gospel brasileira que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, Kaka tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',
@@ -192,8 +189,7 @@ export default function ArtistDetailPage() {
       id: 13,
       name: 'Caio Torres',
       genre: 'Gospel/CCM',
-      image:
-        'https://readdy.ai/api/search-image?query=Brazilian%20male%20gospel%20worship%20singer%20Caio%20Torres%20style%2C%20eyes%20closed%20in%20worship%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20stage%20portrait&width=800&height=800&seq=artist-caio-torres-detail&orientation=squarish',
+      image: '/artistas/caio-torres/IMG_0273.jpg',
       banner:
         'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20male%20lead%20singer%20Caio%20Torres%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-caio-torres-banner&orientation=landscape',
       bio: 'Caio Torres é um cantor gospel brasileiro que tem se dedicado a conduzir pessoas a um lugar de rendição e intimidade com Deus por meio da adoração. Com letras sinceras e melódicas, suas ministrações carregam uma mensagem de arrependimento, esperança e confiança na graça de Cristo.\n\nSeu ministério tem crescido em igrejas e eventos pelo Brasil, sempre com o propósito de apontar para Jesus e criar ambientes onde o Espírito Santo tenha liberdade para agir.',
@@ -213,8 +209,7 @@ export default function ArtistDetailPage() {
       id: 14,
       name: 'Nicole Lavinia',
       genre: 'Gospel/CCM',
-      image:
-        'https://readdy.ai/api/search-image?query=Brazilian%20young%20female%20gospel%20worship%20singer%20Nicole%20Lavinia%20style%2C%20eyes%20closed%20in%20worship%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20portrait&width=800&height=800&seq=artist-nicole-lavinia-detail&orientation=squarish',
+      image: '/artistas/nicole-lavinia/IMG_3996.jpg',
       banner:
         'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20youth%20worship%20concert%20with%20female%20lead%20singer%20Nicole%20Lavinia%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-nicole-lavinia-banner&orientation=landscape',
       bio: 'Nicole Lavinia é uma jovem cantora gospel brasileira que tem se destacado com canções que falam sobre rendição, santidade e intimidade com Deus. Com uma voz doce e marcante, suas ministrações carregam mensagens de esperança e encorajamento para uma geração que deseja viver os propósitos de Cristo.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, Nicole tem alcançado novos públicos, sempre com o desejo de conduzir pessoas a um encontro real com Jesus e a uma vida de adoração genuína.',
@@ -278,8 +273,7 @@ export default function ArtistDetailPage() {
       id: 16,
       name: 'William Soares',
       genre: 'Gospel/CCM',
-      image:
-        'https://readdy.ai/api/search-image?query=Brazilian%20male%20gospel%20worship%20singer%20William%20Soares%20style%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20stage%20portrait&width=800&height=800&seq=artist-william-soares-detail&orientation=squarish',
+      image: '/artistas/william-soares/IMG_4092.jpg',
       banner:
         'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20male%20lead%20singer%20William%20Soares%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-william-soares-banner&orientation=landscape',
       bio: 'William Soares é um cantor gospel brasileiro que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, William tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',
@@ -368,7 +362,10 @@ export default function ArtistDetailPage() {
                 <img
                   src={artist.image}
                   alt={artist.name}
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-full object-cover"
+                  style={{
+                    objectPosition: artist.id === 18 ? 'center 20%' : artist.id === 14 ? 'center 30%' : artist.id === 11 ? 'center 28%' : [13, 16].includes(artist.id) ? 'center 35%' : 'center top'
+                  }}
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-br from-[#0EA8A0]/20 to-[#C45C2F]/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

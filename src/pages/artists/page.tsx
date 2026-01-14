@@ -7,9 +7,7 @@ const artists = [
     name: 'Alex Lucio',
     genre: 'Gospel/CCM',
     bio: 'Alex é membro ativo da Igreja Assembleia de Deus em Campo Grande, onde encontra inspiração espiritual e apoio para continuar sua caminhada. Sua trajetória é marcada por dedicação, talento e fé, e seu objetivo é sempre ser um instrumento nas mãos de Deus para tocar corações e transformar vidas através da música.',
-    // Foto do perfil do artista - substitua pela URL real da foto
-    // Para obter a foto: baixe a foto do perfil do Instagram e hospede em um serviço de imagens (ex: Imgur, Cloudinary) ou use a URL direta se disponível
-    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop&q=80', // Placeholder temporário - substitua pela foto real do artista
+    image: '/artistas/alex-lucio/IMG_3735.jpg',
     instagram: 'https://www.instagram.com/alexlucio.ofc/',
     spotify: 'https://open.spotify.com/artist/2xX3xodC7zA5u2xygCWzuP',
     youtube: null, // Adicione o link do YouTube se disponível
@@ -23,6 +21,16 @@ const artists = [
     instagram: 'https://www.instagram.com/nagracaoficial/',
     spotify: 'https://open.spotify.com/intl-pt/artist/7pmvHrURMH0OqDcXXQiuYX',
     youtube: null,
+  },
+  {
+    id: 11,
+    name: 'No Santuário',
+    genre: 'Gospel/CCM',
+    bio: 'Com 13 anos de carreira ministerial, álbuns, EPs e ministrações por todo o Brasil, EUA e Europa, o ministério No Santuário (Pr. Israel Leonardo e Raphaela Carvalho) dedica-se a proclamar o evangelho através da adoração e da pregação da Palavra de Deus. Com letras bíblicas e forte ênfase na presença de Deus, No Santuário se tornou referência na adoração congregacional, convidando a igreja a viver uma jornada de fé, esperança e restauração em cada canção.',
+    image: '/artistas/no%20santuario/IMG_0090.jpg',
+    instagram: 'https://www.instagram.com/nosantuario/',
+    spotify: 'https://open.spotify.com/intl-pt/artist/3qkhpijMzbtVFexHZTNoai',
+    youtube: 'https://www.youtube.com/watch?v=XWBgmBsxkk4&list=RDXWBgmBsxkk4&start_radio=1',
   },
   {
     id: 15,
@@ -40,8 +48,7 @@ const artists = [
     name: 'Caio Torres',
     genre: 'Gospel/CCM',
     bio: 'Cantor gospel com mensagens de fé e rendição, focado em levar a igreja a uma experiência profunda de adoração e entrega através de suas canções.',
-    image:
-      'https://readdy.ai/api/search-image?query=Brazilian%20male%20gospel%20worship%20singer%20Caio%20Torres%20style%2C%20microphone%20in%20hand%2C%20teal%20and%20bronze%20lighting%2C%20high%20quality%20portrait&width=400&height=400&seq=artist-caio-torres&orientation=squarish',
+    image: '/artistas/caio-torres/IMG_0273.jpg',
     instagram: 'https://www.instagram.com/caiotorees/',
     spotify: 'https://open.spotify.com/intl-pt/artist/3TOPRsT6nYECZi9K9yZZXw',
     youtube: null,
@@ -51,8 +58,7 @@ const artists = [
     name: 'Nicole Lavinia',
     genre: 'Gospel/CCM',
     bio: 'Cantora gospel que tem se destacado entre a nova geração de adoradores, com canções que falam de intimidade com Deus e entrega total.',
-    image:
-      'https://readdy.ai/api/search-image?query=Brazilian%20young%20female%20gospel%20worship%20singer%20Nicole%20Lavinia%20style%2C%20soft%20teal%20and%20gold%20lighting%2C%20high%20quality%20portrait&width=400&height=400&seq=artist-nicole-lavinia&orientation=squarish',
+    image: '/artistas/nicole-lavinia/IMG_3996.jpg',
     instagram: 'https://www.instagram.com/nicolelaviniaoficial_/',
     spotify: 'https://open.spotify.com/intl-pt/track/0AayU24085eVhLhbk27sTE',
     youtube: null,
@@ -62,8 +68,7 @@ const artists = [
     name: 'Debora Lopes',
     genre: 'Gospel/CCM',
     bio: 'Cantora gospel que tem se destacado com canções de fé e esperança, como "Milagres de Deus (Ao Vivo)", alcançando milhares de ouvintes nas plataformas digitais.',
-    image:
-      'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20worship%20singer%20on%20stage%2C%20eyes%20closed%20in%20worship%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20concert%20photography&width=400&height=400&seq=artist-debora-lopes&orientation=squarish',
+    image: '/artistas/debora-lopes/IMG_8699.jpg',
     instagram: 'https://www.instagram.com/deboralopesoficiall/',
     spotify: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
     youtube: null,
@@ -73,8 +78,7 @@ const artists = [
     name: 'Kaka Tavares',
     genre: 'Gospel/CCM',
     bio: 'Cantora gospel que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções.',
-    image:
-      'https://readdy.ai/api/search-image?query=Brazilian%20male%20gospel%20worship%20singer%20Kaka%20Tavares%20style%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20stage%20portrait&width=400&height=400&seq=artist-kaka-tavares&orientation=squarish',
+    image: '/artistas/kaka-tavares/IMG_3648.jpg',
     instagram: null,
     spotify: 'https://open.spotify.com/intl-pt/artist/5v86apLzejN5yQl8H2CcLh',
     youtube: null,
@@ -84,8 +88,7 @@ const artists = [
     name: 'William Soares',
     genre: 'Gospel/CCM',
     bio: 'Cantor gospel que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções.',
-    image:
-      'https://readdy.ai/api/search-image?query=Brazilian%20male%20gospel%20worship%20singer%20William%20Soares%20style%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20portrait&width=400&height=400&seq=artist-william-soares&orientation=squarish',
+    image: '/artistas/william-soares/IMG_4092.jpg',
     instagram: 'https://www.instagram.com/williaamsoarees/',
     spotify: null,
     youtube: null,
@@ -228,6 +231,9 @@ export default function ArtistsPage() {
                       src={artist.image}
                       alt={artist.name}
                       className="w-full h-full object-cover"
+                      style={{
+                        objectPosition: artist.id === 18 ? 'center 20%' : artist.id === 14 ? 'center 30%' : artist.id === 11 ? 'center 28%' : [13, 16].includes(artist.id) ? 'center 35%' : 'center'
+                      }}
                     />
                   </div>
                 </div>
