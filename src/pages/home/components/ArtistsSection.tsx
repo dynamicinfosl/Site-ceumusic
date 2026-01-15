@@ -45,8 +45,7 @@ const artists = [
     id: 15,
     name: 'Maria Pita',
     genre: 'Gospel/CCM',
-    image:
-      'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20singer%20Maria%20Pita%20style%2C%20worshipping%20on%20stage%20with%20teal%20and%20bronze%20lights%2C%20high%20quality%20portrait&width=600&height=600&seq=artist-maria-pita&orientation=squarish',
+    image: '/artistas/maria-pita/IMG_4240.jpg',
     socialLinks: {
       instagram: 'https://www.instagram.com/mariapitacantora_/',
       spotify: 'https://open.spotify.com/intl-pt/artist/7fw7DfkvI0fMyEKfOw0k6n',

@@ -37,8 +37,7 @@ const artists = [
     name: 'Maria Pita',
     genre: 'Gospel/CCM',
     bio: 'Cantora gospel que traz mensagens de esperança, fé e restauração, com um estilo de adoração sensível e intenso.',
-    image:
-      'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20worship%20singer%20Maria%20Pita%20style%2C%20soft%20stage%20lighting%2C%20high%20quality%20portrait&width=400&height=400&seq=artist-maria-pita&orientation=squarish',
+    image: '/artistas/maria-pita/IMG_4240.jpg',
     instagram: 'https://www.instagram.com/mariapitacantora_/',
     spotify: 'https://open.spotify.com/intl-pt/artist/7fw7DfkvI0fMyEKfOw0k6n',
     youtube: null,

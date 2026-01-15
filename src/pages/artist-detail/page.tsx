@@ -236,8 +236,7 @@ export default function ArtistDetailPage() {
       id: 15,
       name: 'Maria Pita',
       genre: 'Gospel/CCM',
-      image:
-        'https://readdy.ai/api/search-image?query=Brazilian%20female%20gospel%20worship%20singer%20Maria%20Pita%20style%2C%20soft%20teal%20and%20bronze%20lighting%2C%20high%20quality%20stage%20portrait&width=800&height=800&seq=artist-maria-pita-detail&orientation=squarish',
+      image: '/artistas/maria-pita/IMG_4240.jpg',
       banner:
         'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20female%20lead%20singer%20Maria%20Pita%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-maria-pita-banner&orientation=landscape',
       bio: 'Maria Pita é uma cantora gospel brasileira que carrega em suas canções mensagens de esperança, cura e rendição aos pés de Jesus. Com uma voz doce e firme, suas ministrações convidam a igreja a confiar na fidelidade de Deus em meio às lutas e processos.\n\nSeu ministério tem alcançado diferentes gerações, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e sincera.',
