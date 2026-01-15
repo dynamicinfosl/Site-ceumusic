@@ -421,7 +421,7 @@ export default function ArtistDetailPage() {
                   alt={artist.name}
                   className="w-full h-full object-cover"
                   style={{
-                    objectPosition: artist.id === 18 ? 'center 20%' : artist.id === 14 ? 'center 30%' : artist.id === 11 ? 'center 28%' : artist.id === 19 ? 'center 30%' : artist.id === 20 ? 'center 30%' : [13, 16].includes(artist.id) ? 'center 35%' : 'center top',
+                    objectPosition: artist.id === 15 ? 'center 50%' : artist.id === 18 ? 'center 20%' : artist.id === 14 ? 'center 30%' : artist.id === 11 ? 'center 28%' : artist.id === 19 ? 'center 30%' : artist.id === 20 ? 'center 30%' : [13, 16].includes(artist.id) ? 'center 35%' : 'center top',
                     imageRendering: [10, 12, 18, 19].includes(artist.id) ? 'auto' : 'crisp-edges',
                     WebkitImageRendering: [10, 12, 18, 19].includes(artist.id) ? 'auto' : 'crisp-edges',
                     filter: [10, 12, 18, 19].includes(artist.id) ? 'none' : 'contrast(1.1) saturate(1.05)'
