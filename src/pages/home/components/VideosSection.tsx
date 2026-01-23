@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 export default function VideosSection() {
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
@@ -53,7 +53,7 @@ export default function VideosSection() {
     }
   }, [activeVideoId, videos]);
 
-  const scrollCarousel = (direction: 'left' | 'right') => {
+  const scrollCarousel = useCallback((direction: 'left' | 'right') => {
     if (!carouselRef.current) return;
 
     const container = carouselRef.current;
@@ -64,43 +64,55 @@ export default function VideosSection() {
       left: scrollAmount,
       behavior: 'smooth',
     });
-  };
+  }, []);
 
   // Atualiza o card "ativo" (no centro) conforme o scroll do carrossel
   useEffect(() => {
     const container = carouselRef.current;
     if (!container) return;
 
+    let rafId: number | null = null;
+    let ticking = false;
+
     const handleScroll = () => {
-      const containerCenter = container.scrollLeft + container.clientWidth / 2;
+      if (!ticking) {
+        rafId = requestAnimationFrame(() => {
+          const containerCenter = container.scrollLeft + container.clientWidth / 2;
 
-      let closestId: number | null = null;
-      let closestDistance = Infinity;
+          let closestId: number | null = null;
+          let closestDistance = Infinity;
 
-      cardRefs.current.forEach((card, index) => {
-        if (!card) return;
-        const rect = card.getBoundingClientRect();
-        const containerRect = container.getBoundingClientRect();
+          cardRefs.current.forEach((card, index) => {
+            if (!card) return;
+            const rect = card.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
 
-        const cardCenter = rect.left - containerRect.left + rect.width / 2 + container.scrollLeft;
-        const distance = Math.abs(cardCenter - containerCenter);
+            const cardCenter = rect.left - containerRect.left + rect.width / 2 + container.scrollLeft;
+            const distance = Math.abs(cardCenter - containerCenter);
 
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestId = videos[index]?.id ?? null;
-        }
-      });
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              closestId = videos[index]?.id ?? null;
+            }
+          });
 
-      if (closestId !== null && closestId !== activeVideoId) {
-        setActiveVideoId(closestId);
+          if (closestId !== null && closestId !== activeVideoId) {
+            setActiveVideoId(closestId);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     handleScroll(); // garante estado correto na primeira renderização
 
-    container.addEventListener('scroll', handleScroll);
+    container.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       container.removeEventListener('scroll', handleScroll);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
     };
   }, [activeVideoId, videos]);
 

@@ -1,5 +1,5 @@
 import { useNavigate, Link } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
 // Artistas da Céu Music
 const artists = [
@@ -253,6 +253,17 @@ export default function ArtistsSection() {
   const [isPaused, setIsPaused] = useState(false);
   const navigate = useNavigate();
 
+  const handleMouseEnter = useCallback(() => setIsPaused(true), []);
+  const handleMouseLeave = useCallback(() => setIsPaused(false), []);
+  const handleArtistClick = useCallback((artistId: number) => {
+    navigate(`/artista/${artistId}`);
+  }, [navigate]);
+  
+  const handleSocialClick = useCallback((url: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }, []);
+
   useEffect(() => {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
@@ -304,14 +315,14 @@ export default function ArtistsSection() {
           ref={scrollRef}
           className="flex gap-6 overflow-x-auto scrollbar-hide px-6 lg:px-12 pb-8"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           {/* Duplicar os artistas para scroll infinito */}
           {[...artists, ...artists].map((artist, index) => (
             <div
               key={`${artist.id}-${index}`}
-            onClick={() => navigate(`/artista/${artist.id}`)}
+            onClick={() => handleArtistClick(artist.id)}
               className="glass-card animate-liquid-glass rounded-2xl overflow-hidden hover:border-[#0EA8A0]/50 transition-all duration-500 cursor-pointer group flex-shrink-0 w-[320px] sm:w-[380px]"
             >
               <div className="relative">
@@ -322,6 +333,11 @@ export default function ArtistsSection() {
                       src={artist.image}
                       alt={artist.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      loading={index < 3 ? 'eager' : 'lazy'}
+                      fetchPriority={index === 0 ? 'high' : index < 3 ? 'high' : 'auto'}
+                      decoding={index < 3 ? 'async' : 'async'}
+                      width={224}
+                      height={224}
                       style={{
                         objectPosition: artist.id === 10 ? '75% center' : artist.id === 15 ? 'center 50%' : artist.id === 18 ? 'center 20%' : artist.id === 14 ? 'center 30%' : artist.id === 11 ? 'center 28%' : artist.id === 19 ? 'center 30%' : artist.id === 20 ? 'center 40%' : [13, 16].includes(artist.id) ? 'center 35%' : 'center',
                         imageRendering: [10, 12, 18, 19].includes(artist.id) ? 'auto' : 'crisp-edges',
@@ -346,10 +362,7 @@ export default function ArtistsSection() {
                     <div className="flex items-center flex-wrap gap-3">
                       {artist.socialLinks.instagram && (
                         <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open(artist.socialLinks.instagram, '_blank', 'noopener,noreferrer');
-                          }}
+                          onClick={(e) => handleSocialClick(artist.socialLinks.instagram!, e)}
                           className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer text-lg"
                           title="Instagram"
                           type="button"
@@ -359,10 +372,7 @@ export default function ArtistsSection() {
                       )}
                       {artist.socialLinks.spotify && (
                         <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open(artist.socialLinks.spotify, '_blank', 'noopener,noreferrer');
-                          }}
+                          onClick={(e) => handleSocialClick(artist.socialLinks.spotify!, e)}
                           className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer text-lg"
                           title="Spotify"
                           type="button"

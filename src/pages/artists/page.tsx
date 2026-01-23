@@ -259,6 +259,11 @@ export default function ArtistsPage() {
                       src={artist.image}
                       alt={artist.name}
                       className="w-full h-full object-cover"
+                      loading={index < 6 ? 'eager' : 'lazy'}
+                      fetchPriority={index < 3 ? 'high' : 'auto'}
+                      decoding="async"
+                      width={400}
+                      height={400}
                       style={{
                         objectPosition: artist.id === 10 ? '75% center' : artist.id === 15 ? 'center 50%' : artist.id === 18 ? 'center 20%' : artist.id === 14 ? 'center 30%' : artist.id === 11 ? 'center 28%' : artist.id === 19 ? 'center 30%' : artist.id === 20 ? 'center 40%' : [13, 16].includes(artist.id) ? 'center 35%' : 'center',
                         imageRendering: [10, 12, 18, 19].includes(artist.id) ? 'auto' : 'crisp-edges',

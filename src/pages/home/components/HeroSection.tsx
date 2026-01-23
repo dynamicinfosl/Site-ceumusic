@@ -197,7 +197,21 @@ export default function HeroSection() {
                   top: 0,
                   left: 0,
                 }}
-              />
+              >
+                {selectedVideo.thumbnail_url && selectedVideo.order_index === 1 && (
+                  <img
+                    src={selectedVideo.thumbnail_url}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 w-full h-full object-cover opacity-0"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                    width={1920}
+                    height={1080}
+                  />
+                )}
+              </div>
               
               {/* YouTube iframe como background (se disponível) */}
               {youtubeVideoId && (
@@ -371,6 +385,11 @@ export default function HeroSection() {
                     src={video.thumbnail_url || '/placeholder.jpg'}
                     alt={video.title}
                     className="w-full h-full object-cover"
+                    loading={video.order_index === 1 ? 'eager' : 'lazy'}
+                    fetchPriority={video.order_index === 1 ? 'high' : 'auto'}
+                    decoding="async"
+                    width={64}
+                    height={64}
                     onError={(e) => {
                       // Fallback caso a imagem não carregue
                       const target = e.target as HTMLImageElement;
