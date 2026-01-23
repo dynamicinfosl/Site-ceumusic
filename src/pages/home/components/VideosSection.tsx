@@ -122,16 +122,16 @@ export default function VideosSection() {
       <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#0EA8A0]/10 rounded-full blur-[120px]" />
       <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-[#A34528]/10 rounded-full blur-[120px]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <span className="inline-block px-4 py-2 bg-[#C45C2F]/10 border border-[#C45C2F]/30 rounded-full text-[#C45C2F] text-sm font-semibold mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-[#C45C2F]/10 border border-[#C45C2F]/30 rounded-full text-[#C45C2F] text-xs sm:text-sm font-semibold mb-4 sm:mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
             Videoclipes
           </span>
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
             Assista aos <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C45C2F] to-[#0EA8A0]">Clipes</span>
           </h2>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed px-4" style={{ fontFamily: 'Inter, sans-serif' }}>
             Produções audiovisuais de alta qualidade dos nossos artistas
           </p>
         </div>

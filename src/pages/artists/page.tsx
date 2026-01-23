@@ -232,11 +232,11 @@ export default function ArtistsPage() {
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="mb-16 text-center">
-          <h1 className="text-6xl lg:text-7xl mb-6 font-montserrat">
+        <div className="mb-8 sm:mb-12 lg:mb-16 text-center px-4 sm:px-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 sm:mb-6 font-montserrat">
             Nossos <span className="text-[#0EA8A0]">Artistas</span>
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto font-montserrat">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto font-montserrat">
             Conheça os talentos que fazem parte da família Céu Music
           </p>
         </div>
@@ -244,17 +244,17 @@ export default function ArtistsPage() {
         <div className="section-divider-glow"></div>
 
         {/* Artists Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-product-shop>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8" data-product-shop>
           {artists.map((artist, index) => (
             <div
               key={artist.id}
               onClick={() => window.location.href = `/artista/${artist.id}`}
-              className="glass-card animate-liquid-glass rounded-2xl p-8 hover:border-[#0EA8A0]/50 transition-all duration-500 cursor-pointer group scroll-reveal"
+              className="glass-card animate-liquid-glass rounded-2xl p-4 sm:p-6 lg:p-8 hover:border-[#0EA8A0]/50 transition-all duration-500 cursor-pointer group scroll-reveal"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div className="relative z-10">
-                <div className="mb-6">
-                  <div className="w-full aspect-square rounded-full overflow-hidden mb-6 border-2 border-[#0EA8A0]/30 group-hover:border-[#0EA8A0] group-hover:shadow-[0_0_30px_rgba(14,168,160,0.4)] transition-all duration-500">
+                <div className="mb-4 sm:mb-6">
+                  <div className="w-full aspect-square rounded-full overflow-hidden mb-4 sm:mb-6 border-2 border-[#0EA8A0]/30 group-hover:border-[#0EA8A0] group-hover:shadow-[0_0_30px_rgba(14,168,160,0.4)] transition-all duration-500">
                     <img
                       src={artist.image}
                       alt={artist.name}
@@ -273,20 +273,20 @@ export default function ArtistsPage() {
                     />
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 font-montserrat">{artist.name}</h3>
-                <p className="text-[#0EA8A0] mb-2 font-montserrat text-sm">{artist.genre}</p>
-                <p className="text-gray-400 mb-4 font-montserrat text-sm">{artist.bio}</p>
-                <div className="flex items-center space-x-4">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 font-montserrat">{artist.name}</h3>
+                <p className="text-[#0EA8A0] mb-2 font-montserrat text-xs sm:text-sm">{artist.genre}</p>
+                <p className="text-gray-400 mb-4 font-montserrat text-xs sm:text-sm line-clamp-3">{artist.bio}</p>
+                <div className="flex items-center space-x-3 sm:space-x-4">
                   {artist.instagram && (
                     <a
                       href={artist.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer"
+                      className="w-9 h-9 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0"
                       title="Instagram"
                     >
-                      <i className="ri-instagram-line"></i>
+                      <i className="ri-instagram-line text-base sm:text-lg"></i>
                     </a>
                   )}
                   {artist.spotify && (
@@ -295,10 +295,10 @@ export default function ArtistsPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer"
+                      className="w-9 h-9 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0"
                       title="Spotify"
                     >
-                      <i className="ri-spotify-fill"></i>
+                      <i className="ri-spotify-fill text-base sm:text-lg"></i>
                     </a>
                   )}
                   {artist.youtube && (
@@ -307,10 +307,10 @@ export default function ArtistsPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer"
+                      className="w-9 h-9 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0"
                       title="YouTube"
                     >
-                      <i className="ri-youtube-fill"></i>
+                      <i className="ri-youtube-fill text-base sm:text-lg"></i>
                     </a>
                   )}
                 </div>

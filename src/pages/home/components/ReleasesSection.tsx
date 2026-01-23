@@ -129,10 +129,10 @@ export default function ReleasesSection() {
   const loading = false;
   const error = null;
   return (
-    <section className="px-6 py-20 lg:px-12 relative">
+    <section className="px-4 sm:px-6 py-12 sm:py-16 lg:py-20 lg:px-12 relative">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-16 text-center">
-          <h2 className="text-6xl lg:text-7xl mb-4 font-montserrat">
+        <div className="mb-8 sm:mb-12 lg:mb-16 text-center">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-3 sm:mb-4 font-montserrat">
             Últimos <span className="text-[#0EA8A0]">Lançamentos</span>
           </h2>
         </div>
@@ -151,12 +151,12 @@ export default function ReleasesSection() {
         )}
 
         {!loading && !error && releases.length > 0 && (
-          <div className="grid md:grid-cols-2 gap-4" data-product-shop>
+          <div className="grid md:grid-cols-2 gap-3 sm:gap-4" data-product-shop>
             {releases.map((release) => (
               <div
                 key={release.id}
                 onClick={() => window.open(release.streamingLink, '_blank', 'noopener,noreferrer')}
-                className="glass-card animate-liquid-glass rounded-2xl overflow-hidden hover:border-[#C45C2F]/50 transition-all duration-500 group cursor-pointer w-96 h-24 mx-auto"
+                className="glass-card animate-liquid-glass rounded-2xl overflow-hidden hover:border-[#C45C2F]/50 transition-all duration-500 group cursor-pointer w-full max-w-sm sm:max-w-md md:w-96 h-20 sm:h-24 mx-auto"
               >
                 {/* Layout Horizontal: Foto à Esquerda, Informações à Direita */}
                 <div className="flex flex-col sm:flex-row h-full">
@@ -182,13 +182,13 @@ export default function ReleasesSection() {
                   </div>
 
                   {/* Informações - Lado Direito */}
-                  <div className="flex-1 p-3 flex flex-col justify-between">
+                  <div className="flex-1 p-2 sm:p-3 flex flex-col justify-between">
                     <div>
                       {/* Título e Artista */}
-                      <h3 className="text-[11px] sm:text-sm md:text-[15px] font-bold mb-1 font-montserrat text-white group-hover:text-[#C45C2F] transition-colors duration-300 line-clamp-2">
+                      <h3 className="text-xs sm:text-sm md:text-[15px] font-bold mb-0.5 sm:mb-1 font-montserrat text-white group-hover:text-[#C45C2F] transition-colors duration-300 line-clamp-2">
                         {release.title}
                       </h3>
-                      <p className="text-gray-400 font-montserrat text-[8px] sm:text-[10px] md:text-[11px] mb-2.5 line-clamp-2">
+                      <p className="text-gray-400 font-montserrat text-[9px] sm:text-[10px] md:text-[11px] mb-1.5 sm:mb-2.5 line-clamp-2">
                         {release.artist}
                       </p>
                     </div>

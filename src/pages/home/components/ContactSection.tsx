@@ -35,16 +35,16 @@ export default function ContactSection() {
       {/* Decorative Elements */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-[#0EA8A0]/10 via-[#C45C2F]/10 to-[#A34528]/10 rounded-full blur-[150px]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <span className="inline-block px-4 py-2 bg-[#0EA8A0]/10 border border-[#0EA8A0]/30 rounded-full text-[#0EA8A0] text-sm font-semibold mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-[#0EA8A0]/10 border border-[#0EA8A0]/30 rounded-full text-[#0EA8A0] text-xs sm:text-sm font-semibold mb-4 sm:mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
             Conecte-se
           </span>
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
             Siga a <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0EA8A0] to-[#C45C2F]">Céu Music</span>
           </h2>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed px-4" style={{ fontFamily: 'Inter, sans-serif' }}>
             Acompanhe nossos artistas e fique por dentro de todas as novidades
           </p>
         </div>

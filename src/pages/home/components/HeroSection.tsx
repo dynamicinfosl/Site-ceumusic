@@ -310,36 +310,37 @@ export default function HeroSection() {
 
       {/* Artist and Song Info - Bottom Left */}
       {selectedVideo && (
-        <div className="absolute bottom-40 left-6 z-50">
-          <div className="bg-black/40 backdrop-blur-md rounded-lg p-2.5 border border-white/10 shadow-xl max-w-[200px]">
-            <p className="text-white/70 text-[8px] mb-0.5 font-montserrat uppercase tracking-wider">
+        <div className="absolute bottom-24 sm:bottom-32 md:bottom-40 left-3 sm:left-6 z-50">
+          <div className="bg-black/40 backdrop-blur-md rounded-lg p-2 sm:p-2.5 border border-white/10 shadow-xl max-w-[160px] sm:max-w-[200px]">
+            <p className="text-white/70 text-[9px] sm:text-[10px] md:text-[8px] mb-0.5 sm:mb-1 font-montserrat uppercase tracking-wider">
               {selectedVideo.artist}
             </p>
-            <h2 className="text-sm font-bold text-white mb-2 font-montserrat leading-tight line-clamp-2">
+            <h2 className="text-xs sm:text-sm font-bold text-white mb-1.5 sm:mb-2 font-montserrat leading-tight line-clamp-2">
               {selectedVideo.title}
             </h2>
             <a
               href={selectedVideo.youtube_url || "https://www.youtube.com/@ceumusicbrasil"}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 bg-[#0EA8A0] hover:bg-[#0EA8A0]/90 text-white px-3 py-1.5 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-[0_0_20px_rgba(14,168,160,0.5)] hover:scale-105 font-montserrat text-[10px]"
+              className="inline-flex items-center gap-1 bg-[#0EA8A0] hover:bg-[#0EA8A0]/90 text-white px-2.5 sm:px-3 py-1.5 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-[0_0_20px_rgba(14,168,160,0.5)] hover:scale-105 font-montserrat text-[10px] sm:text-xs min-h-[36px] sm:min-h-0"
             >
-              <i className="ri-play-circle-fill text-sm"></i>
-              Assista Agora!
+              <i className="ri-play-circle-fill text-xs sm:text-sm"></i>
+              <span className="hidden sm:inline">Assista Agora!</span>
+              <span className="sm:hidden">Assistir</span>
             </a>
           </div>
         </div>
       )}
 
       {/* Video Cards - Bottom Section */}
-      <div className="absolute bottom-0 left-0 right-0 z-50 px-6 pb-6" style={{ paddingTop: '100px', overflow: 'visible', clipPath: 'none' }}>
+      <div className="absolute bottom-0 left-0 right-0 z-50 px-3 sm:px-6 pb-4 sm:pb-6" style={{ paddingTop: '80px', overflow: 'visible', clipPath: 'none' }}>
         {loading ? (
-          <div className="flex items-center justify-center py-8">
-            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#0EA8A0]"></div>
-            <span className="ml-3 text-gray-400">Carregando vídeos...</span>
+          <div className="flex items-center justify-center py-6 sm:py-8">
+            <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-t-2 border-b-2 border-[#0EA8A0]"></div>
+            <span className="ml-2 sm:ml-3 text-gray-400 text-sm sm:text-base">Carregando vídeos...</span>
           </div>
         ) : videos.length > 0 ? (
-          <div className="flex gap-6 overflow-x-auto pb-2 scrollbar-hide items-center justify-center" style={{ overflowY: 'visible', overflowX: 'auto', clipPath: 'none', minHeight: '120px' }}>
+          <div className="flex gap-3 sm:gap-6 overflow-x-auto pb-2 scrollbar-hide items-center justify-center" style={{ overflowY: 'visible', overflowX: 'auto', clipPath: 'none', minHeight: '100px' }}>
             {videos.map((video) => (
               <button
                 key={video.id}

@@ -296,7 +296,7 @@ export default function ArtistsSection() {
   }, [isPaused]);
 
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
       {/* Background Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/3 w-80 h-80 bg-[#0EA8A0]/5 rounded-full blur-3xl"></div>
@@ -304,8 +304,8 @@ export default function ArtistsSection() {
       </div>
 
       <div className="relative z-10">
-        <div className="mb-16 text-center px-6 lg:px-12">
-          <h2 className="text-6xl lg:text-7xl mb-4 font-montserrat">
+        <div className="mb-8 sm:mb-12 lg:mb-16 text-center px-4 sm:px-6 lg:px-12">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-3 sm:mb-4 font-montserrat">
             Nossos <span className="text-[#0EA8A0]">Artistas</span>
           </h2>
         </div>
@@ -313,7 +313,7 @@ export default function ArtistsSection() {
           {/* Galeria com Scroll Lateral */}
         <div 
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto scrollbar-hide px-6 lg:px-12 pb-8"
+          className="flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide px-4 sm:px-6 lg:px-12 pb-6 sm:pb-8"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
@@ -323,12 +323,12 @@ export default function ArtistsSection() {
             <div
               key={`${artist.id}-${index}`}
             onClick={() => handleArtistClick(artist.id)}
-              className="glass-card animate-liquid-glass rounded-2xl overflow-hidden hover:border-[#0EA8A0]/50 transition-all duration-500 cursor-pointer group flex-shrink-0 w-[320px] sm:w-[380px]"
+              className="glass-card animate-liquid-glass rounded-2xl overflow-hidden hover:border-[#0EA8A0]/50 transition-all duration-500 cursor-pointer group flex-shrink-0 w-[280px] sm:w-[320px] md:w-[380px]"
             >
               <div className="relative">
                 {/* Foto Oficial - Formato Redondo */}
-                <div className="flex justify-center pt-8 pb-4">
-                  <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-2 border-[#0EA8A0]/30 group-hover:border-[#0EA8A0] group-hover:shadow-[0_0_30px_rgba(14,168,160,0.4)] transition-all duration-500">
+                <div className="flex justify-center pt-6 sm:pt-8 pb-3 sm:pb-4">
+                  <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-2 border-[#0EA8A0]/30 group-hover:border-[#0EA8A0] group-hover:shadow-[0_0_30px_rgba(14,168,160,0.4)] transition-all duration-500">
                     <img
                       src={artist.image}
                       alt={artist.name}
@@ -349,12 +349,12 @@ export default function ArtistsSection() {
                 </div>
 
                 {/* Informações do Artista */}
-                <div className="p-6 pt-2">
+                <div className="p-4 sm:p-6 pt-2">
                   {/* Nome Artístico */}
-                  <h3 className="text-2xl font-semibold mb-2 font-montserrat text-white group-hover:text-[#0EA8A0] transition-colors duration-300">
+                  <h3 className="text-xl sm:text-2xl font-semibold mb-2 font-montserrat text-white group-hover:text-[#0EA8A0] transition-colors duration-300">
                     {artist.name}
                   </h3>
-                  <p className="text-gray-400 mb-5 font-montserrat text-sm">{artist.genre}</p>
+                  <p className="text-gray-400 mb-4 sm:mb-5 font-montserrat text-xs sm:text-sm">{artist.genre}</p>
                   
                   {/* Redes Sociais */}
                   <div className="mb-5">
@@ -363,7 +363,7 @@ export default function ArtistsSection() {
                       {artist.socialLinks.instagram && (
                         <button
                           onClick={(e) => handleSocialClick(artist.socialLinks.instagram!, e)}
-                          className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer text-lg"
+                          className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer text-base sm:text-lg min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0"
                           title="Instagram"
                           type="button"
                         >
@@ -373,7 +373,7 @@ export default function ArtistsSection() {
                       {artist.socialLinks.spotify && (
                         <button
                           onClick={(e) => handleSocialClick(artist.socialLinks.spotify!, e)}
-                          className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer text-lg"
+                          className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-[#0EA8A0]/20 hover:text-[#0EA8A0] transition-colors cursor-pointer text-base sm:text-lg min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0"
                           title="Spotify"
                           type="button"
                         >
@@ -460,7 +460,7 @@ export default function ArtistsSection() {
           ))}
         </div>
 
-        <div className="text-center mt-12 px-6 lg:px-12">
+        <div className="text-center mt-8 sm:mt-12 px-4 sm:px-6 lg:px-12">
           <Link
             to="/artistas"
             onClick={(e) => {
@@ -479,7 +479,7 @@ export default function ArtistsSection() {
                 document.body.scrollTop = 0;
               });
             }}
-            className="inline-block bg-transparent border border-gray-600 text-white px-8 py-3 rounded-full font-semibold hover:border-[#0EA8A0] hover:shadow-[0_0_20px_rgba(14,168,160,0.3)] transition-all duration-300 whitespace-nowrap cursor-pointer font-montserrat"
+            className="inline-block bg-transparent border border-gray-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold hover:border-[#0EA8A0] hover:shadow-[0_0_20px_rgba(14,168,160,0.3)] transition-all duration-300 whitespace-nowrap cursor-pointer font-montserrat text-sm sm:text-base min-h-[44px] flex items-center justify-center"
           >
             Ver Todos os Artistas
           </Link>
