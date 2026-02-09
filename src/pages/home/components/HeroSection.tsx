@@ -2,6 +2,30 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../../../utils/supabase';
 import Navbar from '../../../components/feature/Navbar';
 
+// Mapeamento de artistas para redes sociais
+const artistSocialLinks: { [key: string]: { instagram?: string; spotify?: string; youtube?: string } } = {
+  'Alexsander Lúcio': {
+    instagram: 'https://www.instagram.com/alexlucio.ofc/',
+    spotify: 'https://open.spotify.com/artist/2xX3xodC7zA5u2xygCWzuP',
+    youtube: null
+  },
+  'No Santuário feat. Geziel Lima': {
+    instagram: 'https://www.instagram.com/nosantuario/',
+    spotify: 'https://open.spotify.com/intl-pt/artist/3qkhpijMzbtVFexHZTNoai',
+    youtube: 'https://www.youtube.com/watch?v=XWBgmBsxkk4&list=RDXWBgmBsxkk4&start_radio=1'
+  },
+  'Na Graça': {
+    instagram: 'https://www.instagram.com/nagracaoficial/',
+    spotify: 'https://open.spotify.com/intl-pt/artist/7pmvHrURMH0OqDcXXQiuYX',
+    youtube: null
+  },
+  'Debora Lopes': {
+    instagram: 'https://www.instagram.com/deboralopesoficiall/',
+    spotify: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
+    youtube: 'https://www.youtube.com/watch?v=V1hYFBtdxm8&list=RDV1hYFBtdxm8&start_radio=1'
+  }
+};
+
 interface HeroVideo {
   id: string;
   title: string;
@@ -309,28 +333,84 @@ export default function HeroSection() {
       </div>
 
       {/* Artist and Song Info - Bottom Left */}
-      {selectedVideo && (
-        <div className="absolute bottom-24 sm:bottom-32 md:bottom-40 left-3 sm:left-6 z-50">
-          <div className="bg-black/40 backdrop-blur-md rounded-lg p-2 sm:p-2.5 border border-white/10 shadow-xl max-w-[160px] sm:max-w-[200px]">
-            <p className="text-white/70 text-[9px] sm:text-[10px] md:text-[8px] mb-0.5 sm:mb-1 font-montserrat uppercase tracking-wider">
-              {selectedVideo.artist}
-            </p>
-            <h2 className="text-xs sm:text-sm font-bold text-white mb-1.5 sm:mb-2 font-montserrat leading-tight line-clamp-2">
-              {selectedVideo.title}
-            </h2>
-            <a
-              href={selectedVideo.youtube_url || "https://www.youtube.com/@ceumusicbrasil"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 bg-[#0EA8A0] hover:bg-[#0EA8A0]/90 text-white px-2.5 sm:px-3 py-1.5 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-[0_0_20px_rgba(14,168,160,0.5)] hover:scale-105 font-montserrat text-[10px] sm:text-xs min-h-[36px] sm:min-h-0"
-            >
-              <i className="ri-play-circle-fill text-xs sm:text-sm"></i>
-              <span className="hidden sm:inline">Assista Agora!</span>
-              <span className="sm:hidden">Assistir</span>
-            </a>
+      {selectedVideo && (() => {
+        const socialLinks = artistSocialLinks[selectedVideo.artist];
+        return (
+          <div className="absolute bottom-24 sm:bottom-32 md:bottom-40 left-3 sm:left-6 z-50">
+            <div className="bg-black/30 backdrop-blur-md rounded-lg p-3 sm:p-4 border border-white/10 shadow-xl w-[280px] sm:w-[360px] md:w-[420px] relative overflow-hidden group">
+              {/* Animated glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#0EA8A0]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer"></div>
+              <div className="relative z-10">
+                <div className="mb-2 sm:mb-2.5">
+                  <p className="text-white/70 text-[9px] sm:text-[10px] md:text-xs mb-0.5 sm:mb-1 font-montserrat uppercase tracking-wider">
+                    {selectedVideo.artist}
+                  </p>
+                  <h2 className="text-xs sm:text-sm md:text-base font-bold text-white font-montserrat leading-tight line-clamp-2">
+                    {selectedVideo.title}
+                  </h2>
+                </div>
+                
+                {/* Social Links and Watch Button */}
+                <div className="flex items-center justify-between gap-2 sm:gap-3">
+                {/* Social Links */}
+                {socialLinks && (
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    {socialLinks.instagram && (
+                      <a
+                        href={socialLinks.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#E4405F]/20 hover:text-[#E4405F] transition-colors cursor-pointer relative z-20"
+                        title="Instagram"
+                      >
+                        <i className="ri-instagram-line text-[10px] sm:text-xs"></i>
+                      </a>
+                    )}
+                    {socialLinks.spotify && (
+                      <a
+                        href={socialLinks.spotify}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#1DB954]/20 hover:text-[#1DB954] transition-colors cursor-pointer relative z-20"
+                        title="Spotify"
+                      >
+                        <i className="ri-spotify-fill text-[10px] sm:text-xs"></i>
+                      </a>
+                    )}
+                    {socialLinks.youtube && (
+                      <a
+                        href={socialLinks.youtube}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#FF0000]/20 hover:text-[#FF0000] transition-colors cursor-pointer relative z-20"
+                        title="YouTube"
+                      >
+                        <i className="ri-youtube-fill text-[10px] sm:text-xs"></i>
+                      </a>
+                    )}
+                  </div>
+                )}
+                
+                {/* Watch Button */}
+                <a
+                  href={selectedVideo.youtube_url || "https://www.youtube.com/@ceumusicbrasil"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-shrink-0 inline-flex items-center gap-1 bg-[#0EA8A0] hover:bg-[#0EA8A0]/90 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-[0_0_20px_rgba(14,168,160,0.5)] hover:scale-105 font-montserrat text-[10px] sm:text-xs ml-auto"
+                >
+                  <i className="ri-play-circle-fill text-xs sm:text-sm"></i>
+                  <span className="hidden sm:inline">Assista Agora!</span>
+                  <span className="sm:hidden">Assistir</span>
+                </a>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
 
       {/* Video Cards - Bottom Section */}
       <div className="absolute bottom-0 left-0 right-0 z-50 px-3 sm:px-6 pb-4 sm:pb-6" style={{ paddingTop: '80px', overflow: 'visible', clipPath: 'none' }}>

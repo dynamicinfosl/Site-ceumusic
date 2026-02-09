@@ -1,5 +1,29 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 
+// Mapeamento de artistas para redes sociais
+const artistSocialLinks: { [key: string]: { instagram?: string; spotify?: string; youtube?: string } } = {
+  'Alex Lúcio': {
+    instagram: 'https://www.instagram.com/alexlucio.ofc/',
+    spotify: 'https://open.spotify.com/artist/2xX3xodC7zA5u2xygCWzuP',
+    youtube: null
+  },
+  'No Santuário': {
+    instagram: 'https://www.instagram.com/nosantuario/',
+    spotify: 'https://open.spotify.com/intl-pt/artist/3qkhpijMzbtVFexHZTNoai',
+    youtube: 'https://www.youtube.com/watch?v=XWBgmBsxkk4&list=RDXWBgmBsxkk4&start_radio=1'
+  },
+  'Na Graça': {
+    instagram: 'https://www.instagram.com/nagracaoficial/',
+    spotify: 'https://open.spotify.com/intl-pt/artist/7pmvHrURMH0OqDcXXQiuYX',
+    youtube: null
+  },
+  'Debora Lopes': {
+    instagram: 'https://www.instagram.com/deboralopesoficiall/',
+    spotify: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
+    youtube: 'https://www.youtube.com/watch?v=V1hYFBtdxm8&list=RDV1hYFBtdxm8&start_radio=1'
+  }
+};
+
 export default function VideosSection() {
   const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
   const [activeVideoId, setActiveVideoId] = useState<number | null>(null);
@@ -255,43 +279,103 @@ export default function VideosSection() {
         </div>
 
         {/* Video Modal */}
-        {selectedVideo && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl p-6"
-            onClick={() => setSelectedVideo(null)}
-          >
-            <div className="relative w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
-              <button
-                onClick={() => setSelectedVideo(null)}
-                className="absolute -top-12 right-0 w-10 h-10 flex items-center justify-center text-white hover:text-[#C45C2F] transition-colors cursor-pointer"
-              >
-                <i className="ri-close-line text-3xl"></i>
-              </button>
-              <div className="aspect-video bg-black rounded-2xl border-2 border-[#C45C2F]/50 shadow-2xl shadow-[#C45C2F]/30 overflow-hidden">
-                {videos.find(v => v.id === selectedVideo)?.videoId ? (
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src={`https://www.youtube.com/embed/${videos.find(v => v.id === selectedVideo)?.videoId}?autoplay=1`}
-                    title="Video Player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <div className="text-center">
-                      <i className="ri-play-circle-fill text-8xl text-[#C45C2F] mb-4"></i>
-                      <p className="text-white/70 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
-                        Vídeo em breve
-                      </p>
+        {selectedVideo && (() => {
+          const video = videos.find(v => v.id === selectedVideo);
+          const socialLinks = video ? artistSocialLinks[video.artist] : null;
+          
+          return (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 sm:p-6"
+              onClick={() => setSelectedVideo(null)}
+            >
+              <div className="relative w-full max-w-[90vw] lg:max-w-7xl bg-transparent backdrop-blur-md rounded-2xl border border-gray-800/50 shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+                <button
+                  onClick={() => setSelectedVideo(null)}
+                  className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center text-white hover:text-[#C45C2F] transition-colors cursor-pointer bg-black/70 backdrop-blur-sm rounded-full border border-gray-800/50"
+                >
+                  <i className="ri-close-line text-2xl"></i>
+                </button>
+                
+                {/* Video Player */}
+                <div className="w-full aspect-video bg-black rounded-t-2xl overflow-hidden">
+                  {video?.videoId ? (
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1`}
+                      title="Video Player"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="text-center">
+                        <i className="ri-play-circle-fill text-8xl text-[#C45C2F] mb-4"></i>
+                        <p className="text-white/70 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
+                          Vídeo em breve
+                        </p>
+                      </div>
                     </div>
+                  )}
+                </div>
+
+                {/* Video Info and Social Links */}
+                {video && (
+                  <div className="p-4 sm:p-6 bg-black/40 backdrop-blur-sm rounded-b-2xl">
+                    <div className="mb-3">
+                      <p className="text-white/60 text-xs sm:text-sm mb-1 uppercase tracking-wider" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                        {video.artist}
+                      </p>
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-3" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                        {video.title}
+                      </h3>
+                    </div>
+                    
+                    {/* Social Links */}
+                    {socialLinks && (
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        {socialLinks.instagram && (
+                          <a
+                            href={socialLinks.instagram}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#E4405F]/20 hover:text-[#E4405F] transition-colors cursor-pointer text-sm sm:text-base"
+                            title="Instagram"
+                          >
+                            <i className="ri-instagram-line"></i>
+                          </a>
+                        )}
+                        {socialLinks.spotify && (
+                          <a
+                            href={socialLinks.spotify}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#1DB954]/20 hover:text-[#1DB954] transition-colors cursor-pointer text-sm sm:text-base"
+                            title="Spotify"
+                          >
+                            <i className="ri-spotify-fill"></i>
+                          </a>
+                        )}
+                        {socialLinks.youtube && (
+                          <a
+                            href={socialLinks.youtube}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#FF0000]/20 hover:text-[#FF0000] transition-colors cursor-pointer text-sm sm:text-base"
+                            title="YouTube"
+                          >
+                            <i className="ri-youtube-fill"></i>
+                          </a>
+                        )}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
             </div>
-          </div>
-        )}
+          );
+        })()}
       </div>
     </section>
   );
