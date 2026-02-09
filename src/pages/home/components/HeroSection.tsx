@@ -106,6 +106,32 @@ export default function HeroSection() {
   const [selectedVideoId, setSelectedVideoId] = useState<string>('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  
+  // Função para calcular o tilt 3D baseado na posição do mouse
+  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (selectedVideoId === e.currentTarget.getAttribute('data-video-id')) return;
+    
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = ((y - centerY) / centerY) * -10; // Inclinação vertical
+    const rotateY = ((x - centerX) / centerX) * 10; // Inclinação horizontal
+    
+    e.currentTarget.style.transform = `scale(1.1) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  };
+  
+  const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const videoId = e.currentTarget.getAttribute('data-video-id');
+    if (selectedVideoId === videoId) {
+      e.currentTarget.style.transform = 'scale(1.15) translateY(-8px)';
+    } else {
+      e.currentTarget.style.transform = 'scale(1) translateY(0)';
+    }
+  };
 
   useEffect(() => {
     async function loadVideos() {
@@ -339,8 +365,8 @@ export default function HeroSection() {
           <div className="absolute bottom-24 sm:bottom-32 md:bottom-40 left-3 sm:left-6 z-50">
             <div className="bg-black/30 backdrop-blur-md rounded-lg p-3 sm:p-4 border border-white/10 shadow-xl w-[280px] sm:w-[360px] md:w-[420px] relative overflow-hidden group">
               {/* Animated glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#0EA8A0]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer"></div>
-              <div className="relative z-10">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#0EA8A0]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer pointer-events-none"></div>
+              <div className="relative z-10" style={{ pointerEvents: 'auto' }}>
                 <div className="mb-2 sm:mb-2.5">
                   <p className="text-white/70 text-[9px] sm:text-[10px] md:text-xs mb-0.5 sm:mb-1 font-montserrat uppercase tracking-wider">
                     {selectedVideo.artist}
@@ -351,7 +377,7 @@ export default function HeroSection() {
                 </div>
                 
                 {/* Social Links and Watch Button */}
-                <div className="flex items-center justify-between gap-2 sm:gap-3">
+                <div className="flex items-center justify-between gap-2 sm:gap-3" style={{ pointerEvents: 'auto' }}>
                 {/* Social Links */}
                 {socialLinks && (
                   <div className="flex items-center gap-1.5 sm:gap-2">
@@ -361,10 +387,11 @@ export default function HeroSection() {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#E4405F]/20 hover:text-[#E4405F] transition-colors cursor-pointer relative z-20"
+                        style={{ pointerEvents: 'auto' }}
+                        className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#E4405F]/20 hover:text-[#E4405F] transition-colors cursor-pointer relative z-30"
                         title="Instagram"
                       >
-                        <i className="ri-instagram-line text-[10px] sm:text-xs"></i>
+                        <i className="ri-instagram-line text-[10px] sm:text-xs" style={{ pointerEvents: 'none' }}></i>
                       </a>
                     )}
                     {socialLinks.spotify && (
@@ -373,10 +400,11 @@ export default function HeroSection() {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#1DB954]/20 hover:text-[#1DB954] transition-colors cursor-pointer relative z-20"
+                        style={{ pointerEvents: 'auto' }}
+                        className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#1DB954]/20 hover:text-[#1DB954] transition-colors cursor-pointer relative z-30"
                         title="Spotify"
                       >
-                        <i className="ri-spotify-fill text-[10px] sm:text-xs"></i>
+                        <i className="ri-spotify-fill text-[10px] sm:text-xs" style={{ pointerEvents: 'none' }}></i>
                       </a>
                     )}
                     {socialLinks.youtube && (
@@ -385,10 +413,11 @@ export default function HeroSection() {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#FF0000]/20 hover:text-[#FF0000] transition-colors cursor-pointer relative z-20"
+                        style={{ pointerEvents: 'auto' }}
+                        className="w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#FF0000]/20 hover:text-[#FF0000] transition-colors cursor-pointer relative z-30"
                         title="YouTube"
                       >
-                        <i className="ri-youtube-fill text-[10px] sm:text-xs"></i>
+                        <i className="ri-youtube-fill text-[10px] sm:text-xs" style={{ pointerEvents: 'none' }}></i>
                       </a>
                     )}
                   </div>
@@ -399,11 +428,13 @@ export default function HeroSection() {
                   href={selectedVideo.youtube_url || "https://www.youtube.com/@ceumusicbrasil"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-shrink-0 inline-flex items-center gap-1 bg-[#0EA8A0] hover:bg-[#0EA8A0]/90 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-[0_0_20px_rgba(14,168,160,0.5)] hover:scale-105 font-montserrat text-[10px] sm:text-xs ml-auto"
+                  onClick={(e) => e.stopPropagation()}
+                  style={{ pointerEvents: 'auto' }}
+                  className="flex-shrink-0 inline-flex items-center gap-1 bg-[#0EA8A0] hover:bg-[#0EA8A0]/90 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-[0_0_20px_rgba(14,168,160,0.5)] hover:scale-105 font-montserrat text-[10px] sm:text-xs ml-auto relative z-30"
                 >
-                  <i className="ri-play-circle-fill text-xs sm:text-sm"></i>
-                  <span className="hidden sm:inline">Assista Agora!</span>
-                  <span className="sm:hidden">Assistir</span>
+                  <i className="ri-play-circle-fill text-xs sm:text-sm" style={{ pointerEvents: 'none' }}></i>
+                  <span className="hidden sm:inline" style={{ pointerEvents: 'none' }}>Assista Agora!</span>
+                  <span className="sm:hidden" style={{ pointerEvents: 'none' }}>Assistir</span>
                 </a>
                 </div>
               </div>
@@ -428,37 +459,33 @@ export default function HeroSection() {
                   // Ao clicar, seleciona o vídeo para exibir como background
                   setSelectedVideoId(video.id);
                 }}
-                className={`group relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0 cursor-pointer ${
-                  selectedVideoId === video.id
-                    ? 'ring-3 ring-[#0EA8A0] ring-offset-2 ring-offset-black/50'
-                    : ''
+                className={`group relative w-16 h-16 overflow-hidden flex-shrink-0 cursor-pointer ${
+                  selectedVideoId === video.id ? 'selected-video-button' : ''
                 }`}
+                data-video-id={video.id}
                 style={{ 
                   fontFamily: 'Montserrat, sans-serif',
+                  borderRadius: selectedVideoId === video.id ? '8px' : '14px',
                   transform: selectedVideoId === video.id 
-                    ? 'scale(1.2) translateY(-8px)' 
+                    ? 'scale(1.15) translateY(-8px)' 
                     : 'scale(1) translateY(0)',
-                  transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                  opacity: selectedVideoId === video.id ? 1 : 0.85,
+                  transition: selectedVideoId === video.id 
+                    ? 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)' 
+                    : 'all 0.3s ease-out',
+                  opacity: selectedVideoId === video.id ? 1 : 0.75,
                   filter: selectedVideoId === video.id 
-                    ? 'brightness(1.1) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4))' 
-                    : 'brightness(1) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))',
+                    ? 'brightness(1.1)' 
+                    : 'blur(0.3px) grayscale(20%) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))',
+                  transformStyle: 'preserve-3d',
                 }}
-                onMouseEnter={(e) => {
+                onMouseEnter={() => {
                   // Ao passar o mouse, seleciona o vídeo para preview
-                  setSelectedVideoId(video.id);
                   if (selectedVideoId !== video.id) {
-                    e.currentTarget.style.transform = 'scale(1.15) translateY(-4px)';
-                    e.currentTarget.style.filter = 'brightness(1.05) drop-shadow(0 12px 24px rgba(0, 0, 0, 0.3))';
+                    setSelectedVideoId(video.id);
                   }
                 }}
-                onMouseLeave={(e) => {
-                  if (selectedVideoId !== video.id) {
-                    e.currentTarget.style.transform = 'scale(1) translateY(0)';
-                    e.currentTarget.style.filter = 'brightness(1) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))';
-                  }
-                }}
-                title={`Assistir: ${video.title}`}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
               >
                 {/* Thumbnail */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#0EA8A0]/20 to-[#C45C2F]/20">
@@ -491,7 +518,7 @@ export default function HeroSection() {
                 {/* Selected Indicator / Play Icon */}
                 {selectedVideoId === video.id && (
                   <div className="absolute inset-0 flex items-center justify-center bg-[#0EA8A0]/20 backdrop-blur-sm">
-                    <div className="bg-[#0EA8A0] rounded-full p-1.5">
+                    <div className="bg-[#0EA8A0] rounded-lg p-1.5">
                       <i className="ri-play-fill text-white text-sm"></i>
                     </div>
                   </div>
@@ -500,7 +527,7 @@ export default function HeroSection() {
                 {/* Play Icon on Hover */}
                 {selectedVideoId !== video.id && (
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="bg-black/50 rounded-full p-2 backdrop-blur-sm">
+                    <div className="bg-black/50 rounded-lg p-2 backdrop-blur-sm">
                       <i className="ri-play-fill text-white text-lg"></i>
                     </div>
                   </div>
