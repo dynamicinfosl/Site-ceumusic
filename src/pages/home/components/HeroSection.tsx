@@ -104,12 +104,37 @@ const MOCK_VIDEOS: HeroVideo[] = [
 export default function HeroSection() {
   const [videos, setVideos] = useState<HeroVideo[]>([]);
   const [selectedVideoId, setSelectedVideoId] = useState<string>('');
+  const [hoveredVideoId, setHoveredVideoId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   
+  // Função para calcular a escala baseada na distância do botão com hover
+  const getButtonScale = (videoId: string, videoIndex: number) => {
+    if (!hoveredVideoId) {
+      // Se nenhum botão está com hover, retorna escala baseada na seleção
+      return selectedVideoId === videoId ? 1.15 : 1;
+    }
+    
+    const hoveredIndex = videos.findIndex(v => v.id === hoveredVideoId);
+    if (hoveredIndex === -1) return 1;
+    
+    const distance = Math.abs(videoIndex - hoveredIndex);
+    
+    if (videoId === hoveredVideoId) {
+      // Botão com hover fica grande
+      return 1.4;
+    } else {
+      // Botões adjacentes diminuem de forma decrescente
+      // Quanto maior a distância, menor o botão
+      const scale = Math.max(0.6, 1 - (distance * 0.15));
+      return scale;
+    }
+  };
+  
   // Função para calcular o tilt 3D baseado na posição do mouse
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (selectedVideoId === e.currentTarget.getAttribute('data-video-id')) return;
+    const videoId = e.currentTarget.getAttribute('data-video-id');
+    if (selectedVideoId === videoId && !hoveredVideoId) return;
     
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -121,11 +146,14 @@ export default function HeroSection() {
     const rotateX = ((y - centerY) / centerY) * -10; // Inclinação vertical
     const rotateY = ((x - centerX) / centerX) * 10; // Inclinação horizontal
     
-    e.currentTarget.style.transform = `scale(1.1) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    const scale = getButtonScale(videoId || '', videos.findIndex(v => v.id === videoId));
+    e.currentTarget.style.transform = `scale(${scale}) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
   };
   
   const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
     const videoId = e.currentTarget.getAttribute('data-video-id');
+    setHoveredVideoId(null);
+    
     if (selectedVideoId === videoId) {
       e.currentTarget.style.transform = 'scale(1.15) translateY(-8px)';
     } else {
@@ -452,7 +480,28 @@ export default function HeroSection() {
           </div>
         ) : videos.length > 0 ? (
           <div className="flex gap-3 sm:gap-6 overflow-x-auto pb-2 scrollbar-hide items-center justify-center" style={{ overflowY: 'visible', overflowX: 'auto', clipPath: 'none', minHeight: '100px' }}>
-            {videos.map((video) => (
+            {videos.map((video, index) => {
+              const isSelected = selectedVideoId === video.id;
+              const isHovered = hoveredVideoId === video.id;
+              const scale = getButtonScale(video.id, index);
+              
+              // Calcular opacidade baseada na distância do botão com hover
+              let opacity = 0.75;
+              if (hoveredVideoId) {
+                const hoveredIndex = videos.findIndex(v => v.id === hoveredVideoId);
+                if (hoveredIndex !== -1) {
+                  const distance = Math.abs(index - hoveredIndex);
+                  if (isHovered) {
+                    opacity = 1;
+                  } else {
+                    opacity = Math.max(0.4, 1 - (distance * 0.15));
+                  }
+                }
+              } else {
+                opacity = isSelected ? 1 : 0.75;
+              }
+              
+              return (
               <button
                 key={video.id}
                 onClick={() => {
@@ -460,25 +509,26 @@ export default function HeroSection() {
                   setSelectedVideoId(video.id);
                 }}
                 className={`group relative w-16 h-16 overflow-hidden flex-shrink-0 cursor-pointer ${
-                  selectedVideoId === video.id ? 'selected-video-button' : ''
+                  isSelected ? 'selected-video-button' : ''
                 }`}
                 data-video-id={video.id}
                 style={{ 
                   fontFamily: 'Montserrat, sans-serif',
-                  borderRadius: selectedVideoId === video.id ? '8px' : '14px',
-                  transform: selectedVideoId === video.id 
-                    ? 'scale(1.15) translateY(-8px)' 
-                    : 'scale(1) translateY(0)',
-                  transition: selectedVideoId === video.id 
-                    ? 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)' 
-                    : 'all 0.3s ease-out',
-                  opacity: selectedVideoId === video.id ? 1 : 0.75,
-                  filter: selectedVideoId === video.id 
+                  borderRadius: isSelected ? '8px' : '14px',
+                  transform: isHovered 
+                    ? `scale(${scale}) translateY(-8px)` 
+                    : isSelected 
+                      ? 'scale(1.15) translateY(-8px)' 
+                      : `scale(${scale}) translateY(0)`,
+                  transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  opacity: opacity,
+                  filter: isHovered || isSelected 
                     ? 'brightness(1.1)' 
                     : 'blur(0.3px) grayscale(20%) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))',
                   transformStyle: 'preserve-3d',
                 }}
                 onMouseEnter={() => {
+                  setHoveredVideoId(video.id);
                   // Ao passar o mouse, seleciona o vídeo para preview
                   if (selectedVideoId !== video.id) {
                     setSelectedVideoId(video.id);
@@ -533,7 +583,8 @@ export default function HeroSection() {
                   </div>
                 )}
               </button>
-            ))}
+              );
+            })}
           </div>
         ) : error ? (
           <div className="max-w-2xl mx-auto py-4 px-4 bg-red-500/10 border border-red-500/30 rounded-lg backdrop-blur-sm">
