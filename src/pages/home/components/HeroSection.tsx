@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { supabase } from '../../../utils/supabase';
 import Navbar from '../../../components/feature/Navbar';
 
@@ -107,16 +107,19 @@ export default function HeroSection() {
   const [hoveredVideoId, setHoveredVideoId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const mouseMoveTimeoutRef = useRef<number | null>(null);
   
-  // Função para calcular a escala baseada na distância do botão com hover
-  const getButtonScale = (videoId: string, videoIndex: number) => {
-    if (!hoveredVideoId) {
+  // Memoizar o índice do vídeo com hover para evitar recálculos
+  const hoveredIndex = useMemo(() => {
+    return hoveredVideoId ? videos.findIndex(v => v.id === hoveredVideoId) : -1;
+  }, [hoveredVideoId, videos]);
+  
+  // Função para calcular a escala baseada na distância do botão com hover (memoizada)
+  const getButtonScale = useCallback((videoId: string, videoIndex: number) => {
+    if (!hoveredVideoId || hoveredIndex === -1) {
       // Se nenhum botão está com hover, retorna escala baseada na seleção
       return selectedVideoId === videoId ? 1.15 : 1;
     }
-    
-    const hoveredIndex = videos.findIndex(v => v.id === hoveredVideoId);
-    if (hoveredIndex === -1) return 1;
     
     const distance = Math.abs(videoIndex - hoveredIndex);
     
@@ -129,10 +132,19 @@ export default function HeroSection() {
       const scale = Math.max(0.6, 1 - (distance * 0.15));
       return scale;
     }
-  };
+  }, [hoveredVideoId, hoveredIndex, selectedVideoId]);
   
-  // Função para calcular o tilt 3D baseado na posição do mouse
-  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+  // Função para calcular o tilt 3D baseado na posição do mouse (com throttle)
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+    // Throttle: só executa a cada 16ms (aproximadamente 60fps)
+    if (mouseMoveTimeoutRef.current) {
+      return;
+    }
+    
+    mouseMoveTimeoutRef.current = window.setTimeout(() => {
+      mouseMoveTimeoutRef.current = null;
+    }, 16);
+    
     const videoId = e.currentTarget.getAttribute('data-video-id');
     if (selectedVideoId === videoId && !hoveredVideoId) return;
     
@@ -146,11 +158,12 @@ export default function HeroSection() {
     const rotateX = ((y - centerY) / centerY) * -10; // Inclinação vertical
     const rotateY = ((x - centerX) / centerX) * 10; // Inclinação horizontal
     
-    const scale = getButtonScale(videoId || '', videos.findIndex(v => v.id === videoId));
+    const videoIndex = videos.findIndex(v => v.id === videoId);
+    const scale = getButtonScale(videoId || '', videoIndex);
     e.currentTarget.style.transform = `scale(${scale}) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  };
+  }, [selectedVideoId, hoveredVideoId, videos, getButtonScale]);
   
-  const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMouseLeave = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     const videoId = e.currentTarget.getAttribute('data-video-id');
     setHoveredVideoId(null);
     
@@ -159,7 +172,28 @@ export default function HeroSection() {
     } else {
       e.currentTarget.style.transform = 'scale(1) translateY(0)';
     }
-  };
+  }, [selectedVideoId]);
+  
+  // Função auxiliar para calcular opacidade (sem hooks)
+  const getButtonOpacity = useCallback((videoId: string, index: number, isSelected: boolean, isHovered: boolean) => {
+    if (!hoveredVideoId || hoveredIndex === -1) {
+      return isSelected ? 1 : 0.75;
+    }
+    if (isHovered) {
+      return 1;
+    }
+    const distance = Math.abs(index - hoveredIndex);
+    return Math.max(0.4, 1 - (distance * 0.15));
+  }, [hoveredVideoId, hoveredIndex]);
+
+  // Cleanup do timeout quando o componente desmontar
+  useEffect(() => {
+    return () => {
+      if (mouseMoveTimeoutRef.current) {
+        clearTimeout(mouseMoveTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     async function loadVideos() {
@@ -324,9 +358,10 @@ export default function HeroSection() {
                       position: 'absolute',
                       top: '50%',
                       left: '50%',
-                      transform: 'translate(-50%, -50%)',
+                      transform: 'translate(-50%, -50%) translateZ(0)',
                       display: 'block',
                       zIndex: 0,
+                      willChange: 'transform',
                     }}
                     src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&start=0`}
                     allow="autoplay; encrypted-media"
@@ -484,22 +519,7 @@ export default function HeroSection() {
               const isSelected = selectedVideoId === video.id;
               const isHovered = hoveredVideoId === video.id;
               const scale = getButtonScale(video.id, index);
-              
-              // Calcular opacidade baseada na distância do botão com hover
-              let opacity = 0.75;
-              if (hoveredVideoId) {
-                const hoveredIndex = videos.findIndex(v => v.id === hoveredVideoId);
-                if (hoveredIndex !== -1) {
-                  const distance = Math.abs(index - hoveredIndex);
-                  if (isHovered) {
-                    opacity = 1;
-                  } else {
-                    opacity = Math.max(0.4, 1 - (distance * 0.15));
-                  }
-                }
-              } else {
-                opacity = isSelected ? 1 : 0.75;
-              }
+              const opacity = getButtonOpacity(video.id, index, isSelected, isHovered);
               
               return (
               <button
@@ -526,6 +546,7 @@ export default function HeroSection() {
                     ? 'brightness(1.1)' 
                     : 'blur(0.3px) grayscale(20%) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))',
                   transformStyle: 'preserve-3d',
+                  willChange: 'transform, opacity',
                 }}
                 onMouseEnter={() => {
                   setHoveredVideoId(video.id);

@@ -10,23 +10,46 @@ import Footer from '../../components/feature/Footer';
 
 export default function HomePage() {
   useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
+    // Usar requestIdleCallback para não bloquear o scroll
+    let observer: IntersectionObserver | null = null;
+    let idleCallbackId: number | null = null;
+
+    const initObserver = () => {
+      const observerOptions = {
+        threshold: [0, 0.1],
+        rootMargin: '0px 0px -100px 0px'
+      };
+
+      observer = new IntersectionObserver((entries) => {
+        // Usar requestAnimationFrame para otimizar as mudanças de DOM
+        requestAnimationFrame(() => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+            }
+          });
+        });
+      }, observerOptions);
+
+      const sections = document.querySelectorAll('.scroll-reveal');
+      sections.forEach(section => observer!.observe(section));
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-        }
-      });
-    }, observerOptions);
+    // Usar requestIdleCallback se disponível, senão executar imediatamente
+    if ('requestIdleCallback' in window) {
+      idleCallbackId = requestIdleCallback(initObserver as IdleRequestCallback, { timeout: 2000 });
+    } else {
+      initObserver();
+    }
 
-    const sections = document.querySelectorAll('.scroll-reveal');
-    sections.forEach(section => observer.observe(section));
-
-    return () => observer.disconnect();
+    return () => {
+      if (idleCallbackId !== null && 'cancelIdleCallback' in window) {
+        cancelIdleCallback(idleCallbackId);
+      }
+      if (observer) {
+        observer.disconnect();
+      }
+    };
   }, []);
 
   return (

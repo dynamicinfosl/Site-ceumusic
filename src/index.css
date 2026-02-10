@@ -99,14 +99,18 @@
 @layer utilities {
   .animate-fade-in-up {
     animation: fadeInUp 1s ease-out forwards;
+    will-change: transform, opacity;
   }
 
   .animate-scroll-horizontal {
     animation: scrollHorizontal 30s linear infinite;
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .animate-shimmer {
     animation: shimmer 3s linear infinite;
+    will-change: transform;
   }
 
   .animate-liquid-glass {

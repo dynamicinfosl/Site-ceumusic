@@ -273,7 +273,7 @@ export default function ArtistsSection() {
     const scrollSpeed = 0.5;
 
     const animate = () => {
-      if (!isPaused && scrollContainer) {
+      if (!isPaused && scrollContainer && scrollRef.current) {
         scrollPosition += scrollSpeed;
         
         // Reinicia o scroll quando chega ao fim
@@ -282,8 +282,10 @@ export default function ArtistsSection() {
         }
         
         scrollContainer.scrollLeft = scrollPosition;
+        animationFrameId = requestAnimationFrame(animate);
+      } else if (scrollRef.current) {
+        animationFrameId = requestAnimationFrame(animate);
       }
-      animationFrameId = requestAnimationFrame(animate);
     };
 
     animationFrameId = requestAnimationFrame(animate);
