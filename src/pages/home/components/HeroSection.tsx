@@ -124,26 +124,26 @@ export default function HeroSection() {
     const distance = Math.abs(videoIndex - hoveredIndex);
     
     if (videoId === hoveredVideoId) {
-      // Botão com hover fica grande
-      return 1.4;
+      // Botão com hover fica grande (muito sutil)
+      return 1.1;
     } else {
       // Botões adjacentes diminuem de forma decrescente
       // Quanto maior a distância, menor o botão
-      const scale = Math.max(0.6, 1 - (distance * 0.15));
+      const scale = Math.max(0.85, 1 - (distance * 0.05));
       return scale;
     }
   }, [hoveredVideoId, hoveredIndex, selectedVideoId]);
   
-  // Função para calcular o tilt 3D baseado na posição do mouse (com throttle)
+  // Função para calcular o tilt 3D baseado na posição do mouse (com throttle mais suave)
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    // Throttle: só executa a cada 16ms (aproximadamente 60fps)
+    // Throttle: só executa a cada 50ms para ser ainda mais suave
     if (mouseMoveTimeoutRef.current) {
       return;
     }
     
     mouseMoveTimeoutRef.current = window.setTimeout(() => {
       mouseMoveTimeoutRef.current = null;
-    }, 16);
+    }, 50);
     
     const videoId = e.currentTarget.getAttribute('data-video-id');
     if (selectedVideoId === videoId && !hoveredVideoId) return;
@@ -155,8 +155,9 @@ export default function HeroSection() {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     
-    const rotateX = ((y - centerY) / centerY) * -10; // Inclinação vertical
-    const rotateY = ((x - centerX) / centerX) * 10; // Inclinação horizontal
+    // Muito sutil: apenas 2 graus
+    const rotateX = ((y - centerY) / centerY) * -2; // Inclinação vertical
+    const rotateY = ((x - centerX) / centerX) * 2; // Inclinação horizontal
     
     const videoIndex = videos.findIndex(v => v.id === videoId);
     const scale = getButtonScale(videoId || '', videoIndex);
@@ -167,8 +168,9 @@ export default function HeroSection() {
     const videoId = e.currentTarget.getAttribute('data-video-id');
     setHoveredVideoId(null);
     
+    // Limpa a transformação para deixar o CSS fazer a transição suave
     if (selectedVideoId === videoId) {
-      e.currentTarget.style.transform = 'scale(1.15) translateY(-8px)';
+      e.currentTarget.style.transform = 'scale(1.15) translateY(-4px)';
     } else {
       e.currentTarget.style.transform = 'scale(1) translateY(0)';
     }
@@ -176,15 +178,21 @@ export default function HeroSection() {
   
   // Função auxiliar para calcular opacidade (sem hooks)
   const getButtonOpacity = useCallback((videoId: string, index: number, isSelected: boolean, isHovered: boolean) => {
+    // Se há um botão selecionado, aplicar fade nos outros
+    if (selectedVideoId && !isSelected) {
+      return 0.5; // Fade nos botões não selecionados
+    }
+    
     if (!hoveredVideoId || hoveredIndex === -1) {
-      return isSelected ? 1 : 0.75;
+      return isSelected ? 1 : 0.85;
     }
     if (isHovered) {
       return 1;
     }
     const distance = Math.abs(index - hoveredIndex);
-    return Math.max(0.4, 1 - (distance * 0.15));
-  }, [hoveredVideoId, hoveredIndex]);
+    // Transição muito suave de opacidade
+    return Math.max(0.75, 1 - (distance * 0.05));
+  }, [hoveredVideoId, hoveredIndex, selectedVideoId]);
 
   // Cleanup do timeout quando o componente desmontar
   useEffect(() => {
@@ -528,7 +536,7 @@ export default function HeroSection() {
                   // Ao clicar, seleciona o vídeo para exibir como background
                   setSelectedVideoId(video.id);
                 }}
-                className={`group relative w-16 h-16 overflow-hidden flex-shrink-0 cursor-pointer ${
+                className={`group relative w-24 h-16 overflow-hidden flex-shrink-0 cursor-pointer ${
                   isSelected ? 'selected-video-button' : ''
                 }`}
                 data-video-id={video.id}
@@ -536,14 +544,14 @@ export default function HeroSection() {
                   fontFamily: 'Montserrat, sans-serif',
                   borderRadius: isSelected ? '8px' : '14px',
                   transform: isHovered 
-                    ? `scale(${scale}) translateY(-8px)` 
+                    ? `scale(${scale}) translateY(-4px)` 
                     : isSelected 
-                      ? 'scale(1.15) translateY(-8px)' 
+                      ? 'scale(1.15) translateY(-4px)' 
                       : `scale(${scale}) translateY(0)`,
-                  transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                   opacity: opacity,
                   filter: isHovered || isSelected 
-                    ? 'brightness(1.1)' 
+                    ? 'brightness(1.02)' 
                     : 'blur(0.3px) grayscale(20%) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))',
                   transformStyle: 'preserve-3d',
                   willChange: 'transform, opacity',
@@ -567,7 +575,7 @@ export default function HeroSection() {
                     loading={video.order_index === 1 ? 'eager' : 'lazy'}
                     fetchPriority={video.order_index === 1 ? 'high' : 'auto'}
                     decoding="async"
-                    width={64}
+                    width={96}
                     height={64}
                     onError={(e) => {
                       // Fallback caso a imagem não carregue
