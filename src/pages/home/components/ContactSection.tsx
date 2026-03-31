@@ -1,34 +1,80 @@
+import { useState, useEffect } from 'react';
+import { supabase } from '../../../utils/supabase';
+
+interface SocialLink {
+  name: string;
+  icon: string;
+  url: string;
+  color: string;
+  followers: string;
+}
+
+interface ContactInfo {
+  email: string;
+  phone: string;
+  address: string;
+}
+
 export default function ContactSection() {
-  const socialLinks = [
-    { 
-      name: 'Instagram', 
-      icon: 'ri-instagram-fill', 
-      url: 'https://www.instagram.com/ceumusicbr/',
-      color: '#E4405F',
-      followers: '21,5 mil'
-    },
-    { 
-      name: 'YouTube', 
-      icon: 'ri-youtube-fill', 
-      url: 'https://www.youtube.com/@ceumusicbrasil',
-      color: '#FF0000',
-      followers: '140 mil'
-    },
-    { 
-      name: 'Spotify', 
-      icon: 'ri-spotify-fill', 
-      url: 'https://spotify.com',
-      color: '#1DB954',
-      followers: '250K'
-    },
-    { 
-      name: 'TikTok', 
-      icon: 'ri-tiktok-fill', 
-      url: 'https://tiktok.com',
-      color: '#000000',
-      followers: '180K'
+  const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);
+  const [contactInfo, setContactInfo] = useState<ContactInfo>({
+    email: 'contato@ceumusicbr.com',
+    phone: '(21) 98244-7141',
+    address: 'Rio de Janeiro, RJ - Brasil'
+  });
+
+  useEffect(() => {
+    async function loadData() {
+      if (!supabase) return;
+      try {
+        // Fetch Social Links
+        const { data: socialData, error: socialError } = await supabase
+          .from('social_links')
+          .select('*')
+          .order('order_index', { ascending: true });
+
+        if (socialError) throw socialError;
+
+        if (socialData && socialData.length > 0) {
+          const mapped: SocialLink[] = socialData.map(s => ({
+            name: s.name,
+            icon: s.icon_class || 'ri-link',
+            url: s.url,
+            color: s.color || '#0EA8A0',
+            followers: s.followers_count || '0'
+          }));
+          setSocialLinks(mapped);
+        } else {
+          // Fallback static links if DB is empty
+          setSocialLinks([
+            { name: 'Instagram', icon: 'ri-instagram-fill', url: 'https://www.instagram.com/ceumusicbr/', color: '#E4405F', followers: '21,5 mil' },
+            { name: 'YouTube', icon: 'ri-youtube-fill', url: 'https://www.youtube.com/@ceumusicbrasil', color: '#FF0000', followers: '140 mil' },
+            { name: 'Spotify', icon: 'ri-spotify-fill', url: 'https://spotify.com', color: '#1DB954', followers: '250K' },
+            { name: 'TikTok', icon: 'ri-tiktok-fill', url: 'https://tiktok.com', color: '#000000', followers: '180K' }
+          ]);
+        }
+
+        // Fetch Contact Info
+        const { data: contactData, error: contactError } = await supabase
+          .from('contact_info')
+          .select('*')
+          .single();
+
+        if (contactError && contactError.code !== 'PGRST116') throw contactError;
+
+        if (contactData) {
+          setContactInfo({
+            email: contactData.email,
+            phone: contactData.phone,
+            address: contactData.address
+          });
+        }
+      } catch (err) {
+        console.error('Erro ao carregar dados de contato:', err);
+      }
     }
-  ];
+    loadData();
+  }, []);
 
   return (
     <section className="relative py-32 bg-gradient-to-b from-black via-[#1A1A1A] to-black">
@@ -111,7 +157,7 @@ export default function ContactSection() {
                 Email
               </h4>
               <p className="text-white/60 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
-                contato@ceumusicbr.com
+                {contactInfo.email}
               </p>
             </div>
 
@@ -123,7 +169,7 @@ export default function ContactSection() {
                 Telefone
               </h4>
               <p className="text-white/60 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
-                (21) 98244-7141
+                {contactInfo.phone}
               </p>
             </div>
 
@@ -135,7 +181,7 @@ export default function ContactSection() {
                 Endereço
               </h4>
               <p className="text-white/60 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
-                Rio de Janeiro, RJ - Brasil
+                {contactInfo.address}
               </p>
             </div>
           </div>

@@ -1,266 +1,75 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useRef, useState, useCallback } from 'react';
+import { supabase } from '../../../utils/supabase';
 
-// Artistas da Céu Music
-const artists = [
-  {
-    id: 1,
-    name: 'Alex Lucio',
-    genre: 'Gospel/CCM',
-    image: '/artistas/alex-lucio/IMG_3735.jpg',
-    socialLinks: {
-      instagram: 'https://www.instagram.com/alexlucio.ofc/',
-      spotify: 'https://open.spotify.com/artist/2xX3xodC7zA5u2xygCWzuP',
-      youtube: null, // Adicione o link do YouTube se disponível
-      tiktok: null,
-      twitter: null,
-      facebook: null,
-    },
-    musicLinks: [
-      { platform: 'Spotify', url: 'https://open.spotify.com/artist/2xX3xodC7zA5u2xygCWzuP' },
-      // Adicione outros links de streaming quando disponíveis
-    ],
-  },
-  {
-    id: 10,
-    name: 'Na Graça',
-    genre: 'Gospel/CCM',
-    image: '/artistas/na graca/na graca.png',
-    socialLinks: {
-      instagram: 'https://www.instagram.com/nagracaoficial/',
-      spotify: 'https://open.spotify.com/intl-pt/artist/7pmvHrURMH0OqDcXXQiuYX',
-      youtube: null,
-      tiktok: null,
-      twitter: null,
-      facebook: null,
-    },
-    musicLinks: [
-      {
-        platform: 'Spotify',
-        url: 'https://open.spotify.com/intl-pt/artist/7pmvHrURMH0OqDcXXQiuYX',
-      },
-    ],
-  },
-  {
-    id: 15,
-    name: 'Maria Pita',
-    genre: 'Gospel/CCM',
-    image: '/artistas/maria-pita/IMG_4240.jpg',
-    socialLinks: {
-      instagram: 'https://www.instagram.com/mariapitacantora_/',
-      spotify: 'https://open.spotify.com/intl-pt/artist/7fw7DfkvI0fMyEKfOw0k6n',
-      youtube: null,
-      tiktok: null,
-      twitter: null,
-      facebook: null,
-    },
-    musicLinks: [
-      {
-        platform: 'Spotify',
-        url: 'https://open.spotify.com/intl-pt/artist/7fw7DfkvI0fMyEKfOw0k6n',
-      },
-    ],
-  },
-  {
-    id: 13,
-    name: 'Caio Torres',
-    genre: 'Gospel/CCM',
-    image: '/artistas/caio-torres/IMG_0273.jpg',
-    socialLinks: {
-      instagram: 'https://www.instagram.com/caiotorees/',
-      spotify: 'https://open.spotify.com/intl-pt/artist/3TOPRsT6nYECZi9K9yZZXw',
-      youtube: null,
-      tiktok: null,
-      twitter: null,
-      facebook: null,
-    },
-    musicLinks: [
-      {
-        platform: 'Spotify',
-        url: 'https://open.spotify.com/intl-pt/artist/3TOPRsT6nYECZi9K9yZZXw',
-      },
-    ],
-  },
-  {
-    id: 11,
-    name: 'No Santuário',
-    genre: 'Gospel/CCM',
-    image: '/artistas/no%20santuario/IMG_0090.jpg',
-    socialLinks: {
-      instagram: 'https://www.instagram.com/nosantuario/',
-      spotify: 'https://open.spotify.com/intl-pt/artist/3qkhpijMzbtVFexHZTNoai',
-      youtube: null,
-      tiktok: null,
-      twitter: null,
-      facebook: null,
-    },
-    musicLinks: [
-      {
-        platform: 'Spotify',
-        url: 'https://open.spotify.com/intl-pt/artist/3qkhpijMzbtVFexHZTNoai',
-      },
-    ],
-  },
-  {
-    id: 14,
-    name: 'Nicole Lavinia',
-    genre: 'Gospel/CCM',
-    image: '/artistas/nicole-lavinia/IMG_3996.jpg',
-    socialLinks: {
-      instagram: 'https://www.instagram.com/nicolelaviniaoficial_/',
-      spotify: 'https://open.spotify.com/intl-pt/track/0AayU24085eVhLhbk27sTE',
-      youtube: null,
-      tiktok: null,
-      twitter: null,
-      facebook: null,
-    },
-    musicLinks: [
-      {
-        platform: 'Spotify',
-        url: 'https://open.spotify.com/intl-pt/track/0AayU24085eVhLhbk27sTE',
-      },
-    ],
-  },
-  {
-    id: 16,
-    name: 'William Soares',
-    genre: 'Gospel/CCM',
-    image: '/artistas/william-soares/IMG_4092.jpg',
-    socialLinks: {
-      instagram: 'https://www.instagram.com/williaamsoarees/',
-      spotify: null,
-      youtube: null,
-      tiktok: null,
-      twitter: null,
-      facebook: null,
-    },
-    musicLinks: [],
-  },
-  {
-    id: 17,
-    name: 'Martinha',
-    genre: 'Gospel/CCM',
-    image: '/artistas/martinha/Gemini_Generated_Image_o5dhzho5dhzho5dh (1).png',
-    socialLinks: {
-      instagram: 'https://www.instagram.com/martinhacantoraoficial/',
-      spotify: 'https://open.spotify.com/intl-pt/artist/6etONEQiR3dUCs4IV0kIlE',
-      youtube: null,
-      tiktok: null,
-      twitter: null,
-      facebook: null,
-    },
-    musicLinks: [
-      {
-        platform: 'Spotify',
-        url: 'https://open.spotify.com/intl-pt/artist/6etONEQiR3dUCs4IV0kIlE',
-      },
-    ],
-  },
-  {
-    id: 12,
-    name: 'Debora Lopes',
-    genre: 'Gospel/CCM',
-    image: '/artistas/debora-lopes/debora-lopes.png',
-    socialLinks: {
-      instagram: 'https://www.instagram.com/deboralopesoficiall/',
-      spotify: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
-      youtube: null,
-      tiktok: null,
-      twitter: null,
-      facebook: null,
-    },
-    musicLinks: [
-      {
-        platform: 'Spotify',
-        url: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
-      },
-    ],
-  },
-  {
-    id: 18,
-    name: 'Kaka Tavares',
-    genre: 'Gospel/CCM',
-    image: '/artistas/kaka-tavares/IMG_3648.jpg',
-    socialLinks: {
-      instagram: null,
-      spotify: 'https://open.spotify.com/intl-pt/artist/5v86apLzejN5yQl8H2CcLh',
-      youtube: null,
-      tiktok: null,
-      twitter: null,
-      facebook: null,
-    },
-    musicLinks: [
-      {
-        platform: 'Spotify',
-        url: 'https://open.spotify.com/intl-pt/artist/5v86apLzejN5yQl8H2CcLh',
-      },
-    ],
-  },
-  {
-    id: 19,
-    name: 'Rachel Malafaia',
-    genre: 'Gospel/CCM',
-    image: '/artistas/rachel-malafaia/IMG_5693.jpg',
-    socialLinks: {
-      instagram: 'https://www.instagram.com/rachelmalafaia/',
-      spotify: 'https://open.spotify.com/intl-pt/artist/1xyrtLIDTu5kRTCvnHgIcJ',
-      youtube: null,
-      tiktok: null,
-      twitter: null,
-      facebook: null,
-    },
-    musicLinks: [
-      {
-        platform: 'Spotify',
-        url: 'https://open.spotify.com/intl-pt/artist/1xyrtLIDTu5kRTCvnHgIcJ',
-      },
-    ],
-  },
-  {
-    id: 20,
-    name: 'George Lean',
-    genre: 'Gospel/CCM',
-    image: '/artistas/george-lean/IMG_1982.jpg',
-    socialLinks: {
-      instagram: 'https://www.instagram.com/georgelean/',
-      spotify: null,
-      youtube: null,
-      tiktok: null,
-      twitter: null,
-      facebook: null,
-    },
-    musicLinks: [],
-  },
-  {
-    id: 21,
-    name: 'Gabriel Magalhães',
-    genre: 'Gospel/CCM',
-    image: '/artistas/gabriel-magalhaes/IMG_4165.jpg',
-    socialLinks: {
-      instagram: 'https://www.instagram.com/gabrielmagalhaes.oficial1/',
-      spotify: null,
-      youtube: null,
-      tiktok: null,
-      twitter: null,
-      facebook: null,
-    },
-    musicLinks: [],
-  },
-];
+interface Artist {
+  id: string | number;
+  name: string;
+  genre: string;
+  image: string;
+  socialLinks: {
+    instagram: string | null;
+    spotify: string | null;
+    youtube: string | null;
+    tiktok: string | null;
+    twitter: string | null;
+    facebook: string | null;
+  };
+  musicLinks: { platform: string; url: string }[];
+}
 
 export default function ArtistsSection() {
+  const [artists, setArtists] = useState<Artist[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    async function loadArtists() {
+      if (!supabase) {
+        return;
+      }
+      try {
+        const { data, error } = await supabase
+          .from('artists')
+          .select('*')
+          .order('order_index', { ascending: true });
+
+        if (error) throw error;
+
+        if (data) {
+          const mappedArtists: Artist[] = data.map(dbArtist => ({
+            id: dbArtist.id,
+            name: dbArtist.name,
+            genre: dbArtist.genre,
+            image: dbArtist.image_url || '/placeholder-artist.jpg',
+            socialLinks: {
+              instagram: dbArtist.instagram,
+              spotify: dbArtist.spotify,
+              youtube: dbArtist.youtube,
+              tiktok: dbArtist.tiktok,
+              twitter: dbArtist.twitter,
+              facebook: dbArtist.facebook,
+            },
+            musicLinks: dbArtist.spotify ? [{ platform: 'Spotify', url: dbArtist.spotify }] : []
+          }));
+          setArtists(mappedArtists);
+        }
+      } catch (err) {
+        console.error('Erro ao carregar artistas:', err);
+      }
+    }
+    loadArtists();
+  }, []);
+
   const handleMouseEnter = useCallback(() => setIsPaused(true), []);
   const handleMouseLeave = useCallback(() => setIsPaused(false), []);
-  const handleArtistClick = useCallback((artistId: number) => {
+  const handleArtistClick = useCallback((artistId: string | number) => {
     navigate(`/artista/${artistId}`);
   }, [navigate]);
   
-  const handleSocialClick = useCallback((url: string, e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleSocialClick = useCallback((url: string, event: React.MouseEvent) => {
+    event.stopPropagation();
     window.open(url, '_blank', 'noopener,noreferrer');
   }, []);
 
@@ -341,10 +150,9 @@ export default function ArtistsSection() {
                       width={224}
                       height={224}
                       style={{
-                        objectPosition: artist.id === 10 ? '75% center' : artist.id === 15 ? 'center 50%' : artist.id === 18 ? 'center 20%' : artist.id === 14 ? 'center 30%' : artist.id === 11 ? 'center 28%' : artist.id === 19 ? 'center 30%' : artist.id === 20 ? 'center 40%' : [13, 16].includes(artist.id) ? 'center 35%' : 'center',
-                        imageRendering: [10, 12, 18, 19].includes(artist.id) ? 'auto' : 'crisp-edges',
-                        WebkitImageRendering: [10, 12, 18, 19].includes(artist.id) ? 'auto' : 'crisp-edges',
-                        filter: [10, 12, 18, 19].includes(artist.id) ? 'none' : 'contrast(1.1) saturate(1.05)'
+                        objectPosition: artist.name === 'Na Graça' ? '75% center' : artist.name === 'Maria Pita' ? 'center 50%' : artist.name === 'Kaka Tavares' ? 'center 20%' : artist.name === 'Nicole Lavinia' ? 'center 30%' : artist.name === 'No Santuário' ? 'center 28%' : artist.name === 'Rachel Malafaia' ? 'center 30%' : artist.name === 'George Lean' ? 'center 40%' : ['Caio Torres', 'William Soares'].includes(artist.name) ? 'center 35%' : 'center',
+                        imageRendering: ['Na Graça', 'Debora Lopes', 'Kaka Tavares', 'Rachel Malafaia'].includes(artist.name) ? 'auto' : 'crisp-edges',
+                        filter: ['Na Graça', 'Debora Lopes', 'Kaka Tavares', 'Rachel Malafaia'].includes(artist.name) ? 'none' : 'contrast(1.1) saturate(1.05)'
                       }}
                     />
                   </div>
@@ -465,7 +273,7 @@ export default function ArtistsSection() {
         <div className="text-center mt-8 sm:mt-12 px-4 sm:px-6 lg:px-12">
           <Link
             to="/artistas"
-            onClick={(e) => {
+            onClick={() => {
               // Scroll para o topo antes de navegar - múltiplas formas
               window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
               window.scrollTo(0, 0);

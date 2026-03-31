@@ -1,56 +1,49 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { supabase } from '../../../utils/supabase';
+
+interface NewsItem {
+  id: string | number;
+  title: string;
+  category: string;
+  date: string;
+  image: string;
+  excerpt: string;
+}
 
 export default function NewsSection() {
-  const news = [
-    {
-      id: 1,
-      title: 'Luna Silva alcança 10 milhões de streams no Spotify',
-      category: 'Conquista',
-      date: '15 Jan 2024',
-      image: 'https://readdy.ai/api/search-image?query=professional%20music%20industry%20celebration%20photo%2C%20female%20pop%20artist%20celebrating%20success%20with%20teal%20and%20bronze%20lighting%2C%20modern%20studio%20setting%2C%20high-quality%20photography%2C%20joyful%20atmosphere%2C%20premium%20editorial%20style&width=600&height=400&seq=news-001&orientation=landscape',
-      excerpt: 'A artista celebra marco histórico com seu single "Noites de Verão", que conquistou o público brasileiro e internacional.'
-    },
-    {
-      id: 2,
-      title: 'Rafael Mendes anuncia turnê nacional',
-      category: 'Tour',
-      date: '12 Jan 2024',
-      image: 'https://readdy.ai/api/search-image?query=hip%20hop%20concert%20announcement%20photo%2C%20male%20rapper%20on%20stage%20with%20dramatic%20teal%20and%20orange%20lighting%2C%20energetic%20performance%2C%20professional%20concert%20photography%2C%20urban%20aesthetic%2C%20premium%20quality&width=600&height=400&seq=news-002&orientation=landscape',
-      excerpt: 'O rapper vai percorrer 15 cidades brasileiras apresentando seu novo EP "Ruas da Cidade" a partir de março.'
-    },
-    {
-      id: 3,
-      title: 'Bianca Costa indicada ao Prêmio da Música Brasileira',
-      category: 'Premiação',
-      date: '10 Jan 2024',
-      image: 'https://readdy.ai/api/search-image?query=elegant%20music%20awards%20ceremony%20photo%2C%20female%20soul%20singer%20in%20sophisticated%20setting%20with%20warm%20bronze%20and%20teal%20lighting%2C%20formal%20event%20photography%2C%20premium%20quality%2C%20artistic%20composition&width=600&height=400&seq=news-003&orientation=landscape',
-      excerpt: 'A cantora recebeu indicação na categoria "Melhor Álbum de MPB" com "Alma Brasileira".'
-    },
-    {
-      id: 4,
-      title: 'Céu Music inaugura novo estúdio de gravação',
-      category: 'Infraestrutura',
-      date: '08 Jan 2024',
-      image: 'https://readdy.ai/api/search-image?query=modern%20professional%20recording%20studio%20interior%2C%20high-end%20audio%20equipment%20with%20teal%20and%20bronze%20accent%20lighting%2C%20state-of-the-art%20mixing%20console%2C%20premium%20production%20facility%2C%20architectural%20photography&width=600&height=400&seq=news-004&orientation=landscape',
-      excerpt: 'Novo espaço conta com equipamentos de última geração e tecnologia de ponta para produção musical.'
-    },
-    {
-      id: 5,
-      title: 'Marina Oliveira colabora com DJ internacional',
-      category: 'Colaboração',
-      date: '05 Jan 2024',
-      image: 'https://readdy.ai/api/search-image?query=electronic%20music%20collaboration%20photo%2C%20female%20DJ%20in%20modern%20studio%20with%20neon%20teal%20and%20orange%20lighting%2C%20futuristic%20production%20setup%2C%20professional%20music%20photography%2C%20vibrant%20atmosphere&width=600&height=400&seq=news-005&orientation=landscape',
-      excerpt: 'A produtora anuncia parceria inédita que promete revolucionar a cena eletrônica brasileira.'
-    },
-    {
-      id: 6,
-      title: 'Pedro Santos bate recorde de público em show',
-      category: 'Evento',
-      date: '03 Jan 2024',
-      image: 'https://readdy.ai/api/search-image?query=massive%20country%20music%20concert%20crowd%2C%20male%20singer%20performing%20for%20huge%20audience%20with%20warm%20bronze%20and%20teal%20stage%20lighting%2C%20epic%20concert%20photography%2C%20professional%20quality%2C%20energetic%20atmosphere&width=600&height=400&seq=news-006&orientation=landscape',
-      excerpt: 'Apresentação reuniu mais de 50 mil pessoas em evento histórico para a música sertaneja.'
+  const [news, setNews] = useState<NewsItem[]>([]);
+
+  useEffect(() => {
+    async function fetchNews() {
+      if (!supabase) {
+        return;
+      }
+      try {
+        const { data, error } = await supabase
+          .from('news')
+          .select('*')
+          .order('publish_date', { ascending: false });
+
+        if (error) throw error;
+
+        if (data) {
+          const mapped: NewsItem[] = data.map(n => ({
+            id: n.id,
+            title: n.title,
+            category: n.category || 'Geral',
+            date: n.publish_date ? new Date(n.publish_date).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }) : '',
+            image: n.image_url || 'https://via.placeholder.com/600x400',
+            excerpt: n.excerpt || ''
+          }));
+          setNews(mapped);
+        }
+      } catch (err) {
+        console.error('Erro ao buscar notícias:', err);
+      }
     }
-  ];
+    fetchNews();
+  }, []);
 
   const categoryColors: { [key: string]: string } = {
     'Conquista': '#0EA8A0',
@@ -58,8 +51,13 @@ export default function NewsSection() {
     'Premiação': '#A34528',
     'Infraestrutura': '#0C3F48',
     'Colaboração': '#0EA8A0',
-    'Evento': '#C45C2F'
+    'Evento': '#C45C2F',
+    'Geral': '#0EA8A0'
   };
+
+  if (news.length === 0) {
+    return null; // Ou um placeholder de "Em breve"
+  }
 
   return (
     <section className="relative py-32 bg-black">
@@ -208,22 +206,6 @@ export default function NewsSection() {
         <div className="text-center">
           <Link
             to="/noticias"
-            onClick={(e) => {
-              // Scroll para o topo antes de navegar - múltiplas formas
-              window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-              window.scrollTo(0, 0);
-              document.documentElement.scrollTop = 0;
-              document.body.scrollTop = 0;
-              if (document.scrollingElement) {
-                document.scrollingElement.scrollTop = 0;
-              }
-              // Garantir scroll após um pequeno delay também
-              requestAnimationFrame(() => {
-                window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-                document.documentElement.scrollTop = 0;
-                document.body.scrollTop = 0;
-              });
-            }}
             className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-[#A34528] to-[#C45C2F] text-white font-semibold rounded-full shadow-lg shadow-[#A34528]/30 hover:shadow-[#A34528]/50 hover:scale-105 transition-all duration-300 whitespace-nowrap cursor-pointer"
             style={{ fontFamily: 'Montserrat, sans-serif' }}
           >

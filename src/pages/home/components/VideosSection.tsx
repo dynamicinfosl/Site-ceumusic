@@ -1,81 +1,85 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { supabase } from '../../../utils/supabase';
 
-// Mapeamento de artistas para redes sociais
-const artistSocialLinks: { [key: string]: { instagram?: string; spotify?: string; youtube?: string } } = {
-  'Alex Lúcio': {
-    instagram: 'https://www.instagram.com/alexlucio.ofc/',
-    spotify: 'https://open.spotify.com/artist/2xX3xodC7zA5u2xygCWzuP',
-    youtube: null
-  },
-  'No Santuário': {
-    instagram: 'https://www.instagram.com/nosantuario/',
-    spotify: 'https://open.spotify.com/intl-pt/artist/3qkhpijMzbtVFexHZTNoai',
-    youtube: 'https://www.youtube.com/watch?v=XWBgmBsxkk4&list=RDXWBgmBsxkk4&start_radio=1'
-  },
-  'Na Graça': {
-    instagram: 'https://www.instagram.com/nagracaoficial/',
-    spotify: 'https://open.spotify.com/intl-pt/artist/7pmvHrURMH0OqDcXXQiuYX',
-    youtube: null
-  },
-  'Debora Lopes': {
-    instagram: 'https://www.instagram.com/deboralopesoficiall/',
-    spotify: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
-    youtube: 'https://www.youtube.com/watch?v=V1hYFBtdxm8&list=RDV1hYFBtdxm8&start_radio=1'
-  }
-};
+interface Video {
+  id: string;
+  title: string;
+  artist: string;
+  views: string;
+  videoId: string;
+  thumbnail: string;
+  duration: string;
+  featured: boolean;
+}
+
+interface SocialLinks {
+  instagram: string | null;
+  spotify: string | null;
+  youtube: string | null;
+}
 
 export default function VideosSection() {
-  const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
-  const [activeVideoId, setActiveVideoId] = useState<number | null>(null);
-  const [hoveredVideoId, setHoveredVideoId] = useState<number | null>(null);
+  const [videos, setVideos] = useState<Video[]>([]);
+  const [artistSocialLinks, setArtistSocialLinks] = useState<{ [key: string]: SocialLinks }>({});
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
+  const [hoveredVideoId, setHoveredVideoId] = useState<string | null>(null);
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const videos = [
-    {
-      id: 1,
-      title: 'Salva-vidas - Alexsander Lúcio',
-      artist: 'Alex Lúcio',
-      views: '271K',
-      videoId: 'bdLeReQbtgY', // ID do YouTube
-      thumbnail: `https://img.youtube.com/vi/bdLeReQbtgY/maxresdefault.jpg`,
-      duration: '3:45'
-    },
-    {
-      id: 2,
-      title: 'Final Feliz - No Santuário feat Geziel Lima',
-      artist: 'No Santuário',
-      views: '1.8M',
-      videoId: 'XWBgmBsxkk4', // ID do YouTube
-      thumbnail: `https://img.youtube.com/vi/XWBgmBsxkk4/maxresdefault.jpg`,
-      duration: '4:12'
-    },
-    {
-      id: 3,
-      title: 'Louva na Graça - Na Graça',
-      artist: 'Na Graça',
-      views: '45K',
-      videoId: '5bvgSlZamBo', // ID do YouTube
-      thumbnail: `https://img.youtube.com/vi/5bvgSlZamBo/maxresdefault.jpg`,
-      duration: '5:20'
-    },
-    {
-      id: 4,
-      title: 'Milagres de Deus - Debora Lopes',
-      artist: 'Debora Lopes',
-      views: '233K',
-      videoId: 'V1hYFBtdxm8', // ID do YouTube
-      thumbnail: `https://img.youtube.com/vi/V1hYFBtdxm8/maxresdefault.jpg`,
-      duration: '3:58'
-    }
-  ];
-
-  // Define inicialmente o primeiro card como ativo
   useEffect(() => {
-    if (videos.length > 0 && activeVideoId === null) {
-      setActiveVideoId(videos[0].id);
+    async function loadData() {
+      if (!supabase) {
+        return;
+      }
+      try {
+        // Fetch Videos
+        const { data: videoData, error: videoError } = await supabase
+          .from('videos_gallery')
+          .select('*')
+          .order('order_index', { ascending: true });
+
+        if (videoError) throw videoError;
+
+        // Fetch Artists for social links
+        const { data: artistData, error: artistError } = await supabase
+          .from('artists')
+          .select('name, instagram, spotify, youtube');
+
+        if (artistError) throw artistError;
+
+        if (videoData) {
+          const mappedVideos: Video[] = videoData.map(v => ({
+            id: v.id,
+            title: v.title,
+            artist: v.artist || 'Céu Music',
+            views: v.views || '0',
+            videoId: v.video_id,
+            thumbnail: `https://img.youtube.com/vi/${v.video_id}/maxresdefault.jpg`,
+            duration: v.duration || '0:00',
+            featured: v.featured || false
+          }));
+          setVideos(mappedVideos);
+          if (mappedVideos.length > 0) setActiveVideoId(mappedVideos[0].id);
+        }
+
+        if (artistData) {
+          const socialMap: { [key: string]: SocialLinks } = {};
+          artistData.forEach(a => {
+            socialMap[a.name] = {
+              instagram: a.instagram,
+              spotify: a.spotify,
+              youtube: a.youtube
+            };
+          });
+          setArtistSocialLinks(socialMap);
+        }
+      } catch (err) {
+        console.error('Erro ao carregar dados dos vídeos:', err);
+      }
     }
-  }, [activeVideoId, videos]);
+    loadData();
+  }, []);
 
   const scrollCarousel = useCallback((direction: 'left' | 'right') => {
     if (!carouselRef.current) return;
@@ -103,7 +107,7 @@ export default function VideosSection() {
         rafId = requestAnimationFrame(() => {
           const containerCenter = container.scrollLeft + container.clientWidth / 2;
 
-          let closestId: number | null = null;
+          let closestId: string | null = null;
           let closestDistance = Infinity;
 
           cardRefs.current.forEach((card, index) => {

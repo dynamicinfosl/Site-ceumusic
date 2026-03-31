@@ -7,7 +7,7 @@ const artistSocialLinks: { [key: string]: { instagram?: string; spotify?: string
   'Alexsander Lúcio': {
     instagram: 'https://www.instagram.com/alexlucio.ofc/',
     spotify: 'https://open.spotify.com/artist/2xX3xodC7zA5u2xygCWzuP',
-    youtube: null
+    youtube: undefined
   },
   'No Santuário feat. Geziel Lima': {
     instagram: 'https://www.instagram.com/nosantuario/',
@@ -17,7 +17,7 @@ const artistSocialLinks: { [key: string]: { instagram?: string; spotify?: string
   'Na Graça': {
     instagram: 'https://www.instagram.com/nagracaoficial/',
     spotify: 'https://open.spotify.com/intl-pt/artist/7pmvHrURMH0OqDcXXQiuYX',
-    youtube: null
+    youtube: undefined
   },
   'Debora Lopes': {
     instagram: 'https://www.instagram.com/deboralopesoficiall/',
@@ -30,19 +30,19 @@ interface HeroVideo {
   id: string;
   title: string;
   artist: string;
+  description?: string;
   video_url: string;
   thumbnail_url: string | null;
   duration: number | null;
   order_index: number;
   youtube_url?: string;
-}
-
-// Dados mock para quando o Supabase não estiver configurado
+}// Dados mock para quando o Supabase não estiver configurado
 const MOCK_VIDEOS: HeroVideo[] = [
   {
     id: '1',
-    title: 'Final Feliz - No Santuário',
+    title: 'Final Feliz',
     artist: 'No Santuário feat. Geziel Lima',
+    description: 'Um louvor emocionante que fala sobre esperança e renovação espiritual.',
     video_url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
     thumbnail_url: 'https://img.youtube.com/vi/XWBgmBsxkk4/maxresdefault.jpg',
     duration: 252,
@@ -53,6 +53,7 @@ const MOCK_VIDEOS: HeroVideo[] = [
     id: '2',
     title: 'Salva-vidas',
     artist: 'Alexsander Lúcio',
+    description: 'A canção retrata a proteção divina em momentos de dificuldade e fé.',
     video_url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
     thumbnail_url: 'https://img.youtube.com/vi/bdLeReQbtgY/maxresdefault.jpg',
     duration: 200,
@@ -63,6 +64,7 @@ const MOCK_VIDEOS: HeroVideo[] = [
     id: '3',
     title: 'Louva na Graça',
     artist: 'Na Graça',
+    description: 'Uma celebração vibrante de adoração e alegria em comunidade.',
     video_url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
     thumbnail_url: 'https://img.youtube.com/vi/5bvgSlZamBo/maxresdefault.jpg',
     duration: 160,
@@ -73,6 +75,7 @@ const MOCK_VIDEOS: HeroVideo[] = [
     id: '4',
     title: 'O Fogo Arderá - Ao Vivo',
     artist: 'Alexsander Lúcio',
+    description: 'Experiência ao vivo intensa focada na manifestação do Espírito Santo.',
     video_url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
     thumbnail_url: 'https://img.youtube.com/vi/Bqc6B5LzTN0/maxresdefault.jpg',
     duration: 240,
@@ -83,6 +86,7 @@ const MOCK_VIDEOS: HeroVideo[] = [
     id: '5',
     title: 'A FÉ - AO VIVO',
     artist: 'Na Graça',
+    description: 'Um testemunho poderoso de fé inabalável em todas as circunstâncias.',
     video_url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
     thumbnail_url: 'https://img.youtube.com/vi/g89eBxkG-Aw/maxresdefault.jpg',
     duration: 180,
@@ -93,6 +97,7 @@ const MOCK_VIDEOS: HeroVideo[] = [
     id: '6',
     title: 'Milagres de Deus',
     artist: 'Debora Lopes',
+    description: 'Uma reflexão sobre os milagres cotidianos e o cuidado de Deus.',
     video_url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4',
     thumbnail_url: 'https://img.youtube.com/vi/V1hYFBtdxm8/maxresdefault.jpg',
     duration: 195,
@@ -107,6 +112,7 @@ export default function HeroSection() {
   const [hoveredVideoId, setHoveredVideoId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showBackground, setShowBackground] = useState(false);
   const mouseMoveTimeoutRef = useRef<number | null>(null);
   
   // Memoizar o índice do vídeo com hover para evitar recálculos
@@ -114,23 +120,31 @@ export default function HeroSection() {
     return hoveredVideoId ? videos.findIndex(v => v.id === hoveredVideoId) : -1;
   }, [hoveredVideoId, videos]);
   
-  // Função para calcular a escala baseada na distância do botão com hover (memoizada)
+  // Função para calcular a escala baseada na distância do botão com hover (estilo macOS Dock)
   const getButtonScale = useCallback((videoId: string, videoIndex: number) => {
     if (!hoveredVideoId || hoveredIndex === -1) {
       // Se nenhum botão está com hover, retorna escala baseada na seleção
-      return selectedVideoId === videoId ? 1.15 : 1;
+      return selectedVideoId === videoId ? 1.25 : 1;
     }
     
+    // Distância absoluta do item com hover
     const distance = Math.abs(videoIndex - hoveredIndex);
     
-    if (videoId === hoveredVideoId) {
-      // Botão com hover fica grande (muito sutil)
-      return 1.1;
+    if (distance === 0) {
+      // Item com hover direto - Escala máxima (ajustado para não cortar)
+      return 1.25;
+    } else if (distance === 1) {
+      // Itens imediatamente adjacentes
+      return 1.15;
+    } else if (distance === 2) {
+      // Itens no segundo nível de proximidade
+      return 1.05;
+    } else if (distance === 3) {
+      // Itens no terceiro nível de proximidade
+      return 1.02;
     } else {
-      // Botões adjacentes diminuem de forma decrescente
-      // Quanto maior a distância, menor o botão
-      const scale = Math.max(0.85, 1 - (distance * 0.05));
-      return scale;
+      // Demais itens voltam ao tamanho base
+      return 1.0;
     }
   }, [hoveredVideoId, hoveredIndex, selectedVideoId]);
   
@@ -161,7 +175,10 @@ export default function HeroSection() {
     
     const videoIndex = videos.findIndex(v => v.id === videoId);
     const scale = getButtonScale(videoId || '', videoIndex);
-    e.currentTarget.style.transform = `scale(${scale}) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    
+    // Inclui o translateY para não ter "pulo" na animação
+    const translateY = (selectedVideoId === videoId || hoveredVideoId === videoId) ? -10 : 0;
+    e.currentTarget.style.transform = `scale(${scale}) translateY(${translateY}px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
   }, [selectedVideoId, hoveredVideoId, videos, getButtonScale]);
   
   const handleMouseLeave = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
@@ -170,14 +187,14 @@ export default function HeroSection() {
     
     // Limpa a transformação para deixar o CSS fazer a transição suave
     if (selectedVideoId === videoId) {
-      e.currentTarget.style.transform = 'scale(1.15) translateY(-4px)';
+      e.currentTarget.style.transform = 'scale(1.15) translateY(-5px)';
     } else {
       e.currentTarget.style.transform = 'scale(1) translateY(0)';
     }
   }, [selectedVideoId]);
   
   // Função auxiliar para calcular opacidade (sem hooks)
-  const getButtonOpacity = useCallback((videoId: string, index: number, isSelected: boolean, isHovered: boolean) => {
+  const getButtonOpacity = useCallback((_videoId: string, index: number, isSelected: boolean, isHovered: boolean) => {
     // Se há um botão selecionado, aplicar fade nos outros
     if (selectedVideoId && !isSelected) {
       return 0.5; // Fade nos botões não selecionados
@@ -196,7 +213,12 @@ export default function HeroSection() {
 
   // Cleanup do timeout quando o componente desmontar
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowBackground(true);
+    }, 3000); // 3 segundos de delay para o logo aparecer primeiro
+
     return () => {
+      clearTimeout(timer);
       if (mouseMoveTimeoutRef.current) {
         clearTimeout(mouseMoveTimeoutRef.current);
       }
@@ -278,7 +300,7 @@ export default function HeroSection() {
       {/* Video Background */}
       <div className="absolute w-full h-full overflow-hidden z-0" style={{ margin: 0, padding: 0, border: 'none', outline: 'none', top: 0, left: 0, right: 0, bottom: 0, width: '100vw', height: '100vh', position: 'absolute', overflow: 'hidden' }}>
         <div 
-          className="absolute top-0 left-0 w-full h-full opacity-30 transition-opacity duration-500"
+          className={`absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ${showBackground ? 'opacity-30' : 'opacity-0'}`}
           style={{ 
             pointerEvents: 'none',
             width: '100vw',
@@ -353,7 +375,7 @@ export default function HeroSection() {
                   <iframe
                     key={selectedVideo.id}
                     style={{
-                      filter: 'brightness(0.7)',
+                      filter: 'brightness(0.85)',
                       pointerEvents: 'none',
                       border: 'none',
                       outline: 'none',
@@ -390,7 +412,7 @@ export default function HeroSection() {
                   muted
                   playsInline
                   style={{
-                    filter: 'brightness(0.7)',
+                    filter: 'brightness(0.85)',
                     width: '100vw',
                     height: '100vh',
                     objectFit: 'cover',
@@ -415,15 +437,50 @@ export default function HeroSection() {
             </>
           )}
         </div>
-        {/* Holographic Canvas Overlay - Efeito Liquid Glass */}
-        <div className="absolute top-0 left-0 w-full h-full holographic-bg opacity-20" style={{ margin: 0, padding: 0, border: 'none', outline: 'none' }}></div>
+        {/* Textura original do site reintroduzida, mas restrita ao centro (desaparece nas laterais) */}
+        <div 
+          className="absolute top-0 left-0 w-full h-full holographic-bg pointer-events-none z-10" 
+          style={{ 
+            margin: 0, 
+            padding: 0, 
+            border: 'none', 
+            outline: 'none',
+            opacity: 0.5,
+            WebkitMaskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%)',
+            maskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%)'
+          }}
+        ></div>
         
-        {/* Gradiente overlay para melhorar contraste */}
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/40 via-black/20 to-black/40" style={{ margin: 0, padding: 0, border: 'none', outline: 'none' }}></div>
+        {/* Uma base bem sutil de sombra e textura original no centro para assegurar legibilidade da logo sem perder cor */}
+        <div 
+          className="absolute top-0 left-0 w-full h-full pointer-events-none z-10" 
+          style={{ 
+            margin: 0, 
+            padding: 0, 
+            border: 'none', 
+            outline: 'none',
+            background: 'radial-gradient(ellipse at center, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 65%)'
+          }}
+        ></div>
+      </div>
+
+      {/* Logo Animation - Center of Hero */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="w-[80%] max-w-[600px] md:max-w-[800px] h-auto object-contain transition-opacity duration-700 opacity-100"
+          style={{ filter: 'drop-shadow(0 0 30px rgba(14, 168, 160, 0.3))' }}
+        >
+          <source src="/videos/hero_logo_anim.webm" type="video/webm" />
+        </video>
       </div>
 
       {/* Floating Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
+
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#0EA8A0]/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#C45C2F]/5 rounded-full blur-3xl"></div>
         <div className="absolute top-1/2 right-1/3 w-32 h-32 bg-[#A34528]/20 rounded-full blur-2xl"></div>
@@ -433,7 +490,7 @@ export default function HeroSection() {
       {selectedVideo && (() => {
         const socialLinks = artistSocialLinks[selectedVideo.artist];
         return (
-          <div className="absolute bottom-24 sm:bottom-32 md:bottom-40 left-3 sm:left-6 z-50">
+          <div className="absolute bottom-48 sm:bottom-56 md:bottom-64 left-3 sm:left-6 z-50">
             <div className="bg-black/30 backdrop-blur-md rounded-lg p-3 sm:p-4 border border-white/10 shadow-xl w-[280px] sm:w-[360px] md:w-[420px] relative overflow-hidden group">
               {/* Animated glow effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#0EA8A0]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer pointer-events-none"></div>
@@ -442,9 +499,14 @@ export default function HeroSection() {
                   <p className="text-white/70 text-[9px] sm:text-[10px] md:text-xs mb-0.5 sm:mb-1 font-montserrat uppercase tracking-wider">
                     {selectedVideo.artist}
                   </p>
-                  <h2 className="text-xs sm:text-sm md:text-base font-bold text-white font-montserrat leading-tight line-clamp-2">
+                  <h2 className="text-xs sm:text-sm md:text-lg font-bold text-white font-montserrat leading-tight line-clamp-1">
                     {selectedVideo.title}
                   </h2>
+                  {selectedVideo.description && (
+                    <p className="text-white/60 text-[10px] sm:text-xs font-montserrat mt-1 line-clamp-2 leading-relaxed">
+                      {selectedVideo.description}
+                    </p>
+                  )}
                 </div>
                 
                 {/* Social Links and Watch Button */}
@@ -522,7 +584,7 @@ export default function HeroSection() {
             <span className="ml-2 sm:ml-3 text-gray-400 text-sm sm:text-base">Carregando vídeos...</span>
           </div>
         ) : videos.length > 0 ? (
-          <div className="flex gap-3 sm:gap-6 overflow-x-auto pb-2 scrollbar-hide items-center justify-center" style={{ overflowY: 'visible', overflowX: 'auto', clipPath: 'none', minHeight: '100px' }}>
+          <div className="flex gap-4 sm:gap-8 overflow-x-auto pt-10 pb-10 scrollbar-hide items-end justify-center" style={{ overflowY: 'visible', overflowX: 'auto', clipPath: 'none', minHeight: '180px' }}>
             {videos.map((video, index) => {
               const isSelected = selectedVideoId === video.id;
               const isHovered = hoveredVideoId === video.id;
@@ -530,31 +592,42 @@ export default function HeroSection() {
               const opacity = getButtonOpacity(video.id, index, isSelected, isHovered);
               
               return (
-              <button
+              <div
                 key={video.id}
+                className="relative flex items-center justify-center transform-origin-bottom"
+                style={{ 
+                  width: 'auto',
+                  height: '140px',
+                  display: 'flex',
+                  alignItems: 'flex-end',
+                  paddingBottom: '20px'
+                }}
+              >
+              <button
                 onClick={() => {
                   // Ao clicar, seleciona o vídeo para exibir como background
                   setSelectedVideoId(video.id);
                 }}
-                className={`group relative w-24 h-16 overflow-hidden flex-shrink-0 cursor-pointer ${
+                className={`group relative w-32 sm:w-40 md:w-52 h-20 sm:h-24 md:h-32 overflow-hidden flex-shrink-0 cursor-pointer ${
                   isSelected ? 'selected-video-button' : ''
                 }`}
                 data-video-id={video.id}
                 style={{ 
                   fontFamily: 'Montserrat, sans-serif',
-                  borderRadius: isSelected ? '8px' : '14px',
+                  borderRadius: '16px',
                   transform: isHovered 
-                    ? `scale(${scale}) translateY(-4px)` 
+                    ? `scale(${scale}) translateY(-6px)` 
                     : isSelected 
-                      ? 'scale(1.15) translateY(-4px)' 
+                      ? 'scale(1.15) translateY(-6px)' 
                       : `scale(${scale}) translateY(0)`,
-                  transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                   opacity: opacity,
                   filter: isHovered || isSelected 
-                    ? 'brightness(1.02)' 
-                    : 'blur(0.3px) grayscale(20%) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))',
-                  transformStyle: 'preserve-3d',
-                  willChange: 'transform, opacity',
+                    ? 'brightness(1.1) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4))' 
+                    : 'brightness(0.8) grayscale(10%) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))',
+                  willChange: 'transform, opacity, filter',
+                  zIndex: isHovered ? 100 : isSelected ? 50 : index,
+                  border: isSelected ? '2px solid rgba(14, 168, 160, 0.6)' : '1px solid rgba(255, 255, 255, 0.1)',
                 }}
                 onMouseEnter={() => {
                   setHoveredVideoId(video.id);
@@ -575,8 +648,8 @@ export default function HeroSection() {
                     loading={video.order_index === 1 ? 'eager' : 'lazy'}
                     fetchPriority={video.order_index === 1 ? 'high' : 'auto'}
                     decoding="async"
-                    width={96}
-                    height={64}
+                    width={320}
+                    height={180}
                     onError={(e) => {
                       // Fallback caso a imagem não carregue
                       const target = e.target as HTMLImageElement;
@@ -589,29 +662,36 @@ export default function HeroSection() {
                   />
                 </div>
                 
-                {/* Overlay */}
-                <div className={`absolute inset-0 bg-black/30 transition-opacity ${
-                  selectedVideoId === video.id ? 'opacity-0' : 'opacity-50 group-hover:opacity-30'
+                {/* Overlay Background */}
+                <div className={`absolute inset-0 bg-black transition-opacity duration-300 ${
+                  isHovered ? 'opacity-50' : selectedVideoId === video.id ? 'opacity-0' : 'opacity-40'
                 }`}></div>
                 
-                {/* Selected Indicator / Play Icon */}
+                {/* Selected Indicator / Hover Elements */}
                 {selectedVideoId === video.id && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-[#0EA8A0]/20 backdrop-blur-sm">
-                    <div className="bg-[#0EA8A0] rounded-lg p-1.5">
-                      <i className="ri-play-fill text-white text-sm"></i>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center transition-colors duration-300 z-10">
+                    <span className={`text-white text-[10px] sm:text-xs font-bold mb-1.5 sm:mb-2 text-center px-1 sm:px-2 line-clamp-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] transition-all duration-300 will-change-transform ${isHovered ? 'opacity-100 translate-y-0 delay-100' : 'opacity-0 translate-y-2'}`}>
+                      {video.title}
+                    </span>
+                    <div className={`rounded-full p-1.5 sm:p-2 transition-all duration-300 shadow-[0_0_15px_rgba(14,168,160,0.5)] bg-[#0EA8A0] ${isHovered ? 'scale-110' : 'scale-100'}`}>
+                      <i className="ri-play-fill text-white text-xs sm:text-sm translate-x-[1px]"></i>
                     </div>
                   </div>
                 )}
                 
-                {/* Play Icon on Hover */}
+                {/* Play Icon on Hover (for non-selected ones) */}
                 {selectedVideoId !== video.id && (
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="bg-black/50 rounded-lg p-2 backdrop-blur-sm">
-                      <i className="ri-play-fill text-white text-lg"></i>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                    <span className="text-white text-[10px] sm:text-xs font-bold mb-1.5 sm:mb-2 text-center px-1 sm:px-2 line-clamp-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] translate-y-2 group-hover:translate-y-0 transition-all duration-300 delay-100 will-change-transform">
+                      {video.title}
+                    </span>
+                    <div className="bg-white/20 rounded-full p-1.5 sm:p-2 backdrop-blur-sm group-hover:scale-110 transition-transform duration-300">
+                      <i className="ri-play-fill text-white text-xs sm:text-sm translate-x-[1px]"></i>
                     </div>
                   </div>
                 )}
               </button>
+              </div>
               );
             })}
           </div>

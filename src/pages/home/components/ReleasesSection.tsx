@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { supabase } from '../../../utils/supabase';
 
 interface Release {
   id: string;
@@ -11,123 +12,59 @@ interface Release {
 }
 
 /**
- * Extrai o nome do artista e da música do título do vídeo
- */
-function parseVideoTitle(title: string): { artist: string; song: string } {
-  const separators = [' - ', ' | ', ' – ', ' — '];
-  
-  for (const sep of separators) {
-    if (title.includes(sep)) {
-      const parts = title.split(sep);
-      if (parts.length >= 2) {
-        // Assume que o primeiro é a música e o segundo é o artista
-        return {
-          song: parts[0].trim(),
-          artist: parts[1].trim()
-        };
-      }
-    }
-  }
-  
-  // Se não encontrar separador, assume que todo o título é a música
-  return {
-    song: title,
-    artist: 'Céu Music'
-  };
-}
-
-/**
- * Determina o tipo de lançamento baseado no título
- */
-function getReleaseType(title: string): string {
-  const lowerTitle = title.toLowerCase();
-  if (lowerTitle.includes('ep') || lowerTitle.includes('extended play')) {
-    return 'EP';
-  }
-  if (lowerTitle.includes('álbum') || lowerTitle.includes('album')) {
-    return 'Álbum';
-  }
-  return 'Single';
-}
-
-/**
- * Formata a data para exibir apenas o ano
- */
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.getFullYear().toString();
-}
-
-/**
  * Gera a URL da thumbnail do YouTube em alta qualidade
  */
 function getYouTubeThumbnail(videoId: string): string {
+  // Se for um link completo, tenta extrair o ID
+  if (videoId.includes('youtube.com') || videoId.includes('youtu.be')) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = videoId.match(regExp);
+    const id = (match && match[2].length === 11) ? match[2] : videoId;
+    return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+  }
   return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 }
 
-// Dados mockados de lançamentos
-const MOCK_RELEASES: Release[] = [
-  {
-    id: '1',
-    title: 'Final Feliz',
-    artist: 'No Santuário feat Geziel Lima',
-    cover: 'https://img.youtube.com/vi/XWBgmBsxkk4/maxresdefault.jpg',
-    type: 'Single',
-    date: '2024',
-    streamingLink: 'https://www.youtube.com/watch?v=XWBgmBsxkk4'
-  },
-  {
-    id: '2',
-    title: 'Salva-vidas',
-    artist: 'Alexsander Lúcio',
-    cover: 'https://img.youtube.com/vi/bdLeReQbtgY/maxresdefault.jpg',
-    type: 'Single',
-    date: '2024',
-    streamingLink: 'https://www.youtube.com/watch?v=bdLeReQbtgY'
-  },
-  {
-    id: '3',
-    title: 'Louva na Graça',
-    artist: 'Na Graça',
-    cover: 'https://img.youtube.com/vi/5bvgSlZamBo/maxresdefault.jpg',
-    type: 'Single',
-    date: '2024',
-    streamingLink: 'https://www.youtube.com/watch?v=5bvgSlZamBo'
-  },
-  {
-    id: '4',
-    title: 'O Fogo Arderá - Ao Vivo',
-    artist: 'Alexsander Lúcio',
-    cover: 'https://img.youtube.com/vi/Bqc6B5LzTN0/maxresdefault.jpg',
-    type: 'Single',
-    date: '2024',
-    streamingLink: 'https://www.youtube.com/watch?v=Bqc6B5LzTN0'
-  },
-  {
-    id: '5',
-    title: 'A FÉ - AO VIVO',
-    artist: 'Na Graça',
-    cover: 'https://img.youtube.com/vi/g89eBxkG-Aw/maxresdefault.jpg',
-    type: 'Single',
-    date: '2024',
-    streamingLink: 'https://www.youtube.com/watch?v=g89eBxkG-Aw'
-  },
-  {
-    id: '6',
-    title: 'Milagres de Deus',
-    artist: 'Debora Lopes',
-    cover: 'https://img.youtube.com/vi/V1hYFBtdxm8/maxresdefault.jpg',
-    type: 'Single',
-    date: '2024',
-    streamingLink: 'https://www.youtube.com/watch?v=V1hYFBtdxm8'
-  }
-];
-
 export default function ReleasesSection() {
-  // Lançamentos estáticos - podem ser atualizados manualmente ou via Supabase no futuro
-  const releases: Release[] = MOCK_RELEASES;
-  const loading = false;
-  const error = null;
+  const [releases, setReleases] = useState<Release[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchReleases() {
+      if (!supabase) {
+        setLoading(false);
+        return;
+      }
+      try {
+        const { data, error: fetchError } = await supabase
+          .from('releases')
+          .select('*')
+          .order('order_index', { ascending: true });
+
+        if (fetchError) throw fetchError;
+
+        if (data) {
+          const mapped: Release[] = data.map(r => ({
+            id: r.id,
+            title: r.title,
+            artist: r.artist_name,
+            cover: r.cover_url || 'https://via.placeholder.com/300',
+            type: r.release_type,
+            date: r.release_date || '',
+            streamingLink: r.streaming_link || '#'
+          }));
+          setReleases(mapped);
+        }
+      } catch (err) {
+        console.error('Erro ao buscar lançamentos:', err);
+        setError('Não foi possível carregar os lançamentos.');
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchReleases();
+  }, []);
   return (
     <section className="px-4 sm:px-6 py-12 sm:py-16 lg:py-20 lg:px-12 relative">
       <div className="max-w-6xl mx-auto">

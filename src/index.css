@@ -557,3 +557,51 @@ select option:focus {
   background-color: #0EA8A0 !important;
   color: #ffffff !important;
 }
+
+@keyframes drawText {
+  0% {
+    stroke-dashoffset: 800;
+    fill: transparent;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  70% {
+    stroke-dashoffset: 0;
+    fill: transparent;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill: white;
+    opacity: 1;
+  }
+}
+
+.animate-draw-text {
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: drawText 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.font-pacifico {
+  font-family: 'Pacifico', cursive !important;
+}
+
+.font-urbanist {
+  font-family: 'Urbanist', sans-serif !important;
+}
+
+.font-space {
+  font-family: 'Space Grotesk', sans-serif !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+

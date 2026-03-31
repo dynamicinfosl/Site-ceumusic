@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logoImage from '../../../assets/Ativo 2[1].png';
 
 // Componente do Logo Céu Music
-function CeuMusicLogo({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
+function CeuMusicLogo({ size = 'md', className = '' }: { size?: 'sm' | 'md' | 'lg', className?: string }) {
   const sizeClasses = {
     sm: 'h-10 w-auto',
     md: 'h-14 w-auto',
@@ -11,7 +11,7 @@ function CeuMusicLogo({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
   };
 
   return (
-    <Link to="/" className="flex items-center justify-center group cursor-pointer relative">
+    <Link to="/" className={`flex items-center justify-center group cursor-pointer relative ${className}`}>
       <img 
         src={logoImage} 
         alt="Céu Music" 
@@ -25,6 +25,31 @@ function CeuMusicLogo({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [logoOpacity, setLogoOpacity] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Começa a mostrar o logo após o hero quase sumir, finaliza em 100vh
+      const scrollPos = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const startFade = windowHeight * 0.7; // Começa aos 70% da página (quase sumindo)
+      const endFade = windowHeight * 1.0;   // Completo ao sair da hero
+      
+      if (scrollPos < startFade) {
+        setLogoOpacity(0);
+      } else if (scrollPos > endFade) {
+        setLogoOpacity(1);
+      } else {
+        const opacity = (scrollPos - startFade) / (endFade - startFade);
+        setLogoOpacity(opacity);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial state
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
@@ -32,7 +57,7 @@ export default function Navbar() {
       <div 
         className="navbar-hero-desktop absolute top-6 left-1/2 -translate-x-1/2 z-50 hidden lg:block" 
         style={{ 
-          position: 'absolute', 
+          position: 'fixed', // Use fixed to stay relative to viewport
           top: '24px', 
           left: '50%', 
           transform: 'translateX(-50%)', 
@@ -40,8 +65,13 @@ export default function Navbar() {
           pointerEvents: 'auto'
         }}
       >
-        {/* Logo acima do menu */}
-        <div className="flex justify-center mb-4 relative" style={{ position: 'relative', transform: 'none' }}>
+        {/* Logo acima do menu - Agora com opacidade controlada pelo scroll */}
+        <div className="flex justify-center mb-4 relative" style={{ 
+          position: 'relative', 
+          transform: 'none',
+          opacity: logoOpacity,
+          transition: logoOpacity === 0 || logoOpacity === 1 ? 'opacity 0.3s ease-out' : 'none'
+        }}>
           <CeuMusicLogo size="sm" />
         </div>
         
@@ -106,17 +136,17 @@ export default function Navbar() {
 
       {/* Mobile Navbar */}
       <div 
-        className="navbar-hero-mobile lg:hidden absolute top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-gray-800"
+        className="navbar-hero-mobile lg:hidden fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-gray-800"
         style={{ 
-          position: 'absolute', 
-          top: '0', 
-          left: '0', 
-          right: '0'
+          position: 'fixed'
         }}
       >
         <div className="flex flex-col">
-          {/* Logo acima do menu mobile */}
-          <div className="flex justify-center pt-3 pb-2">
+          {/* Logo acima do menu mobile - Também com opacidade controlada */}
+          <div className="flex justify-center pt-3 pb-2" style={{ 
+            opacity: logoOpacity,
+            transition: 'opacity 0.3s ease-out'
+          }}>
             <CeuMusicLogo size="sm" />
           </div>
           
@@ -197,3 +227,4 @@ export default function Navbar() {
     </>
   );
 }
+
