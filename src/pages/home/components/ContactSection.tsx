@@ -18,7 +18,7 @@ interface ContactInfo {
 export default function ContactSection() {
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);
   const [contactInfo, setContactInfo] = useState<ContactInfo>({
-    email: 'contato@ceumusicbr.com',
+    email: 'ceumusicbrasil@gmail.com',
     phone: '(21) 98244-7141',
     address: 'Rio de Janeiro, RJ - Brasil'
   });

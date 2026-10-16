@@ -52,7 +52,7 @@ Esta mensagem foi enviada automaticamente através do formulário de contato.
    - `{{message}}` - Mensagem
 
 5. Configure o email de destino:
-   - No campo "To Email", coloque: `contato@ceumusicbr.com`
+   - No campo "To Email", coloque: `ceumusicbrasil@gmail.com`
    - Ou use uma variável se quiser flexibilidade
 
 6. Anote o **Template ID** que será gerado
@@ -115,7 +115,7 @@ Este erro geralmente indica problema com as credenciais ou configuração do tem
 
 2. **Verifique se o template está configurado corretamente:**
    - As variáveis no template devem corresponder exatamente: `{{from_name}}`, `{{from_email}}`, `{{phone}}`, `{{subject}}`, `{{message}}`
-   - O campo "To Email" deve estar preenchido com `contato@ceumusicbr.com`
+   - O campo "To Email" deve estar preenchido com `ceumusicbrasil@gmail.com`
    - O campo "From Email" deve estar configurado
 
 3. **Verifique no console do navegador (F12):**

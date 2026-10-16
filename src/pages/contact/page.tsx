@@ -56,7 +56,7 @@ export default function ContactPage() {
         phone: formData.phone || 'Não informado',
         subject: subjectMap[formData.subject] || formData.subject,
         message: formData.message,
-        to_email: 'contato@ceumusicbr.com', // Email de destino
+        to_email: 'ceumusicbrasil@gmail.com', // Email de destino
       };
 
       // Enviar email
@@ -93,7 +93,7 @@ export default function ContactPage() {
         errorMsg += 'Por favor, verifique se as credenciais do EmailJS estão corretas no arquivo .env';
       }
       
-      errorMsg += ' Ou entre em contato diretamente pelo email contato@ceumusicbr.com';
+      errorMsg += ' Ou entre em contato diretamente pelo email ceumusicbrasil@gmail.com';
       
       setErrorMessage(errorMsg);
       
@@ -149,8 +149,8 @@ export default function ContactPage() {
     {
       icon: 'ri-mail-fill',
       title: 'Email',
-      value: 'contato@ceumusicbr.com',
-      link: 'mailto:contato@ceumusicbr.com',
+      value: 'ceumusicbrasil@gmail.com',
+      link: 'mailto:ceumusicbrasil@gmail.com',
       color: '#0EA8A0'
     },
     {
@@ -403,7 +403,7 @@ export default function ContactPage() {
                         Erro ao enviar mensagem
                       </p>
                       <p className="text-white/80 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
-                        {errorMessage || 'Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente ou entre em contato diretamente pelo email contato@ceumusicbr.com'}
+                        {errorMessage || 'Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente ou entre em contato diretamente pelo email ceumusicbrasil@gmail.com'}
                       </p>
                     </div>
                   </div>

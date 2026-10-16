@@ -151,7 +151,7 @@ export default function ContactEditor() {
                 type="email" 
                 value={getContactValue('email')}
                 onChange={(e) => handleContactChange('email', e.target.value)}
-                placeholder="contato@ceumusicbr.com"
+                placeholder="ceumusicbrasil@gmail.com"
                 className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 mt-1 focus:border-[#0EA8A0] outline-none"
               />
             </div>
