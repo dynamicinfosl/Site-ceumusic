@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../../../utils/supabase';
-import aboutImage from '../../../../assets/logo_ceu_music.png';
+import aboutImage from '../../../../assets/Ativo 2[1].png';
 
 interface AboutData {
   title: string;
@@ -36,19 +36,13 @@ export default function AboutSection() {
 
   return (
     <section className="relative py-16 sm:py-24 lg:py-32 bg-gradient-to-b from-black via-[#1A1A1A] to-black">
-      {/* Decorative Elements */}
+
       <div className="absolute top-0 left-1/4 w-64 h-64 bg-[#0EA8A0]/10 rounded-full blur-[100px]" />
       <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-[#C45C2F]/10 rounded-full blur-[100px]" />
-
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Content */}
         <div className="text-center">
-          <span
-            className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-[#0EA8A0]/10 border border-[#0EA8A0]/30 rounded-full text-[#0EA8A0] text-xs sm:text-sm font-semibold mb-6 sm:mb-8"
-            style={{ fontFamily: 'Montserrat, sans-serif' }}
-          >
-            {aboutData?.title || 'Sobre Nós'}
-          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-8">{aboutData?.title || 'Sobre Nós'}</h2>
           
           {/* Logo em cima */}
           <div className="mb-6 sm:mb-8 lg:mb-10 flex justify-center">
@@ -62,14 +56,13 @@ export default function AboutSection() {
           {/* Texto em baixo */}
           <p
             className="text-base sm:text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-6 sm:mb-8 px-4 whitespace-pre-line"
-            style={{ fontFamily: 'Inter, sans-serif' }}
           >
             {aboutData?.content || defaultContent}
           </p>
 
           <Link
             to="/sobre"
-            className="inline-flex items-center gap-2 bg-transparent border border-gray-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold hover:border-[#0EA8A0] hover:shadow-[0_0_20px_rgba(14,168,160,0.3)] hover:text-[#0EA8A0] transition-all duration-300 whitespace-nowrap cursor-pointer font-montserrat text-sm sm:text-base min-h-[44px]"
+            className="inline-flex items-center gap-2 bg-transparent border border-gray-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold hover:border-[#0EA8A0] hover:shadow-[0_0_20px_rgba(14,168,160,0.3)] hover:text-[#0EA8A0] transition-all duration-300 whitespace-nowrap cursor-pointer text-sm sm:text-base min-h-[44px]"
           >
             Saiba Mais
             <i className="ri-arrow-right-line"></i>
@@ -78,4 +71,4 @@ export default function AboutSection() {
       </div>
     </section>
   );
-}
+}

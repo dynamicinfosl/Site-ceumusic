@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { supabase } from '../../../utils/supabase';
+import { getNativeClipUrl } from '../../../utils/nativeVideo';
+import ClipVideo from '../../../components/feature/ClipVideo';
 
 interface Video {
   id: string;
@@ -10,6 +12,7 @@ interface Video {
   thumbnail: string;
   duration: string;
   featured: boolean;
+  clip: string | null;
 }
 
 interface SocialLinks {
@@ -57,7 +60,8 @@ export default function VideosSection() {
             videoId: v.video_id,
             thumbnail: `https://img.youtube.com/vi/${v.video_id}/maxresdefault.jpg`,
             duration: v.duration || '0:00',
-            featured: v.featured || false
+            featured: v.featured || false,
+            clip: getNativeClipUrl(v.preview_url)
           }));
           setVideos(mappedVideos);
           if (mappedVideos.length > 0) setActiveVideoId(mappedVideos[0].id);
@@ -146,20 +150,16 @@ export default function VideosSection() {
 
   return (
     <section className="relative py-32 bg-gradient-to-b from-black via-[#1A1A1A] to-black">
-      {/* Decorative Elements */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#0EA8A0]/10 rounded-full blur-[120px]" />
-      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-[#A34528]/10 rounded-full blur-[120px]" />
 
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#0EA8A0]/10 rounded-full blur-[120px]" />
+      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-[#C45C2F]/10 rounded-full blur-[120px]" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-          <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-[#C45C2F]/10 border border-[#C45C2F]/30 rounded-full text-[#C45C2F] text-xs sm:text-sm font-semibold mb-4 sm:mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            Videoclipes
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            Assista aos <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C45C2F] to-[#0EA8A0]">Clipes</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
+            Assista aos clipes
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed px-4" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
             Produções audiovisuais de alta qualidade dos nossos artistas
           </p>
         </div>
@@ -205,22 +205,15 @@ export default function VideosSection() {
                     animationDelay: `${index * 100}ms`
                   }}
                 >
-                  <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-black border border-white/10 hover:border-[#C45C2F]/50 transition-all duration-500 hover:scale-105">
+                  <div className="relative overflow-hidden rounded-2xl bg-[#141414] border border-white/10 hover:border-[#C45C2F]/50 transition-all duration-500">
                     {/* Thumbnail / Preview */}
                     <div
                       className="relative aspect-video overflow-hidden"
                       onMouseEnter={() => setHoveredVideoId(video.id)}
                       onMouseLeave={() => setHoveredVideoId(null)}
                     >
-                      {isHovered ? (
-                        <div className="w-full h-full pointer-events-none">
-                          <iframe
-                            className="w-full h-full"
-                            src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${video.videoId}`}
-                            title={video.title}
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          ></iframe>
-                        </div>
+                      {isHovered && video.clip ? (
+                        <ClipVideo src={video.clip} poster={video.thumbnail} className="w-full h-full object-cover pointer-events-none" />
                       ) : (
                         <img
                           src={video.thumbnail}
@@ -232,21 +225,17 @@ export default function VideosSection() {
                       {/* Gradient Overlay */}
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
 
-                      {/* Glow Border Effect */}
-                      <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        <div className="absolute inset-0 border-2 border-[#C45C2F]/50 rounded-2xl shadow-2xl shadow-[#C45C2F]/30" />
-                      </div>
 
                       {/* Play Button (esconde durante o hover/preview) */}
-                      {!isHovered && (
-                        <div className="pointer-events-none absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center bg-[#C45C2F]/90 backdrop-blur-sm rounded-full opacity-90 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100 shadow-2xl shadow-[#C45C2F]/50">
+                      {!(isHovered && video.clip) && (
+                        <div className="pointer-events-none absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center bg-[#C45C2F]/90 backdrop-blur-sm rounded-full opacity-90 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100">
                           <i className="ri-play-fill text-4xl text-white ml-1"></i>
                         </div>
                       )}
 
                       {/* Duration Badge */}
                       <div className="pointer-events-none absolute bottom-4 right-4 px-3 py-1 bg-black/80 backdrop-blur-sm rounded-lg">
-                        <span className="text-white text-xs font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                        <span className="text-white text-xs font-semibold">
                           {video.duration}
                         </span>
                       </div>
@@ -254,7 +243,7 @@ export default function VideosSection() {
                       {/* Views Badge */}
                       <div className="pointer-events-none absolute top-4 left-4 px-3 py-1 bg-black/80 backdrop-blur-sm rounded-lg flex items-center space-x-2">
                         <i className="ri-eye-fill text-[#0EA8A0] text-sm"></i>
-                        <span className="text-white text-xs font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                        <span className="text-white text-xs font-semibold">
                           {video.views}
                         </span>
                       </div>
@@ -266,11 +255,10 @@ export default function VideosSection() {
                         className={`text-xl font-bold mb-2 transition-colors duration-300 ${
                           isActive ? 'text-white group-hover:text-[#C45C2F]' : 'text-white/80 group-hover:text-[#C45C2F]'
                         }`}
-                        style={{ fontFamily: 'Montserrat, sans-serif' }}
                       >
                         {video.title}
                       </h3>
-                      <p className="text-white/60 text-sm flex items-center space-x-2" style={{ fontFamily: 'Inter, sans-serif' }}>
+                      <p className="text-white/60 text-sm flex items-center space-x-2">
                         <i className="ri-user-voice-fill text-[#0EA8A0]"></i>
                         <span>{video.artist}</span>
                       </p>
@@ -316,7 +304,7 @@ export default function VideosSection() {
                     <div className="w-full h-full flex items-center justify-center">
                       <div className="text-center">
                         <i className="ri-play-circle-fill text-8xl text-[#C45C2F] mb-4"></i>
-                        <p className="text-white/70 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        <p className="text-white/70 text-sm">
                           Vídeo em breve
                         </p>
                       </div>
@@ -328,10 +316,10 @@ export default function VideosSection() {
                 {video && (
                   <div className="p-4 sm:p-6 bg-black/40 backdrop-blur-sm rounded-b-2xl">
                     <div className="mb-3">
-                      <p className="text-white/60 text-xs sm:text-sm mb-1 uppercase tracking-wider" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                      <p className="text-white/60 text-xs sm:text-sm mb-1 uppercase tracking-wider">
                         {video.artist}
                       </p>
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-3" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-3">
                         {video.title}
                       </h3>
                     </div>

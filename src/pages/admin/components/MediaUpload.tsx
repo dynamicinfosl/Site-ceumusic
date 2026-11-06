@@ -10,7 +10,26 @@ interface MediaUploadProps {
   label?: string;
 }
 
-export default function MediaUpload({ 
+export async function uploadToStorage(file: File, path: string): Promise<string> {
+  if (!supabase) throw new Error('Supabase client not initialized');
+
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) throw new Error('Não autenticado');
+
+  const fileExt = file.name.split('.').pop();
+  const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
+
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('path', `${path}/${fileName}`);
+
+  const { data, error } = await supabase.functions.invoke('upload-to-r2', { body: formData });
+  if (error) throw error;
+  if (data?.error) throw new Error(data.error);
+  return data.url;
+}
+
+export default function MediaUpload({
   onUploadComplete, 
   currentUrl, 
   type = 'image', 
@@ -29,31 +48,7 @@ export default function MediaUpload({
     setError(null);
 
     try {
-      if (!supabase) throw new Error('Supabase client not initialized');
-
-      // 1. Get the session for JWT authentication
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) throw new Error('Não autenticado');
-
-      // 2. Prepare the file name and path
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
-      const filePath = `${path}/${fileName}`;
-
-      // 3. Call the Edge Function
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('path', filePath);
-
-      const { data, error: uploadError } = await supabase.functions.invoke('upload-to-r2', {
-        body: formData,
-      });
-
-      if (uploadError) throw uploadError;
-      if (data?.error) throw new Error(data.error);
-
-      // 4. Return the URL
-      onUploadComplete(data.url);
+      onUploadComplete(await uploadToStorage(file, path));
     } catch (err: any) {
       console.error('Erro no upload:', err);
       setError(err.message || 'Falha no upload');

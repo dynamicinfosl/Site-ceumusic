@@ -77,7 +77,7 @@ export default function AboutEditor() {
     <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
       <div className="flex flex-col sm:items-center sm:flex-row justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold font-montserrat">Editor da Seção Sobre</h1>
+          <h1 className="text-3xl font-bold">Editor da Seção Sobre</h1>
           <p className="text-white/40 mt-1">Conte a história da Céu Music para o mundo.</p>
         </div>
         <button

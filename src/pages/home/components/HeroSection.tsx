@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { supabase } from '../../../utils/supabase';
 import Navbar from '../../../components/feature/Navbar';
+import ClipVideo from '../../../components/feature/ClipVideo';
+import { getNativeClipUrl } from '../../../utils/nativeVideo';
 
 // Mapeamento de artistas para redes sociais
 const artistSocialLinks: { [key: string]: { instagram?: string; spotify?: string; youtube?: string } } = {
@@ -36,7 +38,8 @@ interface HeroVideo {
   duration: number | null;
   order_index: number;
   youtube_url?: string;
-}// Dados mock para quando o Supabase não estiver configurado
+}
+// Dados mock para quando o Supabase não estiver configurado
 const MOCK_VIDEOS: HeroVideo[] = [
   {
     id: '1',
@@ -280,15 +283,7 @@ export default function HeroSection() {
 
   const selectedVideo = videos.find(v => v.id === selectedVideoId);
 
-  // Função para extrair o ID do vídeo do YouTube a partir da URL
-  const getYouTubeVideoId = (url?: string): string | null => {
-    if (!url) return null;
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : null;
-  };
-
-  const youtubeVideoId = selectedVideo ? getYouTubeVideoId(selectedVideo.youtube_url) : null;
+  const selectedClip = getNativeClipUrl(selectedVideo?.video_url);
 
   return (
     <header className="relative w-full" style={{ margin: 0, padding: 0, border: 'none', outline: 'none', height: '100vh', width: '100vw', position: 'relative', top: 0, left: 0, right: 0, bottom: 0, overflow: 'visible' }}>
@@ -319,120 +314,23 @@ export default function HeroSection() {
         >
           {selectedVideo && (
             <>
-              {/* Thumbnail como background (fallback) */}
-              <div 
-                className="absolute top-0 left-0 w-full h-full bg-cover bg-center transition-opacity duration-500"
-                style={{
-                  backgroundImage: selectedVideo.thumbnail_url 
-                    ? `url(${selectedVideo.thumbnail_url})` 
-                    : 'none',
-                  filter: 'blur(20px) brightness(0.3)',
-                  width: '100vw',
-                  height: '100vh',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  opacity: youtubeVideoId ? 0 : 1,
-                  margin: 0,
-                  padding: 0,
-                  border: 'none',
-                  outline: 'none',
-                  top: 0,
-                  left: 0,
-                }}
-              >
-                {selectedVideo.thumbnail_url && selectedVideo.order_index === 1 && (
-                  <img
-                    src={selectedVideo.thumbnail_url}
-                    alt=""
-                    aria-hidden="true"
-                    className="absolute inset-0 w-full h-full object-cover opacity-0"
-                    loading="eager"
-                    fetchPriority="high"
-                    decoding="async"
-                    width={1920}
-                    height={1080}
-                  />
-                )}
-              </div>
-              
-              {/* YouTube iframe como background (se disponível) */}
-              {youtubeVideoId && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '-1px',
-                    left: '-1px',
-                    right: '-1px',
-                    bottom: '-1px',
-                    width: 'calc(100vw + 2px)',
-                    height: 'calc(100vh + 2px)',
-                    overflow: 'hidden',
-                    margin: 0,
-                    padding: 0,
-                    zIndex: 0,
-                  }}
-                >
-                  <iframe
-                    key={selectedVideo.id}
-                    style={{
-                      filter: 'brightness(0.85)',
-                      pointerEvents: 'none',
-                      border: 'none',
-                      outline: 'none',
-                      margin: 0,
-                      padding: 0,
-                      width: '100vw',
-                      height: '56.25vw',
-                      minHeight: '100vh',
-                      minWidth: '177.77vh',
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%) translateZ(0)',
-                      display: 'block',
-                      zIndex: 0,
-                      willChange: 'transform',
-                    }}
-                    src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&start=0`}
-                    allow="autoplay; encrypted-media"
-                    allowFullScreen
-                    title={selectedVideo.title}
-                    frameBorder="0"
-                    scrolling="no"
-                  />
-                </div>
+              {/* Sem clipe enviado pelo painel, fica a capa */}
+              {selectedVideo.thumbnail_url && (
+                <img
+                  src={selectedVideo.thumbnail_url}
+                  alt=""
+                  aria-hidden="true"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
               )}
-              
-              {/* Vídeo de fundo local (se disponível e não houver YouTube) */}
-              {!youtubeVideoId && selectedVideo.video_url && (
-                <video
-                  key={selectedVideo.id}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  style={{
-                    filter: 'brightness(0.85)',
-                    width: '100vw',
-                    height: '100vh',
-                    objectFit: 'cover',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    border: 'none',
-                    outline: 'none',
-                    margin: 0,
-                    padding: 0,
-                    minWidth: '100%',
-                    minHeight: '100%',
-                    display: 'block',
-                  }}
-                >
-                  <source src={selectedVideo.video_url} type="video/mp4" />
-                  Seu navegador não suporta vídeos HTML5.
-                </video>
+              {selectedClip && (
+                <ClipVideo
+                  src={selectedClip}
+                  poster={selectedVideo.thumbnail_url}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
               )}
             </>
           )}
@@ -471,7 +369,7 @@ export default function HeroSection() {
           loop 
           muted 
           playsInline 
-          className="w-[80%] max-w-[600px] md:max-w-[800px] h-auto object-contain transition-opacity duration-700 opacity-100"
+          className="w-[80%] max-w-[600px] md:max-w-[800px] h-auto object-contain transition-opacity duration-700 opacity-100 lg:-translate-y-[12vh]"
           style={{ filter: 'drop-shadow(0 0 30px rgba(14, 168, 160, 0.3))' }}
         >
           <source src="/videos/hero_logo_anim.webm" type="video/webm" />
@@ -483,7 +381,7 @@ export default function HeroSection() {
 
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#0EA8A0]/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#C45C2F]/5 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 right-1/3 w-32 h-32 bg-[#A34528]/20 rounded-full blur-2xl"></div>
+        <div className="absolute top-1/2 right-1/3 w-32 h-32 bg-[#C45C2F]/20 rounded-full blur-2xl"></div>
       </div>
 
       {/* Artist and Song Info - Bottom Left */}
@@ -496,14 +394,14 @@ export default function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#0EA8A0]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer pointer-events-none"></div>
               <div className="relative z-10" style={{ pointerEvents: 'auto' }}>
                 <div className="mb-2 sm:mb-2.5">
-                  <p className="text-white/70 text-[9px] sm:text-[10px] md:text-xs mb-0.5 sm:mb-1 font-montserrat uppercase tracking-wider">
+                  <p className="text-white/70 text-[9px] sm:text-[10px] md:text-xs mb-0.5 sm:mb-1 uppercase tracking-wider">
                     {selectedVideo.artist}
                   </p>
-                  <h2 className="text-xs sm:text-sm md:text-lg font-bold text-white font-montserrat leading-tight line-clamp-1">
+                  <h2 className="text-xs sm:text-sm md:text-lg font-bold text-white leading-tight line-clamp-1">
                     {selectedVideo.title}
                   </h2>
                   {selectedVideo.description && (
-                    <p className="text-white/60 text-[10px] sm:text-xs font-montserrat mt-1 line-clamp-2 leading-relaxed">
+                    <p className="text-white/60 text-[10px] sm:text-xs mt-1 line-clamp-2 leading-relaxed">
                       {selectedVideo.description}
                     </p>
                   )}
@@ -563,10 +461,10 @@ export default function HeroSection() {
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
                   style={{ pointerEvents: 'auto' }}
-                  className="flex-shrink-0 inline-flex items-center gap-1 bg-[#0EA8A0] hover:bg-[#0EA8A0]/90 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-[0_0_20px_rgba(14,168,160,0.5)] hover:scale-105 font-montserrat text-[10px] sm:text-xs ml-auto relative z-30"
+                  className="flex-shrink-0 inline-flex items-center gap-1 bg-[#0EA8A0] hover:bg-[#0EA8A0]/90 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-[0_0_20px_rgba(14,168,160,0.5)] text-[10px] sm:text-xs ml-auto relative z-30"
                 >
                   <i className="ri-play-circle-fill text-xs sm:text-sm" style={{ pointerEvents: 'none' }}></i>
-                  <span className="hidden sm:inline" style={{ pointerEvents: 'none' }}>Assista Agora!</span>
+                  <span className="hidden sm:inline" style={{ pointerEvents: 'none' }}>Assistir clipe</span>
                   <span className="sm:hidden" style={{ pointerEvents: 'none' }}>Assistir</span>
                 </a>
                 </div>
@@ -613,7 +511,6 @@ export default function HeroSection() {
                 }`}
                 data-video-id={video.id}
                 style={{ 
-                  fontFamily: 'Montserrat, sans-serif',
                   borderRadius: '16px',
                   transform: isHovered 
                     ? `scale(${scale}) translateY(-6px)` 

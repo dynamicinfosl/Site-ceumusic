@@ -13,6 +13,7 @@ import {
   CheckCircle2,
   GripVertical
 } from 'lucide-react';
+import ClipMaker from '../components/ClipMaker';
 
 interface VideoItem {
   id: string;
@@ -23,10 +24,13 @@ interface VideoItem {
   duration: string;
   featured: boolean;
   order_index: number;
+  preview_url?: string | null;
 }
 
 export default function VideosEditor() {
   const [videos, setVideos] = useState<VideoItem[]>([]);
+  // A coluna preview_url depende da migração em supabase/migrations
+  const [hasPreviewColumn, setHasPreviewColumn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
@@ -45,6 +49,7 @@ export default function VideosEditor() {
 
       if (error) throw error;
       setVideos(data || []);
+      setHasPreviewColumn(!!data?.length && 'preview_url' in data[0]);
     } catch (err: any) {
       console.error('Erro ao buscar vídeos:', err);
     } finally {
@@ -109,7 +114,7 @@ export default function VideosEditor() {
     <div className="max-w-5xl mx-auto space-y-8 animate-fade-in">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold font-montserrat">Galeria de Vídeos</h1>
+          <h1 className="text-3xl font-bold">Galeria de Vídeos</h1>
           <p className="text-white/40 mt-1">Gerencie os vídeos do YouTube exibidos na galeria inferior.</p>
         </div>
         <button
@@ -217,6 +222,16 @@ export default function VideosEditor() {
                     className="w-full bg-white/5 border border-white/10 rounded-xl py-2 px-4 mt-1 focus:border-[#0EA8A0] outline-none text-xs"
                   />
                 </div>
+                {hasPreviewColumn && (
+                  <div className="col-span-1 sm:col-span-2">
+                    <ClipMaker
+                      currentUrl={video.preview_url}
+                      onComplete={(url) => handleChange(video.id, 'preview_url', url)}
+                      path="galeria/videos"
+                      label="Trecho exibido ao passar o mouse"
+                    />
+                  </div>
+                )}
               </div>
 
               {/* Order and Trash */}

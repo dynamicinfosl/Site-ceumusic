@@ -122,7 +122,7 @@ export default function ArtistsEditor() {
     <div className="max-w-6xl mx-auto space-y-8 animate-fade-in">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold font-montserrat">Gerenciar Artistas</h1>
+          <h1 className="text-3xl font-bold">Gerenciar Artistas</h1>
           <p className="text-white/40 mt-1">Cadastre e edite os perfis dos artistas do selo.</p>
         </div>
         <button

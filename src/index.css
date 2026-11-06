@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Pacifico&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -29,7 +27,7 @@
   
   body {
     @apply bg-black text-white;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Instrument Sans', system-ui, sans-serif;
     min-height: 100vh;
     height: 100vh;
     overflow-y: auto;
@@ -50,11 +48,32 @@
     box-sizing: border-box !important;
   }
   
-  /* Remove bordas de elementos que podem aparecer */
-  header, div {
-    border: none;
-    outline: none;
-    box-sizing: border-box;
+  html {
+    color-scheme: dark;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Bricolage Grotesque', 'Instrument Sans', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid #0EA8A0;
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
   
   /* Garante que o hero section não tenha espaçamentos */
@@ -362,59 +381,6 @@
   }
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scrollHorizontal {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes gradient-border {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-@keyframes gradient-border {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 @keyframes liquidFlow {
   0%, 100% {
     transform: translate(0, 0) rotate(0deg);
@@ -492,32 +458,57 @@
   }
 }
 
-.font-montserrat {
-  font-family: 'Montserrat', sans-serif;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* YouTube Background Video Styles */
-.youtube-background-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  min-width: 100%;
-  min-height: 100%;
-  overflow: hidden;
+@keyframes scrollHorizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
-.youtube-background-wrapper iframe {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: max(100vw, 177.77vh); /* Garante que cubra toda a largura ou altura */
-  height: max(100vh, 56.25vw); /* Garante que cubra toda a altura ou largura */
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
+@keyframes gradient-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes gradient-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* Scrollbar Hide */
@@ -584,18 +575,6 @@ select option:focus {
   animation: drawText 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.font-pacifico {
-  font-family: 'Pacifico', cursive !important;
-}
-
-.font-urbanist {
-  font-family: 'Urbanist', sans-serif !important;
-}
-
-.font-space {
-  font-family: 'Space Grotesk', sans-serif !important;
-}
-
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -604,4 +583,4 @@ select option:focus {
 .animate-fade-in {
   animation: fadeIn 1s ease-out forwards;
 }
-
+

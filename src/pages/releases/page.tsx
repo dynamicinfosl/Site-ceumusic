@@ -1,10 +1,37 @@
 import { useState, useRef, useEffect } from 'react';
+import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
+import { fetchReleaseRows, normalizeName, type ReleaseRow } from '../../utils/catalog';
+
+interface Release {
+  id: number | string;
+  title: string;
+  artist: string;
+  type: string;
+  typeLabel: string;
+  date: string;
+  cover: string;
+  genre: string;
+  streams: string;
+  featured: boolean;
+  videoUrl: string;
+}
+
+const typeFilterIds: Record<string, string> = { single: 'singles', ep: 'eps', album: 'albums' };
+
+function toFilterId(releaseType: string | null): string {
+  return typeFilterIds[normalizeName(releaseType ?? '')] ?? 'singles';
+}
 
 export default function ReleasesPage() {
   const [selectedFilter, setSelectedFilter] = useState('all');
-  const [openMenuId, setOpenMenuId] = useState<number | null>(null);
-  const menuRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
+  const [openMenuId, setOpenMenuId] = useState<number | string | null>(null);
+  const [releaseRows, setReleaseRows] = useState<ReleaseRow[]>([]);
+  const menuRefs = useRef<{ [key: number | string]: HTMLDivElement | null }>({});
+
+  useEffect(() => {
+    fetchReleaseRows().then(setReleaseRows);
+  }, []);
 
   // Fechar menu ao clicar fora
   useEffect(() => {
@@ -32,7 +59,7 @@ export default function ReleasesPage() {
     { id: 'albums', name: 'Álbuns' }
   ];
 
-  const releases = [
+  const catalogReleases: Release[] = [
     {
       id: 1,
       title: 'Salva-vidas',
@@ -165,7 +192,42 @@ export default function ReleasesPage() {
     },
   ];
 
-  const filteredReleases = selectedFilter === 'all' 
+  const isSameRelease = (release: Release, row: ReleaseRow) => normalizeName(release.title) === normalizeName(row.title);
+
+  // Lançamentos novos do painel aparecem primeiro; os já existentes recebem os dados editados lá
+  const panelOnlyReleases: Release[] = releaseRows
+    .filter((row) => !catalogReleases.some((release) => isSameRelease(release, row)))
+    .map((row) => ({
+      id: row.id,
+      title: row.title,
+      artist: row.artist_name ?? '',
+      type: toFilterId(row.release_type),
+      typeLabel: row.release_type ?? 'Single',
+      date: row.release_date ?? '',
+      cover: row.cover_url ?? '',
+      genre: '',
+      streams: '',
+      featured: false,
+      videoUrl: row.streaming_link ?? '',
+    }));
+
+  const releases: Release[] = [
+    ...panelOnlyReleases,
+    ...catalogReleases.map((release) => {
+      const row = releaseRows.find((candidate) => isSameRelease(release, candidate));
+      if (!row) return release;
+      return {
+        ...release,
+        artist: row.artist_name || release.artist,
+        cover: row.cover_url || release.cover,
+        type: row.release_type ? toFilterId(row.release_type) : release.type,
+        typeLabel: row.release_type || release.typeLabel,
+        date: row.release_date || release.date,
+      };
+    }),
+  ];
+
+  const filteredReleases = selectedFilter === 'all'
     ? releases 
     : releases.filter(release => release.type === selectedFilter);
 
@@ -173,8 +235,10 @@ export default function ReleasesPage() {
 
   return (
     <div className="bg-black min-h-screen">
+      <Navbar />
+
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-44 pb-20 overflow-hidden">
         <div 
           className="absolute inset-0 z-0"
           style={{
@@ -187,13 +251,10 @@ export default function ReleasesPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-black z-10" />
         
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-[#C45C2F]/10 border border-[#C45C2F]/30 rounded-full text-[#C45C2F] text-xs sm:text-sm font-semibold mb-4 sm:mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            Discografia
-          </span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            Nossos <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C45C2F] to-[#0EA8A0]">Lançamentos</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6">
+            Nossos lançamentos
           </h1>
-          <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed px-4" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
             Explore a discografia completa dos artistas Céu Music
           </p>
         </div>
@@ -201,11 +262,11 @@ export default function ReleasesPage() {
 
       {/* Top Releases of the Month */}
       <section className="relative py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-black to-[#1A1A1A]">
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#C45C2F]/10 rounded-full blur-[120px]" />
         
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#C45C2F]/10 rounded-full blur-[120px]" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 sm:mb-12" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            Top Lançamentos do Mês
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 sm:mb-12">
+            Top lançamentos do mês
           </h2>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {featuredReleases.map((release, index) => (
@@ -221,7 +282,7 @@ export default function ReleasesPage() {
                   animationDelay: `${index * 100}ms`
                 }}
               >
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-black border-2 border-[#C45C2F]/30 hover:border-[#C45C2F] transition-all duration-500 hover:scale-105 shadow-xl shadow-[#C45C2F]/20">
+                <div className="relative overflow-hidden rounded-2xl bg-[#141414] border-2 border-[#C45C2F]/30 hover:border-[#C45C2F] transition-all duration-500">
                   {/* Cover Image */}
                   <div className="relative aspect-square overflow-hidden">
                     <img
@@ -231,10 +292,6 @@ export default function ReleasesPage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
                     
-                    {/* Glow Effect */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#C45C2F]/20 via-transparent to-[#0EA8A0]/20" />
-                    </div>
 
                     {/* Play Button */}
                     {release.videoUrl ? (
@@ -243,19 +300,19 @@ export default function ReleasesPage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center bg-[#C45C2F]/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 shadow-2xl shadow-[#C45C2F]/50 cursor-pointer"
+                        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center bg-[#C45C2F]/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 cursor-pointer"
                       >
                         <i className="ri-play-fill text-4xl text-white ml-1"></i>
                       </a>
                     ) : (
-                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center bg-[#C45C2F]/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 shadow-2xl shadow-[#C45C2F]/50">
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center bg-[#C45C2F]/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100">
                         <i className="ri-play-fill text-4xl text-white ml-1"></i>
                       </div>
                     )}
 
                     {/* Featured Badge */}
-                    <div className="absolute top-4 right-4 px-3 py-1 bg-gradient-to-r from-[#C45C2F] to-[#A34528] backdrop-blur-sm rounded-full border border-white/20 shadow-lg">
-                      <span className="text-white text-xs font-bold flex items-center space-x-1" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                    <div className="absolute top-4 right-4 px-3 py-1 bg-[#C45C2F] backdrop-blur-sm rounded-full border border-white/20 shadow-lg">
+                      <span className="text-white text-xs font-bold flex items-center space-x-1">
                         <i className="ri-fire-fill"></i>
                         <span>Destaque</span>
                       </span>
@@ -265,18 +322,18 @@ export default function ReleasesPage() {
                   {/* Release Info */}
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="px-3 py-1 bg-[#C45C2F]/20 border border-[#C45C2F]/30 rounded-full text-[#C45C2F] text-xs font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                      <span className="px-3 py-1 bg-[#C45C2F]/20 border border-[#C45C2F]/30 rounded-full text-[#C45C2F] text-xs font-semibold">
                         {release.typeLabel}
                       </span>
-                      <span className="text-white/50 text-xs" style={{ fontFamily: 'Inter, sans-serif' }}>
+                      <span className="text-white/50 text-xs">
                         {release.date}
                       </span>
                     </div>
 
-                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[#C45C2F] transition-colors duration-300" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[#C45C2F] transition-colors duration-300">
                       {release.title}
                     </h3>
-                    <p className="text-white/60 text-sm mb-4" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <p className="text-white/60 text-sm mb-4">
                       {release.artist}
                     </p>
 
@@ -284,7 +341,7 @@ export default function ReleasesPage() {
                     <div className="flex items-center justify-between pt-4 border-t border-white/10">
                       <div className="flex items-center space-x-2">
                         <i className="ri-headphone-fill text-[#0EA8A0]"></i>
-                        <span className="text-white/50 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        <span className="text-white/50 text-sm">
                           {release.streams}
                         </span>
                       </div>
@@ -321,10 +378,9 @@ export default function ReleasesPage() {
                 onClick={() => setSelectedFilter(filter.id)}
                 className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all duration-300 whitespace-nowrap cursor-pointer text-sm sm:text-base min-h-[44px] ${
                   selectedFilter === filter.id
-                    ? 'bg-gradient-to-r from-[#0EA8A0] to-[#0C3F48] text-white shadow-lg shadow-[#0EA8A0]/30 scale-105'
+                    ? 'bg-[#0EA8A0] hover:bg-[#0EA8A0]/85 text-black scale-105'
                     : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/10 hover:border-white/20'
                 }`}
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
               >
                 {filter.name}
               </button>
@@ -335,11 +391,11 @@ export default function ReleasesPage() {
 
       {/* All Releases */}
       <section className="relative py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-[#1A1A1A] to-black">
-        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-[#0EA8A0]/10 rounded-full blur-[120px]" />
         
+        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-[#0EA8A0]/10 rounded-full blur-[120px]" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 sm:mb-12" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            Todos os Lançamentos
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 sm:mb-12">
+            Todos os lançamentos
           </h2>
           
           {/* List View */}
@@ -371,29 +427,29 @@ export default function ReleasesPage() {
 
                 {/* Info */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-white font-semibold text-base sm:text-lg mb-1 group-hover:text-[#0EA8A0] transition-colors duration-300" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <h3 className="text-white font-semibold text-base sm:text-lg mb-1 group-hover:text-[#0EA8A0] transition-colors duration-300">
                     {release.title}
                   </h3>
-                  <p className="text-white/60 text-xs sm:text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
-                    {release.artist} • {release.genre}
+                  <p className="text-white/60 text-xs sm:text-sm">
+                    {[release.artist, release.genre].filter(Boolean).join(' • ')}
                   </p>
                 </div>
 
                 {/* Type Badge */}
                 <div className="hidden md:block">
-                  <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-white/60 text-xs font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-white/60 text-xs font-semibold">
                     {release.typeLabel}
                   </span>
                 </div>
 
                 {/* Streams */}
                 <div className="hidden lg:flex items-center space-x-2 text-white/50 text-sm min-w-[100px]">
-                  <i className="ri-headphone-fill text-[#0EA8A0]"></i>
-                  <span style={{ fontFamily: 'Inter, sans-serif' }}>{release.streams}</span>
+                  {release.streams && <i className="ri-headphone-fill text-[#0EA8A0]" aria-hidden="true"></i>}
+                  <span>{release.streams}</span>
                 </div>
 
                 {/* Year */}
-                <div className="hidden md:block text-white/50 text-sm min-w-[60px]" style={{ fontFamily: 'Inter, sans-serif' }}>
+                <div className="hidden md:block text-white/50 text-sm min-w-[60px]">
                   {release.date}
                 </div>
 
@@ -448,7 +504,7 @@ export default function ReleasesPage() {
                           className="w-full px-4 py-3 text-left text-white hover:bg-white/10 transition-colors duration-200 flex items-center space-x-2"
                         >
                           <i className="ri-youtube-fill text-red-500"></i>
-                          <span style={{ fontFamily: 'Inter, sans-serif' }}>Assistir no YouTube</span>
+                          <span>Assistir no YouTube</span>
                         </button>
                         <button
                           onClick={(e) => {
@@ -459,7 +515,7 @@ export default function ReleasesPage() {
                           className="w-full px-4 py-3 text-left text-white hover:bg-white/10 transition-colors duration-200 flex items-center space-x-2"
                         >
                           <i className="ri-share-line text-[#0EA8A0]"></i>
-                          <span style={{ fontFamily: 'Inter, sans-serif' }}>Compartilhar</span>
+                          <span>Compartilhar</span>
                         </button>
                         <button
                           onClick={(e) => {
@@ -473,7 +529,7 @@ export default function ReleasesPage() {
                           className="w-full px-4 py-3 text-left text-white hover:bg-white/10 transition-colors duration-200 flex items-center space-x-2"
                         >
                           <i className="ri-links-line text-[#0EA8A0]"></i>
-                          <span style={{ fontFamily: 'Inter, sans-serif' }}>Copiar link</span>
+                          <span>Copiar link</span>
                         </button>
                       </div>
                     )}

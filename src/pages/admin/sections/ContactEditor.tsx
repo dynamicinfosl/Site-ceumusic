@@ -110,7 +110,7 @@ export default function ContactEditor() {
     <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold font-montserrat">Contato & Redes Sociais</h1>
+          <h1 className="text-3xl font-bold">Contato & Redes Sociais</h1>
           <p className="text-white/40 mt-1">Gerencie as informações globais de contato e links do selo.</p>
         </div>
         <button

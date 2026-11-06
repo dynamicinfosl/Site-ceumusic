@@ -44,7 +44,7 @@ export default function Dashboard() {
   return (
     <div className="space-y-8 animate-fade-in">
       <div>
-        <h1 className="text-3xl font-bold font-montserrat">Bem-vindo, Administrador</h1>
+        <h1 className="text-3xl font-bold">Bem-vindo, Administrador</h1>
         <p className="text-white/40 mt-1">Aqui está o que está acontecendo na Céu Music hoje.</p>
       </div>
 

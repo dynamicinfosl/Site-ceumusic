@@ -107,7 +107,7 @@ export default function ReleasesEditor() {
     <div className="max-w-5xl mx-auto space-y-8 animate-fade-in">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold font-montserrat">Gerenciar Lançamentos</h1>
+          <h1 className="text-3xl font-bold">Gerenciar Lançamentos</h1>
           <p className="text-white/40 mt-1">Controle a galeria de novas músicas e álbuns no site.</p>
         </div>
         <button

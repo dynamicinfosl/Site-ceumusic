@@ -8,7 +8,7 @@ Aplicação front-end construída com React 19 + Vite para apresentar o catálog
 - **Estilo**: Tailwind CSS com utilitários customizados (`glass-card`, `scroll-reveal`, divisórias animadas e vídeo de fundo).
 - **Navegação**: `react-router-dom` 7 com `BrowserRouter` configurável via `__BASE_PATH__`.
 - **Internacionalização**: i18next com detecção automática de idioma e carregamento dinâmico de módulos.
-- **Mock de dados**: páginas utilizam conteúdo estático/ilustrativo hospedado em `readdy.ai` até integração com APIs reais.
+- **Mock de dados**: páginas utilizam conteúdo estático/ilustrativo até integração com APIs reais.
 
 ## Scripts NPM
 
@@ -88,7 +88,6 @@ src/
 ## Conteúdo e próximos passos
 
 - Os dados de artistas, shows e notícias estão hardcoded. Substitua por chamadas reais (REST, Supabase ou Firebase) quando as APIs forem disponibilizadas.
-- As imagens usam endpoints gerados dinamicamente no `readdy.ai`; considere migrar para ativos hospedados pela própria gravadora para evitar indisponibilidade.
 - Adicionar testes (unitários ou visuais) e mecanismos de CMS agiliza atualizações frequentes de conteúdo.
 
 ---

@@ -69,21 +69,21 @@ export default function ReleasesSection() {
     <section className="px-4 sm:px-6 py-12 sm:py-16 lg:py-20 lg:px-12 relative">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8 sm:mb-12 lg:mb-16 text-center">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-3 sm:mb-4 font-montserrat">
-            Últimos <span className="text-[#0EA8A0]">Lançamentos</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-3 sm:mb-4">
+            Últimos lançamentos
           </h2>
         </div>
 
         {loading && (
           <div className="text-center py-20">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#0EA8A0]"></div>
-            <p className="text-gray-400 mt-4 font-montserrat">Carregando lançamentos...</p>
+            <p className="text-gray-400 mt-4">Carregando lançamentos...</p>
           </div>
         )}
 
         {error && !loading && (
           <div className="text-center py-20">
-            <p className="text-red-400 font-montserrat mb-2">{error}</p>
+            <p className="text-red-400 mb-2">{error}</p>
           </div>
         )}
 
@@ -122,10 +122,10 @@ export default function ReleasesSection() {
                   <div className="flex-1 p-2 sm:p-3 flex flex-col justify-between">
                     <div>
                       {/* Título e Artista */}
-                      <h3 className="text-xs sm:text-sm md:text-[15px] font-bold mb-0.5 sm:mb-1 font-montserrat text-white group-hover:text-[#C45C2F] transition-colors duration-300 line-clamp-2">
+                      <h3 className="text-xs sm:text-sm md:text-[15px] font-bold mb-0.5 sm:mb-1 text-white group-hover:text-[#C45C2F] transition-colors duration-300 line-clamp-2">
                         {release.title}
                       </h3>
-                      <p className="text-gray-400 font-montserrat text-[9px] sm:text-[10px] md:text-[11px] mb-1.5 sm:mb-2.5 line-clamp-2">
+                      <p className="text-gray-400 text-[9px] sm:text-[10px] md:text-[11px] mb-1.5 sm:mb-2.5 line-clamp-2">
                         {release.artist}
                       </p>
                     </div>
@@ -140,7 +140,7 @@ export default function ReleasesSection() {
 
         {!loading && !error && releases.length === 0 && (
           <div className="text-center py-20">
-            <p className="text-gray-400 font-montserrat">Nenhum lançamento disponível no momento.</p>
+            <p className="text-gray-400">Nenhum lançamento disponível no momento.</p>
           </div>
         )}
       </div>

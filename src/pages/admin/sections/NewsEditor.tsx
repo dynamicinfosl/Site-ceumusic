@@ -118,7 +118,7 @@ export default function NewsEditor() {
     <div className="max-w-6xl mx-auto space-y-8 animate-fade-in">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold font-montserrat">Central de Notícias</h1>
+          <h1 className="text-3xl font-bold">Central de Notícias</h1>
           <p className="text-white/40 mt-1">Publique novidades, parcerias e conquistas dos artistas.</p>
         </div>
         <button
@@ -186,7 +186,7 @@ export default function NewsEditor() {
           {selectedNews ? (
             <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-8 space-y-6 slide-up">
               <div className="flex items-center justify-between border-b border-white/5 pb-6">
-                <h2 className="text-xl font-bold font-montserrat">Editando Postagem</h2>
+                <h2 className="text-xl font-bold">Editando Postagem</h2>
                 <div className="flex gap-2">
                    <button 
                     onClick={() => handleDelete(selectedNews.id)}

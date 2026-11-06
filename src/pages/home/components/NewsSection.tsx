@@ -48,8 +48,8 @@ export default function NewsSection() {
   const categoryColors: { [key: string]: string } = {
     'Conquista': '#0EA8A0',
     'Tour': '#C45C2F',
-    'Premiação': '#A34528',
-    'Infraestrutura': '#0C3F48',
+    'Premiação': '#C45C2F',
+    'Infraestrutura': '#0EA8A0',
     'Colaboração': '#0EA8A0',
     'Evento': '#C45C2F',
     'Geral': '#0EA8A0'
@@ -61,20 +61,16 @@ export default function NewsSection() {
 
   return (
     <section className="relative py-32 bg-black">
-      {/* Decorative Elements */}
+
       <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-[#0EA8A0]/10 rounded-full blur-[120px]" />
       <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-[#C45C2F]/10 rounded-full blur-[120px]" />
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-          <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-[#A34528]/10 border border-[#A34528]/30 rounded-full text-[#A34528] text-xs sm:text-sm font-semibold mb-4 sm:mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            Notícias
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            Últimas <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A34528] to-[#0EA8A0]">Novidades</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
+            Últimas novidades
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed px-4" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
             Fique por dentro de tudo que acontece no universo Céu Music
           </p>
         </div>
@@ -82,7 +78,7 @@ export default function NewsSection() {
         {/* Featured News */}
         <div className="mb-12">
           <Link to={`/noticias/${news[0].id}`} className="group cursor-pointer block">
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#1A1A1A] to-black border border-white/10 hover:border-[#0EA8A0]/50 transition-all duration-500">
+            <div className="relative overflow-hidden rounded-3xl bg-[#141414] border border-white/10 hover:border-[#0EA8A0]/50 transition-all duration-500">
               <div className="grid md:grid-cols-2 gap-0">
                 {/* Image */}
                 <div className="relative aspect-video md:aspect-auto overflow-hidden">
@@ -93,10 +89,6 @@ export default function NewsSection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/50 md:to-black" />
                   
-                  {/* Glow Effect */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0EA8A0] to-[#C45C2F] shadow-lg shadow-[#0EA8A0]/50" />
-                  </div>
                 </div>
 
                 {/* Content */}
@@ -107,25 +99,24 @@ export default function NewsSection() {
                       style={{ 
                         backgroundColor: `${categoryColors[news[0].category]}20`,
                         color: categoryColors[news[0].category],
-                        fontFamily: 'Montserrat, sans-serif'
                       }}
                     >
                       {news[0].category}
                     </span>
-                    <span className="text-white/50 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <span className="text-white/50 text-sm">
                       {news[0].date}
                     </span>
                   </div>
                   
-                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 group-hover:text-[#0EA8A0] transition-colors duration-300" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 group-hover:text-[#0EA8A0] transition-colors duration-300">
                     {news[0].title}
                   </h3>
                   
-                  <p className="text-white/70 text-lg mb-6 leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  <p className="text-white/70 text-lg mb-6 leading-relaxed">
                     {news[0].excerpt}
                   </p>
 
-                  <div className="flex items-center space-x-2 text-[#0EA8A0] font-semibold group-hover:translate-x-2 transition-transform duration-300" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <div className="flex items-center space-x-2 text-[#0EA8A0] font-semibold group-hover:translate-x-2 transition-transform duration-300">
                     <span>Ler mais</span>
                     <i className="ri-arrow-right-line text-xl"></i>
                   </div>
@@ -146,7 +137,7 @@ export default function NewsSection() {
                 animationDelay: `${index * 100}ms`
               }}
             >
-              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-black border border-white/10 hover:border-[#C45C2F]/50 transition-all duration-500 hover:scale-105">
+              <div className="relative overflow-hidden rounded-2xl bg-[#141414] border border-white/10 hover:border-[#C45C2F]/50 transition-all duration-500">
                 {/* Image */}
                 <div className="relative aspect-video overflow-hidden">
                   <img
@@ -163,7 +154,6 @@ export default function NewsSection() {
                       style={{ 
                         backgroundColor: `${categoryColors[item.category]}40`,
                         color: categoryColors[item.category],
-                        fontFamily: 'Montserrat, sans-serif',
                         border: `1px solid ${categoryColors[item.category]}60`
                       }}
                     >
@@ -171,28 +161,24 @@ export default function NewsSection() {
                     </span>
                   </div>
 
-                  {/* Glow Effect */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#C45C2F] to-[#0EA8A0] shadow-lg shadow-[#C45C2F]/50" />
-                  </div>
                 </div>
 
                 {/* Content */}
                 <div className="p-6">
-                  <div className="flex items-center space-x-2 text-white/50 text-xs mb-3" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  <div className="flex items-center space-x-2 text-white/50 text-xs mb-3">
                     <i className="ri-calendar-line"></i>
                     <span>{item.date}</span>
                   </div>
 
-                  <h3 className="text-lg font-bold text-white mb-3 group-hover:text-[#C45C2F] transition-colors duration-300 line-clamp-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <h3 className="text-lg font-bold text-white mb-3 group-hover:text-[#C45C2F] transition-colors duration-300 line-clamp-2">
                     {item.title}
                   </h3>
 
-                  <p className="text-white/60 text-sm mb-4 line-clamp-2 leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  <p className="text-white/60 text-sm mb-4 line-clamp-2 leading-relaxed">
                     {item.excerpt}
                   </p>
 
-                  <div className="flex items-center space-x-2 text-[#C45C2F] text-sm font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <div className="flex items-center space-x-2 text-[#C45C2F] text-sm font-semibold">
                     <span>Ler mais</span>
                     <i className="ri-arrow-right-line group-hover:translate-x-1 transition-transform duration-300"></i>
                   </div>
@@ -206,8 +192,7 @@ export default function NewsSection() {
         <div className="text-center">
           <Link
             to="/noticias"
-            className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-[#A34528] to-[#C45C2F] text-white font-semibold rounded-full shadow-lg shadow-[#A34528]/30 hover:shadow-[#A34528]/50 hover:scale-105 transition-all duration-300 whitespace-nowrap cursor-pointer"
-            style={{ fontFamily: 'Montserrat, sans-serif' }}
+            className="inline-flex items-center space-x-2 px-8 py-4 bg-[#C45C2F] text-white font-semibold rounded-full transition-all duration-300 whitespace-nowrap cursor-pointer"
           >
             <span>Ver todas as notícias</span>
             <i className="ri-arrow-right-line text-xl"></i>

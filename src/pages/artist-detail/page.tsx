@@ -1,9 +1,17 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
+import NotFound from '../NotFound';
+import { applyArtistRow, fetchArtistRows, isSameArtist, type ArtistRow } from '../../utils/catalog';
 
 export default function ArtistDetailPage() {
   const { id } = useParams();
+  const [artistRows, setArtistRows] = useState<ArtistRow[] | null>(null);
+
+  useEffect(() => {
+    fetchArtistRows().then(setArtistRows);
+  }, []);
 
   // Mock data - em produção viria de uma API
   const artists = [
@@ -13,8 +21,6 @@ export default function ArtistDetailPage() {
       followName: 'Alex Lucio',
       genre: 'Gospel/CCM',
       image: '/artistas/alex-lucio/IMG_3735.jpg',
-      banner:
-        'https://readdy.ai/api/search-image?query=professional%20gospel%20singer%20performing%20on%20stage%20with%20dramatic%20teal%20and%20bronze%20lighting%2C%20wide%20cinematic%20shot%2C%20concert%20atmosphere%20with%20glowing%20effects%2C%20premium%20quality%20photography%2C%20artistic%20composition&width=1920&height=600&seq=artist-banner-001&orientation=landscape',
       bio: 'Alex Lúcio nasceu e foi criado em um lar cristão, tendo suas raízes firmadas desde cedo na igreja. Vindo de uma infância simples e humilde, ele é o terceiro de cinco irmãos. Desde pequeno, Alex se destacou nos estudos, sempre dedicado e esforçado, alcançando notas máximas em todas as matérias. Aos 11 anos, seu talento acadêmico lhe rendeu o terceiro lugar em uma oficina de matemática, um momento que marcou sua trajetória escolar.\n\nCom a mãe precisando trabalhar fora para sustentar a família, Alex aprendeu desde cedo o valor do esforço e da fé. Na adolescência, ele descobriu sua vocação para a música, começando então a compor e cantar com o coração voltado sempre para Deus. Seu amor pela música se transformou em uma missão maior: hoje, ele realiza um importante trabalho de evangelização no Calçadão de Campo Grande, levando esperança e a Palavra de Deus a muitas vidas, onde já ganhou centenas de almas pra Jesus.\n\nAlex é membro ativo da Igreja Assembleia de Deus em Campo Grande, onde encontra inspiração espiritual e apoio para continuar sua caminhada. Sua trajetória é marcada por dedicação, talento e fé, e seu objetivo é sempre ser um instrumento nas mãos de Deus para tocar corações e transformar vidas através da música.',
       instagram: 'https://www.instagram.com/alexlucio.ofc/',
       spotify: 'https://open.spotify.com/artist/2xX3xodC7zA5u2xygCWzuP',
@@ -47,20 +53,13 @@ export default function ArtistDetailPage() {
           url: 'https://www.youtube.com/watch?v=bdLeReQbtgY&list=PLDrdTf3Y6voff928gg2qErmcgMV_surVw',
         },
       ],
-      shows: [
-        { id: 1, date: '15 Mar 2024', city: 'São Paulo', venue: 'Espaço das Américas', status: 'Confirmado' },
-        { id: 2, date: '22 Mar 2024', city: 'Rio de Janeiro', venue: 'Vivo Rio', status: 'Confirmado' },
-        { id: 3, date: '05 Abr 2024', city: 'Belo Horizonte', venue: 'Music Hall', status: 'Em breve' },
-        { id: 4, date: '12 Abr 2024', city: 'Curitiba', venue: 'Live Curitiba', status: 'Em breve' },
-      ],
+      shows: [],
     },
     {
       id: 10,
       name: 'Na Graça',
       genre: 'Gospel/CCM',
       image: '/artistas/na graca/na graca.png',
-      banner:
-        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20band%20live%20concert%20with%20hands%20raised%2C%20teal%20and%20bronze%20stage%20lights%2C%20wide%20cinematic%20shot%2C%20modern%20church%20worship%20environment&width=1920&height=600&seq=artist-na-graca-banner&orientation=landscape',
       bio: 'Na Graça é um ministério de louvor que nasceu com o propósito de conduzir a igreja a uma experiência profunda com Deus através da adoração. Com canções congregacionais e mensagens centradas na fé, o grupo tem se destacado por suas ministrações ao vivo, marcadas por simplicidade, unidade e forte presença de Deus.\n\nEntre suas faixas mais conhecidas estão “A Fé (Ao Vivo)”, “Ele Te Chamou (Ao Vivo)” e “Louva Na Graça (Ao Vivo)”, que têm alcançado milhares de ouvintes nas plataformas digitais. O grupo segue avançando com novos projetos e gravações ao vivo, sempre com o foco em espalhar a graça e o amor de Cristo por meio da música.',
       instagram: 'https://www.instagram.com/nagracaoficial/',
       spotify: 'https://open.spotify.com/intl-pt/artist/7pmvHrURMH0OqDcXXQiuYX',
@@ -98,8 +97,6 @@ export default function ArtistDetailPage() {
       name: 'No Santuário',
       genre: 'Gospel/CCM',
       image: '/artistas/no%20santuario/IMG_0090.jpg',
-      banner:
-        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20band%20No%20Santuario%20live%20DVD%20recording%2C%20worship%20environment%2C%20cinematic%20wide%20shot%2C%20teal%20and%20gold%20lights%2C%20congregation%20worshipping&width=1920&height=600&seq=artist-no-santuario-banner&orientation=landscape',
       bio: 'Com 13 anos de carreira ministerial, álbuns, EPs e ministrações por todo o Brasil, EUA e Europa, o ministério No Santuário (Pr. Israel Leonardo e Raphaela Carvalho) dedica-se a proclamar o evangelho através da adoração e da pregação da Palavra de Deus. Recentemente lançaram seu primeiro DVD com canções inéditas e uma nova versão de “Final Feliz”, além de projetos como “Ele Fará”, “Teus Átrios” e “Haja o que Houver (Ao Vivo)”.\n\nCom letras bíblicas e forte ênfase na presença de Deus, No Santuário se tornou referência na adoração congregacional, convidando a igreja a viver uma jornada de fé, esperança e restauração em cada canção.',
       instagram: 'https://www.instagram.com/nosantuario/',
       spotify: 'https://open.spotify.com/intl-pt/artist/3qkhpijMzbtVFexHZTNoai',
@@ -138,8 +135,6 @@ export default function ArtistDetailPage() {
       name: 'Debora Lopes',
       genre: 'Gospel/CCM',
       image: '/artistas/debora-lopes/debora-lopes.png',
-      banner:
-        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20female%20lead%20singer%20Debora%20Lopes%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-debora-lopes-banner&orientation=landscape',
       bio: 'Debora Lopes é uma cantora gospel brasileira que tem sido usada para ministrar sobre fé, cura e milagres através de suas canções. Com o lançamento de "Milagres de Deus (Ao Vivo)" e sua versão em playback, seu ministério vem alcançando um público cada vez maior, fortalecendo a fé de quem ouve e declarando o agir sobrenatural de Deus.\n\nCom uma voz marcante e letras centradas na Palavra, Debora tem se consolidado como um dos novos nomes da adoração contemporânea, convidando a igreja a confiar nos milagres de Deus em cada estação da vida.',
       instagram: 'https://www.instagram.com/deboralopesoficiall/',
       spotify: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
@@ -169,8 +164,6 @@ export default function ArtistDetailPage() {
       name: 'Kaka Tavares',
       genre: 'Gospel/CCM',
       image: '/artistas/kaka-tavares/IMG_3648.jpg',
-      banner:
-        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20male%20lead%20singer%20Kaka%20Tavares%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-kaka-tavares-banner&orientation=landscape',
       bio: 'Kaka Tavares é uma cantora gospel brasileira que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, Kaka tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',
       instagram: null,
       spotify: 'https://open.spotify.com/intl-pt/artist/5v86apLzejN5yQl8H2CcLh',
@@ -189,8 +182,6 @@ export default function ArtistDetailPage() {
       name: 'Caio Torres',
       genre: 'Gospel/CCM',
       image: '/artistas/caio-torres/IMG_0273.jpg',
-      banner:
-        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20male%20lead%20singer%20Caio%20Torres%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-caio-torres-banner&orientation=landscape',
       bio: 'Caio Torres é um cantor gospel brasileiro que tem se dedicado a conduzir pessoas a um lugar de rendição e intimidade com Deus por meio da adoração. Com letras sinceras e melódicas, suas ministrações carregam uma mensagem de arrependimento, esperança e confiança na graça de Cristo.\n\nSeu ministério tem crescido em igrejas e eventos pelo Brasil, sempre com o propósito de apontar para Jesus e criar ambientes onde o Espírito Santo tenha liberdade para agir.',
       instagram: 'https://www.instagram.com/caiotorees/',
       spotify: 'https://open.spotify.com/intl-pt/artist/3TOPRsT6nYECZi9K9yZZXw',
@@ -209,8 +200,6 @@ export default function ArtistDetailPage() {
       name: 'Nicole Lavinia',
       genre: 'Gospel/CCM',
       image: '/artistas/nicole-lavinia/IMG_3996.jpg',
-      banner:
-        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20youth%20worship%20concert%20with%20female%20lead%20singer%20Nicole%20Lavinia%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-nicole-lavinia-banner&orientation=landscape',
       bio: 'Nicole Lavinia é uma jovem cantora gospel brasileira que tem se destacado com canções que falam sobre rendição, santidade e intimidade com Deus. Com uma voz doce e marcante, suas ministrações carregam mensagens de esperança e encorajamento para uma geração que deseja viver os propósitos de Cristo.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, Nicole tem alcançado novos públicos, sempre com o desejo de conduzir pessoas a um encontro real com Jesus e a uma vida de adoração genuína.',
       instagram: 'https://www.instagram.com/nicolelaviniaoficial_/',
       spotify: 'https://open.spotify.com/intl-pt/track/0AayU24085eVhLhbk27sTE',
@@ -237,8 +226,6 @@ export default function ArtistDetailPage() {
       name: 'Maria Pita',
       genre: 'Gospel/CCM',
       image: '/artistas/maria-pita/IMG_4240.jpg',
-      banner:
-        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20female%20lead%20singer%20Maria%20Pita%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-maria-pita-banner&orientation=landscape',
       bio: 'Maria Pita é uma cantora gospel brasileira que carrega em suas canções mensagens de esperança, cura e rendição aos pés de Jesus. Com uma voz doce e firme, suas ministrações convidam a igreja a confiar na fidelidade de Deus em meio às lutas e processos.\n\nSeu ministério tem alcançado diferentes gerações, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e sincera.',
       instagram: 'https://www.instagram.com/mariapitacantora_/',
       spotify: 'https://open.spotify.com/intl-pt/artist/7fw7DfkvI0fMyEKfOw0k6n',
@@ -272,8 +259,6 @@ export default function ArtistDetailPage() {
       name: 'William Soares',
       genre: 'Gospel/CCM',
       image: '/artistas/william-soares/IMG_4092.jpg',
-      banner:
-        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20male%20lead%20singer%20William%20Soares%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-william-soares-banner&orientation=landscape',
       bio: 'William Soares é um cantor gospel brasileiro que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, William tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',
       instagram: 'https://www.instagram.com/williaamsoarees/',
       spotify: null,
@@ -300,8 +285,6 @@ export default function ArtistDetailPage() {
       name: 'Martinha',
       genre: 'Gospel/CCM',
       image: '/artistas/martinha/Gemini_Generated_Image_o5dhzho5dhzho5dh (1).png',
-      banner:
-        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20female%20lead%20singer%20Martinha%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-martinha-banner&orientation=landscape',
       bio: 'Martinha é uma cantora gospel brasileira que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, Martinha tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',
       instagram: 'https://www.instagram.com/martinhacantoraoficial/',
       spotify: 'https://open.spotify.com/intl-pt/artist/6etONEQiR3dUCs4IV0kIlE',
@@ -334,8 +317,6 @@ export default function ArtistDetailPage() {
       name: 'Rachel Malafaia',
       genre: 'Gospel/CCM',
       image: '/artistas/rachel-malafaia/IMG_5693.jpg',
-      banner:
-        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20female%20lead%20singer%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-rachel-malafaia-banner&orientation=landscape',
       bio: 'Rachel Malafaia é uma cantora gospel brasileira que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, Rachel tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',
       instagram: 'https://www.instagram.com/rachelmalafaia/',
       spotify: 'https://open.spotify.com/intl-pt/artist/1xyrtLIDTu5kRTCvnHgIcJ',
@@ -354,8 +335,6 @@ export default function ArtistDetailPage() {
       name: 'George Lean',
       genre: 'Gospel/CCM',
       image: '/artistas/george-lean/IMG_1982.jpg',
-      banner:
-        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20male%20lead%20singer%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-george-lean-banner&orientation=landscape',
       bio: 'George Lean é um cantor gospel brasileiro que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, George tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',
       instagram: 'https://www.instagram.com/georgelean/',
       spotify: null,
@@ -374,8 +353,6 @@ export default function ArtistDetailPage() {
       name: 'Gabriel Magalhães',
       genre: 'Gospel/CCM',
       image: '/artistas/gabriel-magalhaes/IMG_4165.jpg',
-      banner:
-        'https://readdy.ai/api/search-image?query=Brazilian%20gospel%20worship%20concert%20with%20male%20lead%20singer%20style%2C%20wide%20shot%2C%20congregation%20worshipping%2C%20teal%20and%20gold%20lights&width=1920&height=600&seq=artist-gabriel-magalhaes-banner&orientation=landscape',
       bio: 'Gabriel Magalhães é um cantor gospel brasileiro que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções. Com um coração voltado para a adoração, seu ministério busca conduzir pessoas a um encontro genuíno com Deus.\n\nAtravés de suas redes sociais e agendas em igrejas e eventos, Gabriel tem alcançado novos públicos, sempre com o desejo de apontar para Cristo e gerar um ambiente de adoração profunda e transformadora.',
       instagram: 'https://www.instagram.com/gabrielmagalhaes.oficial1/',
       spotify: null,
@@ -391,8 +368,53 @@ export default function ArtistDetailPage() {
     },
   ];
 
-  const artistId = Number(id);
-  const artist = artists.find((a) => a.id === artistId) ?? artists[0];
+  // A home usa o id do banco (UUID) e a página de artistas, o id numérico do catálogo
+  const rowById = artistRows?.find((row) => row.id === id);
+  const catalogArtist =
+    artists.find((a) => String(a.id) === id) ?? (rowById ? artists.find((a) => isSameArtist(a, rowById)) : undefined);
+  const row = rowById ?? (catalogArtist ? artistRows?.find((candidate) => isSameArtist(catalogArtist, candidate)) : undefined);
+
+  if (!catalogArtist && !row) {
+    if (artistRows === null) {
+      return (
+        <div className="bg-black min-h-screen">
+          <Navbar />
+          <p className="pt-52 text-center text-white/60" aria-live="polite">
+            Carregando artista…
+          </p>
+        </div>
+      );
+    }
+    return <NotFound />;
+  }
+
+  // Artista cadastrado só no painel: mostra o que existe no banco
+  const panelOnlyArtist = (panelRow: ArtistRow): (typeof artists)[number] => ({
+    id: 0,
+    name: panelRow.name,
+    genre: panelRow.genre ?? '',
+    image: panelRow.image_url ?? '',
+    bio: panelRow.bio ?? '',
+    instagram: panelRow.instagram,
+    spotify: panelRow.spotify,
+    youtube: panelRow.youtube,
+    followers: { instagram: null, spotify: null, youtube: null },
+    songs: [],
+    videos: [],
+    shows: [],
+  } as (typeof artists)[number]);
+
+  const artist = catalogArtist
+    ? row
+      ? applyArtistRow(catalogArtist as Parameters<typeof applyArtistRow>[0], row) as (typeof artists)[number]
+      : catalogArtist
+    : panelOnlyArtist(row as ArtistRow);
+
+  const followerCounts = [
+    { key: 'instagram', count: artist.followers.instagram, icon: 'ri-instagram-fill text-[#E4405F]' },
+    { key: 'spotify', count: artist.followers.spotify, icon: 'ri-spotify-fill text-[#1DB954]' },
+    { key: 'youtube', count: artist.followers.youtube, icon: 'ri-youtube-fill text-[#FF0000]' },
+  ].filter((item) => item.count);
 
   return (
     <div className="bg-black min-h-screen">
@@ -403,7 +425,7 @@ export default function ArtistDetailPage() {
         <div 
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: `url('${artist.banner}')`,
+            backgroundImage: `url('${artist.image}')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             objectPosition: 'top'
@@ -415,7 +437,7 @@ export default function ArtistDetailPage() {
           <div className="flex flex-col md:flex-row items-center md:items-end gap-8">
             {/* Artist Photo */}
             <div className="relative group">
-              <div className="w-64 h-64 rounded-2xl overflow-hidden border-4 border-[#0EA8A0]/50 shadow-2xl shadow-[#0EA8A0]/30 group-hover:border-[#0EA8A0] transition-all duration-300">
+              <div className="w-64 h-64 rounded-2xl overflow-hidden border-4 border-[#0EA8A0]/50 group-hover:border-[#0EA8A0] transition-all duration-300">
                 <img
                   src={artist.image}
                   alt={artist.name}
@@ -433,25 +455,19 @@ export default function ArtistDetailPage() {
 
             {/* Artist Info */}
             <div className="flex-1 text-center md:text-left">
-              <span className="inline-block px-4 py-2 bg-[#0EA8A0]/10 border border-[#0EA8A0]/30 rounded-full text-[#0EA8A0] text-sm font-semibold mb-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <span className="block text-sm font-medium text-[#0EA8A0] mb-3">
                 {artist.genre}
               </span>
-              <h1 className="text-6xl md:text-7xl font-bold text-white mb-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <h1 className="text-6xl md:text-7xl font-bold text-white mb-4">
                 {artist.name}
               </h1>
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 text-white/70">
-                <div className="flex items-center space-x-2">
-                  <i className="ri-instagram-fill text-[#E4405F] text-xl"></i>
-                  <span style={{ fontFamily: 'Inter, sans-serif' }}>{artist.followers.instagram}</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <i className="ri-spotify-fill text-[#1DB954] text-xl"></i>
-                  <span style={{ fontFamily: 'Inter, sans-serif' }}>{artist.followers.spotify}</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <i className="ri-youtube-fill text-[#FF0000] text-xl"></i>
-                  <span style={{ fontFamily: 'Inter, sans-serif' }}>{artist.followers.youtube}</span>
-                </div>
+                {followerCounts.map((item) => (
+                  <div key={item.key} className="flex items-center space-x-2">
+                    <i className={`${item.icon} text-xl`} aria-hidden="true"></i>
+                    <span>{item.count}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -461,12 +477,12 @@ export default function ArtistDetailPage() {
       {/* Biography */}
       <section className="relative py-20 bg-gradient-to-b from-black to-[#1A1A1A]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-white mb-8" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          <h2 className="text-4xl font-bold text-white mb-8">
             Biografia
           </h2>
           <div className="prose prose-invert max-w-none">
             {artist.bio.split('\n\n').map((paragraph, index) => (
-              <p key={index} className="text-white/70 text-lg leading-relaxed mb-6" style={{ fontFamily: 'Inter, sans-serif' }}>
+              <p key={index} className="text-white/70 text-lg leading-relaxed mb-6">
                 {paragraph}
               </p>
             ))}
@@ -475,12 +491,13 @@ export default function ArtistDetailPage() {
       </section>
 
       {/* Songs */}
+      {artist.songs.length > 0 && (
       <section className="relative py-20 bg-[#1A1A1A]">
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#0EA8A0]/10 rounded-full blur-[120px]" />
         
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#0EA8A0]/10 rounded-full blur-[120px]" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-white mb-12" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            Músicas Populares
+          <h2 className="text-4xl font-bold text-white mb-12">
+            Músicas populares
           </h2>
           <div className="space-y-3">
             {artist.songs.map((song, index) => (
@@ -492,17 +509,17 @@ export default function ArtistDetailPage() {
                   <i className="ri-play-fill text-2xl text-[#0EA8A0]"></i>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-white font-semibold mb-1 group-hover:text-[#0EA8A0] transition-colors duration-300" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <h3 className="text-white font-semibold mb-1 group-hover:text-[#0EA8A0] transition-colors duration-300">
                     {song.title}
                   </h3>
-                  <p className="text-white/50 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  <p className="text-white/50 text-sm">
                     {song.album}
                   </p>
                 </div>
-                <div className="hidden md:block text-white/50 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
+                <div className="hidden md:block text-white/50 text-sm">
                   {song.plays} plays
                 </div>
-                <div className="text-white/50 text-sm" style={{ fontFamily: 'Inter, sans-serif' }}>
+                <div className="text-white/50 text-sm">
                   {song.duration}
                 </div>
               </div>
@@ -510,20 +527,22 @@ export default function ArtistDetailPage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Videos */}
+      {artist.videos.length > 0 && (
       <section className="relative py-20 bg-gradient-to-b from-[#1A1A1A] to-black">
-        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-[#C45C2F]/10 rounded-full blur-[120px]" />
         
+        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-[#C45C2F]/10 rounded-full blur-[120px]" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-white mb-12" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          <h2 className="text-4xl font-bold text-white mb-12">
             Videoclipes
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
             {artist.videos.map((video) => {
               const content = (
                 <div className="group cursor-pointer">
-                  <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1A1A1A] to-black border border-white/10 hover:border-[#C45C2F]/50 transition-all duration-500 hover:scale-105">
+                  <div className="relative overflow-hidden rounded-2xl bg-[#141414] border border-white/10 hover:border-[#C45C2F]/50 transition-all duration-500">
                     <div className="relative aspect-video overflow-hidden">
                       <img
                         src={video.thumbnail}
@@ -532,19 +551,19 @@ export default function ArtistDetailPage() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
                       
-                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center bg-[#C45C2F]/90 backdrop-blur-sm rounded-full opacity-90 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100 shadow-2xl shadow-[#C45C2F]/50">
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center bg-[#C45C2F]/90 backdrop-blur-sm rounded-full opacity-90 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100">
                         <i className="ri-play-fill text-4xl text-white ml-1"></i>
                       </div>
 
                       <div className="absolute top-4 left-4 px-3 py-1 bg-black/80 backdrop-blur-sm rounded-lg flex items-center space-x-2">
                         <i className="ri-eye-fill text-[#0EA8A0] text-sm"></i>
-                        <span className="text-white text-xs font-semibold" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                        <span className="text-white text-xs font-semibold">
                           {video.views}
                         </span>
                       </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-white group-hover:text-[#C45C2F] transition-colors duration-300" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                      <h3 className="text-xl font-bold text-white group-hover:text-[#C45C2F] transition-colors duration-300">
                         {video.title}
                       </h3>
                     </div>
@@ -575,11 +594,12 @@ export default function ArtistDetailPage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Social Links */}
       <section className="relative py-20 bg-gradient-to-b from-black to-[#1A1A1A]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-8" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          <h2 className="text-4xl font-bold text-white mb-8">
             Siga {artist.followName ?? artist.name}
           </h2>
           <div className="flex items-center justify-center gap-6 flex-wrap">

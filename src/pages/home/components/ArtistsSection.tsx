@@ -108,16 +108,15 @@ export default function ArtistsSection() {
 
   return (
     <section className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
-      {/* Background Orbs */}
+
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/3 w-80 h-80 bg-[#0EA8A0]/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-[#C45C2F]/8 rounded-full blur-3xl"></div>
       </div>
-
       <div className="relative z-10">
         <div className="mb-8 sm:mb-12 lg:mb-16 text-center px-4 sm:px-6 lg:px-12">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-3 sm:mb-4 font-montserrat">
-            Nossos <span className="text-[#0EA8A0]">Artistas</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-3 sm:mb-4">
+            Nossos artistas
           </h2>
         </div>
 
@@ -161,14 +160,14 @@ export default function ArtistsSection() {
                 {/* Informações do Artista */}
                 <div className="p-4 sm:p-6 pt-2">
                   {/* Nome Artístico */}
-                  <h3 className="text-xl sm:text-2xl font-semibold mb-2 font-montserrat text-white group-hover:text-[#0EA8A0] transition-colors duration-300">
+                  <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-white group-hover:text-[#0EA8A0] transition-colors duration-300">
                     {artist.name}
                   </h3>
-                  <p className="text-gray-400 mb-4 sm:mb-5 font-montserrat text-xs sm:text-sm">{artist.genre}</p>
+                  <p className="text-gray-400 mb-4 sm:mb-5 text-xs sm:text-sm">{artist.genre}</p>
                   
                   {/* Redes Sociais */}
                   <div className="mb-5">
-                    <p className="text-gray-500 text-xs mb-3 font-montserrat uppercase tracking-wide">Redes Sociais</p>
+                    <p className="text-gray-500 text-xs mb-3 uppercase tracking-wide">Redes Sociais</p>
                     <div className="flex items-center flex-wrap gap-3">
                       {artist.socialLinks.instagram && (
                         <button
@@ -244,7 +243,7 @@ export default function ArtistsSection() {
                   {/* Links de Músicas */}
                   {artist.musicLinks && artist.musicLinks.length > 0 && (
                     <div>
-                      <p className="text-gray-500 text-xs mb-3 font-montserrat uppercase tracking-wide">Ouvir Músicas</p>
+                      <p className="text-gray-500 text-xs mb-3 uppercase tracking-wide">Ouvir Músicas</p>
                       <div className="flex flex-col gap-2">
                         {artist.musicLinks.map((musicLink, idx) => (
                           <a
@@ -255,7 +254,7 @@ export default function ArtistsSection() {
                             onClick={(e) => e.stopPropagation()}
                             className="flex items-center justify-between px-3 py-2 rounded-lg bg-gray-800/30 hover:bg-[#0EA8A0]/10 hover:border-[#0EA8A0]/30 border border-transparent transition-all duration-300 group/music"
                           >
-                            <span className="text-sm text-gray-300 group-hover/music:text-[#0EA8A0] transition-colors font-montserrat">
+                            <span className="text-sm text-gray-300 group-hover/music:text-[#0EA8A0] transition-colors">
                               {musicLink.platform}
                             </span>
                             <i className="ri-external-link-line text-gray-400 group-hover/music:text-[#0EA8A0] transition-colors"></i>
@@ -289,7 +288,7 @@ export default function ArtistsSection() {
                 document.body.scrollTop = 0;
               });
             }}
-            className="inline-flex items-center gap-2 bg-transparent border border-gray-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold hover:border-[#0EA8A0] hover:shadow-[0_0_20px_rgba(14,168,160,0.3)] hover:text-[#0EA8A0] transition-all duration-300 whitespace-nowrap cursor-pointer font-montserrat text-sm sm:text-base min-h-[44px]"
+            className="inline-flex items-center gap-2 bg-transparent border border-gray-600 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold hover:border-[#0EA8A0] hover:shadow-[0_0_20px_rgba(14,168,160,0.3)] hover:text-[#0EA8A0] transition-all duration-300 whitespace-nowrap cursor-pointer text-sm sm:text-base min-h-[44px]"
           >
             Ver Todos os Artistas
             <i className="ri-arrow-right-line"></i>

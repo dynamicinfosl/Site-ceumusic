@@ -1,7 +1,10 @@
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import Navbar from '../../components/feature/Navbar';
+import Footer from '../../components/feature/Footer';
+import { applyArtistRow, fetchArtistRows, isSameArtist, type ArtistRow } from '../../utils/catalog';
 
-const artists = [
+const catalogArtists = [
   {
     id: 1,
     name: 'Alex Lucio',
@@ -136,6 +139,33 @@ const artists = [
 
 export default function ArtistsPage() {
   const location = useLocation();
+  const [artistRows, setArtistRows] = useState<ArtistRow[]>([]);
+
+  useEffect(() => {
+    fetchArtistRows().then(setArtistRows);
+  }, []);
+
+  const artists = useMemo(() => {
+    const merged = catalogArtists.map((artist) => {
+      const row = artistRows.find((candidate) => isSameArtist(artist, candidate));
+      return { ...(row ? applyArtistRow(artist, row) : artist), linkId: String(artist.id) };
+    });
+    // Artistas cadastrados só no painel entram no fim da lista
+    const panelOnly = artistRows
+      .filter((row) => !catalogArtists.some((artist) => isSameArtist(artist, row)))
+      .map((row, index) => ({
+        id: 1000 + index,
+        linkId: row.id,
+        name: row.name,
+        genre: row.genre ?? '',
+        bio: row.bio ?? '',
+        image: row.image_url ?? '',
+        instagram: row.instagram,
+        spotify: row.spotify,
+        youtube: row.youtube,
+      }));
+    return [...merged, ...panelOnly];
+  }, [artistRows]);
 
   // Scroll para o topo ANTES da renderização visual
   useLayoutEffect(() => {
@@ -221,22 +251,23 @@ export default function ArtistsPage() {
   }, [artists]);
 
   return (
-    <div className="min-h-screen pt-32 pb-20 px-6 lg:px-12">
+    <>
+    <Navbar />
+    <div className="min-h-screen pt-44 pb-20 px-6 lg:px-12">
       {/* Elemento de referência para scroll - invisível no topo */}
       <div id="artists-page-top" className="absolute top-0 left-0 w-1 h-1 opacity-0 pointer-events-none" aria-hidden="true"></div>
       
-      {/* Background Orbs */}
+
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#0EA8A0]/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#C45C2F]/8 rounded-full blur-3xl"></div>
       </div>
-
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="mb-8 sm:mb-12 lg:mb-16 text-center px-4 sm:px-6">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 sm:mb-6 font-montserrat">
-            Nossos <span className="text-[#0EA8A0]">Artistas</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 sm:mb-6">
+            Nossos artistas
           </h1>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto font-montserrat">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto">
             Conheça os talentos que fazem parte da família Céu Music
           </p>
         </div>
@@ -248,7 +279,7 @@ export default function ArtistsPage() {
           {artists.map((artist, index) => (
             <div
               key={artist.id}
-              onClick={() => window.location.href = `/artista/${artist.id}`}
+              onClick={() => window.location.href = `/artista/${artist.linkId}`}
               className="glass-card animate-liquid-glass rounded-2xl p-4 sm:p-6 lg:p-8 hover:border-[#0EA8A0]/50 transition-all duration-500 cursor-pointer group scroll-reveal"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
@@ -273,9 +304,9 @@ export default function ArtistsPage() {
                     />
                   </div>
                 </div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 font-montserrat">{artist.name}</h3>
-                <p className="text-[#0EA8A0] mb-2 font-montserrat text-xs sm:text-sm">{artist.genre}</p>
-                <p className="text-gray-400 mb-4 font-montserrat text-xs sm:text-sm line-clamp-3">{artist.bio}</p>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2">{artist.name}</h3>
+                <p className="text-[#0EA8A0] mb-2 text-xs sm:text-sm">{artist.genre}</p>
+                <p className="text-gray-400 mb-4 text-xs sm:text-sm line-clamp-3">{artist.bio}</p>
                 <div className="flex items-center space-x-3 sm:space-x-4">
                   {artist.instagram && (
                     <a
@@ -320,5 +351,7 @@ export default function ArtistsPage() {
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   );
 }

@@ -27,6 +27,8 @@ export function AppRoutes() {
   useEffect(() => {
     const scrollToTop = () => {
       window.scrollTo(0, 0);
+      // O CSS global faz o #root ser o elemento que realmente rola
+      document.getElementById('root')?.scrollTo(0, 0);
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
       if (document.scrollingElement) {

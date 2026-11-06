@@ -1,22 +1,19 @@
 import { Link } from 'react-router-dom';
 import logoImage from '../../../assets/Ativo 2[1].png';
+import { legalDocuments } from '../../pages/legal/legalInfo';
+import { useSocialLinks } from '../../utils/useSocialLinks';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const socialLinks = useSocialLinks();
 
   const quickLinks = [
     { name: 'Home', path: '/' },
     { name: 'Artistas', path: '/artistas' },
     { name: 'Lançamentos', path: '/lancamentos' },
     { name: 'Notícias', path: '/noticias' },
+    { name: 'Sobre', path: '/sobre' },
     { name: 'Contato', path: '/contato' },
-  ];
-
-  const socialLinks = [
-    { icon: 'ri-instagram-fill', url: 'https://www.instagram.com/ceumusicbr/', color: '#E4405F' },
-    { icon: 'ri-youtube-fill', url: 'https://www.youtube.com/@ceumusicbrasil', color: '#FF0000' },
-    { icon: 'ri-spotify-fill', url: 'https://spotify.com', color: '#1DB954' },
-    { icon: 'ri-tiktok-fill', url: 'https://tiktok.com', color: '#000000' },
   ];
 
   return (
@@ -32,15 +29,15 @@ export default function Footer() {
                 className="h-12 w-auto transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
-            <p className="text-white/60 text-sm leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+            <p className="text-white/60 text-sm leading-relaxed">
               Gravadora musical independente dedicada a descobrir e promover talentos únicos. Transformando sonhos em realidade através da música.
             </p>
           </div>
 
-          {/* Links Rápidos */}
+          {/* Links rápidos */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-              Links Rápidos
+            <h3 className="text-white font-bold text-lg mb-6">
+              Links rápidos
             </h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
@@ -48,7 +45,6 @@ export default function Footer() {
                   <Link
                     to={link.path}
                     className="text-white/60 hover:text-[#0EA8A0] transition-colors duration-300 text-sm whitespace-nowrap cursor-pointer"
-                    style={{ fontFamily: 'Inter, sans-serif' }}
                   >
                     {link.name}
                   </Link>
@@ -59,7 +55,7 @@ export default function Footer() {
 
           {/* Redes Sociais */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            <h3 className="text-white font-bold text-lg mb-6">
               Siga-nos
             </h3>
             <div className="flex items-center space-x-4">
@@ -69,6 +65,7 @@ export default function Footer() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={social.name}
                   className="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 hover:bg-[#0EA8A0]/20 border border-white/10 hover:border-[#0EA8A0]/30 transition-all duration-300 group cursor-pointer"
                 >
                   <i className={`${social.icon} text-xl text-white/60 group-hover:text-[#0EA8A0] transition-colors duration-300`}></i>
@@ -81,17 +78,27 @@ export default function Footer() {
         {/* Copyright */}
         <div className="pt-8 border-t border-white/5">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-            <p className="text-white/40 text-sm text-center md:text-left" style={{ fontFamily: 'Inter, sans-serif' }}>
+            <p className="text-white/40 text-sm text-center md:text-left">
               © {currentYear} Céu Music. Todos os direitos reservados.
             </p>
+            <nav aria-label="Documentos legais" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+              {legalDocuments.map((doc) => (
+                <Link
+                  key={doc.path}
+                  to={doc.path}
+                  className="text-white/60 hover:text-[#0EA8A0] transition-colors duration-300 text-sm whitespace-nowrap"
+                >
+                  {doc.label}
+                </Link>
+              ))}
+            </nav>
             <a
-              href="https://readdy.ai/?origin=logo"
+              href="https://www.instagram.com/dynamicinfo_sl/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/40 hover:text-[#0EA8A0] text-sm transition-colors duration-300 whitespace-nowrap cursor-pointer"
-              style={{ fontFamily: 'Inter, sans-serif' }}
+              className="text-white/50 hover:text-[#0EA8A0] text-sm transition-colors duration-300 whitespace-nowrap"
             >
-              Powered by Readdy
+              Desenvolvido por Dynamic Info SL
             </a>
           </div>
         </div>

@@ -8,6 +8,9 @@ const Releases = lazy(() => import('../pages/releases/page'));
 const News = lazy(() => import('../pages/news/page'));
 const About = lazy(() => import('../pages/about/page'));
 const Contact = lazy(() => import('../pages/contact/page'));
+const PrivacyPage = lazy(() => import('../pages/legal/PrivacyPage'));
+const TermsPage = lazy(() => import('../pages/legal/TermsPage'));
+const CookiesPage = lazy(() => import('../pages/legal/CookiesPage'));
 const NotFound = lazy(() => import('../pages/NotFound'));
 
 // Admin Pages
@@ -50,6 +53,18 @@ const routes: RouteObject[] = [
   {
     path: '/contato',
     element: <Contact />,
+  },
+  {
+    path: '/privacidade',
+    element: <PrivacyPage />,
+  },
+  {
+    path: '/termos',
+    element: <TermsPage />,
+  },
+  {
+    path: '/cookies',
+    element: <CookiesPage />,
   },
   // Admin Routes
   {

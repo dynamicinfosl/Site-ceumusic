@@ -11,6 +11,8 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import MediaUpload from '../components/MediaUpload';
+import ClipMaker from '../components/ClipMaker';
+import { getNativeClipUrl } from '../../../utils/nativeVideo';
 
 interface HeroVideo {
   id: string;
@@ -109,7 +111,7 @@ export default function HeroEditor() {
     <div className="max-w-5xl mx-auto space-y-8 animate-fade-in">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold font-montserrat">Editor da Seção Hero</h1>
+          <h1 className="text-3xl font-bold">Editor da Seção Hero</h1>
           <p className="text-white/40 mt-1">Gerencie os vídeos e banners que aparecem no topo do site.</p>
         </div>
         <button
@@ -197,22 +199,12 @@ export default function HeroEditor() {
                   </div>
                   
                   <div>
-                    <MediaUpload 
-                      onUploadComplete={(url) => handleChange(video.id, 'video_url', url)}
-                      currentUrl={video.video_url}
-                      type="video"
+                    <ClipMaker
+                      currentUrl={getNativeClipUrl(video.video_url)}
+                      onComplete={(url) => handleChange(video.id, 'video_url', url)}
                       path="hero/videos"
-                      label="Vídeo de Fundo (MP4/WebM)"
+                      label="Trecho do vídeo de fundo"
                     />
-                    <div className="pt-2 border-t border-white/5">
-                      <input 
-                        type="url" 
-                        value={video.video_url}
-                        onChange={(e) => handleChange(video.id, 'video_url', e.target.value)}
-                        placeholder="Ou use uma URL externa"
-                        className="w-full bg-white/5 border border-white/10 rounded-xl py-1.5 px-3 text-[10px] focus:border-[#0EA8A0] outline-none"
-                      />
-                    </div>
                   </div>
                   
                   <div>

@@ -41,7 +41,7 @@ export default function LoginPage() {
 
       <div className="w-full max-w-md relative z-10">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold font-montserrat tracking-tight mb-2">
+          <h1 className="text-4xl font-bold tracking-tight mb-2">
             Céu Music <span className="text-[#0EA8A0]">Admin</span>
           </h1>
           <p className="text-white/40 text-sm">Gerencie o conteúdo do selo</p>
