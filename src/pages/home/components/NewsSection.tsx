@@ -33,7 +33,7 @@ export default function NewsSection() {
             title: n.title,
             category: n.category || 'Geral',
             date: n.publish_date ? new Date(n.publish_date).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }) : '',
-            image: n.image_url || 'https://via.placeholder.com/600x400',
+            image: n.image_url || '/artistas/ceu-music/IMG_2279-2.jpg',
             excerpt: n.excerpt || ''
           }));
           setNews(mapped);
@@ -54,6 +54,8 @@ export default function NewsSection() {
     'Evento': '#C45C2F',
     'Geral': '#0EA8A0'
   };
+
+  const colorOf = (category: string) => categoryColors[category] ?? '#0EA8A0';
 
   if (news.length === 0) {
     return null; // Ou um placeholder de "Em breve"
@@ -77,7 +79,7 @@ export default function NewsSection() {
 
         {/* Featured News */}
         <div className="mb-12">
-          <Link to={`/noticias/${news[0].id}`} className="group cursor-pointer block">
+          <Link to="/noticias" className="group cursor-pointer block">
             <div className="relative overflow-hidden rounded-3xl bg-[#141414] border border-white/10 hover:border-[#0EA8A0]/50 transition-all duration-500">
               <div className="grid md:grid-cols-2 gap-0">
                 {/* Image */}
@@ -97,8 +99,8 @@ export default function NewsSection() {
                     <span 
                       className="px-3 py-1 rounded-full text-xs font-semibold"
                       style={{ 
-                        backgroundColor: `${categoryColors[news[0].category]}20`,
-                        color: categoryColors[news[0].category],
+                        backgroundColor: `${colorOf(news[0].category)}20`,
+                        color: colorOf(news[0].category),
                       }}
                     >
                       {news[0].category}
@@ -131,7 +133,7 @@ export default function NewsSection() {
           {news.slice(1).map((item, index) => (
             <Link
               key={item.id}
-              to={`/noticias/${item.id}`}
+              to="/noticias"
               className="group cursor-pointer"
               style={{
                 animationDelay: `${index * 100}ms`
@@ -152,9 +154,9 @@ export default function NewsSection() {
                     <span 
                       className="px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm"
                       style={{ 
-                        backgroundColor: `${categoryColors[item.category]}40`,
-                        color: categoryColors[item.category],
-                        border: `1px solid ${categoryColors[item.category]}60`
+                        backgroundColor: `${colorOf(item.category)}40`,
+                        color: colorOf(item.category),
+                        border: `1px solid ${colorOf(item.category)}60`
                       }}
                     >
                       {item.category}

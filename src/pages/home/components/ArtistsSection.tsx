@@ -1,66 +1,17 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { supabase } from '../../../utils/supabase';
-
-interface Artist {
-  id: string | number;
-  name: string;
-  genre: string;
-  image: string;
-  socialLinks: {
-    instagram: string | null;
-    spotify: string | null;
-    youtube: string | null;
-    tiktok: string | null;
-    twitter: string | null;
-    facebook: string | null;
-  };
-  musicLinks: { platform: string; url: string }[];
-}
+import { useArtists } from '../../../utils/content';
 
 export default function ArtistsSection() {
-  const [artists, setArtists] = useState<Artist[]>([]);
+  const artists = (useArtists() ?? []).map((artist) => ({
+    ...artist,
+    image: artist.image_url ?? '',
+    socialLinks: artist,
+    musicLinks: artist.spotify ? [{ platform: 'Spotify', url: artist.spotify }] : [],
+  }));
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    async function loadArtists() {
-      if (!supabase) {
-        return;
-      }
-      try {
-        const { data, error } = await supabase
-          .from('artists')
-          .select('*')
-          .order('order_index', { ascending: true });
-
-        if (error) throw error;
-
-        if (data) {
-          const mappedArtists: Artist[] = data.map(dbArtist => ({
-            id: dbArtist.id,
-            name: dbArtist.name,
-            genre: dbArtist.genre,
-            image: dbArtist.image_url || '/placeholder-artist.jpg',
-            socialLinks: {
-              instagram: dbArtist.instagram,
-              spotify: dbArtist.spotify,
-              youtube: dbArtist.youtube,
-              tiktok: dbArtist.tiktok,
-              twitter: dbArtist.twitter,
-              facebook: dbArtist.facebook,
-            },
-            musicLinks: dbArtist.spotify ? [{ platform: 'Spotify', url: dbArtist.spotify }] : []
-          }));
-          setArtists(mappedArtists);
-        }
-      } catch (err) {
-        console.error('Erro ao carregar artistas:', err);
-      }
-    }
-    loadArtists();
-  }, []);
 
   const handleMouseEnter = useCallback(() => setIsPaused(true), []);
   const handleMouseLeave = useCallback(() => setIsPaused(false), []);
@@ -148,11 +99,7 @@ export default function ArtistsSection() {
                       decoding={index < 3 ? 'async' : 'async'}
                       width={224}
                       height={224}
-                      style={{
-                        objectPosition: artist.name === 'Na Graça' ? '75% center' : artist.name === 'Maria Pita' ? 'center 50%' : artist.name === 'Kaka Tavares' ? 'center 20%' : artist.name === 'Nicole Lavinia' ? 'center 30%' : artist.name === 'No Santuário' ? 'center 28%' : artist.name === 'Rachel Malafaia' ? 'center 30%' : artist.name === 'George Lean' ? 'center 40%' : ['Caio Torres', 'William Soares'].includes(artist.name) ? 'center 35%' : 'center',
-                        imageRendering: ['Na Graça', 'Debora Lopes', 'Kaka Tavares', 'Rachel Malafaia'].includes(artist.name) ? 'auto' : 'crisp-edges',
-                        filter: ['Na Graça', 'Debora Lopes', 'Kaka Tavares', 'Rachel Malafaia'].includes(artist.name) ? 'none' : 'contrast(1.1) saturate(1.05)'
-                      }}
+                      style={{ objectPosition: artist.photo_position ?? undefined }}
                     />
                   </div>
                 </div>

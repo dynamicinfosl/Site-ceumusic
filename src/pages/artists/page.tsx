@@ -1,171 +1,14 @@
-import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
-import { applyArtistRow, fetchArtistRows, isSameArtist, type ArtistRow } from '../../utils/catalog';
+import { useArtists } from '../../utils/content';
 
-const catalogArtists = [
-  {
-    id: 1,
-    name: 'Alex Lucio',
-    genre: 'Gospel/CCM',
-    bio: 'Alex é membro ativo da Igreja Assembleia de Deus em Campo Grande, onde encontra inspiração espiritual e apoio para continuar sua caminhada. Sua trajetória é marcada por dedicação, talento e fé, e seu objetivo é sempre ser um instrumento nas mãos de Deus para tocar corações e transformar vidas através da música.',
-    image: '/artistas/alex-lucio/IMG_3735.jpg',
-    instagram: 'https://www.instagram.com/alexlucio.ofc/',
-    spotify: 'https://open.spotify.com/artist/2xX3xodC7zA5u2xygCWzuP',
-    youtube: null, // Adicione o link do YouTube se disponível
-  },
-  {
-    id: 10,
-    name: 'Na Graça',
-    genre: 'Gospel/CCM',
-    bio: 'Grupo de adoração que leva mensagens de fé e esperança através de ministrações ao vivo e canções marcadas pela presença de Deus.',
-    image: '/artistas/na graca/na graca.png',
-    instagram: 'https://www.instagram.com/nagracaoficial/',
-    spotify: 'https://open.spotify.com/intl-pt/artist/7pmvHrURMH0OqDcXXQiuYX',
-    youtube: null,
-  },
-  {
-    id: 11,
-    name: 'No Santuário',
-    genre: 'Gospel/CCM',
-    bio: 'Com 13 anos de carreira ministerial, álbuns, EPs e ministrações por todo o Brasil, EUA e Europa, o ministério No Santuário (Pr. Israel Leonardo e Raphaela Carvalho) dedica-se a proclamar o evangelho através da adoração e da pregação da Palavra de Deus. Com letras bíblicas e forte ênfase na presença de Deus, No Santuário se tornou referência na adoração congregacional, convidando a igreja a viver uma jornada de fé, esperança e restauração em cada canção.',
-    image: '/artistas/no%20santuario/IMG_0090.jpg',
-    instagram: 'https://www.instagram.com/nosantuario/',
-    spotify: 'https://open.spotify.com/intl-pt/artist/3qkhpijMzbtVFexHZTNoai',
-    youtube: 'https://www.youtube.com/watch?v=XWBgmBsxkk4&list=RDXWBgmBsxkk4&start_radio=1',
-  },
-  {
-    id: 15,
-    name: 'Maria Pita',
-    genre: 'Gospel/CCM',
-    bio: 'Cantora gospel que traz mensagens de esperança, fé e restauração, com um estilo de adoração sensível e intenso.',
-    image: '/artistas/maria-pita/IMG_4240.jpg',
-    instagram: 'https://www.instagram.com/mariapitacantora_/',
-    spotify: 'https://open.spotify.com/intl-pt/artist/7fw7DfkvI0fMyEKfOw0k6n',
-    youtube: null,
-  },
-  {
-    id: 13,
-    name: 'Caio Torres',
-    genre: 'Gospel/CCM',
-    bio: 'Cantor gospel com mensagens de fé e rendição, focado em levar a igreja a uma experiência profunda de adoração e entrega através de suas canções.',
-    image: '/artistas/caio-torres/IMG_0273.jpg',
-    instagram: 'https://www.instagram.com/caiotorees/',
-    spotify: 'https://open.spotify.com/intl-pt/artist/3TOPRsT6nYECZi9K9yZZXw',
-    youtube: null,
-  },
-  {
-    id: 14,
-    name: 'Nicole Lavinia',
-    genre: 'Gospel/CCM',
-    bio: 'Cantora gospel que tem se destacado entre a nova geração de adoradores, com canções que falam de intimidade com Deus e entrega total.',
-    image: '/artistas/nicole-lavinia/IMG_3996.jpg',
-    instagram: 'https://www.instagram.com/nicolelaviniaoficial_/',
-    spotify: 'https://open.spotify.com/intl-pt/track/0AayU24085eVhLhbk27sTE',
-    youtube: null,
-  },
-  {
-    id: 12,
-    name: 'Debora Lopes',
-    genre: 'Gospel/CCM',
-    bio: 'Cantora gospel que tem se destacado com canções de fé e esperança, como "Milagres de Deus (Ao Vivo)", alcançando milhares de ouvintes nas plataformas digitais.',
-    image: '/artistas/debora-lopes/debora-lopes.png',
-    instagram: 'https://www.instagram.com/deboralopesoficiall/',
-    spotify: 'https://open.spotify.com/intl-pt/artist/3GPJu7XtFtUYUKI5qcooml',
-    youtube: null,
-  },
-  {
-    id: 18,
-    name: 'Kaka Tavares',
-    genre: 'Gospel/CCM',
-    bio: 'Cantora gospel que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções.',
-    image: '/artistas/kaka-tavares/IMG_3648.jpg',
-    instagram: null,
-    spotify: 'https://open.spotify.com/intl-pt/artist/5v86apLzejN5yQl8H2CcLh',
-    youtube: null,
-  },
-  {
-    id: 16,
-    name: 'William Soares',
-    genre: 'Gospel/CCM',
-    bio: 'Cantor gospel que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções.',
-    image: '/artistas/william-soares/IMG_4092.jpg',
-    instagram: 'https://www.instagram.com/williaamsoarees/',
-    spotify: null,
-    youtube: null,
-  },
-  {
-    id: 17,
-    name: 'Martinha',
-    genre: 'Gospel/CCM',
-    bio: 'Cantora gospel que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções.',
-    image: '/artistas/martinha/Gemini_Generated_Image_o5dhzho5dhzho5dh (1).png',
-    instagram: 'https://www.instagram.com/martinhacantoraoficial/',
-    spotify: 'https://open.spotify.com/intl-pt/artist/6etONEQiR3dUCs4IV0kIlE',
-    youtube: null,
-  },
-  {
-    id: 19,
-    name: 'Rachel Malafaia',
-    genre: 'Gospel/CCM',
-    bio: 'Cantora gospel que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções.',
-    image: '/artistas/rachel-malafaia/IMG_5693.jpg',
-    instagram: 'https://www.instagram.com/rachelmalafaia/',
-    spotify: 'https://open.spotify.com/intl-pt/artist/1xyrtLIDTu5kRTCvnHgIcJ',
-    youtube: null,
-  },
-  {
-    id: 20,
-    name: 'George Lean',
-    genre: 'Gospel/CCM',
-    bio: 'Cantor gospel que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções.',
-    image: '/artistas/george-lean/IMG_1982.jpg',
-    instagram: 'https://www.instagram.com/georgelean/',
-    spotify: null,
-    youtube: null,
-  },
-  {
-    id: 21,
-    name: 'Gabriel Magalhães',
-    genre: 'Gospel/CCM',
-    bio: 'Cantor gospel que tem se dedicado a levar mensagens de fé e esperança através de suas ministrações e canções.',
-    image: '/artistas/gabriel-magalhaes/IMG_4165.jpg',
-    instagram: 'https://www.instagram.com/gabrielmagalhaes.oficial1/',
-    spotify: null,
-    youtube: null,
-  },
-];
 
 export default function ArtistsPage() {
   const location = useLocation();
-  const [artistRows, setArtistRows] = useState<ArtistRow[]>([]);
-
-  useEffect(() => {
-    fetchArtistRows().then(setArtistRows);
-  }, []);
-
-  const artists = useMemo(() => {
-    const merged = catalogArtists.map((artist) => {
-      const row = artistRows.find((candidate) => isSameArtist(artist, candidate));
-      return { ...(row ? applyArtistRow(artist, row) : artist), linkId: String(artist.id) };
-    });
-    // Artistas cadastrados só no painel entram no fim da lista
-    const panelOnly = artistRows
-      .filter((row) => !catalogArtists.some((artist) => isSameArtist(artist, row)))
-      .map((row, index) => ({
-        id: 1000 + index,
-        linkId: row.id,
-        name: row.name,
-        genre: row.genre ?? '',
-        bio: row.bio ?? '',
-        image: row.image_url ?? '',
-        instagram: row.instagram,
-        spotify: row.spotify,
-        youtube: row.youtube,
-      }));
-    return [...merged, ...panelOnly];
-  }, [artistRows]);
+  const loadedArtists = useArtists();
+  const artists = loadedArtists ?? [];
 
   // Scroll para o topo ANTES da renderização visual
   useLayoutEffect(() => {
@@ -248,7 +91,7 @@ export default function ArtistsPage() {
     cards.forEach(card => observer.observe(card));
 
     return () => observer.disconnect();
-  }, [artists]);
+  }, [loadedArtists]);
 
   return (
     <>
@@ -274,12 +117,16 @@ export default function ArtistsPage() {
 
         <div className="section-divider-glow"></div>
 
+        {loadedArtists === null && (
+          <p className="py-16 text-center text-white/60" aria-live="polite">Carregando artistas…</p>
+        )}
+
         {/* Artists Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8" data-product-shop>
           {artists.map((artist, index) => (
             <div
               key={artist.id}
-              onClick={() => window.location.href = `/artista/${artist.linkId}`}
+              onClick={() => window.location.href = `/artista/${artist.id}`}
               className="glass-card animate-liquid-glass rounded-2xl p-4 sm:p-6 lg:p-8 hover:border-[#0EA8A0]/50 transition-all duration-500 cursor-pointer group scroll-reveal"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
@@ -287,7 +134,7 @@ export default function ArtistsPage() {
                 <div className="mb-4 sm:mb-6">
                   <div className="w-full aspect-square rounded-full overflow-hidden mb-4 sm:mb-6 border-2 border-[#0EA8A0]/30 group-hover:border-[#0EA8A0] group-hover:shadow-[0_0_30px_rgba(14,168,160,0.4)] transition-all duration-500">
                     <img
-                      src={artist.image}
+                      src={artist.image_url ?? ''}
                       alt={artist.name}
                       className="w-full h-full object-cover"
                       loading={index < 6 ? 'eager' : 'lazy'}
@@ -295,18 +142,13 @@ export default function ArtistsPage() {
                       decoding="async"
                       width={400}
                       height={400}
-                      style={{
-                        objectPosition: artist.id === 10 ? '75% center' : artist.id === 15 ? 'center 50%' : artist.id === 18 ? 'center 20%' : artist.id === 14 ? 'center 30%' : artist.id === 11 ? 'center 28%' : artist.id === 19 ? 'center 30%' : artist.id === 20 ? 'center 40%' : [13, 16].includes(artist.id) ? 'center 35%' : 'center',
-                        imageRendering: [10, 12, 18, 19].includes(artist.id) ? 'auto' : 'crisp-edges',
-                        WebkitImageRendering: [10, 12, 18, 19].includes(artist.id) ? 'auto' : 'crisp-edges',
-                        filter: [10, 12, 18, 19].includes(artist.id) ? 'none' : 'contrast(1.1) saturate(1.05)'
-                      }}
+                      style={{ objectPosition: artist.photo_position ?? undefined }}
                     />
                   </div>
                 </div>
                 <h3 className="text-lg sm:text-xl font-semibold mb-2">{artist.name}</h3>
                 <p className="text-[#0EA8A0] mb-2 text-xs sm:text-sm">{artist.genre}</p>
-                <p className="text-gray-400 mb-4 text-xs sm:text-sm line-clamp-3">{artist.bio}</p>
+                <p className="text-gray-400 mb-4 text-xs sm:text-sm line-clamp-3">{artist.short_bio || artist.bio}</p>
                 <div className="flex items-center space-x-3 sm:space-x-4">
                   {artist.instagram && (
                     <a

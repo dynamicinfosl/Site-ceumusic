@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import logoImage from '../../../assets/Ativo 2[1].png';
 import { legalDocuments } from '../../pages/legal/legalInfo';
-import { useSocialLinks } from '../../utils/useSocialLinks';
+import { useSettings, useSocialLinks } from '../../utils/content';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const socialLinks = useSocialLinks();
+  const settings = useSettings();
 
   const quickLinks = [
     { name: 'Home', path: '/' },
@@ -30,7 +31,7 @@ export default function Footer() {
               />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed">
-              Gravadora musical independente dedicada a descobrir e promover talentos únicos. Transformando sonhos em realidade através da música.
+              {settings?.footer_text}
             </p>
           </div>
 

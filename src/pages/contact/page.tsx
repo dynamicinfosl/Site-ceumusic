@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
 import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
-import { useSocialLinks } from '../../utils/useSocialLinks';
+import { phoneHref, useContactInfo, useSettings, useSocialLinks } from '../../utils/content';
 
 export default function ContactPage() {
   const socialLinks = useSocialLinks();
+  const contact = useContactInfo();
+  const settings = useSettings();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -44,23 +46,14 @@ export default function ContactPage() {
       // Inicializar EmailJS
       emailjs.init(EMAILJS_PUBLIC_KEY);
 
-      // Mapear o assunto para texto legível
-      const subjectMap: { [key: string]: string } = {
-        'parceria': 'Parceria Comercial',
-        'artista': 'Quero ser artista',
-        'imprensa': 'Assessoria de Imprensa',
-        'evento': 'Contratação para Evento',
-        'outro': 'Outro'
-      };
-
       // Preparar os dados do template
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
         phone: formData.phone || 'Não informado',
-        subject: subjectMap[formData.subject] || formData.subject,
+        subject: formData.subject,
         message: formData.message,
-        to_email: 'ceumusicbrasil@gmail.com', // Email de destino
+        to_email: contact.email,
       };
 
       // Enviar email
@@ -85,7 +78,7 @@ export default function ContactPage() {
       console.error('Erro ao enviar email:', error);
       setIsSubmitting(false);
       setSubmitStatus('error');
-      setErrorMessage('Tente novamente em alguns instantes ou escreva para ceumusicbrasil@gmail.com.');
+      setErrorMessage(`Tente novamente em alguns instantes ou escreva para ${contact.email}.`);
 
       // Resetar status de erro após 8 segundos
       setTimeout(() => {
@@ -135,26 +128,27 @@ export default function ContactPage() {
     }
   };
 
+  const mapsQuery = encodeURIComponent(contact.address);
   const contactInfo = [
     {
       icon: 'ri-mail-fill',
       title: 'Email',
-      value: 'ceumusicbrasil@gmail.com',
-      link: 'mailto:ceumusicbrasil@gmail.com',
+      value: contact.email,
+      link: `mailto:${contact.email}`,
       color: '#0EA8A0'
     },
     {
       icon: 'ri-phone-fill',
       title: 'Telefone',
-      value: '(21) 98244-7141',
-      link: 'tel:+5521982447141',
+      value: contact.phone,
+      link: phoneHref(contact.phone),
       color: '#C45C2F'
     },
     {
       icon: 'ri-map-pin-fill',
       title: 'Endereço',
-      value: 'Rio de Janeiro, RJ',
-      link: 'https://www.google.com/maps/search/?api=1&query=Rio+de+Janeiro%2C+RJ',
+      value: contact.address,
+      link: `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`,
       color: '#C45C2F'
     }
   ];
@@ -168,7 +162,7 @@ export default function ContactPage() {
         <div 
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: `url('/artistas/ceu-music/IMG_2279-2.jpg')`,
+            backgroundImage: settings?.page_background ? `url('${settings.page_background}')` : undefined,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             objectPosition: 'top'
@@ -279,7 +273,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       maxLength={15}
                       className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-[#0EA8A0]/50 focus:bg-white/10 transition-all duration-300 text-sm"
-                      placeholder="(21) 98244-7141"
+                      placeholder="(00) 00000-0000"
                     />
                   </div>
                 </div>
@@ -305,11 +299,9 @@ export default function ContactPage() {
                     }}
                   >
                     <option value="" style={{ backgroundColor: '#0A0A0A', color: '#ffffff' }}>Selecione um assunto</option>
-                    <option value="parceria" style={{ backgroundColor: '#0A0A0A', color: '#ffffff' }}>Parceria Comercial</option>
-                    <option value="artista" style={{ backgroundColor: '#0A0A0A', color: '#ffffff' }}>Quero ser artista</option>
-                    <option value="imprensa" style={{ backgroundColor: '#0A0A0A', color: '#ffffff' }}>Assessoria de Imprensa</option>
-                    <option value="evento" style={{ backgroundColor: '#0A0A0A', color: '#ffffff' }}>Contratação para Evento</option>
-                    <option value="outro" style={{ backgroundColor: '#0A0A0A', color: '#ffffff' }}>Outro</option>
+                    {(settings?.contact_subjects ?? []).map((subject) => (
+                      <option key={subject} value={subject} style={{ backgroundColor: '#0A0A0A', color: '#ffffff' }}>{subject}</option>
+                    ))}
                   </select>
                 </div>
 
@@ -380,7 +372,7 @@ export default function ContactPage() {
                         Erro ao enviar mensagem
                       </p>
                       <p className="text-white/80 text-sm">
-                        {errorMessage || 'Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente ou entre em contato diretamente pelo email ceumusicbrasil@gmail.com'}
+                        {errorMessage}
                       </p>
                     </div>
                   </div>
@@ -394,16 +386,18 @@ export default function ContactPage() {
                 Nossa localização
               </h2>
               <div className="relative overflow-hidden rounded-2xl border border-white/10 h-[400px] lg:h-full">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235527.4935281952!2d-43.41814155!3d-22.9110137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9bde559108a05b%3A0x50dc426c672fd24e!2sRio%20de%20Janeiro%2C%20RJ!5e0!3m2!1spt-BR!2sbr!4v1234567890"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Localização Céu Music"
-                />
+                {contact.address && (
+                  <iframe
+                    src={`https://www.google.com/maps?q=${mapsQuery}&output=embed`}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Localização Céu Music"
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#0EA8A0]/10 to-[#C45C2F]/10 pointer-events-none" />
               </div>
             </div>

@@ -1,42 +1,8 @@
-import { useState, useEffect } from 'react';
-import { supabase } from '../../../utils/supabase';
-import { useSocialLinks } from '../../../utils/useSocialLinks';
-
-interface ContactInfo {
-  email: string;
-  phone: string;
-  address: string;
-}
+import { useContactInfo, useSocialLinks } from '../../../utils/content';
 
 export default function ContactSection() {
   const socialLinks = useSocialLinks();
-  const [contactInfo, setContactInfo] = useState<ContactInfo>({
-    email: 'ceumusicbrasil@gmail.com',
-    phone: '(21) 98244-7141',
-    address: 'Rio de Janeiro, RJ - Brasil'
-  });
-
-  useEffect(() => {
-    async function loadData() {
-      if (!supabase) return;
-      try {
-        // A tabela guarda uma linha por tipo (email, phone, address)
-        const { data, error } = await supabase.from('contact_info').select('type, value');
-        if (error) throw error;
-
-        const valueOf = (type: string) => data?.find((row) => row.type === type)?.value;
-        // O e-mail não vem do banco: lá ainda está o endereço anterior à troca para o Gmail
-        setContactInfo((current) => ({
-          ...current,
-          phone: valueOf('phone') || current.phone,
-          address: valueOf('address') || current.address,
-        }));
-      } catch (err) {
-        console.error('Erro ao carregar dados de contato:', err);
-      }
-    }
-    loadData();
-  }, []);
+  const contactInfo = useContactInfo();
 
   return (
     <section className="relative py-32 bg-gradient-to-b from-black via-[#1A1A1A] to-black">

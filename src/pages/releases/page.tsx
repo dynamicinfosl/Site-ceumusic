@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
-import { fetchReleaseRows, normalizeName, type ReleaseRow } from '../../utils/catalog';
+import { normalizeName, useReleases, useSettings, type Release as ReleaseRow } from '../../utils/content';
+import { getYouTubeThumbnail } from '../../utils/youtubeLink';
 
 interface Release {
   id: number | string;
@@ -23,15 +24,28 @@ function toFilterId(releaseType: string | null): string {
   return typeFilterIds[normalizeName(releaseType ?? '')] ?? 'singles';
 }
 
+function toRelease(row: ReleaseRow): Release {
+  return {
+    id: row.id,
+    title: row.title,
+    artist: row.artist_name ?? '',
+    type: toFilterId(row.release_type),
+    typeLabel: row.release_type ?? 'Single',
+    date: row.release_date ?? '',
+    cover: row.cover_url || getYouTubeThumbnail(row.video_url) || '',
+    genre: row.genre ?? '',
+    streams: row.streams ?? '',
+    featured: !!row.featured,
+    videoUrl: row.video_url || row.streaming_link || '',
+  };
+}
+
 export default function ReleasesPage() {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [openMenuId, setOpenMenuId] = useState<number | string | null>(null);
-  const [releaseRows, setReleaseRows] = useState<ReleaseRow[]>([]);
+  const releaseRows = useReleases();
+  const settings = useSettings();
   const menuRefs = useRef<{ [key: number | string]: HTMLDivElement | null }>({});
-
-  useEffect(() => {
-    fetchReleaseRows().then(setReleaseRows);
-  }, []);
 
   // Fechar menu ao clicar fora
   useEffect(() => {
@@ -59,173 +73,9 @@ export default function ReleasesPage() {
     { id: 'albums', name: 'Álbuns' }
   ];
 
-  const catalogReleases: Release[] = [
-    {
-      id: 1,
-      title: 'Salva-vidas',
-      artist: 'Alexsander Lúcio',
-      type: 'singles',
-      typeLabel: 'Single',
-      date: '2024',
-      cover: 'https://img.youtube.com/vi/bdLeReQbtgY/maxresdefault.jpg',
-      genre: 'Gospel/CCM',
-      streams: '271K',
-      featured: true,
-      videoUrl: 'https://www.youtube.com/watch?v=bdLeReQbtgY'
-    },
-    {
-      id: 2,
-      title: 'Final Feliz',
-      artist: 'No Santuário feat Geziel Lima',
-      type: 'singles',
-      typeLabel: 'Single',
-      date: '2024',
-      cover: 'https://img.youtube.com/vi/XWBgmBsxkk4/maxresdefault.jpg',
-      genre: 'Gospel/CCM',
-      streams: '1.8M',
-      featured: true,
-      videoUrl: 'https://www.youtube.com/watch?v=XWBgmBsxkk4'
-    },
-    {
-      id: 3,
-      title: 'Louva na Graça',
-      artist: 'Na Graça',
-      type: 'singles',
-      typeLabel: 'Single',
-      date: '2024',
-      cover: 'https://img.youtube.com/vi/5bvgSlZamBo/maxresdefault.jpg',
-      genre: 'Gospel/CCM',
-      streams: '45K',
-      featured: true,
-      videoUrl: 'https://www.youtube.com/watch?v=5bvgSlZamBo'
-    },
-    {
-      id: 4,
-      title: 'Milagres de Deus',
-      artist: 'Debora Lopes',
-      type: 'singles',
-      typeLabel: 'Single',
-      date: '2024',
-      cover: 'https://img.youtube.com/vi/V1hYFBtdxm8/maxresdefault.jpg',
-      genre: 'Gospel/CCM',
-      streams: '233K',
-      featured: false,
-      videoUrl: 'https://www.youtube.com/watch?v=V1hYFBtdxm8'
-    },
-    {
-      id: 5,
-      title: 'O Fogo Arderá - Ao Vivo',
-      artist: 'Alexsander Lúcio',
-      type: 'singles',
-      typeLabel: 'Single',
-      date: '2024',
-      cover: 'https://img.youtube.com/vi/Bqc6B5LzTN0/maxresdefault.jpg',
-      genre: 'Gospel/CCM',
-      streams: '58.6M',
-      featured: false,
-      videoUrl: 'https://www.youtube.com/watch?v=Bqc6B5LzTN0&list=RDBqc6B5LzTN0&start_radio=1'
-    },
-    {
-      id: 6,
-      title: 'A FÉ - AO VIVO',
-      artist: 'Na Graça',
-      type: 'singles',
-      typeLabel: 'Single',
-      date: '2024',
-      cover: 'https://img.youtube.com/vi/g89eBxkG-Aw/maxresdefault.jpg',
-      genre: 'Gospel/CCM',
-      streams: '679.8K',
-      featured: false,
-      videoUrl: 'https://www.youtube.com/watch?v=g89eBxkG-Aw&list=RDg89eBxkG-Aw&start_radio=1'
-    },
-    {
-      id: 7,
-      title: 'SERVO DO CENTURIÃO - AO VIVO',
-      artist: 'Nicole Lavinia',
-      type: 'singles',
-      typeLabel: 'Single',
-      date: '2024',
-      cover: 'https://img.youtube.com/vi/vpi33yUn1Zc/maxresdefault.jpg',
-      genre: 'Gospel/CCM',
-      streams: '45K',
-      featured: false,
-      videoUrl: 'https://www.youtube.com/watch?v=vpi33yUn1Zc&list=RDvpi33yUn1Zc&start_radio=1'
-    },
-    {
-      id: 8,
-      title: 'SE LEVANTE',
-      artist: 'Maria Pita',
-      type: 'singles',
-      typeLabel: 'Single',
-      date: '2024',
-      cover: 'https://img.youtube.com/vi/mb7rskqf1A4/maxresdefault.jpg',
-      genre: 'Gospel/CCM',
-      streams: '35K',
-      featured: false,
-      videoUrl: 'https://www.youtube.com/watch?v=mb7rskqf1A4&list=RDEMzFMowVXry3q4Od_yFQGfxw&index=3'
-    },
-    {
-      id: 9,
-      title: 'Ao Cheiro das Águas (Ao Vivo)',
-      artist: 'William Soares',
-      type: 'singles',
-      typeLabel: 'Single',
-      date: '2024',
-      cover: 'https://img.youtube.com/vi/MyhL5CT8-Eo/maxresdefault.jpg',
-      genre: 'Gospel/CCM',
-      streams: '28K',
-      featured: false,
-      videoUrl: 'https://www.youtube.com/watch?v=MyhL5CT8-Eo&list=RDMyhL5CT8-Eo&start_radio=1'
-    },
-    {
-      id: 10,
-      title: 'EU FAÇO AO VIVO',
-      artist: 'Martinha',
-      type: 'singles',
-      typeLabel: 'Single',
-      date: '2024',
-      cover: 'https://img.youtube.com/vi/eMv-TwacSck/maxresdefault.jpg',
-      genre: 'Gospel/CCM',
-      streams: '15.8K',
-      featured: false,
-      videoUrl: 'https://www.youtube.com/watch?v=eMv-TwacSck&list=RDeMv-TwacSck&start_radio=1'
-    },
-  ];
 
-  const isSameRelease = (release: Release, row: ReleaseRow) => normalizeName(release.title) === normalizeName(row.title);
 
-  // Lançamentos novos do painel aparecem primeiro; os já existentes recebem os dados editados lá
-  const panelOnlyReleases: Release[] = releaseRows
-    .filter((row) => !catalogReleases.some((release) => isSameRelease(release, row)))
-    .map((row) => ({
-      id: row.id,
-      title: row.title,
-      artist: row.artist_name ?? '',
-      type: toFilterId(row.release_type),
-      typeLabel: row.release_type ?? 'Single',
-      date: row.release_date ?? '',
-      cover: row.cover_url ?? '',
-      genre: '',
-      streams: '',
-      featured: false,
-      videoUrl: row.streaming_link ?? '',
-    }));
-
-  const releases: Release[] = [
-    ...panelOnlyReleases,
-    ...catalogReleases.map((release) => {
-      const row = releaseRows.find((candidate) => isSameRelease(release, candidate));
-      if (!row) return release;
-      return {
-        ...release,
-        artist: row.artist_name || release.artist,
-        cover: row.cover_url || release.cover,
-        type: row.release_type ? toFilterId(row.release_type) : release.type,
-        typeLabel: row.release_type || release.typeLabel,
-        date: row.release_date || release.date,
-      };
-    }),
-  ];
+  const releases: Release[] = (releaseRows ?? []).map(toRelease);
 
   const filteredReleases = selectedFilter === 'all'
     ? releases 
@@ -242,7 +92,7 @@ export default function ReleasesPage() {
         <div 
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: `url('/artistas/ceu-music/IMG_2279-2.jpg')`,
+            backgroundImage: settings?.page_background ? `url('${settings.page_background}')` : undefined,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             objectPosition: 'top'

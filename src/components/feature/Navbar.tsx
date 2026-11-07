@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import logoImage from '../../../assets/Ativo 2[1].png';
+import { useSocialLinks } from '../../utils/content';
 
 const navItems = [
   { path: '/', label: 'Home' },
@@ -11,7 +12,6 @@ const navItems = [
   { path: '/contato', label: 'Contato' },
 ];
 
-const listenUrl = 'https://www.youtube.com/@ceumusicbrasil';
 const focusRing = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0EA8A0]';
 
 function CeuMusicLogo() {
@@ -29,6 +29,8 @@ function CeuMusicLogo() {
 }
 
 export default function Navbar() {
+  const socialLinks = useSocialLinks();
+  const listenUrl = socialLinks.find((social) => social.name.toLowerCase() === 'youtube')?.url ?? socialLinks[0]?.url ?? '#';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { pathname } = useLocation();
   // Na home o hero já mostra o logo em destaque; a altura fica reservada para o menu não mudar de lugar

@@ -32,8 +32,6 @@ export default function AboutSection() {
     fetchAbout();
   }, []);
 
-  const defaultContent = "Somos uma agência cristã, onde promovemos o reino de Deus através da música.\nValorizamos os nossos artistas, dando a eles uma plataforma onde suas vozes são ouvidas.\nAssim como o Céu tem um espaço infinito para a movimentação dos astros, A Céu Music tem infinita possibilidades para os seus agenciados se moverem. \nAcreditamos que uma das coisas mais importantes que temos é a voz.\nFoi através dela que os céus e terra foram criados e tanta outras coisas mais, e por conta disso, a Céu Music é o lugar para amplificar aqueles que tem uma voz, e que só precisam ser ouvidos.";
-
   return (
     <section className="relative py-16 sm:py-24 lg:py-32 bg-gradient-to-b from-black via-[#1A1A1A] to-black">
 
@@ -42,7 +40,7 @@ export default function AboutSection() {
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Content */}
         <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-8">{aboutData?.title || 'Sobre Nós'}</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-8">{aboutData?.title}</h2>
           
           {/* Logo em cima */}
           <div className="mb-6 sm:mb-8 lg:mb-10 flex justify-center">
@@ -57,7 +55,7 @@ export default function AboutSection() {
           <p
             className="text-base sm:text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-6 sm:mb-8 px-4 whitespace-pre-line"
           >
-            {aboutData?.content || defaultContent}
+            {aboutData?.content}
           </p>
 
           <Link

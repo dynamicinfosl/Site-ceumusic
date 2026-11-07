@@ -26,8 +26,8 @@ const jsonResponse = (body: unknown, status: number) =>
   });
 
 // A chave pública do site também passa pela verificação de JWT da plataforma,
-// então a função precisa confirmar que quem envia é um administrador.
-async function isAdminRequest(req: Request): Promise<boolean> {
+// então a função precisa confirmar que quem envia tem acesso ao painel.
+async function canUpload(req: Request): Promise<boolean> {
   const authorization = req.headers.get('Authorization');
   if (!authorization) return false;
 
@@ -39,7 +39,7 @@ async function isAdminRequest(req: Request): Promise<boolean> {
   const { data: { user } } = await supabase.auth.getUser(authorization.replace(/^Bearer\s+/i, ''));
   if (!user) return false;
 
-  const { data, error } = await supabase.rpc('is_admin');
+  const { data, error } = await supabase.rpc('can_upload');
   return !error && data === true;
 }
 
@@ -55,7 +55,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    if (!(await isAdminRequest(req))) {
+    if (!(await canUpload(req))) {
       return jsonResponse({ error: 'Não autorizado' }, 403);
     }
 

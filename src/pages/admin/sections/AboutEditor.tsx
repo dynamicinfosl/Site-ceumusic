@@ -1,154 +1,191 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Plus, Trash2 } from 'lucide-react';
 import { supabase } from '../../../utils/supabase';
-import { 
-  Save, 
-  Loader2,
-  AlertCircle,
-  CheckCircle2
-} from 'lucide-react';
+import { clearContentCache, fetchSettings, type AboutPageContent } from '../../../utils/content';
 import MediaUpload from '../components/MediaUpload';
+import { Field, inputClass, LoadingPanel, MessageBanner, MoveButtons, PageHeader } from '../components/PanelControls';
+import { describeSaveError, saveSetting, type PanelMessage } from '../components/useOrderedList';
 
-interface AboutData {
+interface HomeAbout {
   id?: string;
   title: string;
   content: string;
-  image_url: string;
+  image_url: string | null;
 }
 
+const EMPTY_PAGE: AboutPageContent = {
+  intro: '', story: '', mission_title: '', mission_text: '', card_title: '', card_text: '',
+  values_title: '', values_text: '', values: [], vision_title: '', vision_text: '',
+};
+
 export default function AboutEditor() {
-  const [data, setData] = useState<AboutData>({ title: '', content: '', image_url: '' });
+  const [home, setHome] = useState<HomeAbout>({ title: '', content: '', image_url: '' });
+  const [page, setPage] = useState<AboutPageContent>(EMPTY_PAGE);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+  const [message, setMessage] = useState<PanelMessage | null>(null);
 
   useEffect(() => {
-    fetchData();
-  }, []);
-
-  async function fetchData() {
-    if (!supabase) return;
-    try {
-      const { data: aboutData, error } = await supabase
-        .from('about_section')
-        .select('*')
-        .single();
-
-      if (error && error.code !== 'PGRST116') throw error; // PGRST116 is "no rows"
-      if (aboutData) setData(aboutData);
-    } catch (err: any) {
-      console.error('Erro ao buscar sobre:', err);
-    } finally {
-      setLoading(false);
+    async function load() {
+      if (!supabase) return;
+      try {
+        clearContentCache();
+        const [homeResult, settings] = await Promise.all([supabase.from('about_section').select('*').limit(1).maybeSingle(), fetchSettings()]);
+        if (homeResult.error) throw homeResult.error;
+        if (homeResult.data) setHome(homeResult.data);
+        if (settings.about_page) setPage({ ...EMPTY_PAGE, ...settings.about_page });
+      } catch (error) {
+        setMessage({ type: 'error', text: `Não foi possível carregar: ${(error as Error).message}` });
+      } finally {
+        setLoading(false);
+      }
     }
-  }
+    load();
+  }, []);
 
   const handleSave = async () => {
     if (!supabase) return;
     setSaving(true);
     setMessage(null);
-
     try {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('about_section')
-        .upsert({
-          ...data,
-          updated_at: new Date().toISOString()
-        });
-
+        .upsert({ ...home, updated_at: new Date().toISOString() })
+        .select()
+        .single();
       if (error) throw error;
-      setMessage({ type: 'success', text: 'Seção Sobre salva com sucesso!' });
-      fetchData();
-    } catch (err: any) {
-      setMessage({ type: 'error', text: 'Erro ao salvar: ' + err.message });
+      setHome(data);
+      await saveSetting('about_page', page);
+      setMessage({ type: 'success', text: 'Textos da seção Sobre salvos.' });
+    } catch (error) {
+      setMessage({ type: 'error', text: describeSaveError(error as { code?: string; message?: string }) });
     } finally {
       setSaving(false);
     }
   };
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-[#0EA8A0]" />
-      </div>
-    );
-  }
+  const setField = (field: keyof AboutPageContent, value: string) => setPage((current) => ({ ...current, [field]: value }));
+
+  const moveValue = (index: number, direction: -1 | 1) => {
+    const next = [...page.values];
+    [next[index], next[index + direction]] = [next[index + direction], next[index]];
+    setPage({ ...page, values: next });
+  };
+
+  if (loading) return <LoadingPanel />;
+
+  const cardClass = 'bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 space-y-4';
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
-      <div className="flex flex-col sm:items-center sm:flex-row justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold">Editor da Seção Sobre</h1>
-          <p className="text-white/40 mt-1">Conte a história da Céu Music para o mundo.</p>
+      <PageHeader title="Sobre" description="O resumo da página inicial e a página “Nossa história”." saving={saving} onSave={handleSave} />
+      <MessageBanner message={message} />
+
+      <section className={cardClass}>
+        <h2 className="text-xl font-bold">Resumo na página inicial</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <Field label="Título">
+              <input type="text" value={home.title} onChange={(event) => setHome({ ...home, title: event.target.value })} className={inputClass} />
+            </Field>
+            <Field label="Texto">
+              <textarea rows={9} value={home.content} onChange={(event) => setHome({ ...home, content: event.target.value })} className={`${inputClass} resize-y`} />
+            </Field>
+          </div>
+          <div className="space-y-4">
+            <MediaUpload onUploadComplete={(url) => setHome({ ...home, image_url: url })} currentUrl={home.image_url ?? ''} type="image" path="about" label="Imagem (sem imagem, usamos a logo)" />
+            <Field label="Ou cole o link da imagem">
+              <input type="url" value={home.image_url ?? ''} onChange={(event) => setHome({ ...home, image_url: event.target.value })} className={inputClass} />
+            </Field>
+          </div>
         </div>
+      </section>
+
+      <section className={cardClass}>
+        <h2 className="text-xl font-bold">Página “Nossa história”</h2>
+        <Field label="Frase de abertura">
+          <textarea rows={2} value={page.intro} onChange={(event) => setField('intro', event.target.value)} className={`${inputClass} resize-y`} />
+        </Field>
+        <Field label="Texto abaixo da logo">
+          <textarea rows={5} value={page.story} onChange={(event) => setField('story', event.target.value)} className={`${inputClass} resize-y`} />
+        </Field>
+      </section>
+
+      <section className={cardClass}>
+        <h2 className="text-xl font-bold">Missão</h2>
+        <Field label="Título">
+          <input type="text" value={page.mission_title} onChange={(event) => setField('mission_title', event.target.value)} className={inputClass} />
+        </Field>
+        <Field label="Texto" hint="Deixe uma linha em branco para separar parágrafos.">
+          <textarea rows={7} value={page.mission_text} onChange={(event) => setField('mission_text', event.target.value)} className={`${inputClass} resize-y`} />
+        </Field>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <Field label="Título do destaque">
+            <input type="text" value={page.card_title} onChange={(event) => setField('card_title', event.target.value)} className={inputClass} />
+          </Field>
+          <Field label="Texto do destaque">
+            <input type="text" value={page.card_text} onChange={(event) => setField('card_text', event.target.value)} className={inputClass} />
+          </Field>
+        </div>
+      </section>
+
+      <section className={cardClass}>
+        <h2 className="text-xl font-bold">Valores</h2>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <Field label="Título">
+            <input type="text" value={page.values_title} onChange={(event) => setField('values_title', event.target.value)} className={inputClass} />
+          </Field>
+          <Field label="Subtítulo">
+            <input type="text" value={page.values_text} onChange={(event) => setField('values_text', event.target.value)} className={inputClass} />
+          </Field>
+        </div>
+        {page.values.map((value, index) => (
+          <div key={index} className="p-4 bg-white/5 rounded-xl space-y-2">
+            <div className="flex items-end gap-2">
+              <div className="flex-1">
+                <Field label="Nome do valor">
+                  <input
+                    type="text"
+                    value={value.title}
+                    onChange={(event) => setPage({ ...page, values: page.values.map((item, i) => (i === index ? { ...item, title: event.target.value } : item)) })}
+                    className={inputClass}
+                  />
+                </Field>
+              </div>
+              <MoveButtons label={value.title} isFirst={index === 0} isLast={index === page.values.length - 1} onMove={(direction) => moveValue(index, direction)} />
+              <button type="button" aria-label={`Remover ${value.title}`} onClick={() => setPage({ ...page, values: page.values.filter((_, i) => i !== index) })} className="p-1.5 text-white/40 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-colors">
+                <Trash2 className="w-4 h-4" />
+              </button>
+            </div>
+            <Field label="Descrição">
+              <textarea
+                rows={2}
+                value={value.description}
+                onChange={(event) => setPage({ ...page, values: page.values.map((item, i) => (i === index ? { ...item, description: event.target.value } : item)) })}
+                className={`${inputClass} resize-y`}
+              />
+            </Field>
+          </div>
+        ))}
         <button
-          onClick={handleSave}
-          disabled={saving}
-          className="bg-[#0EA8A0] hover:bg-[#0EA8A0]/90 text-white px-6 py-2.5 rounded-xl font-bold flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+          type="button"
+          onClick={() => setPage({ ...page, values: [...page.values, { icon: 'ri-star-fill', title: '', description: '' }] })}
+          className="w-full py-3 border-2 border-dashed border-white/10 hover:border-[#0EA8A0]/30 rounded-xl text-sm text-white/50 hover:text-[#0EA8A0] flex items-center justify-center gap-2 transition-colors"
         >
-          {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-          Salvar Alterações
+          <Plus className="w-4 h-4" />
+          Adicionar valor
         </button>
-      </div>
+      </section>
 
-      {message && (
-        <div className={`p-4 rounded-xl flex items-center gap-3 border ${
-          message.type === 'success' 
-            ? 'bg-green-500/10 border-green-500/20 text-green-500' 
-            : 'bg-red-500/10 border-red-500/20 text-red-500'
-        }`}>
-          {message.type === 'success' ? <CheckCircle2 className="w-5 h-5" /> : <AlertCircle className="w-5 h-5" />}
-          <p className="text-sm">{message.text}</p>
-        </div>
-      )}
-
-      <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-8 space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-6">
-            <div>
-              <label className="text-xs font-medium text-white/40 ml-1 uppercase">Título da Seção</label>
-              <input 
-                type="text" 
-                value={data.title}
-                onChange={(e) => setData({ ...data, title: e.target.value })}
-                placeholder="Ex: Sobre Nós"
-                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 mt-1 focus:border-[#0EA8A0] transition-all outline-none text-sm"
-              />
-            </div>
-
-            <div>
-              <label className="text-xs font-medium text-white/40 ml-1 uppercase">História / Conteúdo</label>
-              <textarea 
-                rows={10}
-                value={data.content}
-                onChange={(e) => setData({ ...data, content: e.target.value })}
-                placeholder="Escreva aqui a história do selo..."
-                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 mt-1 focus:border-[#0EA8A0] transition-all outline-none text-sm resize-none"
-              />
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <MediaUpload 
-              onUploadComplete={(url) => setData({ ...data, image_url: url })}
-              currentUrl={data.image_url}
-              type="image"
-              path="about"
-              label="Imagem Lateral (Upload R2)"
-            />
-            
-            <div className="pt-4 border-t border-white/5">
-              <label className="text-[10px] font-medium text-white/20 ml-1 uppercase">Ou insira uma URL externa</label>
-              <input 
-                type="url" 
-                value={data.image_url}
-                onChange={(e) => setData({ ...data, image_url: e.target.value })}
-                placeholder="https://..."
-                className="w-full bg-white/5 border border-white/10 rounded-xl py-2 px-3 mt-1 focus:border-[#0EA8A0] transition-all outline-none text-[12px]"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+      <section className={cardClass}>
+        <h2 className="text-xl font-bold">Visão de futuro</h2>
+        <Field label="Título">
+          <input type="text" value={page.vision_title} onChange={(event) => setField('vision_title', event.target.value)} className={inputClass} />
+        </Field>
+        <Field label="Texto" hint="Deixe uma linha em branco para separar parágrafos.">
+          <textarea rows={6} value={page.vision_text} onChange={(event) => setField('vision_text', event.target.value)} className={`${inputClass} resize-y`} />
+        </Field>
+      </section>
     </div>
   );
 }

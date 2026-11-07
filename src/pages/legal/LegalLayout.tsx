@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
 import { legalDocuments, legalInfo } from './legalInfo';
+import { useContactInfo, useSettings } from '../../utils/content';
 
 export interface LegalSection {
   id: string;
@@ -117,12 +118,20 @@ export function ProviderList({ items }: { items: { name: string; purpose: string
   );
 }
 
+export function ContactEmail() {
+  const { email } = useContactInfo();
+  return <a href={`mailto:${email}`}>{email}</a>;
+}
+
 export function ControllerDetails() {
-  const { brandName, legalName, cnpj, address, dpoName, email, phone } = legalInfo;
+  const { address, email, phone } = useContactInfo();
+  const legal = useSettings()?.legal;
+  const cnpj = legal?.cnpj;
+  const dpoName = legal?.dpo_name;
   return (
     <ul>
       <li>
-        <strong>Responsável:</strong> {legalName || brandName}
+        <strong>Responsável:</strong> {legal?.legal_name || legalInfo.brandName}
         {cnpj && `, CNPJ ${cnpj}`}
       </li>
       <li>

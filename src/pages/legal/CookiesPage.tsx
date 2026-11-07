@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import LegalLayout, { ProviderList, type LegalSection } from './LegalLayout';
-import { legalInfo } from './legalInfo';
+import LegalLayout, { ContactEmail, ProviderList, type LegalSection } from './LegalLayout';
 
 const sections: LegalSection[] = [
   {
@@ -39,7 +38,7 @@ const sections: LegalSection[] = [
         </p>
         <ProviderList
           items={[
-            { name: 'YouTube (Google)', purpose: 'Vídeos completos, carregados apenas quando você escolhe assistir.' },
+            { name: 'YouTube (Google)', purpose: 'Prévias sem som no topo da página inicial e na galeria, carregadas em computadores no modo de privacidade reforçada do YouTube, e vídeos completos quando você escolhe assistir.' },
             { name: 'Google Maps', purpose: 'Mapa na página de contato.' },
           ]}
         />
@@ -64,7 +63,7 @@ const sections: LegalSection[] = [
           funcionar corretamente.
         </p>
         <p>
-          Dúvidas? Escreva para <a href={`mailto:${legalInfo.email}`}>{legalInfo.email}</a>. Mais detalhes sobre dados
+          Dúvidas? Escreva para <ContactEmail />. Mais detalhes sobre dados
           pessoais estão na <Link to="/privacidade">Política de Privacidade</Link>.
         </p>
       </>

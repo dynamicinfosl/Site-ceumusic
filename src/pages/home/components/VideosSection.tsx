@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { supabase } from '../../../utils/supabase';
-import { getNativeClipUrl } from '../../../utils/nativeVideo';
+import YouTubePreview from '../../../components/feature/YouTubePreview';
+import { findArtistByCredit, useArtists } from '../../../utils/content';
+import { getYouTubeId, getYouTubeThumbnail } from '../../../utils/youtubeLink';
 import ClipVideo from '../../../components/feature/ClipVideo';
 
 interface Video {
@@ -13,17 +15,12 @@ interface Video {
   duration: string;
   featured: boolean;
   clip: string | null;
-}
-
-interface SocialLinks {
-  instagram: string | null;
-  spotify: string | null;
-  youtube: string | null;
+  previewStart: number;
 }
 
 export default function VideosSection() {
   const [videos, setVideos] = useState<Video[]>([]);
-  const [artistSocialLinks, setArtistSocialLinks] = useState<{ [key: string]: SocialLinks }>({});
+  const artists = useArtists();
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [hoveredVideoId, setHoveredVideoId] = useState<string | null>(null);
@@ -44,40 +41,23 @@ export default function VideosSection() {
 
         if (videoError) throw videoError;
 
-        // Fetch Artists for social links
-        const { data: artistData, error: artistError } = await supabase
-          .from('artists')
-          .select('name, instagram, spotify, youtube');
-
-        if (artistError) throw artistError;
-
         if (videoData) {
           const mappedVideos: Video[] = videoData.map(v => ({
             id: v.id,
             title: v.title,
             artist: v.artist || 'Céu Music',
             views: v.views || '0',
-            videoId: v.video_id,
-            thumbnail: `https://img.youtube.com/vi/${v.video_id}/maxresdefault.jpg`,
+            videoId: getYouTubeId(v.video_id) ?? '',
+            thumbnail: getYouTubeThumbnail(v.video_id) ?? '',
             duration: v.duration || '0:00',
             featured: v.featured || false,
-            clip: getNativeClipUrl(v.preview_url)
+            clip: v.preview_url || null,
+            previewStart: v.preview_start ?? 0
           }));
           setVideos(mappedVideos);
           if (mappedVideos.length > 0) setActiveVideoId(mappedVideos[0].id);
         }
 
-        if (artistData) {
-          const socialMap: { [key: string]: SocialLinks } = {};
-          artistData.forEach(a => {
-            socialMap[a.name] = {
-              instagram: a.instagram,
-              spotify: a.spotify,
-              youtube: a.youtube
-            };
-          });
-          setArtistSocialLinks(socialMap);
-        }
       } catch (err) {
         console.error('Erro ao carregar dados dos vídeos:', err);
       }
@@ -221,13 +201,16 @@ export default function VideosSection() {
                           className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
                         />
                       )}
+                      {isHovered && !video.clip && video.videoId && (
+                        <YouTubePreview videoId={video.videoId} start={video.previewStart} />
+                      )}
 
                       {/* Gradient Overlay */}
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
 
 
                       {/* Play Button (esconde durante o hover/preview) */}
-                      {!(isHovered && video.clip) && (
+                      {!(isHovered && (video.clip || video.videoId)) && (
                         <div className="pointer-events-none absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center bg-[#C45C2F]/90 backdrop-blur-sm rounded-full opacity-90 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100">
                           <i className="ri-play-fill text-4xl text-white ml-1"></i>
                         </div>
@@ -273,7 +256,7 @@ export default function VideosSection() {
         {/* Video Modal */}
         {selectedVideo && (() => {
           const video = videos.find(v => v.id === selectedVideo);
-          const socialLinks = video ? artistSocialLinks[video.artist] : null;
+          const socialLinks = video ? findArtistByCredit(artists, video.artist) : undefined;
           
           return (
             <div

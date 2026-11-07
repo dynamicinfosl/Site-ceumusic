@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../../utils/supabase';
 import { Lock, Mail, AlertCircle, Loader2 } from 'lucide-react';
 
@@ -27,7 +27,7 @@ export default function LoginPage() {
 
       navigate('/admin/dashboard');
     } catch (err: any) {
-      setError(err.message || 'Erro ao realizar login');
+      setError(err.code === 'invalid_credentials' ? 'E-mail ou senha incorretos.' : 'Não foi possível entrar. Tente novamente.');
     } finally {
       setLoading(false);
     }
@@ -84,6 +84,12 @@ export default function LoginPage() {
                   className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-white/20 focus:border-[#0EA8A0] focus:ring-1 focus:ring-[#0EA8A0] transition-all outline-none"
                 />
               </div>
+            </div>
+
+            <div className="text-right -mt-2">
+              <Link to="/admin/esqueci-senha" className="text-sm text-white/60 hover:text-[#0EA8A0] transition-colors">
+                Esqueci minha senha
+              </Link>
             </div>
 
             <button

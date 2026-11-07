@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import LegalLayout, { ControllerDetails, ProviderList, type LegalSection } from './LegalLayout';
-import { legalInfo } from './legalInfo';
+import LegalLayout, { ContactEmail, ControllerDetails, ProviderList, type LegalSection } from './LegalLayout';
 
 const sections: LegalSection[] = [
   {
@@ -122,7 +121,7 @@ const sections: LegalSection[] = [
           <li>revisão ou oposição a um tratamento, quando cabível.</li>
         </ul>
         <p>
-          Envie seu pedido para <a href={`mailto:${legalInfo.email}`}>{legalInfo.email}</a>. Podemos pedir informações
+          Envie seu pedido para <ContactEmail />. Podemos pedir informações
           para confirmar sua identidade. Você também pode apresentar reclamação à{' '}
           <a href="https://www.gov.br/anpd" target="_blank" rel="noopener noreferrer">
             Autoridade Nacional de Proteção de Dados (ANPD)

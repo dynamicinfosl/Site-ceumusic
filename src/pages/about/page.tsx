@@ -3,9 +3,15 @@ import { useLocation } from 'react-router-dom';
 import Navbar from '../../components/feature/Navbar';
 import Footer from '../../components/feature/Footer';
 import aboutImage from '../../../assets/Ativo 2[1].png';
+import { useSettings } from '../../utils/content';
+
+const VALUE_COLORS = ['#0EA8A0', '#C45C2F', '#C45C2F', '#0EA8A0'];
+
+const paragraphs = (text = '') => text.split('\n\n').filter(Boolean);
 
 export default function AboutPage() {
   const location = useLocation();
+  const about = useSettings()?.about_page;
 
   // Scroll para o topo ANTES da renderização visual
   useLayoutEffect(() => {
@@ -88,34 +94,7 @@ export default function AboutPage() {
     elements.forEach(element => observer.observe(element));
 
     return () => observer.disconnect();
-  }, []);
-
-  const values = [
-    {
-      icon: 'ri-heart-3-fill',
-      title: 'Fé e propósito',
-      description: 'Acreditamos no poder transformador da música para tocar corações e transformar vidas através de mensagens de fé e esperança.',
-      color: '#0EA8A0'
-    },
-    {
-      icon: 'ri-star-fill',
-      title: 'Excelência',
-      description: 'Buscamos sempre a excelência em nossas produções, utilizando tecnologia de ponta e equipe profissional para entregar o melhor resultado.',
-      color: '#C45C2F'
-    },
-    {
-      icon: 'ri-team-fill',
-      title: 'Comunidade',
-      description: 'Valorizamos o relacionamento e o trabalho em equipe, criando uma família unida em torno da música e da missão de levar esperança ao mundo.',
-      color: '#C45C2F'
-    },
-    {
-      icon: 'ri-lightbulb-fill',
-      title: 'Inovação',
-      description: 'Estamos sempre em busca de novas formas de expressar a arte e alcançar pessoas, utilizando as melhores ferramentas e tecnologias disponíveis.',
-      color: '#0EA8A0'
-    }
-  ];
+  }, [about]);
 
   return (
     <div className="bg-black min-h-screen">
@@ -136,7 +115,7 @@ export default function AboutPage() {
             Nossa história
           </h1>
           <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
-            Conheça a Céu Music e nossa paixão por transformar sonhos em realidade através da música
+            {about?.intro}
           </p>
         </div>
       </section>
@@ -152,7 +131,7 @@ export default function AboutPage() {
             />
           </div>
           <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
-            Somos uma gravadora cristã independente que acredita no poder transformador da música para tocar corações e transformar vidas. Nossa missão é descobrir e desenvolver talentos que levam mensagens de fé, esperança e amor através de produções musicais de excelência. Com tecnologia de ponta, equipe profissional e paixão pelo que fazemos, transformamos sonhos em realidade e levamos a música dos nossos artistas para o mundo inteiro.
+            {about?.story}
           </p>
         </div>
       </section>
@@ -163,14 +142,13 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 gap-12 items-center scroll-reveal">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Transformar sonhos em realidade
+                {about?.mission_title}
               </h2>
-              <p className="text-lg text-white/70 leading-relaxed mb-6">
-                A Céu Music nasceu com o propósito de ser uma plataforma que descobre, desenvolve e promove talentos musicais cristãos. Acreditamos que cada artista tem uma voz única e uma mensagem poderosa para compartilhar com o mundo.
-              </p>
-              <p className="text-lg text-white/70 leading-relaxed">
-                Nossa missão vai além de simplesmente produzir música. Queremos criar uma comunidade onde artistas possam crescer, se desenvolver e alcançar seu potencial máximo, sempre mantendo o foco em levar mensagens de fé, esperança e amor através da música.
-              </p>
+              {paragraphs(about?.mission_text).map((paragraph) => (
+                <p key={paragraph} className="text-lg text-white/70 leading-relaxed mb-6 last:mb-0">
+                  {paragraph}
+                </p>
+              ))}
             </div>
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-[#0EA8A0]/20 to-[#C45C2F]/20 rounded-3xl blur-2xl"></div>
@@ -179,10 +157,10 @@ export default function AboutPage() {
                   <i className="ri-music-2-fill text-[#0EA8A0]"></i>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4 text-center">
-                  Música com propósito
+                  {about?.card_title}
                 </h3>
                 <p className="text-white/70 text-center">
-                  Cada produção nossa carrega uma mensagem de transformação e esperança, criada com excelência e paixão.
+                  {about?.card_text}
                 </p>
               </div>
             </div>
@@ -203,15 +181,15 @@ export default function AboutPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16 scroll-reveal">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              O que nos move
+              {about?.values_title}
             </h2>
             <p className="text-lg text-white/70 max-w-3xl mx-auto">
-              Os valores que guiam cada decisão e cada produção da Céu Music
+              {about?.values_text}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => (
+            {(about?.values ?? []).map((value, index) => (
               <div
                 key={index}
                 className="glass-card animate-liquid-glass rounded-2xl p-8 hover:border-[#0EA8A0]/50 transition-all duration-500 scroll-reveal group"
@@ -220,12 +198,12 @@ export default function AboutPage() {
                 <div 
                   className="w-16 h-16 flex items-center justify-center rounded-2xl mb-6 transition-all duration-300 group-hover:scale-110"
                   style={{
-                    backgroundColor: `${value.color}20`,
+                    backgroundColor: `${VALUE_COLORS[index % VALUE_COLORS.length]}20`,
                   }}
                 >
                   <i 
                     className={`${value.icon} text-3xl`}
-                    style={{ color: value.color }}
+                    style={{ color: VALUE_COLORS[index % VALUE_COLORS.length] }}
                   ></i>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-4 group-hover:text-[#0EA8A0] transition-colors duration-300">
@@ -245,14 +223,13 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center scroll-reveal">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
-              O futuro que construímos
+              {about?.vision_title}
             </h2>
-            <p className="text-lg md:text-xl text-white/70 leading-relaxed mb-8">
-              Sonhamos em ser referência nacional e internacional na produção de música cristã de qualidade, reconhecida pela excelência técnica, pela profundidade das mensagens e pelo impacto transformador em vidas.
-            </p>
-            <p className="text-lg text-white/70 leading-relaxed">
-              Queremos continuar descobrindo novos talentos, expandindo nosso catálogo e alcançando cada vez mais pessoas com mensagens de fé, esperança e amor através da música que produzimos.
-            </p>
+            {paragraphs(about?.vision_text).map((paragraph) => (
+              <p key={paragraph} className="text-lg md:text-xl text-white/70 leading-relaxed mb-8 last:mb-0">
+                {paragraph}
+              </p>
+            ))}
           </div>
         </div>
       </section>
@@ -261,13 +238,3 @@ export default function AboutPage() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
