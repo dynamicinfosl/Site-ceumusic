@@ -10,16 +10,16 @@ import {
   Lock,
   Receipt,
   RefreshCw,
-  ShieldCheck,
-  Split,
+  Wallet,
+  Calculator,
 } from 'lucide-react';
 import { supabase } from '../../utils/supabase';
 import { useAccess } from '../../utils/access';
 import { Field, inputClass, LoadingPanel, MessageBanner } from './components/PanelControls';
 import type { PanelMessage } from './components/useOrderedList';
 
-// Financeiro do Festival: a parte da Céu em cada inscrição paga cai na conta da Céu
-// na AbacatePay (subconta). Daqui a equipe acompanha cada valor e saca para o CNPJ.
+// Financeiro do Festival: o valor das inscrições pagas, menos a taxa da plataforma, cai na conta
+// cadastrada na AbacatePay (subconta). Daqui a equipe acompanha cada valor e saca para o CNPJ.
 
 interface Withdrawal {
   id: string;
@@ -117,7 +117,7 @@ function CreateAccount({ onDone }: { onDone: (message: PanelMessage) => void }) 
     setBusy(true);
     try {
       await callFestival({ action: 'payment_setup', step: 'create_subaccount', name, tax_id: taxId });
-      onDone({ type: 'success', text: 'Conta da Céu criada. A partir de agora cada inscrição paga já é dividida.' });
+      onDone({ type: 'success', text: 'Conta criada. A partir de agora as inscrições pagas entram nesta conta, já com a taxa da plataforma descontada.' });
     } catch (error) {
       onDone({ type: 'error', text: (error as Error).message });
     } finally {
@@ -160,7 +160,7 @@ export default function FinanceAdmin() {
 
 function FinanceContent() {
   const [overview, setOverview] = useState<Overview | null>(null);
-  const [registrationFee, setRegistrationFee] = useState<number | null>(null);
+  const [simulated, setSimulated] = useState('');
   const [loadedAt, setLoadedAt] = useState<Date | null>(null);
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -192,7 +192,7 @@ function FinanceContent() {
       .maybeSingle()
       .then(({ data }) => {
         const fee = Number((data?.value as { fee_cents?: number } | null)?.fee_cents);
-        if (Number.isInteger(fee) && fee >= 100) setRegistrationFee(fee);
+        if (Number.isInteger(fee) && fee >= 100) setSimulated((current) => current || (fee / 100).toFixed(2).replace('.', ','));
       });
   }, [load]);
 
@@ -216,7 +216,7 @@ function FinanceContent() {
     setWithdrawing(true);
     try {
       const result = await callFestival({ action: 'finance_withdraw', amount_cents: pendingAmount });
-      if (result.status === 'complete') setMessage({ type: 'success', text: 'Saque enviado para a conta da Céu. O comprovante está na lista de saques.' });
+      if (result.status === 'complete') setMessage({ type: 'success', text: 'Saque enviado. O comprovante está na lista de saques.' });
       else if (result.status === 'failed') setMessage({ type: 'error', text: result.error ?? 'O saque não foi enviado. O valor continua no saldo.' });
       else setMessage({ type: 'error', text: result.error ?? 'O saque está em processamento. Use "Conferir" em instantes.' });
       setAmount('');
@@ -256,8 +256,8 @@ function FinanceContent() {
     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
       <div>
         <p className="text-xs font-medium text-[#0EA8A0]">Festival de Verão</p>
-        <h1 className="text-3xl font-bold mt-1">Financeiro da Céu Music</h1>
-        <p className="text-white/50 mt-1 max-w-2xl">Cada inscrição paga é dividida no momento do pagamento. A parte da Céu cai direto na conta da Céu e pode ser sacada por aqui.</p>
+        <h1 className="text-3xl font-bold mt-1">Financeiro</h1>
+        <p className="text-white/50 mt-1 max-w-2xl">Acompanhe as inscrições recebidas, o saldo da conta e os saques.</p>
       </div>
       <div className="flex flex-col items-start sm:items-end gap-1 shrink-0">
         <button type="button" onClick={load} disabled={loading} className="border border-white/15 hover:bg-white/5 px-4 py-2 rounded-xl text-sm flex items-center gap-2 disabled:opacity-60">
@@ -277,7 +277,7 @@ function FinanceContent() {
         {overview.is_master ? (
           <CreateAccount onDone={(result) => { setMessage(result); load(); }} />
         ) : (
-          <Card className="text-center text-white/60">A conta da Céu ainda está sendo preparada. Assim que estiver pronta, o saldo das inscrições aparece aqui.</Card>
+          <Card className="text-center text-white/60">A conta ainda está sendo preparada. Assim que estiver pronta, o saldo das inscrições aparece aqui.</Card>
         )}
       </div>
     );
@@ -295,12 +295,13 @@ function FinanceContent() {
   const difference = balanceTotal == null ? null : totalReceived - totalWithdrawn - inProgress - balanceTotal;
   const companyName = overview.subaccount?.name ?? 'Céu Music';
   const cnpj = formatTaxId(overview.subaccount?.tax_id ?? null);
-  const example = registrationFee ? { amount: registrationFee, ...splitOf(registrationFee, overview.commission_bps) } : null;
+  const simulatedCents = parseMoney(simulated);
+  const simulation = Number.isInteger(simulatedCents) && simulatedCents >= 100 && simulatedCents <= 100000000 ? { amount: simulatedCents, ...splitOf(simulatedCents, overview.commission_bps) } : null;
 
   const cards = [
     { label: 'Disponível para saque', value: overview.balance ? money(overview.balance.available) : '—', hint: 'Pode ser sacado agora', accent: true },
     { label: 'Em liberação', value: overview.balance ? money(overview.balance.blocked) : '—', hint: 'Pagamentos recentes, liberados em breve' },
-    { label: 'Recebido no festival', value: money(totalReceived), hint: `${realEntries.length} inscriç${realEntries.length === 1 ? 'ão paga' : 'ões pagas'}` },
+    { label: 'Total recebido', value: money(totalReceived), hint: `${realEntries.length} inscriç${realEntries.length === 1 ? 'ão paga' : 'ões pagas'}` },
     { label: 'Já sacado', value: money(totalWithdrawn), hint: `${realWithdrawals.filter((item) => item.status === 'complete').length} saque(s) enviados` },
   ];
 
@@ -324,7 +325,7 @@ function FinanceContent() {
               </div>
               <div>
                 <h2 className="font-bold leading-tight">Conta de recebimento</h2>
-                <p className="text-xs text-white/45 mt-0.5">Onde fica o dinheiro da Céu</p>
+                <p className="text-xs text-white/45 mt-0.5">Dados cadastrados da conta</p>
               </div>
             </div>
             <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium ${testMode ? 'bg-amber-500/10 text-amber-400' : 'bg-green-500/10 text-green-400'}`}>
@@ -341,28 +342,36 @@ function FinanceContent() {
           <div className="mt-5 flex gap-3 rounded-xl bg-white/[0.04] p-4">
             <Lock className="w-4 h-4 text-[#0EA8A0] shrink-0 mt-0.5" />
             <p className="text-xs text-white/60 leading-relaxed">
-              Este saldo é da Céu Music. O saque só pode ser enviado para a chave Pix do CNPJ da Céu: o sistema não tem como mandar o dinheiro para outra conta.
+              Por segurança, os saques só podem ser enviados para a chave Pix do CNPJ cadastrado nesta conta. Não é possível enviar para outro destino.
             </p>
           </div>
         </Card>
 
-        <section className="lg:col-span-2 rounded-2xl border border-[#0EA8A0]/40 bg-[#0EA8A0]/[0.08] p-6 flex flex-col">
+        <section className="lg:col-span-2 rounded-2xl border border-white/10 bg-white/[0.03] p-6 flex flex-col">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-[#0EA8A0]/20 text-[#0EA8A0] flex items-center justify-center shrink-0">
-              <Split className="w-5 h-5" />
+            <div className="w-11 h-11 rounded-xl bg-[#0EA8A0]/15 text-[#0EA8A0] flex items-center justify-center shrink-0">
+              <Calculator className="w-5 h-5" />
             </div>
-            <h2 className="font-bold">Taxa da plataforma</h2>
+            <div>
+              <h2 className="font-bold leading-tight">Simulador de recebimento</h2>
+              <p className="text-xs text-white/45 mt-0.5">Quanto entra na conta por inscrição</p>
+            </div>
           </div>
-          <p className="mt-5 text-5xl font-bold tracking-tight tabular-nums">{percent(overview.commission_bps)}</p>
-          <p className="text-sm text-white/60 mt-1">por inscrição paga. Todo o restante é da Céu.</p>
-          {example && (
-            <dl className="mt-5 rounded-xl bg-black/25 p-4 text-sm space-y-2">
-              <div className="flex justify-between gap-4"><dt className="text-white/55">Inscrição</dt><dd className="tabular-nums">{money(example.amount)}</dd></div>
-              <div className="flex justify-between gap-4"><dt className="text-white/55">Taxa da plataforma</dt><dd className="tabular-nums text-white/70">− {money(example.platform)}</dd></div>
-              <div className="flex justify-between gap-4 border-t border-white/10 pt-2 font-semibold"><dt>Para a Céu</dt><dd className="tabular-nums text-[#0EA8A0]">{money(example.partner)}</dd></div>
+          <Field label="Valor da inscrição (R$)">
+            <input className={inputClass} value={simulated} onChange={(event) => setSimulated(event.target.value)} inputMode="decimal" placeholder="0,00" />
+          </Field>
+          {simulation ? (
+            <dl className="mt-4 rounded-xl bg-black/25 p-4 text-sm space-y-2">
+              <div className="flex justify-between gap-4"><dt className="text-white/55">Valor da inscrição</dt><dd className="tabular-nums">{money(simulation.amount)}</dd></div>
+              <div className="flex justify-between gap-4"><dt className="text-white/55">Taxa da plataforma ({percent(overview.commission_bps)})</dt><dd className="tabular-nums text-white/70">− {money(simulation.platform)}</dd></div>
+              <div className="flex justify-between gap-4 border-t border-white/10 pt-2 font-semibold"><dt>Valor recebido</dt><dd className="tabular-nums text-[#0EA8A0]">{money(simulation.partner)}</dd></div>
             </dl>
+          ) : (
+            <p className="mt-4 text-sm text-white/40">Informe um valor a partir de R$ 1,00.</p>
           )}
-          <p className="text-xs text-white/45 mt-auto pt-4">A divisão é automática, no momento em que o Pix é pago. Cada saque tem custo de {money(WITHDRAW_FEE_CENTS)}.</p>
+          <p className="text-xs text-white/45 mt-auto pt-4">
+            A taxa da plataforma é de {percent(overview.commission_bps)} sobre cada inscrição paga{simulation && simulation.platform === PIX_COST_RESERVE_CENTS && simulation.amount < 10000 ? `, com mínimo de ${money(PIX_COST_RESERVE_CENTS)}` : ''} e já vem descontada no saldo.
+          </p>
         </section>
       </div>
 
@@ -387,7 +396,7 @@ function FinanceContent() {
             )}
           </div>
           <div className="mt-4 grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] sm:items-center text-sm">
-            <div><p className="text-xs text-white/45">Recebido nas inscrições</p><p className="font-semibold tabular-nums">{money(totalReceived)}</p></div>
+            <div><p className="text-xs text-white/45">Total recebido</p><p className="font-semibold tabular-nums">{money(totalReceived)}</p></div>
             <span className="hidden sm:block text-white/30">=</span>
             <div><p className="text-xs text-white/45">Já sacado</p><p className="font-semibold tabular-nums">{money(totalWithdrawn)}</p></div>
             <span className="hidden sm:block text-white/30">+</span>
@@ -410,9 +419,17 @@ function FinanceContent() {
           <ArrowDownToLine className="w-5 h-5 text-[#0EA8A0]" />
           <h2 className="text-lg font-bold">Sacar</h2>
         </div>
-        <p className="text-sm text-white/55 max-w-2xl">
-          O dinheiro vai por Pix para a chave do CNPJ {cnpj} ({companyName}). Essa chave precisa estar cadastrada no banco da Céu.
-          Entre 20h e 8h o limite de saque é de R$ 1.000,00.
+        <p className="text-sm text-white/55 max-w-2xl">O valor é enviado por Pix para a chave do CNPJ cadastrado na conta.</p>
+        <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 max-w-md">
+          <Lock className="w-4 h-4 text-[#0EA8A0] shrink-0" />
+          <div className="min-w-0">
+            <p className="text-[11px] text-white/45">Chave Pix de destino (CNPJ cadastrado)</p>
+            <p className="text-sm font-semibold tabular-nums">{cnpj}</p>
+            <p className="text-xs text-white/55 truncate">{companyName}</p>
+          </div>
+        </div>
+        <p className="text-xs text-white/40 max-w-2xl">
+          A chave Pix do CNPJ precisa estar ativa no banco do titular. Cada saque tem custo de {money(WITHDRAW_FEE_CENTS)}. Entre 20h e 8h o limite é de R$ 1.000,00.
         </p>
 
         {pendingAmount == null ? (
@@ -439,7 +456,7 @@ function FinanceContent() {
             <dl className="mt-3 text-sm space-y-2">
               <div className="flex justify-between gap-4"><dt className="text-white/55">Valor do saque</dt><dd className="tabular-nums">{money(pendingAmount)}</dd></div>
               <div className="flex justify-between gap-4"><dt className="text-white/55">Custo do saque</dt><dd className="tabular-nums text-white/70">− {money(WITHDRAW_FEE_CENTS)}</dd></div>
-              <div className="flex justify-between gap-4 border-t border-white/10 pt-2 font-semibold"><dt>Cai na conta da Céu</dt><dd className="tabular-nums text-[#0EA8A0]">{money(Math.max(0, pendingAmount - WITHDRAW_FEE_CENTS))}</dd></div>
+              <div className="flex justify-between gap-4 border-t border-white/10 pt-2 font-semibold"><dt>Valor que você recebe</dt><dd className="tabular-nums text-[#0EA8A0]">{money(Math.max(0, pendingAmount - WITHDRAW_FEE_CENTS))}</dd></div>
               <div className="flex justify-between gap-4 pt-1"><dt className="text-white/55">Destino</dt><dd className="text-right">Pix CNPJ {cnpj}</dd></div>
             </dl>
             <div className="flex gap-3 mt-5">
@@ -513,10 +530,10 @@ function FinanceContent() {
 
       <section className="space-y-3">
         <div className="flex items-center gap-2">
-          <Split className="w-5 h-5 text-[#0EA8A0]" />
+          <Wallet className="w-5 h-5 text-[#0EA8A0]" />
           <h2 className="text-lg font-bold">Entradas</h2>
         </div>
-        <p className="text-sm text-white/50">Cada inscrição paga, com a divisão feita no pagamento.</p>
+        <p className="text-sm text-white/50">Inscrições pagas, já com a taxa da plataforma descontada.</p>
         {overview.entries.length === 0 ? (
           <p className="text-sm text-white/40">Nenhuma inscrição paga ainda.</p>
         ) : (
@@ -528,7 +545,7 @@ function FinanceContent() {
                   <th className="px-4 py-3 font-medium">Paga em</th>
                   <th className="px-4 py-3 font-medium">Valor pago</th>
                   <th className="px-4 py-3 font-medium">Taxa da plataforma</th>
-                  <th className="px-4 py-3 font-medium">Parte da Céu</th>
+                  <th className="px-4 py-3 font-medium">Valor líquido</th>
                 </tr>
               </thead>
               <tbody>
@@ -558,18 +575,6 @@ function FinanceContent() {
         )}
       </section>
 
-      <Card>
-        <div className="flex items-center gap-2">
-          <ShieldCheck className="w-5 h-5 text-[#0EA8A0]" />
-          <h2 className="font-bold">Como o dinheiro da Céu é protegido</h2>
-        </div>
-        <ul className="mt-4 grid gap-4 sm:grid-cols-2 text-sm text-white/65">
-          <li className="flex gap-3"><Split className="w-4 h-4 text-[#0EA8A0] shrink-0 mt-0.5" />A divisão de cada inscrição é feita automaticamente pela AbacatePay no momento do pagamento, sem ninguém mexer no valor.</li>
-          <li className="flex gap-3"><Building2 className="w-4 h-4 text-[#0EA8A0] shrink-0 mt-0.5" />A parte da Céu fica numa conta própria, em nome do CNPJ da Céu, separada do saldo da plataforma.</li>
-          <li className="flex gap-3"><Lock className="w-4 h-4 text-[#0EA8A0] shrink-0 mt-0.5" />O saque só vai para a chave Pix do CNPJ da Céu. Não existe opção de mandar para outra conta.</li>
-          <li className="flex gap-3"><Receipt className="w-4 h-4 text-[#0EA8A0] shrink-0 mt-0.5" />Todo saque fica registrado com data, quem pediu e o comprovante do Pix.</li>
-        </ul>
-      </Card>
     </div>
   );
 }
