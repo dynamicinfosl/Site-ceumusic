@@ -10,7 +10,7 @@ Modalidade: seleção de intérpretes de música gospel exclusivamente por méri
 
 Prêmios: 1º lugar: gravação de 2 músicas com videoclipes, mentoria com Samuel Messias, contrato de 1 ano com a Céu Music e R$ 10.000,00. 2º lugar: gravação de 1 música, gravação de reels, mentoria, contrato de distribuição e R$ 5.000,00. 3º lugar: 6 reels, 3 covers para YouTube, mentoria e R$ 2.000,00. Detalhes no Anexo I.
 
-Calendário: inscrições de a data de publicação deste Regulamento a 22 de fevereiro de 2027, horário de Brasília; demais etapas na Cláusula 7.
+Fases: o Festival tem 4 (quatro) fases, com um novo vídeo em cada uma. A Fase 1 tem inscrições até 22 de fevereiro de 2027. As regras das fases seguintes são comunicadas aos classificados conforme avançam (Cláusula 7).
 
 Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil@gmail.com e (21) 98244-7141; privacidade ceumusicbrasil@gmail.com.
 
@@ -82,7 +82,9 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # 7. Cronograma e publicidade
 
-7.1. As inscrições ocorrerão de a data de publicação deste Regulamento a 22 de fevereiro de 2027, às 23h59, horário de Brasília; avaliação entre [DATAS DA AVALIAÇÃO]; divulgação dos classificados em [DATA DOS CLASSIFICADOS]; final em [DATA, LOCAL E MODALIDADE DA FINAL]; resultado em [DATA DO RESULTADO], no site oficial e no Instagram da Céu Music; entrega da ficha de avaliação individual até 15 (quinze) dias úteis após o fim da avaliação.
+7.1. O Festival tem 4 (quatro) fases. Em cada fase, o participante classificado envia um novo vídeo, avaliado pela banca da Cláusula 13. A Fase 1 é a fase de inscrição e classificação: inscrições e envio do vídeo de a data de publicação deste Regulamento até 22 de fevereiro de 2027, às 23h59, horário de Brasília. O resultado da Fase 1 (aprovado ou não aprovado) é informado a cada participante em até 7 (sete) dias após o envio do vídeo, por e-mail e na página "Minha inscrição", e a ficha de avaliação fica disponível no mesmo prazo.
+
+7.1-A. As Fases 2, 3 e 4 ainda serão detalhadas. Para cada uma, a Céu Music comunica aos participantes classificados, por e-mail e no site, com pelo menos 7 (sete) dias de antecedência do início da fase: o tema ou formato do vídeo, os prazos, os critérios de avaliação, quantos participantes avançam e, na Fase 4 (final), data, local e formato. Essas regras valem igualmente para todos os classificados da fase, não reduzem os prêmios da Cláusula 18 e não criam cobrança para avançar. O participante que não concordar com as regras de uma fase pode deixar o Festival, sem perder os itens do Pacote já entregues.
 
 7.2. As condições essenciais estão disponíveis em https://festivaldeverao.ceumusic.com.br antes do início das inscrições. A Organizadora arquiva todas as versões do Regulamento e as comunicações relevantes.
 
@@ -112,7 +114,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # 10. Envio de vídeos e requisitos técnicos
 
-10.1. O participante envia pelo site um vídeo interpretando a música gospel inscrita, com duração máxima de 1 (um) minuto, em formatos comuns de celular (como MP4 e MOV), até o fim do prazo de inscrição. O vídeo deve permitir identificar o intérprete e verificar a integridade da performance. Cada inscrição aceita um único vídeo, que não pode ser trocado depois de enviado, salvo falha de processamento.
+10.1. Em cada fase, o participante envia pelo site um novo vídeo interpretando a música gospel indicada para aquela fase, com duração máxima de 1 (um) minuto na Fase 1 (as fases seguintes podem ter outra duração, comunicada nos termos da Cláusula 7.1-A), em formatos comuns de celular (como MP4 e MOV), dentro do prazo da fase. O vídeo deve permitir identificar o intérprete e verificar a integridade da performance. Cada fase aceita um único vídeo por inscrição, que não pode ser trocado depois de enviado, salvo falha de processamento.
 
 10.2. São vedados vídeos adulterados que falseiem a autoria, a identidade ou o desempenho avaliado. Regras sobre edição, correção vocal, inteligência artificial, playback e acompanhamento: o vídeo deve ser gravado a capela (somente a voz, sem instrumentos, base ou playback) e sem edição: não são aceitos cortes, montagens, filtros de voz, correção de afinação ou voz gerada por inteligência artificial.
 
@@ -140,13 +142,13 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # 13. Etapas de seleção e avaliação técnica
 
-13.1. A seleção é composta pelas etapas: (i) conferência documental e técnica; (ii) avaliação artística individual; (iii) divulgação dos classificados; (iv) final presencial; (v) homologação e divulgação do resultado.
+13.1. A seleção ocorre em 4 (quatro) fases. Na Fase 1, cada vídeo passa por conferência documental e técnica e por avaliação artística individual, e o participante é aprovado ou não aprovado para a Fase 2. As Fases 2 e 3 seguem a mesma lógica, com as regras da Cláusula 7.1-A. A Fase 4 é a final, que define os três premiados, seguida da homologação e divulgação do resultado.
 
-13.2. A avaliação é feita por banca formada pelo time da Céu Music e por Samuel Messias, com no mínimo [NÚMERO MÍNIMO DE JURADOS] jurados, cujos nomes serão publicados no site até [DATA DE DIVULGAÇÃO DOS JURADOS]. Jurados com conflito de interesses declaram impedimento e são substituídos.
+13.2. A avaliação é feita por banca formada pelo time da Céu Music e por Samuel Messias, com pelo menos 3 (três) jurados, cujos nomes são publicados no site até a divulgação dos resultados da Fase 1. Jurados com conflito de interesses declaram impedimento e são substituídos.
 
 13.3. A pontuação totaliza 100 pontos: interpretação e expressão vocal (25), repertório, mensagem e originalidade da interpretação (25), domínio técnico-musical (20), identidade e expressão artística (15) e presença e coerência artística (15). Cada jurado pontua de forma individual e documentada no sistema do Festival.
 
-13.4. A média aritmética das notas válidas define a classificação. A Céu Music conserva as fichas de cada jurado para auditoria, defesa em reclamações e comprovação do serviço.
+13.4. Em cada fase, a média aritmética das notas válidas define a classificação. Na Fase 1, é aprovado para a Fase 2 o participante que alcançar a nota de corte definida pela banca, aplicada igualmente a todos e divulgada junto com os resultados. Nas fases seguintes, avançam os mais bem pontuados, em número comunicado no início de cada fase. A Céu Music conserva as fichas de cada jurado para auditoria, defesa em reclamações e comprovação do serviço.
 
 13.5. Critérios de desempate, sucessivamente: maior média em repertório, mensagem e originalidade; maior média em interpretação; maior média em domínio técnico; persistindo empate, nova avaliação por jurado independente designado previamente. Não há sorteio para definição do vencedor.
 
@@ -154,7 +156,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # 14. Final, eventos presenciais e transmissão
 
-14.1. A final ocorrerá em [LOCAL, CIDADE, DATA E HORÁRIO DA FINAL] ou, havendo motivo relevante e comunicação adequada, em ambiente digital, mantida a equivalência de condições entre os finalistas.
+14.1. A final (Fase 4) é presencial, com data, local e horário comunicados aos finalistas nos termos da Cláusula 7.1-A. Havendo motivo relevante e comunicação adequada, pode ocorrer em ambiente digital, mantida a equivalência de condições entre os finalistas.
 
 14.2. A Organizadora poderá fixar regras de ensaio, credenciamento, segurança, duração e apresentação, respeitando as exigências de execução pública musical, direitos autorais, licenças do local e autorização de imagem e voz.
 
@@ -184,7 +186,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # 17. Impugnação, recurso e decisão final
 
-17.1. O participante poderá apresentar reclamação fundamentada pelo e-mail ceumusicbrasil@gmail.com, em até 5 dias úteis da divulgação da classificação, quando houver erro de cadastro, soma, descumprimento dos critérios, impedimento de jurado ou indício concreto de fraude.
+17.1. O participante poderá apresentar reclamação fundamentada pelo e-mail ceumusicbrasil@gmail.com, em até 5 dias úteis da divulgação do resultado de cada fase, quando houver erro de cadastro, soma, descumprimento dos critérios, impedimento de jurado ou indício concreto de fraude.
 
 17.2. Não cabe revisão arbitrária do juízo estético fundamentado, sem prejuízo do controle de erro material, desvio de finalidade, discriminação, conflito de interesse, fraude ou violação do Regulamento. A decisão motivada será comunicada em até 10 dias úteis.
 
@@ -302,13 +304,13 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # Anexo I: Pacote, cronograma e prêmios
 
-A. Avaliação individual. Todos os participantes com inscrição válida recebem, independentemente de classificação, ficha com as notas dos cinco critérios da Cláusula 13 (média dos jurados) e devolutiva escrita com pontos de destaque e de aprimoramento, elaborada pelo time da Céu Music e por Samuel Messias. A ficha fica disponível na página "Minha inscrição" até 15 (quinze) dias úteis após o fim da avaliação. A ficha não constitui diagnóstico profissional, consultoria individual continuada ou garantia de classificação, e não é resposta automática genérica.
+A. Avaliação individual. Todos os participantes com inscrição válida recebem, independentemente de classificação, ficha com as notas dos cinco critérios da Cláusula 13 (média dos jurados) e devolutiva escrita com pontos de destaque e de aprimoramento sobre o vídeo da Fase 1, elaborada pelo time da Céu Music e por Samuel Messias. A ficha fica disponível na página "Minha inscrição" em até 7 (sete) dias após o envio do vídeo da Fase 1. A ficha não constitui diagnóstico profissional, consultoria individual continuada ou garantia de classificação, e não é resposta automática genérica.
 
 B. Grupo exclusivo. Acesso ao grupo exclusivo de participantes em [PLATAFORMA DO GRUPO, POR EXEMPLO WHATSAPP], liberado na página "Minha inscrição" após a confirmação do pagamento, durante [PERÍODO DE ACESSO AO GRUPO].
 
 C. Materiais exclusivos. [DESCREVER OS MATERIAIS PREPARADOS POR SAMUEL MESSIAS: FORMATO (VÍDEO, PDF, AULA), QUANTIDADE E DATAS DE LIBERAÇÃO], disponibilizados na página "Minha inscrição".
 
-D. Valor e etapas. Valor total: R$ 179,00, incluídos os custos da plataforma; Pix processado pela AbacatePay. Uma obra por inscrição. Datas conforme a Cláusula 7.
+D. Valor e etapas. Valor total: R$ 179,00, incluídos os custos da plataforma; Pix processado pela AbacatePay. Um vídeo por fase. Datas conforme a Cláusula 7.
 
 E. Mentoria com Samuel Messias (1º, 2º e 3º lugares). Duração: [HORAS OU ENCONTROS]; formato: presencial; período: [DATA OU JANELA]; conteúdo mínimo: [TEMAS]. Deslocamento, hospedagem e alimentação ficam a cargo do premiado.
 
