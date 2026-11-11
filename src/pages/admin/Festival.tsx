@@ -53,8 +53,8 @@ const CONSENT_LABELS: Record<string, string> = {
   terms: 'Regulamento, privacidade e condições',
   authorship: 'Declaração de autoria',
   internal_use: 'Uso interno para avaliação',
-  publicity: 'Divulgação de imagem e voz (opcional)',
-  marketing: 'Comunicações da Céu (opcional)',
+  publicity: 'Divulgação de imagem e voz',
+  marketing: 'Comunicações da Céu',
   guardian_terms: 'Termo do responsável (Anexo IV)',
 };
 const RELATION_LABELS: Record<string, string> = { mae: 'Mãe', pai: 'Pai', tutor: 'Tutor(a)', guardiao: 'Guardião(ã)', outro: 'Outro' };
@@ -82,7 +82,7 @@ const primaryButton = 'bg-[#0EA8A0] hover:bg-[#0EA8A0]/90 text-black px-4 py-2 r
 const secondaryButton = 'bg-white/5 hover:bg-white/10 px-4 py-2 rounded-xl text-sm flex items-center justify-center gap-2 transition-colors disabled:opacity-50';
 
 function exportCsv(rows: Registration[]) {
-  const header = ['Número', 'Nome', 'Nome artístico', 'Nascimento', 'E-mail', 'WhatsApp', 'CPF', 'Cidade', 'UF', 'Música', 'Coautores', 'Responsável', 'Autorização', 'Pagamento', 'Valor', 'Pago em', 'Vídeo', 'Inscrito em'];
+  const header = ['Número', 'Nome', 'Nome artístico', 'Nascimento', 'E-mail', 'WhatsApp', 'CPF', 'Cidade', 'UF', 'Música', 'Autores', 'Responsável', 'Autorização', 'Pagamento', 'Valor', 'Pago em', 'Vídeo', 'Inscrito em'];
   const escape = (value: string | number | null) => `"${String(value ?? '').replace(/"/g, '""')}"`;
   const lines = rows.map((row) =>
     [
@@ -158,7 +158,7 @@ function RegistrationCard({ row, onRefresh, onResendGuardian }: { row: Registrat
             <div><dt className="text-white/50">Inscrito em</dt><dd>{date(row.created_at)}</dd></div>
             <div><dt className="text-white/50">Pago em</dt><dd>{row.paid_at ? date(row.paid_at) : '—'}</dd></div>
             <div><dt className="text-white/50">Nascimento</dt><dd>{row.birth_date ? `${new Date(`${row.birth_date}T12:00:00`).toLocaleDateString('pt-BR')} (${ageFrom(row.birth_date)} anos)` : '—'}</dd></div>
-            <div><dt className="text-white/50">Coautores</dt><dd>{row.coauthors || '—'}</dd></div>
+            <div><dt className="text-white/50">Autores</dt><dd>{row.coauthors || '—'}</dd></div>
             {row.guardian_name && (
               <div className="col-span-2 rounded-xl bg-white/5 p-3">
                 <dt className="text-white/50">Responsável legal ({RELATION_LABELS[row.guardian_relation ?? ''] ?? row.guardian_relation})</dt>

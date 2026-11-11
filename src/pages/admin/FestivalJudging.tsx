@@ -9,10 +9,10 @@ import type { PanelMessage } from './components/useOrderedList';
 
 export const CRITERIA = [
   { key: 'interpretation', label: 'Interpretação e expressão vocal', max: 25 },
-  { key: 'composition', label: 'Composição e originalidade', max: 25 },
+  { key: 'composition', label: 'Repertório, mensagem e originalidade', max: 25 },
   { key: 'technique', label: 'Domínio técnico-musical', max: 20 },
   { key: 'identity', label: 'Identidade e expressão artística', max: 15 },
-  { key: 'coherence', label: 'Coerência do projeto autoral', max: 15 },
+  { key: 'coherence', label: 'Presença e coerência artística', max: 15 },
 ] as const;
 
 type CriterionKey = (typeof CRITERIA)[number]['key'];
@@ -108,7 +108,7 @@ function ScoreCard({
         <span className="text-xs font-bold text-white/50 tabular-nums">Nº {String(entry.number).padStart(4, '0')}</span>
         <span className="min-w-0 flex-1">
           <span className="block font-semibold truncate">{name(entry)}</span>
-          <span className="block text-sm text-white/50 truncate">“{entry.song_title}”{entry.coauthors && ` · com ${entry.coauthors}`}</span>
+          <span className="block text-sm text-white/50 truncate">“{entry.song_title}”{entry.coauthors && ` · de ${entry.coauthors}`}</span>
         </span>
         <span className="text-xs px-2.5 py-1 rounded-full bg-white/10 text-white/70">{STATUS_LABELS[status] ?? status}</span>
         <span className="text-xs text-white/40 tabular-nums">{position} de {count}</span>

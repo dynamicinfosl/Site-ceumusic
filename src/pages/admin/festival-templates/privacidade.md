@@ -2,13 +2,13 @@ Este aviso explica como o Festival de Verão usa os seus dados. Ele complementa 
 
 # 1. Quem cuida dos seus dados
 
-A controladora é [RAZÃO SOCIAL], CNPJ [CNPJ], nome fantasia Céu Music, com sede em [ENDEREÇO]. Encarregado de dados: [NOME DO ENCARREGADO], pelo e-mail ceumusicbrasil@gmail.com.
+A controladora é CEU MUSIC PRODUCOES ARTISTICA LTDA, CNPJ 57.358.544/0001-47, nome fantasia Céu Music, com sede em Av. Olof Palme, 765, salas 701 a 704 e 724 a 726, Camorim, Rio de Janeiro/RJ, CEP 22783-119. Encarregado de dados: [NOME DO ENCARREGADO], pelo e-mail ceumusicbrasil@gmail.com.
 
 # 2. Quais dados coletamos
 
 Dados da inscrição: nome completo, nome artístico, CPF, data de nascimento, e-mail, WhatsApp, cidade e estado.
 
-Dados da música: nome da música, coautores informados e o vídeo enviado, com sua imagem e voz.
+Dados da música: nome da música, autores informados e o vídeo enviado, com sua imagem e voz.
 
 Dados do responsável, quando o participante tem menos de 18 anos: nome, CPF, e-mail, telefone e vínculo com o participante.
 
@@ -22,7 +22,7 @@ Dados da avaliação: notas e comentários dos jurados.
 
 Para realizar a inscrição e a contratação do Pacote; gerar e confirmar o Pix; receber, armazenar e avaliar o vídeo; entregar a ficha de avaliação, o acesso ao grupo e os materiais; falar com você sobre o Festival; verificar autoria e prevenir fraudes; entregar os prêmios; emitir documentos fiscais; cumprir obrigações legais e defender direitos.
 
-Divulgamos seu nome artístico, imagem, voz e vídeo apenas se você marcar a autorização facultativa de divulgação, nos meios e pelo prazo do Regulamento. Enviamos comunicações não necessárias ao Festival apenas se você marcar essa opção.
+Divulgamos seu nome artístico, imagem, voz e vídeo nos meios e pelo prazo do Regulamento, conforme a autorização dada na inscrição. Também enviamos novidades da Céu Music, que você pode cancelar a qualquer momento pelos canais de atendimento.
 
 # 4. Bases legais
 
@@ -32,7 +32,7 @@ Cumprimento de obrigação legal (art. 7º, II) para registros fiscais e de paga
 
 Exercício regular de direitos (art. 7º, VI) para guardar provas do aceite e das avaliações.
 
-Consentimento (art. 7º, I) para a divulgação pública e para comunicações promocionais. Você pode retirar esse consentimento a qualquer momento.
+Consentimento (art. 7º, I) para a divulgação pública e para comunicações promocionais, dado na inscrição. Você pode pedir a revogação a qualquer momento, sem efeito sobre o uso já realizado.
 
 Dados de crianças e adolescentes são tratados no seu melhor interesse (art. 14 da LGPD), com consentimento específico e destacado de um dos responsáveis quando exigido.
 
@@ -40,7 +40,7 @@ Dados de crianças e adolescentes são tratados no seu melhor interesse (art. 14
 
 Com fornecedores que operam o Festival, apenas no necessário: Supabase (banco de dados e servidores do sistema), Cloudflare (armazenamento e reprodução dos vídeos), AbacatePay (pagamento por Pix), Resend (envio de e-mails) e Vercel (hospedagem do site).
 
-Com os jurados do time Céu Music e Samuel Messias, que veem seu nome artístico, a música, os coautores e o vídeo. Jurados não recebem CPF, endereço ou contatos.
+Com os jurados do time Céu Music e Samuel Messias, que veem seu nome artístico, a música, os autores e o vídeo. Jurados não recebem CPF, endereço ou contatos.
 
 Com autoridades, quando a lei exigir, e com titulares de direitos para resolver conflitos de autoria fundamentados.
 
@@ -66,7 +66,7 @@ O acesso aos dados é restrito à equipe do Festival, com login individual e per
 
 Você, ou seu responsável legal, pode pedir confirmação, acesso, correção, informação sobre compartilhamento, eliminação quando aplicável, portabilidade, oposição e revogação do consentimento pelo e-mail ceumusicbrasil@gmail.com. Podemos pedir uma confirmação de identidade.
 
-Retirar a autorização de divulgação não cancela a inscrição. Pedir a exclusão de dados essenciais durante o Festival pode encerrar a participação, preservados seus direitos de consumidor.
+Pedir a exclusão de dados essenciais durante o Festival pode encerrar a participação, preservados seus direitos de consumidor.
 
 Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD).
 

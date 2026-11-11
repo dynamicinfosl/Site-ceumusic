@@ -1,14 +1,14 @@
 # Quadro-resumo
 
-Organizadora: [RAZÃO SOCIAL], CNPJ [CNPJ], sede em [ENDEREÇO], nome fantasia Céu Music.
+Organizadora: CEU MUSIC PRODUCOES ARTISTICA LTDA, CNPJ 57.358.544/0001-47, sede em Av. Olof Palme, 765, salas 701 a 704 e 724 a 726, Camorim, Rio de Janeiro/RJ, CEP 22783-119, nome fantasia Céu Music.
 
 Pacote Festival de Verão: avaliação individual do vídeo pelo time Céu Music e Samuel Messias, com ficha de notas e devolutiva escrita; acesso ao grupo exclusivo de participantes; materiais exclusivos preparados por Samuel Messias; e participação na seleção artística do Festival. Valor único de R$ 179,00, pago por Pix no site oficial.
 
-Participantes: pessoas físicas a partir de 18 (dezoito) anos. Menores de 18 anos participam com autorização do responsável legal, nas condições da Cláusula 5 e do Anexo IV.
+Participantes: pessoas físicas a partir de 16 (dezesseis) anos. Menores de 18 anos participam com autorização do responsável legal, nas condições da Cláusula 5 e do Anexo IV.
 
-Modalidade: seleção de intérpretes e canções autorais exclusivamente por mérito artístico, com notas de jurados. O vencedor não é definido por sorteio nem por compra de votos.
+Modalidade: seleção de intérpretes de música gospel exclusivamente por mérito artístico, com notas de jurados. O vencedor não é definido por sorteio nem por compra de votos.
 
-Prêmios do vencedor: mentoria com Samuel Messias; produção e gravação de 3 músicas no estúdio da Céu Music; estratégia de lançamento, conforme o Anexo I.
+Prêmios: 1º lugar: gravação de 2 músicas com videoclipes, mentoria com Samuel Messias, contrato de 1 ano com a Céu Music e R$ 10.000,00. 2º lugar: gravação de 1 música, gravação de reels, mentoria, contrato de distribuição e R$ 5.000,00. 3º lugar: 6 reels, 3 covers para YouTube, mentoria e R$ 2.000,00. Detalhes no Anexo I.
 
 Calendário: inscrições de a data de publicação deste Regulamento a 22 de fevereiro de 2027, horário de Brasília; demais etapas na Cláusula 7.
 
@@ -16,7 +16,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # 1. Organização, natureza e objeto
 
-1.1. O Festival de Verão Céu Music ("Festival") é iniciativa privada da [RAZÃO SOCIAL], pessoa jurídica inscrita no CNPJ sob nº [CNPJ], com sede em [ENDEREÇO], doravante "Céu Music" ou "Organizadora".
+1.1. O Festival de Verão Céu Music ("Festival") é iniciativa privada da CEU MUSIC PRODUCOES ARTISTICA LTDA, pessoa jurídica inscrita no CNPJ sob nº 57.358.544/0001-47, com sede em Av. Olof Palme, 765, salas 701 a 704 e 724 a 726, Camorim, Rio de Janeiro/RJ, CEP 22783-119, doravante "Céu Music" ou "Organizadora".
 
 1.2. O Festival objetiva promover avaliação, orientação e desenvolvimento de talentos musicais, mediante análise técnica de vídeos de interpretação de músicas autorais e seleção por mérito artístico, sem sorteio, loteria, pagamento por voto ou modalidade aleatória de definição dos vencedores.
 
@@ -26,11 +26,11 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 1.5. O Quadro-resumo e os Anexos I a IV integram este Regulamento. Em caso de divergência entre publicidade e instrumento contratual, prevalecerão a informação mais favorável ao consumidor e as condições legalmente exigíveis, sem prejuízo de eventual correção pública e uniforme.
 
-1.6. [AÇÃO PROMOCIONAL COM SORTEIO (CARRO): DEFINIR COM A ADVOGADA SE E COMO MENCIONAR. Hoje este Regulamento afirma que não há sorteio. Apague esta linha quando decidir.]
+1.6. [SORTEIO DE UM CARRO (MOBI, KWID OU SIMILAR): REGRAS DEFINIDAS COM A ADVOGADA, EM REGULAMENTO PRÓPRIO. Este Regulamento afirma que os vencedores do concurso não são definidos por sorteio. Apague esta linha quando decidir.]
 
 # 2. Definições e formação da relação contratual
 
-2.1. "Participante" é a pessoa física inscrita para interpretação de obra musical autoral; "Inscrição válida" é aquela que observa cumulativamente os critérios de elegibilidade, os documentos, os prazos, o envio do material e a confirmação de pagamento; "Responsável legal" é quem representa ou assiste o participante menor nos termos da lei.
+2.1. "Participante" é a pessoa física inscrita para interpretação de obra musical do gênero gospel; "Inscrição válida" é aquela que observa cumulativamente os critérios de elegibilidade, os documentos, os prazos, o envio do material e a confirmação de pagamento; "Responsável legal" é quem representa ou assiste o participante menor nos termos da lei.
 
 2.2. "Pacote" é o conjunto de serviços e conteúdos descrito na Cláusula 3 e no Anexo I; "Avaliação individual" é a análise do material apresentado, com entrega de ficha de notas e devolutiva; "Premiação" corresponde apenas aos benefícios expressamente indicados no Anexo I; "Fonograma" é a fixação sonora resultante da gravação; e "Obra musical" é a composição subjacente, distinta do fonograma.
 
@@ -50,7 +50,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 4.1. Poderão se inscrever pessoas físicas residentes em todo o território nacional, com CPF regular, desde que atendidas as exigências de autoria, representação legal e demais condições deste Regulamento.
 
-4.2. A idade mínima para participar é de 18 (dezoito) anos, completos na data da inscrição. Menores de 18 anos participam nas condições da Cláusula 5 e do Anexo IV. A Organizadora poderá estabelecer limites de formato, agenda ou participação presencial necessários à proteção integral.
+4.2. A idade mínima para participar é de 16 (dezesseis) anos, completos na data da inscrição. Menores de 18 anos participam nas condições da Cláusula 5 e do Anexo IV. A Organizadora poderá estabelecer limites de formato, agenda ou participação presencial necessários à proteção integral.
 
 4.3. São inelegíveis os integrantes diretamente envolvidos na administração da seleção, os jurados, colaboradores com acesso decisório ou informações privilegiadas, e seus cônjuges, companheiros e parentes até o 2º (segundo) grau, quando configurado conflito de interesse. Vínculos artísticos preexistentes deverão ser declarados. O participante com contrato de gravadora, editora ou empresário é o único responsável por verificar se pode participar; eventual quebra de contrato decorrente da inscrição é de sua exclusiva responsabilidade.
 
@@ -70,9 +70,9 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 5.6. Em caso de ausência de autorização necessária ou risco à integridade do menor, a Céu Music poderá adiar ou substituir a etapa por modalidade segura equivalente, quando juridicamente viável; não sendo possível, aplicará o regime de cancelamento e restituição pertinente, sem penalização indevida do participante.
 
-# 6. Coautores, grupos e representantes
+# 6. Autores, grupos e representantes
 
-6.1. A inscrição identificará o intérprete principal e todos os coautores da obra, incluindo parceiros de letra e música, arranjadores e eventuais participantes da gravação.
+6.1. A inscrição identificará o intérprete principal e os autores da obra (compositores da letra e da música), sejam eles o próprio participante ou terceiros.
 
 6.2. O participante deverá ter as autorizações necessárias para a avaliação e divulgação do material. Na ausência de autorização indispensável, a Organizadora poderá solicitar regularização dentro de prazo razoável ou indeferir a inscrição.
 
@@ -112,7 +112,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # 10. Envio de vídeos e requisitos técnicos
 
-10.1. O participante envia pelo site um vídeo interpretando a música autoral inscrita, com duração máxima de 1 (um) minuto, em formatos comuns de celular (como MP4 e MOV), até o fim do prazo de inscrição. O vídeo deve permitir identificar o intérprete e verificar a integridade da performance. Cada inscrição aceita um único vídeo, que não pode ser trocado depois de enviado, salvo falha de processamento.
+10.1. O participante envia pelo site um vídeo interpretando a música gospel inscrita, com duração máxima de 1 (um) minuto, em formatos comuns de celular (como MP4 e MOV), até o fim do prazo de inscrição. O vídeo deve permitir identificar o intérprete e verificar a integridade da performance. Cada inscrição aceita um único vídeo, que não pode ser trocado depois de enviado, salvo falha de processamento.
 
 10.2. São vedados vídeos adulterados que falseiem a autoria, a identidade ou o desempenho avaliado. Regras sobre edição, correção vocal, inteligência artificial, playback e acompanhamento: o vídeo deve ser gravado a capela (somente a voz, sem instrumentos, base ou playback) e sem edição: não são aceitos cortes, montagens, filtros de voz, correção de afinação ou voz gerada por inteligência artificial.
 
@@ -122,9 +122,9 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # 11. Ineditismo, integridade e direitos de terceiros
 
-11.1. A obra inscrita deve ser autoral, original ou legitimamente submetida pelo intérprete com as permissões necessárias. Ineditismo: [A MÚSICA PRECISA SER INÉDITA? SIM OU NÃO E EXCEÇÕES].
+11.1. A música inscrita deve ser do gênero gospel (música cristã), de autoria do participante ou de terceiros. Não é exigido ineditismo. Quando a música não for do participante, ele informa os autores no formulário.
 
-11.2. O participante declara deter direitos ou autorizações suficientes quanto a letra, composição, arranjo, bases, samples, fonogramas preexistentes, conteúdo audiovisual, imagem e voz de terceiros. Covers, remixes e material gerado por inteligência artificial: não são aceitos covers, remixes nem letra ou melodia geradas por inteligência artificial.
+11.2. O participante declara ter direito de interpretar a obra para fins de avaliação e declara que a letra, a melodia e o vídeo não violam direitos de terceiros. São aceitas interpretações de músicas de outros autores (covers). Não são aceitos remixes, paródias nem letra, melodia ou voz geradas por inteligência artificial.
 
 11.3. Suspeitas razoáveis de plágio, usurpação de identidade, violação de direitos ou fraude permitem diligência, suspensão cautelar de publicação, solicitação de documentos e decisão motivada, respeitando prazo de defesa quando possível.
 
@@ -134,7 +134,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 12.1. Não são admitidas fraudes de identidade, manipulação de pontuação, utilização não autorizada de obras, conteúdos ilícitos ou discriminatórios, assédio, exposição abusiva de menores, violência, ameaça ou condutas que comprometam a segurança dos participantes.
 
-12.2. Linha editorial do Festival: [DESCRIÇÃO OBJETIVA DA PROPOSTA ARTÍSTICA, POR EXEMPLO ALINHAMENTO À MÚSICA CRISTÃ]. Os critérios de adequação de conteúdo são aplicados de forma uniforme; a mera discordância estética não caracteriza infração.
+12.2. Linha editorial do Festival: o Festival é de música gospel; letras devem ter mensagem cristã e são vedados conteúdos contrários à fé cristã, ofensivos ou impróprios para a família. Os critérios de adequação de conteúdo são aplicados de forma uniforme; a mera discordância estética não caracteriza infração.
 
 12.3. A Organizadora poderá adotar advertência, correção de irregularidade, retirada de material ou desclassificação proporcional e motivada, com comunicação ao interessado e via de contestação conforme a Cláusula 17.
 
@@ -144,11 +144,11 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 13.2. A avaliação é feita por banca formada pelo time da Céu Music e por Samuel Messias, com no mínimo [NÚMERO MÍNIMO DE JURADOS] jurados, cujos nomes serão publicados no site até [DATA DE DIVULGAÇÃO DOS JURADOS]. Jurados com conflito de interesses declaram impedimento e são substituídos.
 
-13.3. A pontuação totaliza 100 pontos: interpretação e expressão vocal (25), qualidade da composição e originalidade (25), domínio técnico-musical (20), identidade e expressão artística (15) e coerência do projeto autoral (15). Cada jurado pontua de forma individual e documentada no sistema do Festival.
+13.3. A pontuação totaliza 100 pontos: interpretação e expressão vocal (25), repertório, mensagem e originalidade da interpretação (25), domínio técnico-musical (20), identidade e expressão artística (15) e presença e coerência artística (15). Cada jurado pontua de forma individual e documentada no sistema do Festival.
 
 13.4. A média aritmética das notas válidas define a classificação. A Céu Music conserva as fichas de cada jurado para auditoria, defesa em reclamações e comprovação do serviço.
 
-13.5. Critérios de desempate, sucessivamente: maior média em composição e originalidade; maior média em interpretação; maior média em domínio técnico; persistindo empate, nova avaliação por jurado independente designado previamente. Não há sorteio para definição do vencedor.
+13.5. Critérios de desempate, sucessivamente: maior média em repertório, mensagem e originalidade; maior média em interpretação; maior média em domínio técnico; persistindo empate, nova avaliação por jurado independente designado previamente. Não há sorteio para definição do vencedor.
 
 13.6. Não há voto popular com peso decisório. Enquetes de engajamento, se houver, são recreativas e não influenciam a premiação.
 
@@ -174,7 +174,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # 16. Vencedor e suplentes
 
-16.1. É vencedor o participante ou grupo que alcançar a maior pontuação final nos termos da Cláusula 13, observados os critérios de desempate e eventuais impedimentos legais.
+16.1. São premiados, em ordem, os três participantes ou grupos que alcançarem as maiores pontuações finais nos termos da Cláusula 13, observados os critérios de desempate e eventuais impedimentos legais.
 
 16.2. O vencedor será convocado para confirmar seus dados e apresentar os documentos estritamente necessários à entrega do prêmio em 10 dias úteis, admitida prorrogação razoável por motivo justificado, sobretudo quando envolver menor e necessidade de ordem judicial.
 
@@ -192,23 +192,29 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # 18. Premiação
 
-18.1. A premiação do vencedor compreende: (a) mentoria artística com Samuel Messias; (b) gravação e produção de três músicas no estúdio da Céu Music; e (c) estratégia de lançamento das músicas, conforme o Anexo I.
+18.1. Os três primeiros colocados recebem:
 
-18.2. A premiação é pessoal, vinculada ao vencedor ou ao grupo inscrito, não conversível em dinheiro e não transferível sem consentimento escrito. O detalhamento do prêmio não pode ser alterado unilateralmente após a inscrição em prejuízo do participante.
+1º lugar: gravação e produção de 2 (duas) músicas, com videoclipe de cada uma; mentoria com Samuel Messias; contrato de 1 (um) ano com a Céu Music; e R$ 10.000,00 (dez mil reais).
+
+2º lugar: gravação e produção de 1 (uma) música; gravação de reels; mentoria com Samuel Messias; contrato de distribuição; e R$ 5.000,00 (cinco mil reais).
+
+3º lugar: gravação de 6 (seis) reels; gravação de 3 (três) covers para YouTube; mentoria com Samuel Messias; e R$ 2.000,00 (dois mil reais).
+
+18.2. Os prêmios em dinheiro são pagos por transferência ou Pix para conta de titularidade do premiado (ou do responsável legal, se menor) em até 30 (trinta) dias após a divulgação do resultado, com a retenção de imposto de renda exigida por lei. Os demais prêmios são pessoais, não conversíveis em dinheiro e não transferíveis sem consentimento escrito. O detalhamento dos prêmios não pode ser alterado unilateralmente após a inscrição em prejuízo do participante.
 
 18.3. A mentoria depende da disponibilidade confirmada de Samuel Messias. Impossibilidade superveniente será tratada por remarcação ou alternativa de natureza e valor comparáveis, mediante acordo.
 
-18.4. Não integram o prêmio, salvo previsão expressa, a contratação exclusiva do artista, assessoria permanente de carreira, cessão editorial de compositores, videoclipes, investimento obrigatório em mídia, garantia de números de audiência, playlists ou receita futura.
+18.4. Não integram o prêmio, salvo previsão expressa no item 18.1, a contratação exclusiva do artista, assessoria permanente de carreira, cessão editorial de compositores, investimento obrigatório em mídia, garantia de números de audiência, playlists ou receita futura.
 
 18.5. Para menores, sessões, gravações e mentoria observam os acompanhamentos, permissões, horários e medidas de segurança do Anexo IV e de eventuais alvarás.
 
 # 19. Produção fonográfica e exploração econômica
 
-19.1. A Céu Music atua como produtora fonográfica dos três fonogramas que financiar, organizar e fixar, respeitados os direitos autorais sobre as composições e os direitos conexos dos intérpretes.
+19.1. A Céu Music atua como produtora dos fonogramas e vídeos do prêmio que financiar, organizar e fixar, respeitados os direitos autorais sobre as composições e os direitos conexos dos intérpretes.
 
 19.2. A inscrição não transfere a titularidade da composição, não gera cessão editorial, exclusividade de agenciamento, exclusividade de carreira nem licença irrestrita de catálogo. A exploração comercial dos fonogramas do prêmio depende de contrato específico.
 
-19.3. As condições essenciais do contrato fonográfico vinculado à premiação constam do Anexo I, item F, e estão disponíveis antes da inscrição.
+19.3. As condições essenciais dos contratos vinculados à premiação (contrato de 1 ano do 1º lugar e contrato de distribuição do 2º lugar) constam do Anexo I, item H, e estão disponíveis antes da inscrição.
 
 19.4. É vedada a imposição, após a escolha do vencedor, de cessão total de composições, exclusividade abrangente ou ônus não anunciado como condição para usufruir a premiação.
 
@@ -218,7 +224,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 20.1. Para viabilizar a avaliação, o participante concede licença não exclusiva, gratuita e limitada ao processamento interno do material, à exibição aos jurados e ao armazenamento necessário, durante o período do Festival e de retenção legal.
 
-20.2. A reprodução e comunicação pública do vídeo, da obra e da interpretação para divulgação do Festival dependem de autorização específica e facultativa, dada em caixa própria no formulário, nos seguintes meios: site do Festival e da Céu Music, redes sociais, plataformas digitais, imprensa e materiais de divulgação do Festival, em todo o mundo, por 24 meses após o encerramento do Festival. A recusa dessa autorização não impede a avaliação.
+20.2. A reprodução e comunicação pública do vídeo, da obra e da interpretação para divulgação do Festival dependem de autorização específica, dada em caixa própria e obrigatória do formulário, nos seguintes meios: site do Festival e da Céu Music, redes sociais, plataformas digitais, imprensa e materiais de divulgação do Festival, em todo o mundo, por 24 meses após o encerramento do Festival.
 
 20.3. A licença de divulgação não autoriza uso em publicidade comercial alheia ao Festival, produtos derivados, exploração fonográfica autônoma, treinamento de inteligência artificial ou cessão a patrocinadores para campanhas independentes.
 
@@ -228,7 +234,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # 21. Nome, imagem, voz e direitos da personalidade
 
-21.1. O uso do nome, nome artístico, imagem, voz e performances para divulgação do Festival segue a autorização facultativa da Cláusula 20.2, sem remuneração adicional, pelos mesmos meios e prazo.
+21.1. O uso do nome, nome artístico, imagem, voz e performances para divulgação do Festival segue a autorização da Cláusula 20.2, sem remuneração adicional, pelos mesmos meios e prazo.
 
 21.2. A divulgação pode incluir cobertura de bastidores, resultados, publicações, chamadas do Festival, entrevistas e registros da premiação. Campanhas externas e endosso de produtos de terceiros exigem consentimento específico.
 
@@ -304,27 +310,27 @@ C. Materiais exclusivos. [DESCREVER OS MATERIAIS PREPARADOS POR SAMUEL MESSIAS: 
 
 D. Valor e etapas. Valor total: R$ 179,00, incluídos os custos da plataforma; Pix processado pela AbacatePay. Uma obra por inscrição. Datas conforme a Cláusula 7.
 
-E. Prêmio 1: mentoria com Samuel Messias. Duração: [HORAS OU ENCONTROS]; formato: presencial; período: [DATA OU JANELA]; conteúdo mínimo: [TEMAS]; custos incluídos e deslocamento: deslocamento, hospedagem e alimentação ficam a cargo do vencedor.
+E. Mentoria com Samuel Messias (1º, 2º e 3º lugares). Duração: [HORAS OU ENCONTROS]; formato: presencial; período: [DATA OU JANELA]; conteúdo mínimo: [TEMAS]. Deslocamento, hospedagem e alimentação ficam a cargo do premiado.
 
-F. Prêmio 2: produção de três fonogramas. Produção e gravação de 3 músicas no estúdio da Céu Music, com [HORAS OU SESSÕES POR MÚSICA], incluindo a produção completa de cada música, em áudio e vídeo; músicos e arranjadores: [INCLUSOS OU NÃO]; videoclipe: incluso (vídeo de cada música); prazo máximo: [PRAZO DO PRÊMIO].
+F. Gravações. 1º lugar: produção completa de 2 músicas em áudio e videoclipe. 2º lugar: produção completa de 1 música em áudio e gravação de [QUANTIDADE DE REELS DO 2º LUGAR] reels. 3º lugar: gravação de 6 reels e de 3 covers para YouTube. Prazo para realização: [PRAZO DO PRÊMIO]. Deslocamento e hospedagem ficam a cargo do premiado.
 
-G. Prêmio 3: estratégia de lançamento. Entregáveis mínimos: [REUNIÃO, CRONOGRAMA, PLANO DE DISTRIBUIÇÃO E COMUNICAÇÃO]. Não garante distribuição em data determinada, playlist editorial, audiência ou receita.
+G. Prêmios em dinheiro. 1º lugar: R$ 10.000,00; 2º lugar: R$ 5.000,00; 3º lugar: R$ 2.000,00, pagos conforme a Cláusula 18.2.
 
-H. Condições essenciais do contrato fonográfico. Produtora fonográfica: Céu Music. Titularidade dos fonogramas: do vencedor; a Céu Music realiza a produção como serviço do prêmio. Território: [TERRITÓRIO]. Prazo: 1 (um) ano. Remuneração e royalties: [CRITÉRIO E PERCENTUAL]. Dedução de custos: [DESCREVER OU VEDAR]. Prestação de contas: semestral. Distribuidora: [A DEFINIR]. Contratos editoriais, de agenciamento ou de exclusividade artística exigem negociação independente.
+H. Condições essenciais dos contratos do prêmio. Titularidade das gravações: do premiado; a Céu Music realiza a produção como serviço do prêmio. Contrato do 1º lugar: [TIPO DO CONTRATO DE 1 ANO: ARTÍSTICO, EMPRESARIAMENTO OU OUTRO E O QUE A CÉU OFERECE]. Contrato de distribuição do 2º lugar: [PRAZO E PERCENTUAL DA DISTRIBUIÇÃO]. Território: [TERRITÓRIO]. Prazo do contrato do 1º lugar: 1 (um) ano. Remuneração e royalties: [CRITÉRIO E PERCENTUAL]. Dedução de custos: [DESCREVER OU VEDAR]. Prestação de contas: semestral. Distribuidora: [A DEFINIR]. Contratos editoriais, de agenciamento ou de exclusividade artística exigem negociação independente.
 
 # Anexo III: Declarações e autorizações eletrônicas
 
-No formulário de inscrição, em caixas separadas e não pré-marcadas, com registro da versão dos documentos, data, horário, endereço IP e navegador:
+No formulário de inscrição, em caixas separadas, não pré-marcadas e todas obrigatórias, com registro da versão dos documentos, data, horário, endereço IP e navegador:
 
 1. Li e aceito o Regulamento, o Aviso de Privacidade e as condições de preço, entregas e reembolso. (obrigatória)
 
-2. Declaro que a música é de minha autoria ou que tenho autorização de todos os coautores, que informei no formulário. (obrigatória)
+2. Declaro que informei corretamente os autores da música e que tenho direito de interpretá-la no Festival. (obrigatória)
 
 3. Autorizo o uso interno da música e do vídeo para a avaliação e a administração da inscrição. (obrigatória)
 
-4. Autorizo a divulgação do meu nome artístico, imagem, voz, música e trechos do vídeo nos meios e pelo prazo da Cláusula 20.2. (facultativa)
+4. Autorizo a divulgação do meu nome artístico, imagem, voz, música e trechos do vídeo nos meios e pelo prazo da Cláusula 20.2. (obrigatória)
 
-5. Aceito receber comunicações da Céu Music não necessárias ao Festival, podendo cancelar a qualquer momento. (facultativa)
+5. Aceito receber comunicações da Céu Music não necessárias ao Festival, podendo cancelar a qualquer momento pelos canais de atendimento. (obrigatória)
 
 A idade é informada pela data de nascimento. Menores de 18 anos seguem o Anexo IV.
 
@@ -340,7 +346,7 @@ Quando o participante tem menos de 18 anos, o responsável legal informa no form
 
 4. Autorizo o tratamento dos dados necessários à participação e à segurança do participante e, quando exigido, dou consentimento específico e destacado (art. 14, § 1º, da LGPD).
 
-5. A divulgação pública de imagem, voz, obra e performance depende da autorização facultativa separada do formulário, que não abrange anúncios alheios ao Festival nem exploração fonográfica comercial.
+5. Autorizo a divulgação pública de imagem, voz, obra e performance do participante nos termos da Cláusula 20.2, que não abrange anúncios alheios ao Festival nem exploração fonográfica comercial.
 
 6. Acompanharei o participante nas atividades presenciais e gravações e cooperarei com a obtenção de alvarás e outras permissões exigíveis.
 
