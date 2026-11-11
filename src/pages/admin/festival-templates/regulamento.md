@@ -60,7 +60,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 5.1. A inscrição de menor de 16 anos será realizada por seu representante legal; o adolescente de 16 a 17 anos será assistido por responsável legal, inclusive para aceite de documentos e contratação, conforme a capacidade civil aplicável.
 
-5.2. Na inscrição de menor, o formulário exige nome, CPF, e-mail, telefone e vínculo do responsável legal, que declara ser o responsável e aceita o Termo do Anexo IV. A Céu Music envia ao e-mail do responsável um link pessoal para confirmar a autorização. O envio do vídeo só é liberado depois dessa confirmação. A Céu Music poderá pedir comprovação do vínculo.
+5.2. Na inscrição de menor, o formulário exige nome, CPF, e-mail, telefone e vínculo do responsável legal, que declara ser o responsável e aceita o Termo do Anexo IV no próprio formulário. A Céu Music poderá pedir comprovação do vínculo e confirmação adicional da autorização pelos contatos informados.
 
 5.3. O pagamento é feito em nome do responsável legal. Pedidos de reembolso e comunicações contratuais com menores ocorrerão preferencialmente com o responsável, que recebe cópia dos e-mails. A equipe não poderá solicitar contato privado não supervisionado com criança ou adolescente, nem exigir gravações em situações de risco, constrangimento ou incompatibilidade etária.
 
@@ -356,4 +356,4 @@ Quando o participante tem menos de 18 anos, o responsável legal informa no form
 
 8. Eventual contrato fonográfico posterior terá seus termos essenciais previamente disponibilizados e dependerá de instrumento específico e da devida representação ou assistência.
 
-Assinatura eletrônica: o responsável recebe por e-mail um link pessoal e confirma a autorização na página do Festival. O sistema registra a data, o horário, o endereço IP e o navegador da confirmação, que vale como assinatura eletrônica deste Termo.
+Assinatura eletrônica: o responsável aceita este Termo no formulário de inscrição. O sistema registra a data, o horário, o endereço IP e o navegador do aceite, que vale como assinatura eletrônica deste Termo.
