@@ -2,7 +2,7 @@
 
 Organizadora: CEU MUSIC PRODUCOES ARTISTICA LTDA, CNPJ 57.358.544/0001-47, sede em Av. Olof Palme, 765, salas 701 a 704 e 724 a 726, Camorim, Rio de Janeiro/RJ, CEP 22783-119, nome fantasia Céu Music.
 
-Pacote Festival de Verão: avaliação individual do vídeo pelo time Céu Music e Samuel Messias, com ficha de notas e devolutiva escrita; acesso ao grupo exclusivo de participantes; materiais exclusivos preparados por Samuel Messias; e participação na seleção artística do Festival. Valor único de R$ 179,99, pago por Pix no site oficial.
+Pacote Festival de Verão: avaliação individual do vídeo pelo time Céu Music e Samuel Messias, com ficha de notas e devolutiva escrita; acesso ao grupo exclusivo de participantes; materiais exclusivos preparados por Samuel Messias; e participação na seleção artística do Festival. Valor único de R$ 179,90, pago por Pix no site oficial.
 
 Participantes: pessoas físicas a partir de 16 (dezesseis) anos. Menores de 18 anos participam com autorização do responsável legal, nas condições da Cláusula 5 e do Anexo IV.
 
@@ -82,7 +82,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # 7. Cronograma e publicidade
 
-7.1. O Festival tem 4 (quatro) fases. Em cada fase, o participante classificado envia um novo vídeo, avaliado pela banca da Cláusula 13. A Fase 1 é a fase de inscrição e classificação: inscrições e envio do vídeo de a data de publicação deste Regulamento até 22 de fevereiro de 2027, às 23h59, horário de Brasília. O resultado da Fase 1 (aprovado ou não aprovado) é informado a cada participante em até 7 (sete) dias após o envio do vídeo, pelo e-mail ou WhatsApp cadastrados.
+7.1. O Festival tem 4 (quatro) fases. Em cada fase, o participante classificado envia um novo vídeo, avaliado pela banca da Cláusula 13. A Fase 1 é a fase de inscrição e classificação: inscrições e envio do vídeo de a data de publicação deste Regulamento até 22 de fevereiro de 2027, às 23h59, horário de Brasília. O resultado da Fase 1 (aprovado ou não aprovado) será informado em breve a cada participante, pelo e-mail ou WhatsApp cadastrados.
 
 7.1-A. As Fases 2, 3 e 4 ainda serão detalhadas. Para cada uma, a Céu Music comunica aos participantes classificados, por e-mail e no site, com pelo menos 7 (sete) dias de antecedência do início da fase: o tema ou formato do vídeo, os prazos, os critérios de avaliação, quantos participantes avançam e, na Fase 4 (final), data, local e formato. Essas regras valem igualmente para todos os classificados da fase, não reduzem os prêmios da Cláusula 18 e não criam cobrança para avançar. O participante que não concordar com as regras de uma fase pode deixar o Festival, sem perder os itens do Pacote já entregues.
 
@@ -94,7 +94,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 8.1. A inscrição é feita exclusivamente em https://festivaldeverao.ceumusic.com.br, mediante preenchimento correto dos dados, aceite dos documentos aplicáveis, pagamento e envio do vídeo. Cada inscrição corresponde a uma obra musical; limite por pessoa: até 3 (três) inscrições, cada uma com seu próprio Pacote.
 
-8.2. O preço total do Pacote é de R$ 179,99, já incluídos os custos da plataforma de pagamento. O pagamento ocorre por Pix, processado pela AbacatePay. O código Pix vale 24 horas; se vencer, um novo código é gerado. A Céu Music não solicita pagamentos por mensagens particulares ou contas não informadas no site oficial.
+8.2. O preço total do Pacote é de R$ 179,90, já incluídos os custos da plataforma de pagamento. O pagamento ocorre por Pix, processado pela AbacatePay. O código Pix vale 24 horas; se vencer, um novo código é gerado. A Céu Music não solicita pagamentos por mensagens particulares ou contas não informadas no site oficial.
 
 8.3. A inscrição é confirmada após a confirmação do pagamento e o recebimento do vídeo. Em caso de duplicidade, erro de pagamento, falha da plataforma ou contestação, serão adotados procedimentos de correção e restituição proporcionais, sem prejuízo dos direitos do consumidor.
 
@@ -310,7 +310,7 @@ B. Grupo exclusivo. Acesso ao grupo exclusivo de participantes, cujo link é lib
 
 C. Materiais exclusivos. Conteúdos de orientação artística preparados por Samuel Messias, disponibilizados na página "Minha inscrição" ou no grupo exclusivo durante a Fase 1, com a descrição de cada material publicada no momento da liberação.
 
-D. Valor e etapas. Valor total: R$ 179,99, incluídos os custos da plataforma; Pix processado pela AbacatePay. Um vídeo por fase. Datas conforme a Cláusula 7.
+D. Valor e etapas. Valor total: R$ 179,90, incluídos os custos da plataforma; Pix processado pela AbacatePay. Um vídeo por fase. Datas conforme a Cláusula 7.
 
 E. Mentoria com Samuel Messias (1º, 2º e 3º lugares). Formato presencial, com carga horária, temas e datas combinados com cada premiado e agendados em até 6 (seis) meses após o resultado. Deslocamento, hospedagem e alimentação ficam a cargo do premiado.
 
