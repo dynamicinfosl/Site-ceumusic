@@ -35,8 +35,13 @@ const sections: LegalSection[] = [
           e uma sessão fica salva no navegador. Essa área não é usada pelo público.
         </p>
         <p>
-          O site não exige cadastro de visitantes, não vende produtos e não tem, em seu próprio código, ferramentas de
-          análise de audiência ou de publicidade.
+          <strong>Inscrições no Festival de Verão.</strong> Quem se inscreve no concurso informa nome, nome artístico,
+          CPF, e-mail, WhatsApp, cidade, estado e o nome da música, e envia um vídeo da apresentação. O pagamento da
+          taxa é feito por Pix com um processador de pagamentos: recebemos apenas a confirmação, nunca dados bancários.
+        </p>
+        <p>
+          Fora das inscrições no festival, o site não exige cadastro de visitantes, e não tem, em seu próprio código,
+          ferramentas de análise de audiência ou de publicidade.
         </p>
       </>
     ),
@@ -50,6 +55,10 @@ const sections: LegalSection[] = [
           <strong>Responder ao seu contato</strong> e dar andamento a pedidos de parceria, imprensa, eventos ou
           apresentação de artistas. Base legal: procedimentos preliminares a um contrato, a seu pedido, e legítimo
           interesse (art. 7º, V e IX, da LGPD).
+        </li>
+        <li>
+          <strong>Realizar o Festival de Verão</strong>: processar a inscrição e o pagamento, avaliar o vídeo e falar
+          com os participantes. Base legal: execução de contrato (art. 7º, V, da LGPD).
         </li>
         <li>
           <strong>Manter o site funcionando e seguro</strong>, inclusive exibindo vídeos e conteúdos. Base legal: legítimo
@@ -85,7 +94,8 @@ const sections: LegalSection[] = [
         <ProviderList
           items={[
             { name: 'Comunicação', purpose: 'Envio e recebimento das mensagens do formulário de contato.' },
-            { name: 'Infraestrutura', purpose: 'Hospedagem, banco de dados, armazenamento e entrega dos arquivos do site.' },
+            { name: 'Infraestrutura', purpose: 'Hospedagem, banco de dados, armazenamento e entrega dos arquivos e dos vídeos do festival.' },
+            { name: 'Pagamentos', purpose: 'Cobrança por Pix das inscrições no Festival de Verão.' },
             { name: 'Conteúdo incorporado', purpose: 'Exibição de vídeos do YouTube e do mapa do Google Maps.' },
           ]}
         />

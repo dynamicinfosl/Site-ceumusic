@@ -89,7 +89,21 @@ export interface LegalSettings {
   dpo_name: string;
 }
 
+export interface FestivalSettings {
+  registration_open?: boolean;
+  fee_cents?: number;
+  deadline?: string;
+  max_video_minutes?: number;
+  tagline?: string;
+  about?: string;
+  prizes?: { title: string; text: string }[];
+  regulation?: string;
+  site_url?: string;
+  banner?: { enabled?: boolean; title?: string; text?: string };
+}
+
 export interface SiteSettings {
+  festival?: FestivalSettings;
   about_page?: AboutPageContent;
   footer_text?: string;
   contact_subjects?: string[];

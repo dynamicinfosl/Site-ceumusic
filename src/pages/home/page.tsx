@@ -7,6 +7,7 @@ import VideosSection from './components/VideosSection';
 import NewsSection from './components/NewsSection';
 import ContactSection from './components/ContactSection';
 import Footer from '../../components/feature/Footer';
+import FestivalBanner from '../../components/feature/FestivalBanner';
 
 export default function HomePage() {
   useEffect(() => {
@@ -55,7 +56,9 @@ export default function HomePage() {
   return (
     <div className="min-h-screen" style={{ margin: 0, padding: 0, width: '100%' }}>
       <HeroSection />
-      
+
+      <FestivalBanner />
+
       <div className="section-divider"></div>
       
       <div className="scroll-reveal">

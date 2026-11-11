@@ -13,6 +13,8 @@ export const PERMISSION_GROUPS = [
       { key: 'news', label: 'Notícias' },
       { key: 'contact', label: 'Contato e redes' },
       { key: 'settings', label: 'Configurações do site' },
+      { key: 'festival', label: 'Festival de Verão' },
+      { key: 'finance', label: 'Financeiro do festival (saldo e saques)' },
     ],
   },
   {

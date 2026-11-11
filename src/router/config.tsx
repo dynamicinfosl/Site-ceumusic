@@ -14,6 +14,9 @@ const CookiesPage = lazy(() => import('../pages/legal/CookiesPage'));
 const Invite = lazy(() => import('../pages/invite/page'));
 const NotFound = lazy(() => import('../pages/NotFound'));
 
+const AdminFestival = lazy(() => import('../pages/admin/Festival'));
+const AdminFinance = lazy(() => import('../pages/admin/Finance'));
+
 // Admin Pages
 const AdminLayout = lazy(() => import('../layouts/AdminLayout'));
 const AdminLogin = lazy(() => import('../pages/admin/Login'));
@@ -131,6 +134,14 @@ const routes: RouteObject[] = [
       {
         path: 'profile',
         element: <AdminProfile />,
+      },
+      {
+        path: 'festival',
+        element: <AdminFestival />,
+      },
+      {
+        path: 'financeiro',
+        element: <AdminFinance />,
       },
     ],
   },

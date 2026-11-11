@@ -11,10 +11,12 @@ import {
   Music,
   Newspaper,
   Settings,
+  Sun,
   ShieldCheck,
   UserCircle,
   Users,
   Video,
+  Wallet,
   X,
   type LucideIcon,
 } from 'lucide-react';
@@ -39,6 +41,8 @@ const menuItems: MenuItem[] = [
   { icon: Newspaper, label: 'Notícias', path: '/admin/sections/news', anyOf: ['news'] },
   { icon: Mail, label: 'Contato e redes', path: '/admin/sections/contact', anyOf: ['contact'] },
   { icon: Settings, label: 'Configurações', path: '/admin/sections/settings', anyOf: ['settings'] },
+  { icon: Sun, label: 'Festival de Verão', path: '/admin/festival', anyOf: ['festival'] },
+  { icon: Wallet, label: 'Financeiro', path: '/admin/financeiro', anyOf: ['finance'] },
   { icon: ShieldCheck, label: 'Usuários', path: '/admin/users', anyOf: ['users', 'roles'] },
   { icon: UserCircle, label: 'Meu perfil', path: '/admin/profile' },
 ];

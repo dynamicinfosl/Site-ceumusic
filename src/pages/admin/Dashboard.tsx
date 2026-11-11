@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Info, Mail, Music, Newspaper, Settings, ShieldCheck, UserCircle, Users, Video, type LucideIcon } from 'lucide-react';
+import { ArrowUpRight, Info, Mail, Music, Newspaper, Settings, ShieldCheck, Sun, UserCircle, Users, Video, Wallet, type LucideIcon } from 'lucide-react';
 import { supabase } from '../../utils/supabase';
 import { useAccess } from '../../utils/access';
 
@@ -23,6 +23,8 @@ const shortcuts: Shortcut[] = [
   { label: 'Sobre', description: 'Resumo e página “Nossa história”', icon: Info, path: '/admin/sections/about', anyOf: ['about'] },
   { label: 'Contato e redes', description: 'E-mail, telefone, endereço e redes', icon: Mail, path: '/admin/sections/contact', anyOf: ['contact'] },
   { label: 'Configurações', description: 'Rodapé, assuntos e dados da empresa', icon: Settings, path: '/admin/sections/settings', anyOf: ['settings'] },
+  { label: 'Festival de Verão', description: 'Inscrições, vídeos e configurações', icon: Sun, path: '/admin/festival', anyOf: ['festival'] },
+  { label: 'Financeiro', description: 'Saldo e saques do festival', icon: Wallet, path: '/admin/financeiro', anyOf: ['finance'] },
   { label: 'Usuários', description: 'Convites, aprovações e níveis', icon: ShieldCheck, path: '/admin/users', anyOf: ['users', 'roles'] },
   { label: 'Meu perfil', description: 'Seus dados e sua senha', icon: UserCircle, path: '/admin/profile' },
 ];
