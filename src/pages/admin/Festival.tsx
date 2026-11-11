@@ -1,9 +1,15 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Download, ExternalLink, Loader2, Plus, RefreshCw, Save, Trash2 } from 'lucide-react';
+import { Download, ExternalLink, FileText, Loader2, Mail, Plus, RefreshCw, Save, Trash2 } from 'lucide-react';
 import { supabase } from '../../utils/supabase';
 import { clearContentCache, fetchSettings, type FestivalSettings } from '../../utils/content';
 import { Field, inputClass, LoadingPanel, MessageBanner } from './components/PanelControls';
 import { describeSaveError, saveSetting, type PanelMessage } from './components/useOrderedList';
+import FestivalJudging from './FestivalJudging';
+import regulationTemplate from './festival-templates/regulamento.md?raw';
+import privacyTemplate from './festival-templates/privacidade.md?raw';
+
+// Lacunas do modelo ainda não preenchidas, como "[CNPJ]"
+const placeholders = (text?: string) => Array.from(new Set((text ?? '').match(/\[[^\]\n]{3,}\]/g) ?? []));
 
 interface Registration {
   id: string;
@@ -24,6 +30,41 @@ interface Registration {
   video_duration: number | null;
   video_embed_url: string | null;
   created_at: string;
+  birth_date: string | null;
+  coauthors: string;
+  guardian_name: string | null;
+  guardian_cpf: string | null;
+  guardian_email: string | null;
+  guardian_phone: string | null;
+  guardian_relation: string | null;
+  guardian_confirmed_at: string | null;
+}
+
+interface Consent {
+  consent: string;
+  granted: boolean;
+  actor: string;
+  ip: string | null;
+  user_agent: string | null;
+  created_at: string;
+}
+
+const CONSENT_LABELS: Record<string, string> = {
+  terms: 'Regulamento, privacidade e condições',
+  authorship: 'Declaração de autoria',
+  internal_use: 'Uso interno para avaliação',
+  publicity: 'Divulgação de imagem e voz (opcional)',
+  marketing: 'Comunicações da Céu (opcional)',
+  guardian_terms: 'Termo do responsável (Anexo IV)',
+};
+const RELATION_LABELS: Record<string, string> = { mae: 'Mãe', pai: 'Pai', tutor: 'Tutor(a)', guardiao: 'Guardião(ã)', outro: 'Outro' };
+
+function ageFrom(birthDate: string) {
+  const [year, month, day] = birthDate.split('-').map(Number);
+  const today = new Date();
+  let age = today.getFullYear() - year;
+  if (today.getMonth() + 1 < month || (today.getMonth() + 1 === month && today.getDate() < day)) age--;
+  return age;
 }
 
 type Filter = 'all' | 'paid' | 'pending_payment' | 'video_ready' | 'video_missing';
@@ -41,11 +82,12 @@ const primaryButton = 'bg-[#0EA8A0] hover:bg-[#0EA8A0]/90 text-black px-4 py-2 r
 const secondaryButton = 'bg-white/5 hover:bg-white/10 px-4 py-2 rounded-xl text-sm flex items-center justify-center gap-2 transition-colors disabled:opacity-50';
 
 function exportCsv(rows: Registration[]) {
-  const header = ['Número', 'Nome', 'Nome artístico', 'E-mail', 'WhatsApp', 'CPF', 'Cidade', 'UF', 'Música', 'Pagamento', 'Valor', 'Pago em', 'Vídeo', 'Inscrito em'];
+  const header = ['Número', 'Nome', 'Nome artístico', 'Nascimento', 'E-mail', 'WhatsApp', 'CPF', 'Cidade', 'UF', 'Música', 'Coautores', 'Responsável', 'Autorização', 'Pagamento', 'Valor', 'Pago em', 'Vídeo', 'Inscrito em'];
   const escape = (value: string | number | null) => `"${String(value ?? '').replace(/"/g, '""')}"`;
   const lines = rows.map((row) =>
     [
-      row.number, row.full_name, row.artistic_name, row.email, formatPhone(row.phone), formatCpf(row.cpf), row.city, row.state, row.song_title,
+      row.number, row.full_name, row.artistic_name, row.birth_date ?? '', row.email, formatPhone(row.phone), formatCpf(row.cpf), row.city, row.state, row.song_title, row.coauthors,
+      row.guardian_name ?? '', row.guardian_name ? (row.guardian_confirmed_at ? 'Confirmada' : 'Pendente') : '',
       PAYMENT_LABELS[row.status], (row.amount_cents / 100).toFixed(2).replace('.', ','), row.paid_at ? date(row.paid_at) : '', VIDEO_LABELS[row.video_status], date(row.created_at),
     ].map(escape).join(';')
   );
@@ -59,7 +101,28 @@ function exportCsv(rows: Registration[]) {
   URL.revokeObjectURL(url);
 }
 
-function RegistrationCard({ row, onRefresh }: { row: Registration; onRefresh: (id: string) => Promise<void> }) {
+function ConsentList({ registrationId }: { registrationId: string }) {
+  const [consents, setConsents] = useState<Consent[] | null>(null);
+  useEffect(() => {
+    supabase?.from('festival_consents').select('consent, granted, actor, ip, user_agent, created_at').eq('registration_id', registrationId).order('created_at')
+      .then(({ data }) => setConsents((data ?? []) as Consent[]));
+  }, [registrationId]);
+  if (!consents) return null;
+  if (consents.length === 0) return <p className="text-xs text-white/40">Inscrição anterior ao registro detalhado dos aceites.</p>;
+  return (
+    <ul className="space-y-1 text-xs">
+      {consents.map((item, index) => (
+        <li key={index} className="flex flex-wrap gap-x-2" title={item.user_agent ?? ''}>
+          <span className={item.granted ? 'text-green-400' : 'text-white/40'}>{item.granted ? '✓' : '✗'}</span>
+          <span>{CONSENT_LABELS[item.consent] ?? item.consent}</span>
+          <span className="text-white/40">{item.actor === 'guardian' ? 'responsável' : 'participante'} · {date(item.created_at)}{item.ip && ` · IP ${item.ip}`}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function RegistrationCard({ row, onRefresh, onResendGuardian }: { row: Registration; onRefresh: (id: string) => Promise<void>; onResendGuardian: (id: string) => Promise<void> }) {
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
 
@@ -71,6 +134,11 @@ function RegistrationCard({ row, onRefresh }: { row: Registration; onRefresh: (i
           <span className="block font-semibold truncate">{row.artistic_name || row.full_name}</span>
           <span className="block text-sm text-white/50 truncate">“{row.song_title}” · {row.city}{row.state && `/${row.state}`}</span>
         </span>
+        {row.guardian_name && (
+          <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${row.guardian_confirmed_at ? 'bg-white/10 text-white/60' : 'bg-orange-500/15 text-orange-300'}`}>
+            Menor{row.guardian_confirmed_at ? '' : ' · autorização pendente'}
+          </span>
+        )}
         <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${PAYMENT_CLASSES[row.status]}`}>
           {PAYMENT_LABELS[row.status]}{row.payment_dev_mode && ' (teste)'}
         </span>
@@ -89,6 +157,40 @@ function RegistrationCard({ row, onRefresh }: { row: Registration; onRefresh: (i
             <div><dt className="text-white/50">Valor</dt><dd>{money(row.amount_cents)}</dd></div>
             <div><dt className="text-white/50">Inscrito em</dt><dd>{date(row.created_at)}</dd></div>
             <div><dt className="text-white/50">Pago em</dt><dd>{row.paid_at ? date(row.paid_at) : '—'}</dd></div>
+            <div><dt className="text-white/50">Nascimento</dt><dd>{row.birth_date ? `${new Date(`${row.birth_date}T12:00:00`).toLocaleDateString('pt-BR')} (${ageFrom(row.birth_date)} anos)` : '—'}</dd></div>
+            <div><dt className="text-white/50">Coautores</dt><dd>{row.coauthors || '—'}</dd></div>
+            {row.guardian_name && (
+              <div className="col-span-2 rounded-xl bg-white/5 p-3">
+                <dt className="text-white/50">Responsável legal ({RELATION_LABELS[row.guardian_relation ?? ''] ?? row.guardian_relation})</dt>
+                <dd>
+                  {row.guardian_name} · CPF {formatCpf(row.guardian_cpf ?? '')} · {formatPhone(row.guardian_phone ?? '')} · <span className="break-all">{row.guardian_email}</span>
+                  <br />
+                  {row.guardian_confirmed_at ? (
+                    <span className="text-green-400">Autorização confirmada em {date(row.guardian_confirmed_at)}</span>
+                  ) : (
+                    <span className="inline-flex flex-wrap items-center gap-2 text-orange-300">
+                      Autorização pendente: o vídeo fica bloqueado.
+                      <button
+                        type="button"
+                        disabled={busy}
+                        onClick={async () => {
+                          setBusy(true);
+                          await onResendGuardian(row.id);
+                          setBusy(false);
+                        }}
+                        className="underline hover:text-white inline-flex items-center gap-1"
+                      >
+                        <Mail className="w-3.5 h-3.5" /> Reenviar e-mail
+                      </button>
+                    </span>
+                  )}
+                </dd>
+              </div>
+            )}
+            <div className="col-span-2">
+              <dt className="text-white/50 mb-1">Aceites registrados</dt>
+              <dd><ConsentList registrationId={row.id} /></dd>
+            </div>
             <div className="col-span-2 pt-2">
               <button
                 type="button"
@@ -129,10 +231,43 @@ function RegistrationCard({ row, onRefresh }: { row: Registration; onRefresh: (i
   );
 }
 
+interface PackagePrivate {
+  group_url: string;
+  materials: { title: string; url: string }[];
+}
+
+function DocumentEditor({ label, value, template, onChange }: { label: string; value: string; template: string; onChange: (value: string) => void }) {
+  const gaps = placeholders(value);
+  return (
+    <div className="space-y-2">
+      <Field label={label} hint="Deixe uma linha em branco entre parágrafos. Comece uma linha com # para criar um título. Cada texto salvo diferente vira uma nova versão, e quem já se inscreveu continua ligado à versão que aceitou.">
+        <textarea rows={16} value={value} onChange={(event) => onChange(event.target.value)} className={`${inputClass} resize-y font-mono text-xs`} />
+      </Field>
+      <div className="flex flex-wrap items-center gap-3">
+        <button
+          type="button"
+          onClick={() => {
+            if (!value.trim() || window.confirm('Substituir o texto atual pelo modelo revisado? O texto atual será perdido se não estiver salvo.')) onChange(template.trim());
+          }}
+          className="text-xs text-[#0EA8A0] hover:text-white flex items-center gap-1"
+        >
+          <FileText className="w-3.5 h-3.5" /> Carregar o modelo revisado
+        </button>
+        {gaps.length > 0 && (
+          <p className="text-xs text-orange-300">
+            Faltam {gaps.length} {gaps.length === 1 ? 'lacuna' : 'lacunas'} entre colchetes: {gaps.slice(0, 6).join(', ')}{gaps.length > 6 ? '…' : ''}. As inscrições só abrem sem lacunas.
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function SettingsTab({ onMessage }: { onMessage: (message: PanelMessage) => void }) {
   const [festival, setFestival] = useState<FestivalSettings | null>(null);
   const [fee, setFee] = useState('');
   const [saving, setSaving] = useState(false);
+  const [pkg, setPkg] = useState<PackagePrivate | null>(null);
 
   useEffect(() => {
     clearContentCache();
@@ -141,6 +276,8 @@ function SettingsTab({ onMessage }: { onMessage: (message: PanelMessage) => void
       setFestival(value);
       setFee(value.fee_cents ? (value.fee_cents / 100).toFixed(2).replace('.', ',') : '');
     });
+    supabase?.from('festival_package').select('group_url, materials').eq('id', 1).maybeSingle()
+      .then(({ data }) => setPkg({ group_url: data?.group_url ?? '', materials: (data?.materials as PackagePrivate['materials']) ?? [] }));
   }, []);
 
   if (!festival) return <LoadingPanel />;
@@ -154,13 +291,26 @@ function SettingsTab({ onMessage }: { onMessage: (message: PanelMessage) => void
       onMessage({ type: 'error', text: 'Defina uma taxa de pelo menos R$ 1,00 antes de abrir as inscrições.' });
       return;
     }
-    if (festival.registration_open && !festival.regulation?.trim()) {
-      onMessage({ type: 'error', text: 'Publique o regulamento antes de abrir as inscrições: os participantes precisam aceitá-lo.' });
+    if (festival.registration_open && (!festival.regulation?.trim() || !festival.privacy?.trim())) {
+      onMessage({ type: 'error', text: 'Publique o regulamento e o aviso de privacidade antes de abrir as inscrições: os participantes precisam aceitá-los.' });
+      return;
+    }
+    if (festival.registration_open && (placeholders(festival.regulation).length || placeholders(festival.privacy).length)) {
+      onMessage({ type: 'error', text: 'Preencha as lacunas entre colchetes do regulamento e do aviso de privacidade antes de abrir as inscrições.' });
       return;
     }
     setSaving(true);
     try {
-      await saveSetting('festival', { ...festival, fee_cents: Number.isFinite(feeCents) ? feeCents : 0 });
+      if (pkg && supabase) {
+        const materials = pkg.materials.map((item) => ({ title: item.title.trim(), url: item.url.trim() })).filter((item) => item.title);
+        const { error } = await supabase.from('festival_package').update({ group_url: pkg.group_url.trim(), materials, updated_at: new Date().toISOString() }).eq('id', 1);
+        if (error) throw error;
+      }
+      await saveSetting('festival', {
+        ...festival,
+        fee_cents: Number.isFinite(feeCents) ? feeCents : 0,
+        package_items: (festival.package_items ?? []).map((item) => item.trim()).filter(Boolean),
+      });
       onMessage({ type: 'success', text: 'Configurações do festival salvas.' });
     } catch (error) {
       onMessage({ type: 'error', text: describeSaveError(error as { code?: string; message?: string }) });
@@ -180,7 +330,7 @@ function SettingsTab({ onMessage }: { onMessage: (message: PanelMessage) => void
           Inscrições abertas
         </label>
         <div className="grid sm:grid-cols-3 gap-4">
-          <Field label="Taxa de inscrição (R$)">
+          <Field label="Valor do Pacote (R$)">
             <input type="text" inputMode="decimal" value={fee} onChange={(event) => setFee(event.target.value)} placeholder="0,00" className={inputClass} />
           </Field>
           <Field label="Inscrições até" hint="Vale até 23h59 (horário de Brasília).">
@@ -189,7 +339,50 @@ function SettingsTab({ onMessage }: { onMessage: (message: PanelMessage) => void
           <Field label="Duração máxima do vídeo (min)">
             <input type="number" min={1} max={60} value={festival.max_video_minutes ?? 10} onChange={(event) => set({ max_video_minutes: Number(event.target.value) })} className={inputClass} />
           </Field>
+          <Field label="Idade mínima" hint="Menores de 18 precisam da autorização do responsável.">
+            <input type="number" min={1} max={18} value={festival.min_age ?? 16} onChange={(event) => set({ min_age: Number(event.target.value) })} className={inputClass} />
+          </Field>
         </div>
+      </section>
+
+      <section className={cardClass}>
+        <h2 className="text-xl font-bold">Pacote Festival de Verão</h2>
+        <Field label="O que o Pacote inclui (um item por linha)" hint="Aparece na página inicial e no formulário. Em branco, usa os itens padrão.">
+          <textarea
+            rows={5}
+            value={(festival.package_items ?? []).join('\n')}
+            onChange={(event) => set({ package_items: event.target.value.split('\n') })}
+            placeholder={'Avaliação individual do seu vídeo pelo time Céu Music e Samuel Messias, com ficha de notas e devolutiva escrita\nAcesso ao grupo exclusivo dos participantes\nMateriais exclusivos preparados por Samuel Messias\nParticipação na seleção do Festival de Verão'}
+            className={`${inputClass} resize-y`}
+          />
+        </Field>
+        {pkg && (
+          <>
+            <Field label="Link do grupo exclusivo" hint="Só aparece para quem pagou, na página Minha inscrição. Não fica público.">
+              <input type="url" value={pkg.group_url} onChange={(event) => setPkg({ ...pkg, group_url: event.target.value })} placeholder="https://chat.whatsapp.com/..." className={inputClass} />
+            </Field>
+            <p className="text-sm font-semibold pt-2">Materiais exclusivos</p>
+            <p className="text-xs text-white/40 -mt-2">Só para quem pagou. Sem link, aparece como "em breve".</p>
+            {pkg.materials.map((material, index) => (
+              <div key={index} className="flex items-start gap-2">
+                <div className="flex-1 grid sm:grid-cols-[1fr_1.5fr] gap-2">
+                  <input type="text" aria-label="Título do material" value={material.title} placeholder="Título" onChange={(event) => setPkg({ ...pkg, materials: pkg.materials.map((item, i) => (i === index ? { ...item, title: event.target.value } : item)) })} className={inputClass} />
+                  <input type="url" aria-label="Link do material" value={material.url} placeholder="https://..." onChange={(event) => setPkg({ ...pkg, materials: pkg.materials.map((item, i) => (i === index ? { ...item, url: event.target.value } : item)) })} className={inputClass} />
+                </div>
+                <button type="button" aria-label={`Remover ${material.title}`} onClick={() => setPkg({ ...pkg, materials: pkg.materials.filter((_, i) => i !== index) })} className="p-2 mt-1 text-white/40 hover:text-red-500 rounded-lg">
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+            <button type="button" onClick={() => setPkg({ ...pkg, materials: [...pkg.materials, { title: '', url: '' }] })} className="text-xs text-[#0EA8A0] hover:text-white flex items-center gap-1">
+              <Plus className="w-3.5 h-3.5" /> Adicionar material
+            </button>
+          </>
+        )}
+        <label className="flex items-center gap-3 text-sm cursor-pointer pt-2">
+          <input type="checkbox" checked={!!festival.feedback_released} onChange={(event) => set({ feedback_released: event.target.checked })} className="w-5 h-5 accent-[#0EA8A0]" />
+          Liberar as fichas de avaliação para os participantes
+        </label>
       </section>
 
       <section className={cardClass}>
@@ -218,10 +411,9 @@ function SettingsTab({ onMessage }: { onMessage: (message: PanelMessage) => void
       </section>
 
       <section className={cardClass}>
-        <h2 className="text-xl font-bold">Regulamento</h2>
-        <Field label="Texto do regulamento" hint="Deixe uma linha em branco entre parágrafos. Comece uma linha com # para criar um título.">
-          <textarea rows={14} value={festival.regulation ?? ''} onChange={(event) => set({ regulation: event.target.value })} className={`${inputClass} resize-y font-mono text-xs`} />
-        </Field>
+        <h2 className="text-xl font-bold">Regulamento e privacidade</h2>
+        <DocumentEditor label="Regulamento" value={festival.regulation ?? ''} template={regulationTemplate} onChange={(regulation) => set({ regulation })} />
+        <DocumentEditor label="Aviso de privacidade do festival" value={festival.privacy ?? ''} template={privacyTemplate} onChange={(privacy) => set({ privacy })} />
       </section>
 
       <section className={cardClass}>
@@ -251,7 +443,7 @@ function SettingsTab({ onMessage }: { onMessage: (message: PanelMessage) => void
 }
 
 export default function FestivalAdmin() {
-  const [tab, setTab] = useState<'registrations' | 'settings'>('registrations');
+  const [tab, setTab] = useState<'registrations' | 'judging' | 'settings'>('registrations');
   const [rows, setRows] = useState<Registration[] | null>(null);
   const [filter, setFilter] = useState<Filter>('all');
   const [search, setSearch] = useState('');
@@ -261,7 +453,7 @@ export default function FestivalAdmin() {
     if (!supabase) return;
     const { data, error } = await supabase
       .from('festival_registrations')
-      .select('id, number, full_name, artistic_name, email, phone, cpf, city, state, song_title, status, amount_cents, payment_dev_mode, paid_at, video_status, video_duration, video_embed_url, created_at')
+      .select('id, number, full_name, artistic_name, email, phone, cpf, city, state, song_title, status, amount_cents, payment_dev_mode, paid_at, video_status, video_duration, video_embed_url, created_at, birth_date, coauthors, guardian_name, guardian_cpf, guardian_email, guardian_phone, guardian_relation, guardian_confirmed_at')
       .order('number', { ascending: false });
     if (error) setMessage({ type: 'error', text: `Não foi possível carregar: ${error.message}` });
     setRows((data ?? []) as Registration[]);
@@ -276,6 +468,13 @@ export default function FestivalAdmin() {
     const { data, error } = await supabase.functions.invoke('festival', { body: { action: 'admin_refresh', id } });
     if (error || data?.error) setMessage({ type: 'error', text: data?.error ?? 'Não foi possível conferir agora.' });
     await load();
+  };
+
+  const resendGuardian = async (id: string) => {
+    if (!supabase) return;
+    const { data, error } = await supabase.functions.invoke('festival', { body: { action: 'admin_resend_guardian', id } });
+    if (error || data?.error) setMessage({ type: 'error', text: data?.error ?? 'Não foi possível reenviar agora.' });
+    else setMessage({ type: 'success', text: 'E-mail de autorização reenviado ao responsável.' });
   };
 
   const visible = useMemo(() => {
@@ -313,6 +512,7 @@ export default function FestivalAdmin() {
       <div role="tablist" className="flex gap-1 border-b border-white/10">
         {[
           { key: 'registrations', label: 'Inscrições' },
+          { key: 'judging', label: 'Avaliação' },
           { key: 'settings', label: 'Configurações' },
         ].map((item) => (
           <button
@@ -335,6 +535,8 @@ export default function FestivalAdmin() {
 
       {tab === 'settings' ? (
         <SettingsTab onMessage={setMessage} />
+      ) : tab === 'judging' ? (
+        <FestivalJudging onMessage={setMessage} />
       ) : rows === null ? (
         <LoadingPanel />
       ) : (
@@ -366,7 +568,7 @@ export default function FestivalAdmin() {
             <p className="text-center text-white/50 py-12">{rows.length === 0 ? 'Nenhuma inscrição ainda.' : 'Nenhuma inscrição com este filtro.'}</p>
           ) : (
             <div className="space-y-3">
-              {visible.map((row) => <RegistrationCard key={row.id} row={row} onRefresh={refresh} />)}
+              {visible.map((row) => <RegistrationCard key={row.id} row={row} onRefresh={refresh} onResendGuardian={resendGuardian} />)}
             </div>
           )}
         </div>

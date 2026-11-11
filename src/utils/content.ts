@@ -98,6 +98,10 @@ export interface FestivalSettings {
   about?: string;
   prizes?: { title: string; text: string }[];
   regulation?: string;
+  privacy?: string;
+  min_age?: number;
+  package_items?: string[];
+  feedback_released?: boolean;
   site_url?: string;
   banner?: { enabled?: boolean; title?: string; text?: string };
 }
