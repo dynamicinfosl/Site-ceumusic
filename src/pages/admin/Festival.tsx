@@ -38,6 +38,7 @@ interface Registration {
   guardian_phone: string | null;
   guardian_relation: string | null;
   guardian_confirmed_at: string | null;
+  password_set_at: string | null;
 }
 
 interface Consent {
@@ -122,7 +123,7 @@ function ConsentList({ registrationId }: { registrationId: string }) {
   );
 }
 
-function RegistrationCard({ row, onRefresh, onResendGuardian }: { row: Registration; onRefresh: (id: string) => Promise<void>; onResendGuardian: (id: string) => Promise<void> }) {
+function RegistrationCard({ row, onRefresh, onResendGuardian, onClearPassword }: { row: Registration; onRefresh: (id: string) => Promise<void>; onResendGuardian: (id: string) => Promise<void>; onClearPassword: (id: string) => Promise<void> }) {
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
 
@@ -158,7 +159,29 @@ function RegistrationCard({ row, onRefresh, onResendGuardian }: { row: Registrat
             <div><dt className="text-white/50">Inscrito em</dt><dd>{date(row.created_at)}</dd></div>
             <div><dt className="text-white/50">Pago em</dt><dd>{row.paid_at ? date(row.paid_at) : '—'}</dd></div>
             <div><dt className="text-white/50">Nascimento</dt><dd>{row.birth_date ? `${new Date(`${row.birth_date}T12:00:00`).toLocaleDateString('pt-BR')} (${ageFrom(row.birth_date)} anos)` : '—'}</dd></div>
-            <div><dt className="text-white/50">Autores</dt><dd>{row.coauthors || '—'}</dd></div>
+            <div>
+              <dt className="text-white/50">Senha de acesso</dt>
+              <dd>
+                {row.password_set_at ? (
+                  <span className="inline-flex flex-wrap items-center gap-2">
+                    Criada em {date(row.password_set_at)}
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={async () => {
+                        if (!window.confirm('Remover a senha? A pessoa volta a entrar com e-mail e CPF e cria uma senha nova.')) return;
+                        setBusy(true);
+                        await onClearPassword(row.id);
+                        setBusy(false);
+                      }}
+                      className="underline text-orange-300 hover:text-white"
+                    >
+                      Remover senha
+                    </button>
+                  </span>
+                ) : 'Ainda não criada'}
+              </dd>
+            </div>
             {row.guardian_name && (
               <div className="col-span-2 rounded-xl bg-white/5 p-3">
                 <dt className="text-white/50">Responsável legal ({RELATION_LABELS[row.guardian_relation ?? ''] ?? row.guardian_relation})</dt>
@@ -453,7 +476,7 @@ export default function FestivalAdmin() {
     if (!supabase) return;
     const { data, error } = await supabase
       .from('festival_registrations')
-      .select('id, number, full_name, artistic_name, email, phone, cpf, city, state, song_title, status, amount_cents, payment_dev_mode, paid_at, video_status, video_duration, video_embed_url, created_at, birth_date, coauthors, guardian_name, guardian_cpf, guardian_email, guardian_phone, guardian_relation, guardian_confirmed_at')
+      .select('id, number, full_name, artistic_name, email, phone, cpf, city, state, song_title, status, amount_cents, payment_dev_mode, paid_at, video_status, video_duration, video_embed_url, created_at, birth_date, coauthors, guardian_name, guardian_cpf, guardian_email, guardian_phone, guardian_relation, guardian_confirmed_at, password_set_at')
       .order('number', { ascending: false });
     if (error) setMessage({ type: 'error', text: `Não foi possível carregar: ${error.message}` });
     setRows((data ?? []) as Registration[]);
@@ -467,6 +490,14 @@ export default function FestivalAdmin() {
     if (!supabase) return;
     const { data, error } = await supabase.functions.invoke('festival', { body: { action: 'admin_refresh', id } });
     if (error || data?.error) setMessage({ type: 'error', text: data?.error ?? 'Não foi possível conferir agora.' });
+    await load();
+  };
+
+  const clearPassword = async (id: string) => {
+    if (!supabase) return;
+    const { data, error } = await supabase.functions.invoke('festival', { body: { action: 'admin_clear_password', id } });
+    if (error || data?.error) setMessage({ type: 'error', text: data?.error ?? 'Não foi possível remover a senha agora.' });
+    else setMessage({ type: 'success', text: 'Senha removida. A pessoa entra com e-mail e CPF e cria uma senha nova.' });
     await load();
   };
 
@@ -568,7 +599,7 @@ export default function FestivalAdmin() {
             <p className="text-center text-white/50 py-12">{rows.length === 0 ? 'Nenhuma inscrição ainda.' : 'Nenhuma inscrição com este filtro.'}</p>
           ) : (
             <div className="space-y-3">
-              {visible.map((row) => <RegistrationCard key={row.id} row={row} onRefresh={refresh} onResendGuardian={resendGuardian} />)}
+              {visible.map((row) => <RegistrationCard key={row.id} row={row} onRefresh={refresh} onResendGuardian={resendGuardian} onClearPassword={clearPassword} />)}
             </div>
           )}
         </div>
