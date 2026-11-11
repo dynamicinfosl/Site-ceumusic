@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState, type FormEvent } from 'react';
 import { ArrowDownToLine, ExternalLink, Loader2, RefreshCw } from 'lucide-react';
 import { supabase } from '../../utils/supabase';
+import { useAccess } from '../../utils/access';
 import { Field, inputClass, LoadingPanel, MessageBanner } from './components/PanelControls';
 import type { PanelMessage } from './components/useOrderedList';
 
@@ -73,41 +74,26 @@ async function callFestival(body: Record<string, unknown>) {
 function SetupPanel({ overview, onDone }: { overview: Overview; onDone: (message: PanelMessage) => void }) {
   const [name, setName] = useState('');
   const [taxId, setTaxId] = useState('');
-  const [rate, setRate] = useState(String(overview.commission_bps / 100).replace('.', ','));
-  const [busy, setBusy] = useState<'create' | 'rate' | null>(null);
+  const [busy, setBusy] = useState(false);
 
   const createSubaccount = async (event: FormEvent) => {
     event.preventDefault();
-    setBusy('create');
+    setBusy(true);
     try {
       await callFestival({ action: 'payment_setup', step: 'create_subaccount', name, tax_id: taxId });
       onDone({ type: 'success', text: 'Subconta da Céu criada. A partir de agora cada inscrição paga já divide o valor.' });
     } catch (error) {
       onDone({ type: 'error', text: (error as Error).message });
     } finally {
-      setBusy(null);
-    }
-  };
-
-  const saveRate = async (event: FormEvent) => {
-    event.preventDefault();
-    const bps = Math.round(Number(rate.replace(',', '.')) * 100);
-    setBusy('rate');
-    try {
-      await callFestival({ action: 'payment_setup', step: 'set_commission', commission_bps: bps });
-      onDone({ type: 'success', text: `Taxa da plataforma salva em ${percent(bps)}. Vale para os próximos Pix gerados.` });
-    } catch (error) {
-      onDone({ type: 'error', text: (error as Error).message });
-    } finally {
-      setBusy(null);
+      setBusy(false);
     }
   };
 
   return (
     <section className="rounded-2xl border border-[#0EA8A0]/30 bg-[#0EA8A0]/5 p-6 space-y-6">
       <div>
-        <h2 className="text-lg font-bold">Configuração (só o Master vê)</h2>
-        <p className="text-sm text-white/50 mt-1">A equipe da Céu vê apenas o saldo, os saques e a taxa da plataforma em porcentagem.</p>
+        <h2 className="text-lg font-bold">Conta da Céu (só o Master vê)</h2>
+        <p className="text-sm text-white/50 mt-1">A equipe vê o saldo, os saques e quanto a plataforma desconta. A taxa é fixa e não pode ser alterada pelo painel.</p>
       </div>
 
       {overview.configured ? (
@@ -123,27 +109,31 @@ function SetupPanel({ overview, onDone }: { overview: Overview; onDone: (message
           <Field label="CNPJ da Céu">
             <input className={inputClass} value={taxId} onChange={(event) => setTaxId(event.target.value)} required inputMode="numeric" placeholder="00.000.000/0000-00" />
           </Field>
-          <button type="submit" disabled={busy !== null} className="bg-[#0EA8A0] hover:bg-[#0EA8A0]/90 text-black px-5 py-2.5 rounded-xl font-bold disabled:opacity-50 flex items-center gap-2 justify-center">
-            {busy === 'create' && <Loader2 className="w-4 h-4 animate-spin" />}
+          <button type="submit" disabled={busy} className="bg-[#0EA8A0] hover:bg-[#0EA8A0]/90 text-black px-5 py-2.5 rounded-xl font-bold disabled:opacity-50 flex items-center gap-2 justify-center">
+            {busy && <Loader2 className="w-4 h-4 animate-spin" />}
             Criar subconta
           </button>
         </form>
       )}
 
-      <form onSubmit={saveRate} className="flex flex-wrap items-end gap-4">
-        <Field label="Taxa da plataforma (%)" hint="Descontada de cada inscrição paga. O restante vai para a Céu.">
-          <input className={`${inputClass} w-32`} value={rate} onChange={(event) => setRate(event.target.value)} inputMode="decimal" required />
-        </Field>
-        <button type="submit" disabled={busy !== null} className="border border-white/15 hover:bg-white/5 px-5 py-2.5 rounded-xl font-semibold disabled:opacity-50 flex items-center gap-2 mb-5">
-          {busy === 'rate' && <Loader2 className="w-4 h-4 animate-spin" />}
-          Salvar taxa
-        </button>
-      </form>
     </section>
   );
 }
 
 export default function FinanceAdmin() {
+  const { can } = useAccess();
+  if (!can('finance')) {
+    return (
+      <div className="space-y-6">
+        <h1 className="text-3xl font-bold">Financeiro</h1>
+        <MessageBanner message={{ type: 'error', text: 'Seu nível de acesso não inclui o Financeiro. Peça a liberação ao administrador.' }} />
+      </div>
+    );
+  }
+  return <FinanceContent />;
+}
+
+function FinanceContent() {
   const [overview, setOverview] = useState<Overview | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [message, setMessage] = useState<PanelMessage | null>(null);
@@ -229,7 +219,7 @@ export default function FinanceAdmin() {
         <div>
           <h1 className="text-3xl font-bold">Financeiro</h1>
           <p className="text-white/50 mt-1">
-            Parte da Céu nas inscrições do Festival de Verão. Taxa da plataforma: {percent(overview.commission_bps)} por inscrição.
+            Parte da Céu nas inscrições do Festival de Verão. Taxa da plataforma: {percent(overview.commission_bps)} descontados de cada inscrição paga.
           </p>
         </div>
         <button type="button" onClick={load} className="border border-white/15 hover:bg-white/5 px-4 py-2 rounded-xl text-sm flex items-center gap-2 self-start">

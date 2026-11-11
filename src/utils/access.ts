@@ -14,8 +14,11 @@ export const PERMISSION_GROUPS = [
       { key: 'contact', label: 'Contato e redes' },
       { key: 'settings', label: 'Configurações do site' },
       { key: 'festival', label: 'Festival de Verão' },
-      { key: 'finance', label: 'Financeiro do festival (saldo e saques)' },
     ],
+  },
+  {
+    label: 'Financeiro',
+    items: [{ key: 'finance', label: 'Ver o saldo e fazer saques do festival' }],
   },
   {
     label: 'Administração',
