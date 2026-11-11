@@ -72,7 +72,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # 6. Autores, grupos e representantes
 
-6.1. A inscrição identificará o intérprete principal e os autores da obra (compositores da letra e da música), sejam eles o próprio participante ou terceiros.
+6.1. A inscrição identifica o intérprete principal. A música apresentada pode ser de autoria do participante ou de terceiros (cover), desde que seja do gênero gospel.
 
 6.2. O participante deverá ter as autorizações necessárias para a avaliação e divulgação do material. Na ausência de autorização indispensável, a Organizadora poderá solicitar regularização dentro de prazo razoável ou indeferir a inscrição.
 
@@ -124,7 +124,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # 11. Ineditismo, integridade e direitos de terceiros
 
-11.1. A música inscrita deve ser do gênero gospel (música cristã), de autoria do participante ou de terceiros. Não é exigido ineditismo. Quando a música não for do participante, ele informa os autores no formulário.
+11.1. A música inscrita deve ser do gênero gospel (música cristã), de autoria do participante ou de terceiros. Não é exigido ineditismo nem autoria própria: são aceitas interpretações de músicas gospel de outros autores (covers).
 
 11.2. O participante declara ter direito de interpretar a obra para fins de avaliação e declara que a letra, a melodia e o vídeo não violam direitos de terceiros. São aceitas interpretações de músicas de outros autores (covers). Não são aceitos remixes, paródias nem letra, melodia ou voz geradas por inteligência artificial.
 
@@ -326,7 +326,7 @@ No formulário de inscrição, em caixas separadas, não pré-marcadas e todas o
 
 1. Li e aceito o Regulamento, o Aviso de Privacidade e as condições de preço, entregas e reembolso. (obrigatória)
 
-2. Declaro que informei corretamente os autores da música e que tenho direito de interpretá-la no Festival. (obrigatória)
+2. Declaro que o vídeo traz uma música gospel interpretada por mim, que posso cantá-la no Festival e que o vídeo não viola direitos de terceiros. (obrigatória)
 
 3. Autorizo o uso interno da música e do vídeo para a avaliação e a administração da inscrição. (obrigatória)
 
