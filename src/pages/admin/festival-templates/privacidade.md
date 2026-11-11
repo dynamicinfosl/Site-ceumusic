@@ -2,7 +2,7 @@ Este aviso explica como o Festival de Verão usa os seus dados. Ele complementa 
 
 # 1. Quem cuida dos seus dados
 
-A controladora é [RAZÃO SOCIAL], CNPJ [CNPJ], nome fantasia Céu Music, com sede em [ENDEREÇO]. Encarregado de dados: [NOME DO ENCARREGADO], pelo e-mail [E-MAIL DE PRIVACIDADE].
+A controladora é [RAZÃO SOCIAL], CNPJ [CNPJ], nome fantasia Céu Music, com sede em [ENDEREÇO]. Encarregado de dados: [NOME DO ENCARREGADO], pelo e-mail ceumusicbrasil@gmail.com.
 
 # 2. Quais dados coletamos
 
@@ -52,7 +52,7 @@ Alguns fornecedores armazenam ou processam dados em servidores fora do Brasil. N
 
 # 7. Por quanto tempo guardamos
 
-Dados e vídeos dos participantes não premiados ficam guardados por [PRAZO DE GUARDA, POR EXEMPLO 12 MESES] após a divulgação do resultado e depois são apagados ou anonimizados.
+Os vídeos dos participantes não premiados são apagados ao final do Festival. Os dados de cadastro ficam guardados pelo prazo necessário para cumprir obrigações legais e defender direitos da Céu Music.
 
 Dados e vídeos dos vencedores ficam guardados enquanto forem necessários à premiação e aos contratos.
 
@@ -64,7 +64,7 @@ O acesso aos dados é restrito à equipe do Festival, com login individual e per
 
 # 9. Seus direitos
 
-Você, ou seu responsável legal, pode pedir confirmação, acesso, correção, informação sobre compartilhamento, eliminação quando aplicável, portabilidade, oposição e revogação do consentimento pelo e-mail [E-MAIL DE PRIVACIDADE]. Podemos pedir uma confirmação de identidade.
+Você, ou seu responsável legal, pode pedir confirmação, acesso, correção, informação sobre compartilhamento, eliminação quando aplicável, portabilidade, oposição e revogação do consentimento pelo e-mail ceumusicbrasil@gmail.com. Podemos pedir uma confirmação de identidade.
 
 Retirar a autorização de divulgação não cancela a inscrição. Pedir a exclusão de dados essenciais durante o Festival pode encerrar a participação, preservados seus direitos de consumidor.
 

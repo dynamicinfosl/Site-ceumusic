@@ -2,17 +2,17 @@
 
 Organizadora: [RAZÃO SOCIAL], CNPJ [CNPJ], sede em [ENDEREÇO], nome fantasia Céu Music.
 
-Pacote Festival de Verão: avaliação individual do vídeo pelo time Céu Music e Samuel Messias, com ficha de notas e devolutiva escrita; acesso ao grupo exclusivo de participantes; materiais exclusivos preparados por Samuel Messias; e participação na seleção artística do Festival. Valor único de R$ [VALOR], pago por Pix no site oficial.
+Pacote Festival de Verão: avaliação individual do vídeo pelo time Céu Music e Samuel Messias, com ficha de notas e devolutiva escrita; acesso ao grupo exclusivo de participantes; materiais exclusivos preparados por Samuel Messias; e participação na seleção artística do Festival. Valor único de R$ 179,00, pago por Pix no site oficial.
 
-Participantes: pessoas físicas a partir de [IDADE MÍNIMA] anos. Menores de 18 anos participam com autorização do responsável legal, nas condições da Cláusula 5 e do Anexo IV.
+Participantes: pessoas físicas a partir de 18 (dezoito) anos. Menores de 18 anos participam com autorização do responsável legal, nas condições da Cláusula 5 e do Anexo IV.
 
 Modalidade: seleção de intérpretes e canções autorais exclusivamente por mérito artístico, com notas de jurados. O vencedor não é definido por sorteio nem por compra de votos.
 
 Prêmios do vencedor: mentoria com Samuel Messias; produção e gravação de 3 músicas no estúdio da Céu Music; estratégia de lançamento, conforme o Anexo I.
 
-Calendário: inscrições de [DATA INICIAL] a [DATA FINAL], horário de Brasília; demais etapas na Cláusula 7.
+Calendário: inscrições de a data de publicação deste Regulamento a 22 de fevereiro de 2027, horário de Brasília; demais etapas na Cláusula 7.
 
-Canais: site https://festivaldeverao.ceumusic.com.br; atendimento [E-MAIL DO FESTIVAL] e [WHATSAPP DO FESTIVAL]; privacidade [E-MAIL DE PRIVACIDADE].
+Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil@gmail.com e (21) 98244-7141; privacidade ceumusicbrasil@gmail.com.
 
 # 1. Organização, natureza e objeto
 
@@ -48,11 +48,11 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento [E-MAIL DO FES
 
 # 4. Elegibilidade, idade e território
 
-4.1. Poderão se inscrever pessoas físicas residentes em [ABRANGÊNCIA GEOGRÁFICA], com CPF regular, desde que atendidas as exigências de autoria, representação legal e demais condições deste Regulamento.
+4.1. Poderão se inscrever pessoas físicas residentes em todo o território nacional, com CPF regular, desde que atendidas as exigências de autoria, representação legal e demais condições deste Regulamento.
 
-4.2. A idade mínima para participar é de [IDADE MÍNIMA] anos, completos na data da inscrição. Menores de 18 anos participam nas condições da Cláusula 5 e do Anexo IV. A Organizadora poderá estabelecer limites de formato, agenda ou participação presencial necessários à proteção integral.
+4.2. A idade mínima para participar é de 18 (dezoito) anos, completos na data da inscrição. Menores de 18 anos participam nas condições da Cláusula 5 e do Anexo IV. A Organizadora poderá estabelecer limites de formato, agenda ou participação presencial necessários à proteção integral.
 
-4.3. São inelegíveis os integrantes diretamente envolvidos na administração da seleção, os jurados, colaboradores com acesso decisório ou informações privilegiadas, e seus cônjuges, companheiros e parentes até o [GRAU DE PARENTESCO], quando configurado conflito de interesse. Vínculos artísticos preexistentes deverão ser declarados.
+4.3. São inelegíveis os integrantes diretamente envolvidos na administração da seleção, os jurados, colaboradores com acesso decisório ou informações privilegiadas, e seus cônjuges, companheiros e parentes até o 2º (segundo) grau, quando configurado conflito de interesse. Vínculos artísticos preexistentes deverão ser declarados. O participante com contrato de gravadora, editora ou empresário é o único responsável por verificar se pode participar; eventual quebra de contrato decorrente da inscrição é de sua exclusiva responsabilidade.
 
 4.4. A participação de pessoa com deficiência será assegurada com medidas razoáveis de acessibilidade e adaptação, quando necessárias e tecnicamente viáveis, sem alteração arbitrária da comparação artística. Solicitações devem ser feitas pelos canais de atendimento até o fim do prazo de inscrição.
 
@@ -82,7 +82,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento [E-MAIL DO FES
 
 # 7. Cronograma e publicidade
 
-7.1. As inscrições ocorrerão de [DATA INICIAL] a [DATA FINAL], às 23h59, horário de Brasília; avaliação entre [DATAS DA AVALIAÇÃO]; divulgação dos classificados em [DATA DOS CLASSIFICADOS]; final em [DATA, LOCAL E MODALIDADE DA FINAL]; resultado em [DATA DO RESULTADO], no site oficial e no Instagram da Céu Music; entrega da ficha de avaliação individual até [PRAZO DA FICHA].
+7.1. As inscrições ocorrerão de a data de publicação deste Regulamento a 22 de fevereiro de 2027, às 23h59, horário de Brasília; avaliação entre [DATAS DA AVALIAÇÃO]; divulgação dos classificados em [DATA DOS CLASSIFICADOS]; final em [DATA, LOCAL E MODALIDADE DA FINAL]; resultado em [DATA DO RESULTADO], no site oficial e no Instagram da Céu Music; entrega da ficha de avaliação individual até 15 (quinze) dias úteis após o fim da avaliação.
 
 7.2. As condições essenciais estão disponíveis em https://festivaldeverao.ceumusic.com.br antes do início das inscrições. A Organizadora arquiva todas as versões do Regulamento e as comunicações relevantes.
 
@@ -90,19 +90,19 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento [E-MAIL DO FES
 
 # 8. Inscrição, pagamento por Pix e confirmação
 
-8.1. A inscrição é feita exclusivamente em https://festivaldeverao.ceumusic.com.br, mediante preenchimento correto dos dados, aceite dos documentos aplicáveis, pagamento e envio do vídeo. Cada inscrição corresponde a uma obra musical; limite por pessoa: [LIMITE DE INSCRIÇÕES POR PESSOA].
+8.1. A inscrição é feita exclusivamente em https://festivaldeverao.ceumusic.com.br, mediante preenchimento correto dos dados, aceite dos documentos aplicáveis, pagamento e envio do vídeo. Cada inscrição corresponde a uma obra musical; limite por pessoa: até 3 (três) inscrições, cada uma com seu próprio Pacote.
 
-8.2. O preço total do Pacote é de R$ [VALOR], já incluídos os custos da plataforma de pagamento. O pagamento ocorre por Pix, processado pela AbacatePay. O código Pix vale 24 horas; se vencer, um novo código é gerado. A Céu Music não solicita pagamentos por mensagens particulares ou contas não informadas no site oficial.
+8.2. O preço total do Pacote é de R$ 179,00, já incluídos os custos da plataforma de pagamento. O pagamento ocorre por Pix, processado pela AbacatePay. O código Pix vale 24 horas; se vencer, um novo código é gerado. A Céu Music não solicita pagamentos por mensagens particulares ou contas não informadas no site oficial.
 
 8.3. A inscrição é confirmada após a confirmação do pagamento e o recebimento do vídeo. Em caso de duplicidade, erro de pagamento, falha da plataforma ou contestação, serão adotados procedimentos de correção e restituição proporcionais, sem prejuízo dos direitos do consumidor.
 
-8.4. Recibo e documento fiscal serão emitidos conforme a legislação aplicável e enviados ao e-mail informado em até [PRAZO DO DOCUMENTO FISCAL]. Para menores, os comprovantes são enviados ao responsável legal.
+8.4. Recibo e documento fiscal serão emitidos conforme a legislação aplicável e enviados ao e-mail informado em até 30 (trinta) dias. Para menores, os comprovantes são enviados ao responsável legal.
 
 # 9. Direito de arrependimento, desistência e devoluções
 
 9.1. É assegurado o direito de arrependimento previsto no art. 49 do Código de Defesa do Consumidor, em até 7 dias corridos após o pagamento, com restituição integral de todas as quantias pagas. O envio do vídeo ou o início da avaliação não afastam esse direito.
 
-9.2. O arrependimento pode ser exercido pelo e-mail [E-MAIL DO FESTIVAL], informando o número da inscrição. A Céu Music confirma o recebimento e devolve o valor por Pix em até [PRAZO DE DEVOLUÇÃO], preferencialmente à mesma conta de origem. Para menores, a devolução é feita ao responsável legal.
+9.2. O arrependimento pode ser exercido pelo e-mail ceumusicbrasil@gmail.com, informando o número da inscrição. A Céu Music confirma o recebimento e devolve o valor por Pix em até 7 (sete) dias úteis, preferencialmente à mesma conta de origem. Para menores, a devolução é feita ao responsável legal.
 
 9.3. Após o prazo legal, a desistência será analisada conforme os itens do Pacote efetivamente entregues e os custos demonstráveis, vedada retenção integral automática por serviços não executados ou penalidade desproporcional.
 
@@ -112,9 +112,9 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento [E-MAIL DO FES
 
 # 10. Envio de vídeos e requisitos técnicos
 
-10.1. O participante envia pelo site um vídeo interpretando a música autoral inscrita, com duração máxima de [DURAÇÃO MÁXIMA DO VÍDEO], em formatos comuns de celular (como MP4 e MOV), até o fim do prazo de inscrição. O vídeo deve permitir identificar o intérprete e verificar a integridade da performance. Cada inscrição aceita um único vídeo, que não pode ser trocado depois de enviado, salvo falha de processamento.
+10.1. O participante envia pelo site um vídeo interpretando a música autoral inscrita, com duração máxima de 1 (um) minuto, em formatos comuns de celular (como MP4 e MOV), até o fim do prazo de inscrição. O vídeo deve permitir identificar o intérprete e verificar a integridade da performance. Cada inscrição aceita um único vídeo, que não pode ser trocado depois de enviado, salvo falha de processamento.
 
-10.2. São vedados vídeos adulterados que falseiem a autoria, a identidade ou o desempenho avaliado. Regras sobre edição, correção vocal, inteligência artificial, playback e acompanhamento: [POLÍTICA TÉCNICA DO VÍDEO].
+10.2. São vedados vídeos adulterados que falseiem a autoria, a identidade ou o desempenho avaliado. Regras sobre edição, correção vocal, inteligência artificial, playback e acompanhamento: o vídeo deve ser gravado a capela (somente a voz, sem instrumentos, base ou playback) e sem edição: não são aceitos cortes, montagens, filtros de voz, correção de afinação ou voz gerada por inteligência artificial.
 
 10.3. O participante deve manter cópia do arquivo original. Falhas imputáveis à plataforma ensejarão oportunidade razoável de reenvio em igualdade de condições; a Céu Music não é obrigada a aceitar entregas tardias decorrentes exclusivamente de negligência comprovada do participante.
 
@@ -124,7 +124,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento [E-MAIL DO FES
 
 11.1. A obra inscrita deve ser autoral, original ou legitimamente submetida pelo intérprete com as permissões necessárias. Ineditismo: [A MÚSICA PRECISA SER INÉDITA? SIM OU NÃO E EXCEÇÕES].
 
-11.2. O participante declara deter direitos ou autorizações suficientes quanto a letra, composição, arranjo, bases, samples, fonogramas preexistentes, conteúdo audiovisual, imagem e voz de terceiros. Covers, remixes e material gerado por inteligência artificial: [POLÍTICA DE ADMISSIBILIDADE].
+11.2. O participante declara deter direitos ou autorizações suficientes quanto a letra, composição, arranjo, bases, samples, fonogramas preexistentes, conteúdo audiovisual, imagem e voz de terceiros. Covers, remixes e material gerado por inteligência artificial: não são aceitos covers, remixes nem letra ou melodia geradas por inteligência artificial.
 
 11.3. Suspeitas razoáveis de plágio, usurpação de identidade, violação de direitos ou fraude permitem diligência, suspensão cautelar de publicação, solicitação de documentos e decisão motivada, respeitando prazo de defesa quando possível.
 
@@ -140,7 +140,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento [E-MAIL DO FES
 
 # 13. Etapas de seleção e avaliação técnica
 
-13.1. A seleção é composta pelas etapas: (i) conferência documental e técnica; (ii) avaliação artística individual; (iii) divulgação dos classificados; (iv) [SEMIFINAL, SE HOUVER]; (v) final [PRESENCIAL OU ONLINE]; (vi) homologação e divulgação do resultado.
+13.1. A seleção é composta pelas etapas: (i) conferência documental e técnica; (ii) avaliação artística individual; (iii) divulgação dos classificados; (iv) final presencial; (v) homologação e divulgação do resultado.
 
 13.2. A avaliação é feita por banca formada pelo time da Céu Music e por Samuel Messias, com no mínimo [NÚMERO MÍNIMO DE JURADOS] jurados, cujos nomes serão publicados no site até [DATA DE DIVULGAÇÃO DOS JURADOS]. Jurados com conflito de interesses declaram impedimento e são substituídos.
 
@@ -158,7 +158,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento [E-MAIL DO FES
 
 14.2. A Organizadora poderá fixar regras de ensaio, credenciamento, segurança, duração e apresentação, respeitando as exigências de execução pública musical, direitos autorais, licenças do local e autorização de imagem e voz.
 
-14.3. Deslocamento, hospedagem, alimentação e transporte dos finalistas: [QUEM PAGA E LIMITES]. A omissão dessa informação não poderá resultar em despesas-surpresa necessárias à fruição da premiação.
+14.3. Deslocamento, hospedagem, alimentação e transporte dos finalistas: ficam a cargo de cada finalista. A omissão dessa informação não poderá resultar em despesas-surpresa necessárias à fruição da premiação.
 
 14.4. Para menores, a presença do responsável legal ou acompanhante autorizado é obrigatória, e a apresentação depende das autorizações judiciais ou administrativas exigíveis.
 
@@ -184,7 +184,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento [E-MAIL DO FES
 
 # 17. Impugnação, recurso e decisão final
 
-17.1. O participante poderá apresentar reclamação fundamentada pelo e-mail [E-MAIL DO FESTIVAL], em até 5 dias úteis da divulgação da classificação, quando houver erro de cadastro, soma, descumprimento dos critérios, impedimento de jurado ou indício concreto de fraude.
+17.1. O participante poderá apresentar reclamação fundamentada pelo e-mail ceumusicbrasil@gmail.com, em até 5 dias úteis da divulgação da classificação, quando houver erro de cadastro, soma, descumprimento dos critérios, impedimento de jurado ou indício concreto de fraude.
 
 17.2. Não cabe revisão arbitrária do juízo estético fundamentado, sem prejuízo do controle de erro material, desvio de finalidade, discriminação, conflito de interesse, fraude ou violação do Regulamento. A decisão motivada será comunicada em até 10 dias úteis.
 
@@ -278,11 +278,11 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento [E-MAIL DO FES
 
 # 26. Atendimento e foro
 
-26.1. Atendimento: [E-MAIL DO FESTIVAL] e [WHATSAPP DO FESTIVAL]. Privacidade: [E-MAIL DE PRIVACIDADE].
+26.1. Atendimento: ceumusicbrasil@gmail.com e (21) 98244-7141. Privacidade: ceumusicbrasil@gmail.com.
 
 26.2. As partes buscarão solução consensual. Não há arbitragem compulsória, renúncia prévia a direitos ou limitação indevida de acesso ao Poder Judiciário.
 
-26.3. Fica eleito o foro da comarca de [CIDADE DO FORO], sem prejuízo do foro do domicílio do consumidor. Regras imperativas de proteção à criança e ao adolescente prevalecem.
+26.3. Fica eleito o foro da comarca de Rio de Janeiro/RJ, sem prejuízo do foro do domicílio do consumidor. Regras imperativas de proteção à criança e ao adolescente prevalecem.
 
 # 27. Disposições finais
 
@@ -296,21 +296,21 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento [E-MAIL DO FES
 
 # Anexo I: Pacote, cronograma e prêmios
 
-A. Avaliação individual. Todos os participantes com inscrição válida recebem, independentemente de classificação, ficha com as notas dos cinco critérios da Cláusula 13 (média dos jurados) e devolutiva escrita com pontos de destaque e de aprimoramento, elaborada pelo time da Céu Music e por Samuel Messias. A ficha fica disponível na página "Minha inscrição" até [PRAZO DA FICHA]. A ficha não constitui diagnóstico profissional, consultoria individual continuada ou garantia de classificação, e não é resposta automática genérica.
+A. Avaliação individual. Todos os participantes com inscrição válida recebem, independentemente de classificação, ficha com as notas dos cinco critérios da Cláusula 13 (média dos jurados) e devolutiva escrita com pontos de destaque e de aprimoramento, elaborada pelo time da Céu Music e por Samuel Messias. A ficha fica disponível na página "Minha inscrição" até 15 (quinze) dias úteis após o fim da avaliação. A ficha não constitui diagnóstico profissional, consultoria individual continuada ou garantia de classificação, e não é resposta automática genérica.
 
 B. Grupo exclusivo. Acesso ao grupo exclusivo de participantes em [PLATAFORMA DO GRUPO, POR EXEMPLO WHATSAPP], liberado na página "Minha inscrição" após a confirmação do pagamento, durante [PERÍODO DE ACESSO AO GRUPO].
 
 C. Materiais exclusivos. [DESCREVER OS MATERIAIS PREPARADOS POR SAMUEL MESSIAS: FORMATO (VÍDEO, PDF, AULA), QUANTIDADE E DATAS DE LIBERAÇÃO], disponibilizados na página "Minha inscrição".
 
-D. Valor e etapas. Valor total: R$ [VALOR], incluídos os custos da plataforma; Pix processado pela AbacatePay. Uma obra por inscrição. Datas conforme a Cláusula 7.
+D. Valor e etapas. Valor total: R$ 179,00, incluídos os custos da plataforma; Pix processado pela AbacatePay. Uma obra por inscrição. Datas conforme a Cláusula 7.
 
-E. Prêmio 1: mentoria com Samuel Messias. Duração: [HORAS OU ENCONTROS]; formato: [ONLINE OU PRESENCIAL]; período: [DATA OU JANELA]; conteúdo mínimo: [TEMAS]; custos incluídos e deslocamento: [QUEM PAGA].
+E. Prêmio 1: mentoria com Samuel Messias. Duração: [HORAS OU ENCONTROS]; formato: presencial; período: [DATA OU JANELA]; conteúdo mínimo: [TEMAS]; custos incluídos e deslocamento: deslocamento, hospedagem e alimentação ficam a cargo do vencedor.
 
-F. Prêmio 2: produção de três fonogramas. Produção e gravação de 3 músicas no estúdio da Céu Music, com [HORAS OU SESSÕES POR MÚSICA], incluindo [ARRANJO, CAPTAÇÃO, EDIÇÃO, MIXAGEM E MASTERIZAÇÃO: O QUE ESTÁ INCLUSO]; músicos e arranjadores: [INCLUSOS OU NÃO]; videoclipe: [INCLUSO OU NÃO]; prazo máximo: [PRAZO DO PRÊMIO].
+F. Prêmio 2: produção de três fonogramas. Produção e gravação de 3 músicas no estúdio da Céu Music, com [HORAS OU SESSÕES POR MÚSICA], incluindo a produção completa de cada música, em áudio e vídeo; músicos e arranjadores: [INCLUSOS OU NÃO]; videoclipe: incluso (vídeo de cada música); prazo máximo: [PRAZO DO PRÊMIO].
 
 G. Prêmio 3: estratégia de lançamento. Entregáveis mínimos: [REUNIÃO, CRONOGRAMA, PLANO DE DISTRIBUIÇÃO E COMUNICAÇÃO]. Não garante distribuição em data determinada, playlist editorial, audiência ou receita.
 
-H. Condições essenciais do contrato fonográfico. Produtora fonográfica: Céu Music. Titularidade dos fonogramas: [DEFINIR]. Território: [TERRITÓRIO]. Prazo: [ANOS]. Remuneração e royalties: [CRITÉRIO E PERCENTUAL]. Dedução de custos: [DESCREVER OU VEDAR]. Prestação de contas: [PERIODICIDADE]. Distribuidora: [A DEFINIR]. Contratos editoriais, de agenciamento ou de exclusividade artística exigem negociação independente.
+H. Condições essenciais do contrato fonográfico. Produtora fonográfica: Céu Music. Titularidade dos fonogramas: do vencedor; a Céu Music realiza a produção como serviço do prêmio. Território: [TERRITÓRIO]. Prazo: 1 (um) ano. Remuneração e royalties: [CRITÉRIO E PERCENTUAL]. Dedução de custos: [DESCREVER OU VEDAR]. Prestação de contas: semestral. Distribuidora: [A DEFINIR]. Contratos editoriais, de agenciamento ou de exclusividade artística exigem negociação independente.
 
 # Anexo III: Declarações e autorizações eletrônicas
 
