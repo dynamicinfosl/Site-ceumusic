@@ -2,7 +2,7 @@ Este aviso explica como o Festival de Verão usa os seus dados. Ele complementa 
 
 # 1. Quem cuida dos seus dados
 
-A controladora é CEU MUSIC PRODUCOES ARTISTICA LTDA, CNPJ 57.358.544/0001-47, nome fantasia Céu Music, com sede em Av. Olof Palme, 765, salas 701 a 704 e 724 a 726, Camorim, Rio de Janeiro/RJ, CEP 22783-119. Encarregado de dados: [NOME DO ENCARREGADO], pelo e-mail ceumusicbrasil@gmail.com.
+A controladora é CEU MUSIC PRODUCOES ARTISTICA LTDA, CNPJ 57.358.544/0001-47, nome fantasia Céu Music, com sede em Av. Olof Palme, 765, salas 701 a 704 e 724 a 726, Camorim, Rio de Janeiro/RJ, CEP 22783-119. Canal de atendimento ao titular e encarregado de dados: Céu Music, pelo e-mail ceumusicbrasil@gmail.com.
 
 # 2. Quais dados coletamos
 

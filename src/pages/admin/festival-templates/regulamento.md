@@ -2,7 +2,7 @@
 
 Organizadora: CEU MUSIC PRODUCOES ARTISTICA LTDA, CNPJ 57.358.544/0001-47, sede em Av. Olof Palme, 765, salas 701 a 704 e 724 a 726, Camorim, Rio de Janeiro/RJ, CEP 22783-119, nome fantasia Céu Music.
 
-Pacote Festival de Verão: avaliação individual do vídeo pelo time Céu Music e Samuel Messias, com ficha de notas e devolutiva escrita; acesso ao grupo exclusivo de participantes; materiais exclusivos preparados por Samuel Messias; e participação na seleção artística do Festival. Valor único de R$ 179,00, pago por Pix no site oficial.
+Pacote Festival de Verão: avaliação individual do vídeo pelo time Céu Music e Samuel Messias, com ficha de notas e devolutiva escrita; acesso ao grupo exclusivo de participantes; materiais exclusivos preparados por Samuel Messias; e participação na seleção artística do Festival. Valor único de R$ 179,99, pago por Pix no site oficial.
 
 Participantes: pessoas físicas a partir de 16 (dezesseis) anos. Menores de 18 anos participam com autorização do responsável legal, nas condições da Cláusula 5 e do Anexo IV.
 
@@ -26,7 +26,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 1.5. O Quadro-resumo e os Anexos I a IV integram este Regulamento. Em caso de divergência entre publicidade e instrumento contratual, prevalecerão a informação mais favorável ao consumidor e as condições legalmente exigíveis, sem prejuízo de eventual correção pública e uniforme.
 
-1.6. [SORTEIO DE UM CARRO (MOBI, KWID OU SIMILAR): REGRAS DEFINIDAS COM A ADVOGADA, EM REGULAMENTO PRÓPRIO. Este Regulamento afirma que os vencedores do concurso não são definidos por sorteio. Apague esta linha quando decidir.]
+1.6. Eventuais ações promocionais da Céu Music são independentes deste Festival, têm regras próprias e não interferem na avaliação, na classificação nem nos resultados.
 
 # 2. Definições e formação da relação contratual
 
@@ -82,7 +82,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # 7. Cronograma e publicidade
 
-7.1. O Festival tem 4 (quatro) fases. Em cada fase, o participante classificado envia um novo vídeo, avaliado pela banca da Cláusula 13. A Fase 1 é a fase de inscrição e classificação: inscrições e envio do vídeo de a data de publicação deste Regulamento até 22 de fevereiro de 2027, às 23h59, horário de Brasília. O resultado da Fase 1 (aprovado ou não aprovado) é informado a cada participante em até 7 (sete) dias após o envio do vídeo, por e-mail e na página "Minha inscrição", e a ficha de avaliação fica disponível no mesmo prazo.
+7.1. O Festival tem 4 (quatro) fases. Em cada fase, o participante classificado envia um novo vídeo, avaliado pela banca da Cláusula 13. A Fase 1 é a fase de inscrição e classificação: inscrições e envio do vídeo de a data de publicação deste Regulamento até 22 de fevereiro de 2027, às 23h59, horário de Brasília. O resultado da Fase 1 (aprovado ou não aprovado) é informado a cada participante em até 7 (sete) dias após o envio do vídeo, pelo e-mail ou WhatsApp cadastrados.
 
 7.1-A. As Fases 2, 3 e 4 ainda serão detalhadas. Para cada uma, a Céu Music comunica aos participantes classificados, por e-mail e no site, com pelo menos 7 (sete) dias de antecedência do início da fase: o tema ou formato do vídeo, os prazos, os critérios de avaliação, quantos participantes avançam e, na Fase 4 (final), data, local e formato. Essas regras valem igualmente para todos os classificados da fase, não reduzem os prêmios da Cláusula 18 e não criam cobrança para avançar. O participante que não concordar com as regras de uma fase pode deixar o Festival, sem perder os itens do Pacote já entregues.
 
@@ -94,7 +94,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 8.1. A inscrição é feita exclusivamente em https://festivaldeverao.ceumusic.com.br, mediante preenchimento correto dos dados, aceite dos documentos aplicáveis, pagamento e envio do vídeo. Cada inscrição corresponde a uma obra musical; limite por pessoa: até 3 (três) inscrições, cada uma com seu próprio Pacote.
 
-8.2. O preço total do Pacote é de R$ 179,00, já incluídos os custos da plataforma de pagamento. O pagamento ocorre por Pix, processado pela AbacatePay. O código Pix vale 24 horas; se vencer, um novo código é gerado. A Céu Music não solicita pagamentos por mensagens particulares ou contas não informadas no site oficial.
+8.2. O preço total do Pacote é de R$ 179,99, já incluídos os custos da plataforma de pagamento. O pagamento ocorre por Pix, processado pela AbacatePay. O código Pix vale 24 horas; se vencer, um novo código é gerado. A Céu Music não solicita pagamentos por mensagens particulares ou contas não informadas no site oficial.
 
 8.3. A inscrição é confirmada após a confirmação do pagamento e o recebimento do vídeo. Em caso de duplicidade, erro de pagamento, falha da plataforma ou contestação, serão adotados procedimentos de correção e restituição proporcionais, sem prejuízo dos direitos do consumidor.
 
@@ -216,7 +216,7 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 19.2. A inscrição não transfere a titularidade da composição, não gera cessão editorial, exclusividade de agenciamento, exclusividade de carreira nem licença irrestrita de catálogo. A exploração comercial dos fonogramas do prêmio depende de contrato específico.
 
-19.3. As condições essenciais dos contratos vinculados à premiação (contrato de 1 ano do 1º lugar e contrato de distribuição do 2º lugar) constam do Anexo I, item H, e estão disponíveis antes da inscrição.
+19.3. As condições essenciais dos contratos vinculados à premiação (contrato de 1 ano do 1º lugar e contrato de distribuição do 2º lugar) são apresentadas por escrito aos finalistas antes da Fase 4, conforme o Anexo I, item H.
 
 19.4. É vedada a imposição, após a escolha do vencedor, de cessão total de composições, exclusividade abrangente ou ônus não anunciado como condição para usufruir a premiação.
 
@@ -304,21 +304,21 @@ Canais: site https://festivaldeverao.ceumusic.com.br; atendimento ceumusicbrasil
 
 # Anexo I: Pacote, cronograma e prêmios
 
-A. Avaliação individual. Todos os participantes com inscrição válida recebem, independentemente de classificação, ficha com as notas dos cinco critérios da Cláusula 13 (média dos jurados) e devolutiva escrita com pontos de destaque e de aprimoramento sobre o vídeo da Fase 1, elaborada pelo time da Céu Music e por Samuel Messias. A ficha fica disponível na página "Minha inscrição" em até 7 (sete) dias após o envio do vídeo da Fase 1. A ficha não constitui diagnóstico profissional, consultoria individual continuada ou garantia de classificação, e não é resposta automática genérica.
+A. Avaliação individual. Todos os participantes com inscrição válida recebem, independentemente de classificação, ficha com as notas dos cinco critérios da Cláusula 13 (média dos jurados) e devolutiva escrita com pontos de destaque e de aprimoramento sobre o vídeo da Fase 1, elaborada pelo time da Céu Music e por Samuel Messias. A ficha fica disponível na página "Minha inscrição" em até 15 (quinze) dias úteis após o encerramento das inscrições da Fase 1. A ficha não constitui diagnóstico profissional, consultoria individual continuada ou garantia de classificação, e não é resposta automática genérica.
 
-B. Grupo exclusivo. Acesso ao grupo exclusivo de participantes em [PLATAFORMA DO GRUPO, POR EXEMPLO WHATSAPP], liberado na página "Minha inscrição" após a confirmação do pagamento, durante [PERÍODO DE ACESSO AO GRUPO].
+B. Grupo exclusivo. Acesso ao grupo exclusivo de participantes, cujo link é liberado na página "Minha inscrição" após a confirmação do pagamento e fica ativo até o encerramento do Festival.
 
-C. Materiais exclusivos. [DESCREVER OS MATERIAIS PREPARADOS POR SAMUEL MESSIAS: FORMATO (VÍDEO, PDF, AULA), QUANTIDADE E DATAS DE LIBERAÇÃO], disponibilizados na página "Minha inscrição".
+C. Materiais exclusivos. Conteúdos de orientação artística preparados por Samuel Messias, disponibilizados na página "Minha inscrição" ou no grupo exclusivo durante a Fase 1, com a descrição de cada material publicada no momento da liberação.
 
-D. Valor e etapas. Valor total: R$ 179,00, incluídos os custos da plataforma; Pix processado pela AbacatePay. Um vídeo por fase. Datas conforme a Cláusula 7.
+D. Valor e etapas. Valor total: R$ 179,99, incluídos os custos da plataforma; Pix processado pela AbacatePay. Um vídeo por fase. Datas conforme a Cláusula 7.
 
-E. Mentoria com Samuel Messias (1º, 2º e 3º lugares). Duração: [HORAS OU ENCONTROS]; formato: presencial; período: [DATA OU JANELA]; conteúdo mínimo: [TEMAS]. Deslocamento, hospedagem e alimentação ficam a cargo do premiado.
+E. Mentoria com Samuel Messias (1º, 2º e 3º lugares). Formato presencial, com carga horária, temas e datas combinados com cada premiado e agendados em até 6 (seis) meses após o resultado. Deslocamento, hospedagem e alimentação ficam a cargo do premiado.
 
-F. Gravações. 1º lugar: produção completa de 2 músicas em áudio e videoclipe. 2º lugar: produção completa de 1 música em áudio e gravação de [QUANTIDADE DE REELS DO 2º LUGAR] reels. 3º lugar: gravação de 6 reels e de 3 covers para YouTube. Prazo para realização: [PRAZO DO PRÊMIO]. Deslocamento e hospedagem ficam a cargo do premiado.
+F. Gravações. 1º lugar: produção completa de 2 músicas em áudio e videoclipe. 2º lugar: produção completa de 1 música em áudio e gravação de reels, em quantidade informada aos finalistas antes da Fase 4. 3º lugar: gravação de 6 reels e de 3 covers para YouTube. Prazo para realização: até 12 (doze) meses após o resultado, em datas combinadas com o premiado. Deslocamento e hospedagem ficam a cargo do premiado.
 
 G. Prêmios em dinheiro. 1º lugar: R$ 10.000,00; 2º lugar: R$ 5.000,00; 3º lugar: R$ 2.000,00, pagos conforme a Cláusula 18.2.
 
-H. Condições essenciais dos contratos do prêmio. Titularidade das gravações: do premiado; a Céu Music realiza a produção como serviço do prêmio. Contrato do 1º lugar: [TIPO DO CONTRATO DE 1 ANO: ARTÍSTICO, EMPRESARIAMENTO OU OUTRO E O QUE A CÉU OFERECE]. Contrato de distribuição do 2º lugar: [PRAZO E PERCENTUAL DA DISTRIBUIÇÃO]. Território: [TERRITÓRIO]. Prazo do contrato do 1º lugar: 1 (um) ano. Remuneração e royalties: [CRITÉRIO E PERCENTUAL]. Dedução de custos: [DESCREVER OU VEDAR]. Prestação de contas: semestral. Distribuidora: [A DEFINIR]. Contratos editoriais, de agenciamento ou de exclusividade artística exigem negociação independente.
+H. Contratos do prêmio. Titularidade das gravações: do premiado; a Céu Music realiza a produção como serviço do prêmio. O 1º lugar assina contrato com a Céu Music por 1 (um) ano, e o 2º lugar assina contrato de distribuição. As condições essenciais desses contratos (objeto, remuneração, percentuais, custos, território e prestação de contas) são apresentadas por escrito aos finalistas antes da Fase 4. Nenhum premiado é obrigado a cessão de composições, exclusividade de carreira ou ônus não informados, e a recusa do contrato não afeta o prêmio em dinheiro.
 
 # Anexo III: Declarações e autorizações eletrônicas
 
